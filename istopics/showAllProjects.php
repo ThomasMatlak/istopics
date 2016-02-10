@@ -29,7 +29,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-echo "<p>Connected successfully</p>";
+//echo "<p>Connected successfully</p>";
 
 $sql = "SELECT title, comments FROM projects";
 $result = $conn->query($sql);

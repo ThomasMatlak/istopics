@@ -18,9 +18,17 @@ File Manifest
 This project has the following file structure:
 
 /istopics
+|--README.txt
+|--AUTHORS.txt
+|--CHANGE_LOG.txt
 |--database_setup.sql
 |--/istopics
-    |
+    |--footer.php
+    |--header.php
+    |--newProject.php
+    |--newUser.php
+    |--search.php
+    |--showAllProjects.php
 |--/majors
     |--convert_majors_to_html.py
     |--majors.html

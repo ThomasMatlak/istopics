@@ -1,0 +1,5 @@
+CHANGE LOG
+==========
+
+2016-02-10
+-can view all projects (title and comments) from browser
