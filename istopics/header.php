@@ -14,7 +14,7 @@
 <body>
 
 <nav class="navbar navbar-inverse navbar-static-top">
-<div class="container">
+<div class="container-fluid">
   <a href="showAllProjects.php" class="navbar-brand">Home</a>
   <ul class="nav nav-pills navbar-left">
     <li><a href="showAllProjects.php">View All Projects</a></li>
