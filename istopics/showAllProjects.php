@@ -8,7 +8,7 @@
 
 $page_title = "View All Projects";
 include("header.php");
-echo "<div class='container-fluid'>";
+echo "\n<div class='container-fluid'>";
 ?>
 
 <?php
@@ -41,15 +41,15 @@ if ($result->num_rows > 0) {
 
 //Display Projects
 if ($result->num_rows > 0) {
-    echo "<table class='table table-striped'>";
+    echo "<table class='table table-striped'>\n";
     while($row = $result->fetch_assoc()) {
-        echo "<tr>";
-	echo "<table class='table'><caption>". $row["title"]. "</caption>";
-	echo "<tr><th>Abstract:</th><td>". $row["abstract"]. "</td></tr><tr><th>Comments:</th><td>". $row["comments"]. "</td></tr><tr><th>Keywords:</th><td>". $row["keywords"]. "</td></tr>";
-	echo "</table>";
-	echo "</tr>";
+        echo "<tr><td>\n";
+	echo "<table class='table'>\n<caption>". $row["title"]. "</caption>\n";
+	echo "<tr><th>Abstract:</th><td>". $row["abstract"]. "</td></tr>\n<tr><th>Comments:</th><td>". $row["comments"]. "</td></tr>\n<tr><th>Keywords:</th><td>". $row["keywords"]. "</td></tr>\n";
+	echo "</table>\n";
+	echo "</td></tr>\n";
     }
-    echo "</table>";
+    echo "</table>\n";
 } else {
     echo "<p>Showing 0 results.</p>";
 }
