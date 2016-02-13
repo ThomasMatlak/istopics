@@ -19,13 +19,14 @@ if ($conn->connect_error) {
 }
 
 $title = $_POST["title"];
+$discipline = $_POST["discipline"];
 $abstract = $_POST["abstract"];
 $keywords = $_POST["keywords"];
 $comments = $_POST["comments"];
 
 //Prepare the SQL statement
-$stmt = $conn->prepare("INSERT INTO projects (title, abstract, keywords, comments) VALUES (?, ?, ?, ?)");
-$stmt->bind_param("ssss", $title, $abstract, $keywords, $comments);
+$stmt = $conn->prepare("INSERT INTO projects (title, discipline, abstract, keywords, comments) VALUES (?, ?, ?, ?, ?)");
+$stmt->bind_param("sssss", $title, $discipline, $abstract, $keywords, $comments);
 
 //Submit the SQL statement
 $stmt->execute();

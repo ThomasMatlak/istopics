@@ -26,13 +26,13 @@ if ($conn->connect_error) {
 }
 //echo "<p>Connected successfully</p>";
 
-$sql = "SELECT title, abstract, comments, keywords FROM projects";
+$sql = "SELECT title, discipline, abstract, comments, keywords FROM projects";
 $result = $conn->query($sql);
 
 /*
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-        echo "<p>Project Title: ". $row["title"]. "<br> Comments: ". $row["comments"]. "</p>";
+        //echo "<p>Project Title: ". $row["title"]. "<br> Comments: ". $row["comments"]. "</p>";
     }
 } else {
     echo "<p>Showing 0 results.</p>";
@@ -46,7 +46,7 @@ if ($result->num_rows > 0) {
         echo "<tr><td>\n";
 	echo "<table class='table'>\n<caption>". $row["title"]. "</caption>\n";
 //Make abstract a one line with a collapse
-	echo "<tr><th>Abstract:</th><td>". $row["abstract"]. "</td></tr>\n<tr><th>Comments:</th><td>". $row["comments"]. "</td></tr>\n<tr><th>Keywords:</th><td>". $row["keywords"]. "</td></tr>\n";
+	echo "<tr><th>Discipline:</th><td>". $row["discipline"]. "</td></tr><tr><th>Abstract:</th><td>". $row["abstract"]. "</td></tr>\n<tr><th>Comments:</th><td>". $row["comments"]. "</td></tr>\n<tr><th>Keywords:</th><td>". $row["keywords"]. "</td></tr>\n";
 	echo "</table>\n";
 	echo "</td></tr>\n";
     }
