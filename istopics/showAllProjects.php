@@ -41,10 +41,11 @@ if ($result->num_rows > 0) {
 
 //Display Projects
 if ($result->num_rows > 0) {
-    echo "<table class='table table-striped'>\n";
+    echo "<table class='table table-hover'>\n";
     while($row = $result->fetch_assoc()) {
         echo "<tr><td>\n";
 	echo "<table class='table'>\n<caption>". $row["title"]. "</caption>\n";
+//Make abstract a one line with a collapse
 	echo "<tr><th>Abstract:</th><td>". $row["abstract"]. "</td></tr>\n<tr><th>Comments:</th><td>". $row["comments"]. "</td></tr>\n<tr><th>Keywords:</th><td>". $row["keywords"]. "</td></tr>\n";
 	echo "</table>\n";
 	echo "</td></tr>\n";
