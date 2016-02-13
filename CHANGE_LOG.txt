@@ -1,5 +1,14 @@
 CHANGE LOG
 ==========
 
+2016-02-13
+-fixed view issues with view all projects
+-added discipline column to database
+-cleaned up new project form
+
+2016-02-11
+-can add projects from browser
+-imporved look of pages
+
 2016-02-10
 -can view all projects (title and comments) from browser

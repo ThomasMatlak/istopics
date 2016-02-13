@@ -3,11 +3,11 @@ ISTOPICS
 
 Configuration
 -------------
-The web server should have support for MySQL and a php interpreter.
+The web server should have support for MySQL and a php interpreter with the MySQLi extenstion installed.
 
 Installation
 ------------
--place the *.php files found in /istopics on the web server
+-place the /istopics folder on the web server
     (probably at /var/www/html)
 -run database_setup.sql in MySQL to set up the database and its tables
 -create a MySQL user that only has access to the istopics database(!),
