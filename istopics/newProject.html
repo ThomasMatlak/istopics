@@ -5,18 +5,20 @@ include("header.php");
 
 <body>
 
-<form id="new_project" action="newProject.php" method="POST">
-  <label for="title">Title:</label><br>
-  <input type="text" name="title" id="title"><br><br>
-  <label for="discipline">Discipline:</label><br>
-  <input type="text" name="discipline" id="discipline"><br><br>
-  <label for="abstract">Abstract:</label><br>
-  <textarea rows="5" cols="80" name="abstract" form="new_project" id="abstract"></textarea><br><br>
-  <label for="keywords">Keywords:</label><br>
-  <textarea rows="1" cols="80" name="keywords" form="new_project" id="keywords"></textarea><br><br>
-  <label for="comments">Additional Comments:</label><br>
-  <textarea rows="2" cols="80" name="comments" form="new_project" id="comments"></textarea><br><br>
+<form id="new_project" action="newProjectController.php" method="POST" class="form-horizontal">
+  <div class="form-control"
+  <label for="title" class="control-label">Title:</label><br>
+  <input type="text" name="title" id="title" class="form-control"><br><br>
+  <label for="discipline" class="control-label">Discipline:</label><br>
+  <input type="text" name="discipline" id="discipline" class="form-control"><br><br>
+  <label for="abstract" class="control-label">Abstract:</label><br>
+  <textarea rows="5" cols="80" name="abstract" form="new_project" id="abstract" class="form-control"></textarea><br><br>
+  <label for="keywords" class="control-label">Keywords:</label><br>
+  <textarea rows="1" cols="80" name="keywords" form="new_project" id="keywords" class="form-control"></textarea><br><br>
+  <label for="comments" class="control-label">Additional Comments:</label><br>
+  <textarea rows="2" cols="80" name="comments" form="new_project" id="comments" class="form-control"></textarea><br><br>
   <input type="submit" value="Submit">
+  </div>
 </form>
 
 <?php 

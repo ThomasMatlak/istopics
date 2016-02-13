@@ -12,3 +12,19 @@
 </head>
 
 <body>
+
+<nav class="navbar navbar-inverse navbar-static-top">
+<div class="container">
+  <a href="showAllProjects.php" class="navbar-brand">Home</a>
+  <ul class="nav nav-pills navbar-left">
+    <li><a href="showAllProjects.php">View All Projects</a></li>
+    <li><a href="newProject.php">Add a New Project</a></li>
+  </ul>
+  <form id="search" action="search.php" method="GET" class="navbar-form navbar-right">
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="search">
+      <button type="submit" class="btn">Search</button>
+    </div>
+  </form>
+</div>
+</nav>
