@@ -1,17 +1,14 @@
 <?php
 /*
-* showAllProjects.php
+* viewProject.php
 * 
-* Display all of the projects in the istopics database.
-* Topics are sorted alphabetically be default.
+* Display the project 
 */
 
-$page_title = "View All Projects";
+$page_title = "View Project";
 include("header.php");
 echo "\n<div class='container-fluid'>";
-?>
 
-<?php
 $servername = "localhost";
 $username = "istopics";
 $password = "password"; //NOTE: CHANGE THE PASSWORD BEFORE GOING INTO PRODUCTION
@@ -26,26 +23,22 @@ if ($conn->connect_error) {
 }
 //echo "<p>Connected successfully</p>";
 
-$sql = "SELECT id, title, discipline, abstract, comments, keywords FROM projects ORDER BY title";
+$sql = "SELECT * FROM projects where id=". $_GET["project_id"];
 $result = $conn->query($sql);
 
 //Display Projects
 if ($result->num_rows > 0) {
-    echo "<table class='table table-hover'>\n";
+    echo "<table class='table table-striped'>\n";
     while($row = $result->fetch_assoc()) {
-        echo "<tr><td>\n";
-	echo "<form action='viewProject.php' method='GET'><table class='table'>\n<input type='hidden' name='project_id' value='". $row["id"]. "'><button type='submit' class='btn btn-link'>". $row["title"]. "</button></form>\n";
-//Make abstract a one line with a collapse
-	echo "<tr><th>Discipline:</th><td>". $row["discipline"]. "</td></tr>\n";
+        echo "<caption>". $row["title"]. "</caption>";
+	echo "<tr><th>Discipline:</th><td>". $row["discipline"]. "</td></tr>";
 	echo "<tr><th>Abstract:</th><td>". $row["abstract"]. "</td></tr>\n";
 	echo "<tr><th>Comments:</th><td>". $row["comments"]. "</td></tr>\n";
 	echo "<tr><th>Keywords:</th><td>". $row["keywords"]. "</td></tr>\n";
-	echo "</table>\n";
-	echo "</td></tr>\n";
     }
     echo "</table>\n";
 } else {
-    echo "<p>Showing 0 results.</p>";
+    echo "<p>Project Not Found.</p>";
 }
 
 //Close connection
