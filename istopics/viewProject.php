@@ -35,6 +35,7 @@ if ($result->num_rows > 0) {
 	echo "<tr><th>Abstract:</th><td>". $row["abstract"]. "</td></tr>\n";
 	echo "<tr><th>Comments:</th><td>". $row["comments"]. "</td></tr>\n";
 	echo "<tr><th>Keywords:</th><td>". $row["keywords"]. "</td></tr>\n";
+	echo "<form action='updateProject.php' method='GET'><table class='table'>\n<input type='hidden' name='project_id' value='". $row["id"]. "'><button type='submit' class='btn btn-warning'>Edit Project</button></form>";
     }
     echo "</table>\n";
 } else {
