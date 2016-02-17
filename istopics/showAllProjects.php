@@ -34,7 +34,7 @@ if ($result->num_rows > 0) {
     echo "<table class='table table-hover'>\n";
     while($row = $result->fetch_assoc()) {
         echo "<tr><td>\n";
-	echo "<form action='viewProject.php' method='GET'><table class='table'>\n<input type='hidden' name='project_id' value='". $row["id"]. "'><button type='submit' class='btn btn-link'>". $row["title"]. "</button></form>\n";
+	echo "<form action='viewProject.php' method='GET'>\n<input type='hidden' name='project_id' value='". $row["id"]. "'><button type='submit' class='btn btn-link'>". $row["title"]. "</button></form><table class='table'>\n";
 //Make abstract a one line with a collapse
 	echo "<tr><th>Discipline:</th><td>". $row["discipline"]. "</td></tr>\n";
 	echo "<tr><th>Abstract:</th><td>". $row["abstract"]. "</td></tr>\n";

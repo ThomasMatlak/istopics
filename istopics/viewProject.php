@@ -26,18 +26,20 @@ if ($conn->connect_error) {
 $sql = "SELECT * FROM projects where id=". $_GET["project_id"];
 $result = $conn->query($sql);
 
-//Display Projects
+//Display Project
 if ($result->num_rows > 0) {
-    echo "<table class='table table-striped'>\n";
-    while($row = $result->fetch_assoc()) {
-        echo "<caption>". $row["title"]. "</caption>";
-	echo "<tr><th>Discipline:</th><td>". $row["discipline"]. "</td></tr>";
-	echo "<tr><th>Abstract:</th><td>". $row["abstract"]. "</td></tr>\n";
-	echo "<tr><th>Comments:</th><td>". $row["comments"]. "</td></tr>\n";
-	echo "<tr><th>Keywords:</th><td>". $row["keywords"]. "</td></tr>\n";
-	echo "<form action='updateProject.php' method='GET'><table class='table'>\n<input type='hidden' name='project_id' value='". $row["id"]. "'><button type='submit' class='btn btn-warning'>Edit Project</button></form>";
-    }
-    echo "</table>\n";
+   $row = $result->fetch_assoc();
+   echo "<table class='table table-striped'>\n";
+
+   echo "<caption>". $row["title"]. "</caption>";
+   echo "<tr><th>Discipline:</th><td>". $row["discipline"]. "</td></tr>";
+   echo "<tr><th>Abstract:</th><td>". $row["abstract"]. "</td></tr>\n";
+   echo "<tr><th>Comments:</th><td>". $row["comments"]. "</td></tr>\n";
+   echo "<tr><th>Keywords:</th><td>". $row["keywords"]. "</td></tr>\n";
+
+   echo "</table>\n";
+
+   echo "<form action='updateProject.php' method='GET'>\n<input type='hidden' name='project_id' value='". $row["id"]. "'><button type='submit' class='btn btn-warning'>Edit Project</button></form>";
 } else {
     echo "<p>Project Not Found.</p>";
 }

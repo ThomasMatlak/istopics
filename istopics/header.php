@@ -6,6 +6,8 @@
 
   <!-- include Bootstrap style sheets -->
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <!-- include jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
   <title><?php echo $page_title; ?></title>
   
