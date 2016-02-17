@@ -1,5 +1,5 @@
 <?php
-$page_title = "Add a New Project";
+$page_title = "Update Project";
 include("header.php");
 
 $servername = "localhost";
