@@ -55,6 +55,10 @@ $conn->close();
     <button type="submit" class="btn btn-warning form-control">Submit</button>
   </div>
 </form>
+<form id="delete_project" action="deleteProjectController.php" method="POST">
+    <input type="hidden" name="project_id" value="<?php echo $id; ?>">
+    <button type="submit" class="btn btn-danger">Delete Project</button>
+</form>
 </div>
 
 <?php 
