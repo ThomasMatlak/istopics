@@ -23,12 +23,18 @@ This project has the following file structure:
 |--CHANGE_LOG.txt
 |--database_setup.sql
 |--/istopics
+    |--deleteProjectController.php
     |--footer.php
     |--header.php
+    |--majors.html
     |--newProject.php
+    |--newProjectController.php
     |--newUser.php
     |--search.php
     |--showAllProjects.php
+    |--updateProject.php
+    |--updateProjectController.php
+    |--viewProject.php
 |--/majors
     |--convert_majors_to_html.py
     |--majors.html

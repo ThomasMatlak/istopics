@@ -1,6 +1,16 @@
 CHANGE LOG
 ==========
 
+2016-02-17
+-can update a project
+-can delete a project
+-made output conform to w3c standards
+-fixed various display issues
+
+2016-02-16
+-can view one project
+-started search functionality
+
 2016-02-13
 -fixed view issues with view all projects
 -added discipline column to database
