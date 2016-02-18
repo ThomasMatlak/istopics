@@ -25,11 +25,14 @@
     <li><a href="showAllProjects.php">View All Projects</a></li>
     <li><a href="newProject.php">Add a New Project</a></li>
   </ul>
-  <form id="search" action="search.php" method="GET" class="navbar-form navbar-right">
-    <div class="form-group">
-      <input type="text" class="form-control" name="search_term" id="search_term" placeholder="search">
-      <button type="submit" class="btn">Search</button>
-    </div>
-  </form>
+  <ul class="nav navbar-right">
+    <a href="newUser.php" class="nav btn btn-link">New User?</a>
+    <form id="search" action="search.php" method="GET" class="navbar-form navbar-right">
+      <div class="form-group">
+	<input type="text" class="form-control" name="search_term" id="search_term" placeholder="search">
+	<button type="submit" class="btn">Search</button>
+      </div>
+    </form>
+  </ul>
 </div>
 </nav>
