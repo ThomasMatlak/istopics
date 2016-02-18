@@ -24,8 +24,8 @@ $year = $_POST["year"];
 $major = $_POST["discipline"];
 $email = $_POST["email"];
 $password = $_POST["password"]; //CHANGE TO NOT PLAIN TEXT
-/*
-if () {
+
+if ($first_name == "" || $last_name == "" || $year == "" || $major == "" || $email == "" || $password == "") {
    //display error message
    echo '<script language="javascript">';
    echo 'alert("")';
@@ -34,7 +34,7 @@ if () {
    //redirect to home page
    header("Location: showAllProjects.php");
    exit();
-}*/
+}
 
 //Prepare the SQL statement
 $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, major, year, password) VALUES (?,?,?,?,?,?)");
