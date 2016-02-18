@@ -30,6 +30,7 @@ This project has the following file structure:
     |--newProject.php
     |--newProjectController.php
     |--newUser.php
+    |--newUserController.php
     |--search.php
     |--showAllProjects.php
     |--updateProject.php
