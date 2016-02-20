@@ -18,18 +18,14 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$title = $_POST["title"];
-$discipline = $_POST["discipline"];
-$abstract = $_POST["abstract"];
-$keywords = $_POST["keywords"];
-$comments = $_POST["comments"];
+//Set variables and sanitize input
+$title = filter_var($_POST["title"], FILTER_SANITIZE_STRING);
+$discipline = filter_var($_POST["discipline"], FILTER_SANITIZE_STRING);
+$abstract = filter_var($_POST["abstract"], FILTER_SANITIZE_STRING);
+$keywords = filter_var($_POST["keywords"], FILTER_SANITIZE_STRING);
+$comments = filter_var($_POST["comments"], FILTER_SANITIZE_STRING);
 
-if ($title == "" || discipline == "") {
-   //display error message
-   echo '<script language="javascript">';
-   echo 'alert("Could not add project with blank title or discipline")';
-   echo '</script>';
-
+if (empty($title) || empty($discipline)) {
    //redirect to home page
    header("Location: showAllProjects.php");
    exit();

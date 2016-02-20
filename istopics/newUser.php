@@ -4,7 +4,7 @@ include("header.php");
 ?>
 
 <div class="container-fluid">
-<form id="new_project" action="newUserController.php" method="POST" class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<form id="new_user" action="newUserController.php" method="POST" class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
   <div class="form-group">
     <div id="check_first_name">
     <label for="first_name" class="control-label">First Name:</label>
@@ -116,6 +116,9 @@ $('#password').on('input', function() {
         if ($('#first_name').val() != "" && $('#last_name').val() != "") {
 	    $('#password_group').attr("class", "has-success");
         }
+	else {
+	     $('#submit').attr("disabled", "true");
+	}
     }
 });
 $('#confirm_password').on('input', function() {
@@ -129,6 +132,9 @@ $('#confirm_password').on('input', function() {
         if ($('#first_name').val() != "" && $('#last_name').val() != "") {
 	    $('#password_group').attr("class", "has-success");
         }
+	else {
+	     $('#submit').attr("disabled", "true");
+	}
     }
 });
 

@@ -22,7 +22,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$search_term = _GET["search_term"];
+$search_term = $_GET["search_term"];
 
 //Prepare the SQL statement
 $stmt = $conn->prepare("SELECT id, title, discipline FROM projects WHERE (project.title LIKE '%?%' OR project.keywords LIKE '%?%')");
