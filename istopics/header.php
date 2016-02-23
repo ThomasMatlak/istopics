@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!Doctype HTML>
 <html lang="en">
 <head>
@@ -27,7 +31,18 @@
     <li><a href="newProject.php">Add a New Project</a></li>
   </ul>
   <ul class="nav navbar-right">
-    <a href="newUser.php" class="nav btn btn-link">New User?</a>
+    <?php
+       if (!empty($_SESSION["sess_user_id"]) && !empty($_SESSION["sess_user_name"])) {
+           //user is signed in
+           echo "<p class='navbar-text'>Hello ". $_SESSION["sess_user_name"]. "</p>";
+       }
+       else {
+           //user is not signed in
+           echo "<a href='login.php' class='nav btn btn-link'";
+           echo "<a href='newUser.php' class='nav btn btn-link'>New User?</a>";
+       }
+    ?>
+    
     <form id="search" action="search.php" method="GET" class="navbar-form navbar-right">
       <div class="form-group">
 	<input type="text" class="form-control" name="search_term" id="search_term" placeholder="search">

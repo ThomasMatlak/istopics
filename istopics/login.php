@@ -1,4 +1,13 @@
 <?php
+
+session_start();
+if (!empty($_SESSION["sess_user_id"]) && !empty($_SESSION["sess_user_name"])) {
+   //user is already signed in
+   //redirect to home page
+   header("Location: showAllProjects.php");
+   exit();
+}
+
 $page_title = "Sign In";
 include("header.php");
 ?>

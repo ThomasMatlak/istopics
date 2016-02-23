@@ -22,25 +22,28 @@ if ($conn->connect_error) {
 
 //Set variables and sanitize input
 $email = $_GET["email"];
-$password = _GET["password"];
+$pass = $_GET["password"];
 
 //Prepare the SQL statement
-$stmt = "SELECT id, first_name FROM users WHERE email='$email' AND password='$password'";
-$result = conn->query($stmt);
+$sql = "SELECT id, first_name FROM users WHERE email=? AND password=?";
 
-if ($result->num_rows == 1) {
-   $row = $result->fetch_assoc();
-   echo "Login Succesful";
-   $_SESSION["user_id"] = $row["id"];
-   $_SESSION["user_name"] = $row["first_name"];
+//Attempt to prepare the statement
+
+if ($stmt = $conn->prepare($sql)) {
+   $stmt->bind_param("ss", $email, $password);
+
+   $stmt->execute();
+
+   $stmt->bind_result($user_id, $user_name);
+
+   while ($stmt->fetch()) {
+       $_SESSION["sess_user_id"] = $user_id;
+       $_SESSION["sess_user_name"] = $user_name;
+   }
+   $stmt->close();
 }
 
-//$stmt->bind_param("ss", $email, $password);
-
-//$stmt->execute();
-
-
-
+//Close connections
 $conn->close();
 
 //Redirect to home page

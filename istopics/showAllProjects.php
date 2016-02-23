@@ -6,6 +6,8 @@
 * Topics are sorted alphabetically be default.
 */
 
+session_start();
+
 $page_title = "View All Projects";
 include("header.php");
 echo "\n<div class='container-fluid'>";
@@ -26,6 +28,12 @@ if ($conn->connect_error) {
 
 $sql = "SELECT id, title, discipline, abstract, comments, keywords FROM projects ORDER BY title";
 $result = $conn->query($sql);
+
+
+echo "<h1>". $_SESSION["sess_user_name"]. "</h1>";
+
+
+
 
 //Display Projects
 if ($result->num_rows > 0) {
