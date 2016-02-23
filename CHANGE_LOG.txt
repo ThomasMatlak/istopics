@@ -1,6 +1,15 @@
 CHANGE LOG
 ==========
 
+2016-02-23
+-login no longer throws 500 error
+
+2016-02-20
+-added favicon.ico
+-sanitize input
+-added client side validation for projcet information
+-started login capability
+
 2016-02-18
 -validation of user info input on both client and server
 -can add users to database
