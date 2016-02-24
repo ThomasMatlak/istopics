@@ -24,29 +24,29 @@ if ($conn->connect_error) {
 $email = $_GET["email"];
 $pass = $_GET["password"];
 
-//Prepare the SQL statement
-$sql = "SELECT id, first_name FROM users WHERE email=? AND password=?";
+$sql = "SELECT id, first_name FROM users WHERE email='$email' AND password='$pass'";
+$result = $conn->query($sql);
 
-//Attempt to prepare the statement
+if ($result->num_rows > 0) {
+   $row = $result->fetch_assoc();
+   
+   $_SESSION["sess_user_id"] = $row["id"];
+   $_SESSION["sess_user_name"] = $row["first_name"];
+   
+   //Close connections
+   $conn->close();
 
-if ($stmt = $conn->prepare($sql)) {
-   $stmt->bind_param("ss", $email, $password);
+   //Redirect to home page
+   header("Location: showAllProjects.php");
+   exit();
 
-   $stmt->execute();
+} else {
+    //Close connections
+    $conn->close();
 
-   $stmt->bind_result($user_id, $user_name);
-
-   while ($stmt->fetch()) {
-       $_SESSION["sess_user_id"] = $user_id;
-       $_SESSION["sess_user_name"] = $user_name;
-   }
-   $stmt->close();
+    //Redirect to home page
+    header("Location: showAllProjects.php");
+    exit();
 }
 
-//Close connections
-$conn->close();
-
-//Redirect to home page
-header("Location: showAllProjects.php");
-exit();
 ?>

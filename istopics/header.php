@@ -27,19 +27,20 @@ session_start();
 <div class="container-fluid">
   <a href="showAllProjects.php" class="navbar-brand">Home</a>
   <ul class="nav nav-pills navbar-left">
-    <li><a href="showAllProjects.php">View All Projects</a></li>
-    <li><a href="newProject.php">Add a New Project</a></li>
+    <li><a href="showAllProjects.php" class="navbar-link">View All Projects</a></li>
+    <li><a href="newProject.php" class="navbar-link">Add a New Project</a></li>
   </ul>
   <ul class="nav navbar-right">
     <?php
-       if (!empty($_SESSION["sess_user_id"]) && !empty($_SESSION["sess_user_name"])) {
+       if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"])) {
            //user is signed in
            echo "<p class='navbar-text'>Hello ". $_SESSION["sess_user_name"]. "</p>";
+	   echo "<a href='logout.php' class='nav btn btn-link navbar-btn'>Sign Out</a>";
        }
        else {
            //user is not signed in
-           echo "<a href='login.php' class='nav btn btn-link'";
-           echo "<a href='newUser.php' class='nav btn btn-link'>New User?</a>";
+           echo "<a href='login.php' class='nav btn btn-link navbar-btn'>Sign In</a>";
+           echo "<a href='newUser.php' class='nav btn btn-link navbar-btn'>New User?</a>";
        }
     ?>
     

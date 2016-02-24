@@ -29,12 +29,6 @@ if ($conn->connect_error) {
 $sql = "SELECT id, title, discipline, abstract, comments, keywords FROM projects ORDER BY title";
 $result = $conn->query($sql);
 
-
-echo "<h1>". $_SESSION["sess_user_name"]. "</h1>";
-
-
-
-
 //Display Projects
 if ($result->num_rows > 0) {
     echo "<ul class='list-unstyled'>";
