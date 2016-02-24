@@ -53,3 +53,21 @@ session_start();
   </ul>
 </div>
 </nav>
+
+<?php
+if (isset($_SESSION["error"]) && $_SESSION["error"] != 0) {
+   $error_msg = $_SESSION["error_msg"];
+   echo <<<EOT
+   	<div class="container-fluid">
+   	<div class="alert alert-danger" role="alert">
+	     <p>
+		{$error_msg}
+	     </p>
+	</div>
+	</div>
+EOT;
+
+    unset($_SESSION["error"]);
+    unset($_SESSION["error_msg"]);
+}
+?>

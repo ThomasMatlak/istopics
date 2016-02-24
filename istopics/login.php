@@ -1,8 +1,12 @@
 <?php
 
 session_start();
-if (!empty($_SESSION["sess_user_id"]) && !empty($_SESSION["sess_user_name"])) {
+if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"])) {
    //user is already signed in
+
+   $_SESSION["error"] = 1;
+   $_SESSION["error_msg"] = "You are already signed in.";
+
    //redirect to home page
    header("Location: showAllProjects.php");
    exit();
@@ -12,21 +16,22 @@ $page_title = "Sign In";
 include("header.php");
 ?>
 
-<form class="form-horizontal" action="loginController.php" method="GET">
+<div class="container-fluid">
+<form class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12" action="loginController.php" method="GET">
   <div class="form-group">
-    <label for="email" class="col-sm-2 control-label">Email</label>
-    <div class="col-sm-10">
+    <label for="email" class="control-label">Email</label>
+    <div class="">
       <input type="email" class="form-control" id="email" name="email" placeholder="Email">
     </div>
   </div>
   <div class="form-group">
-    <label for="password" class="col-sm-2 control-label">Password</label>
-    <div class="col-sm-10">
+    <label for="password" class="control-label">Password</label>
+    <div class="">
       <input type="password" class="form-control" id="password" name="password" placeholder="Password">
     </div>
   </div>
   <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
+    <div class="">
       <div class="checkbox">
         <label>
           <input type="checkbox" id="remember" name="remember"> Remember me
@@ -35,11 +40,12 @@ include("header.php");
     </div>
   </div>
   <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
+    <div class="">
       <button type="submit" class="btn btn-default">Sign in</button>
     </div>
   </div>
 </form>
+</div>
 
 <?php 
 include("footer.php")

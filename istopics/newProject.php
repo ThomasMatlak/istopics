@@ -1,8 +1,18 @@
 <?php
+
+session_start();
+
 $page_title = "Add a New Project";
 include("header.php");
-?>
 
+if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"])) {
+//user is signed in
+
+//Print the new project page
+
+$major_list = file_get_contents("majors.html");
+
+echo <<<EOT
 <div class="container-fluid">
 <form id="new_project" action="newProjectController.php" method="POST" class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
   <div class="form-group">
@@ -12,7 +22,7 @@ include("header.php");
     </div>
     <div id="discipline_check">
     <label for="discipline" class="control-label">Discipline:</label><span id="proj_disc"></span>
-    <?php include("majors.html"); ?>
+    {$major_list}
     </div>
     <label for="abstract" class="control-label">Abstract:</label>
     <textarea rows="5" cols="80" name="abstract" form="new_project" id="abstract" class="form-control"></textarea>
@@ -63,7 +73,17 @@ $("form :input").on('input', function() {
 });
 
 </script>
+EOT;
+}
+else {
+     //user is not signed in, set error message
+     $_SESSION["error"] = 1;
+     $_SESSION["error_msg"] = "You must be signed in to perform this action.";
+     
+     //Redirect to home page
+     header("Location: showAllProjects.php");
+     exit();
+}
 
-<?php 
 include("footer.php")
 ?>

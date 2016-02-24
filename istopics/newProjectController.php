@@ -1,9 +1,21 @@
 <?php
 /*
-* newProject.php
+* newProjectController.php
 * 
 * Add a new project to the istopics database.
 */
+
+session_start();
+
+if (!isset($_SESSION["sess_user_id"]) || !isset($_SESSION["sess_user_name"])) {
+   //user is not signed in, set error message
+   $_SESSION["error"] = 1;
+   $_SESSION["error_msg"] = "You must be signed in to perform this action.";
+     
+   //Redirect to home page
+   header("Location: showAllProjects.php");
+   exit();
+}
 
 $servername = "localhost";
 $username = "istopics";
@@ -38,7 +50,20 @@ $stmt->bind_param("sssss", $title, $discipline, $abstract, $keywords, $comments)
 //Submit the SQL statement
 $stmt->execute();
 
+$proj_id = $conn->insert_id;
+
 $stmt->close();
+
+//Link the project to the currently signed in user
+$stmt = $conn->prepare("INSERT INTO user_project_connections (userid, projectid) VALUES (?, ?)");
+
+$user_id = $_SESSION["sess_user_id"];
+$stmt->bind_param("ss", $user_id, $proj_id);
+
+$stmt->execute();
+
+$stmt->close();
+
 $conn->close();
 
 //Redirect to home page

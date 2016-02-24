@@ -30,9 +30,14 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
    $row = $result->fetch_assoc();
    
+   //set session variables
    $_SESSION["sess_user_id"] = $row["id"];
    $_SESSION["sess_user_name"] = $row["first_name"];
    
+   //reset error variables
+   unset($_SESSION["error"]);
+   unset($_SESSION["error_message"]);
+
    //Close connections
    $conn->close();
 
@@ -44,8 +49,11 @@ if ($result->num_rows > 0) {
     //Close connections
     $conn->close();
 
+    $_SESSION["error"] = 1;
+    $_SESSION["error_msg"] = "Username or password does not match.";
+
     //Redirect to home page
-    header("Location: showAllProjects.php");
+    header("Location: login.php");
     exit();
 }
 

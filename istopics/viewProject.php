@@ -21,9 +21,10 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-//echo "<p>Connected successfully</p>";
 
-$sql = "SELECT * FROM projects where id=". $_GET["project_id"];
+$proj_id = $_GET["project_id"]
+
+$sql = "SELECT projects.id, projects.title, projects.discipline, projects.abstract, projects.comments, projects.keywords, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE projects_id=$proj_id";
 $result = $conn->query($sql);
 
 //Display Project
