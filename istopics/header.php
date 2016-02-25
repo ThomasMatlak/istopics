@@ -23,34 +23,42 @@ session_start();
 
 <body>
 
-<nav class="navbar navbar-inverse navbar-static-top">
+<nav class="navbar navbar-inverse navbar-static-top col-lg-12 col-md-12 col-sm-12 col-sx-12">
 <div class="container-fluid">
   <a href="showAllProjects.php" class="navbar-brand">Home</a>
   <ul class="nav nav-pills navbar-left">
     <li><a href="showAllProjects.php" class="navbar-link">View All Projects</a></li>
     <li><a href="newProject.php" class="navbar-link">Add a New Project</a></li>
-  </ul>
-  <ul class="nav navbar-right">
+  
+ 
     <?php
        if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"])) {
            //user is signed in
-           echo "<p class='navbar-text'>Hello ". $_SESSION["sess_user_name"]. "</p>";
-	   echo "<a href='logout.php' class='nav btn btn-link navbar-btn'>Sign Out</a>";
+	   echo <<<EOT
+	   
+           <li><p class='navbar-text'>Hello {$_SESSION["sess_user_name"]}</p></li>
+	   <li><a href='logout.php' class='nav btn btn-link navbar-btn'>Sign Out</a></li>
+	   </ul>
+EOT;
        }
        else {
            //user is not signed in
-           echo "<a href='login.php' class='nav btn btn-link navbar-btn'>Sign In</a>";
-           echo "<a href='newUser.php' class='nav btn btn-link navbar-btn'>New User?</a>";
+	   echo <<<EOT
+	   
+           <li><a href='login.php' class='nav btn btn-link navbar-btn'>Sign In</a></li>
+           <li><a href='newUser.php' class='nav btn btn-link navbar-btn'>New User?</a></li>
+	   </ul>
+EOT;
        }
     ?>
-    
-    <form id="search" action="search.php" method="GET" class="navbar-form navbar-right">
+<div class="nav navbar-right">
+    <form id="search" action="search.php" method="GET" class="navbar-form">
       <div class="form-group">
 	<input type="text" class="form-control" name="search_term" id="search_term" placeholder="search">
-	<button type="submit" class="btn">Search</button>
+	<button type="submit" class="btn btn-warning">Search</button>
       </div>
     </form>
-  </ul>
+ </div>
 </div>
 </nav>
 
