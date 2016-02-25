@@ -3,7 +3,7 @@ ISTOPICS
 
 Configuration
 -------------
-The web server should have support for MySQL and a php interpreter with the MySQLi extenstion installed.
+The web server should have support for MySQL and a php interpreter with the MySQLi extension installed.
 
 Installation
 ------------
