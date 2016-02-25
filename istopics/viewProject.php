@@ -22,32 +22,44 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$proj_id = $_GET["project_id"]
-
-$sql = "SELECT projects.id, projects.title, projects.discipline, projects.abstract, projects.comments, projects.keywords, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE projects_id=$proj_id";
+$proj_id = $_GET["project_id"];
+if (!filter_var($proj_id, FILTER_VALIDATE_INT)) {
+   echo "<p>That is not a valid project id.</p>";
+}
+else {
+$sql = "SELECT projects.id, projects.title, projects.discipline, projects.abstract, projects.comments, projects.keywords, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE projects.id={$proj_id}";
 $result = $conn->query($sql);
 
 //Display Project
 if ($result->num_rows > 0) {
    $row = $result->fetch_assoc();
-   echo "<table class='table table-striped'>\n";
 
-   echo "<caption>". $row["title"]. "</caption>";
-   echo "<tr><th>Discipline:</th><td>". $row["discipline"]. "</td></tr>";
-   echo "<tr><th>Abstract:</th><td>". $row["abstract"]. "</td></tr>\n";
-   echo "<tr><th>Comments:</th><td>". $row["comments"]. "</td></tr>\n";
-   echo "<tr><th>Keywords:</th><td>". $row["keywords"]. "</td></tr>\n";
+   $author_name = $row["first_name"]. " ". $row["last_name"];
 
-   echo "</table>\n";
+   echo <<<EOT
+   	<strong>{$row["title"]}</strong>
+	<table class='table table-striped'>\n
 
-   echo "<form action='updateProject.php' method='GET'>\n<input type='hidden' name='project_id' value='". $row["id"]. "'><button type='submit' class='btn btn-warning'>Edit Project</button></form>";
+   	<caption>{$author_name}</caption>
+   	<tr><th>Discipline:</th><td>{$row["discipline"]}</td></tr>
+   	<tr><th>Abstract:</th><td>{$row["abstract"]}</td></tr>\n
+   	<tr><th>Comments:</th><td>{$row["comments"]}</td></tr>\n
+   	<tr><th>Keywords:</th><td>{$row["keywords"]}</td></tr>\n
+
+   	</table>\n
+
+   	<form action='updateProject.php' method='GET'>\n<input type='hidden' name='project_id' value='{$row["id"]}'><button type='submit' class='btn btn-warning'>Edit Project</button></form>
+EOT;
+
 } else {
     echo "<p>Project Not Found.</p>";
 }
 
 //Close connection
 $conn->close();
+}
 
 echo "</div>";
 include("footer.php");
+
 ?>
