@@ -9,9 +9,9 @@ Installation
 ------------
 -place the /istopics folder on the web server
     (probably at /var/www/html)
--run database_setup.sql in MySQL to set up the database and its tables
--create a MySQL user that only has access to the istopics database(!),
-    update username and password in the necessary files(?) appropriately.
+-run database_setup.sql in MySQL to set up the database and its tables as well as the mySQL user
+-the mySQL user 'istopics'@'localhost' is created in the above file and granted necessary permissions
+    update username and password in the necessary files appropriately.
 
 File Manifest
 -------------

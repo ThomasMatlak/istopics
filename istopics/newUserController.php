@@ -20,12 +20,14 @@ if ($conn->connect_error) {
 
 $first_name = filter_var($_POST["first_name"], FILTER_SANITIZE_STRING);
 $last_name = filter_var($_POST["last_name"], FILTER_SANITIZE_STRING);
-$year = filter_var($_POST["year"], FILTER_SANITIZE_INT);
+$year = filter_var($_POST["year"], FILTER_SANITIZE_STRING);
 $major = filter_var($_POST["discipline"], FILTER_SANITIZE_STRING);
 $email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
 $password = $_POST["password"]; //CHANGE TO NOT PLAIN TEXT
 
 if (empty($first_name) || empty($last_name) || empty($year) || empty($major) || empty($email) || empty($password)) {
+   $_SESSION["error"] = 1;
+   $_SESSION["error_msg"] = "Could not create user.";
    //redirect to home page
    header("Location: showAllProjects.php");
    exit();
