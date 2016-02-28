@@ -23,9 +23,17 @@ This project has the following file structure:
 |--CHANGE_LOG.txt
 |--database_setup.sql
 |--/istopics
+    |--css/
+        |--istopics.css
+    |--images/
+    |--db_credentials.php
     |--deleteProjectController.php
+    |--favicon.ico
     |--footer.php
     |--header.php
+    |--login.php
+    |--loginController.php
+    |--logout.php
     |--majors.html
     |--newProject.php
     |--newProjectController.php
@@ -36,7 +44,7 @@ This project has the following file structure:
     |--updateProject.php
     |--updateProjectController.php
     |--viewProject.php
-|--/majors
+|--majors/
     |--convert_majors_to_html.py
     |--majors.html
     |--majors.txt
