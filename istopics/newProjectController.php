@@ -63,6 +63,9 @@ $stmt->close();
 
 $conn->close();
 
+$_SESSION["message"] = 1;
+$_SESSION["msg"] = "Succecfully Added Project";
+
 //Redirect to home page
 header("Location: showAllProjects.php");
 exit();

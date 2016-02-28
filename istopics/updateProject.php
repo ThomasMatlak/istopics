@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $page_title = "Update Project";
 include("header.php");
 
@@ -28,8 +30,6 @@ $discipline = $row["discipline"];
 $abstract = $row["abstract"];
 $keywords = $row["keywords"];
 $comments = $row["comments"];
-
-
 
 if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"])) {
 //user is signed in

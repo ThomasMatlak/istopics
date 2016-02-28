@@ -40,7 +40,10 @@ $stmt->execute();
 $stmt->close();
 $conn->close();
 
-//Redirect to home page
-header("Location: showAllProjects.php");
+$_SESSION["message"] = 1;
+$_SESSION["msg"] = "New User Succesfully Added";
+
+//Redirect to login page
+header("Location: login.php");
 exit();
 ?>

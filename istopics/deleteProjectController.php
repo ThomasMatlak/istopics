@@ -5,6 +5,8 @@
 * Delete a project from the istopics database.
 */
 
+session_start();
+
 require_once 'db_credentials.php';
 
 // Create connection
@@ -17,6 +19,29 @@ if ($conn->connect_error) {
 
 $id = $_POST["project_id"];
 
+if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"])) {
+//user is signed in
+
+//Check that the user has the correct id
+$sql = "SELECT userid FROM user_project_connections WHERE projectid={$id}";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
+
+$user_id = $row["userid"];
+
+if ($user_id != $_SESSION["sess_user_id"]) {
+   //the correct user is not signed in, set error message
+     $_SESSION["error"] = 1;
+     $_SESSION["error_msg"] = "You are not authorized to perform this action.";
+
+     //Close connection
+     $conn->close();
+
+     //Redirect to home page
+     header("Location: showAllProjects.php");
+     exit();
+}
+
 //Prepare the SQL statement
 $stmt = $conn->prepare("DELETE from projects WHERE id=?");
 $stmt->bind_param("s", $id);
@@ -27,7 +52,20 @@ $stmt->execute();
 $stmt->close();
 $conn->close();
 
+$_SESSION["message"] = 2;
+$_SESSION["msg"] = "Project Deleted";
+
 //Redirect to home page
 header("Location: showAllProjects.php");
 exit();
+}
+else {
+     //user is not signed in, set error message
+     $_SESSION["error"] = 1;
+     $_SESSION["error_msg"] = "You must be signed in to perform this action.";
+     
+     //Redirect to home page
+     header("Location: showAllProjects.php");
+     exit();
+}
 ?>
