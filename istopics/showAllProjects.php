@@ -24,7 +24,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-$sql = "SELECT projects.id, projects.title, projects.discipline, projects.abstract, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id ORDER BY title";
+$sql = "SELECT projects.id, projects.title, projects.discipline, projects.abstract, projects.keywords, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id ORDER BY title";
 $result = $conn->query($sql);
 
 //Display Projects
@@ -36,6 +36,7 @@ if ($result->num_rows > 0) {
 	$proj_title = $row["title"];
 	$proj_discipline = $row["discipline"];
 	$proj_abstract = $row["abstract"];
+	$proj_keywords = $row["keywords"];
 	$author_name = $row['first_name']. " ". $row['last_name'];
 
 	echo <<<EOT
@@ -47,6 +48,9 @@ if ($result->num_rows > 0) {
 EOT;
 	if ($proj_abstract != NULL) {
 	   echo "<tr><th><a role='button' data-toggle='collapse' href='#{$proj_id}". "abstract' aria-expanded='false' aria-controls='{$proj_id}". "abstract'>Abstract:</a></th><td><div class='collapse' id='{$proj_id}". "abstract'>{$proj_abstract}</div></td></tr>\n";
+	}
+	if ($proj_keywords != NULL) {
+	   echo "<tr><th><a role='button' data-toggle='collapse' href='#{$proj_id}". "keywords' aria-expanded='false' aria-controls='{$proj_id}". "abstract'>Keywords:</a></th><td><div class='collapse' id='{$proj_id}". "keywords'>{$proj_keywords}</div></td></tr>\n";
 	}
 	echo "</table>\n";
 	echo "</li>";
