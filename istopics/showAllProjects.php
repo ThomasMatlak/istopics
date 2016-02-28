@@ -12,10 +12,8 @@ echo <<<EOT
      <div class='container-fluid'>
      <h1>{$page_title}</h1>
 EOT;
-$servername = "localhost";
-$username = "istopics";
-$password = "password"; //NOTE: CHANGE THE PASSWORD BEFORE GOING INTO PRODUCTION
-$dbname = "istopics";
+
+require_once 'db_credentials.php';
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -50,7 +48,7 @@ EOT;
 	   echo "<tr><th><a role='button' data-toggle='collapse' href='#{$proj_id}". "abstract' aria-expanded='false' aria-controls='{$proj_id}". "abstract'>Abstract:</a></th><td><div class='collapse' id='{$proj_id}". "abstract'>{$proj_abstract}</div></td></tr>\n";
 	}
 	if ($proj_keywords != NULL) {
-	   echo "<tr><th><a role='button' data-toggle='collapse' href='#{$proj_id}". "keywords' aria-expanded='false' aria-controls='{$proj_id}". "abstract'>Keywords:</a></th><td><div class='collapse' id='{$proj_id}". "keywords'>{$proj_keywords}</div></td></tr>\n";
+	   echo "<tr><th><a role='button' data-toggle='collapse' href='#{$proj_id}". "keywords' aria-expanded='false' aria-controls='{$proj_id}". "keywords'>Keywords:</a></th><td><div class='collapse' id='{$proj_id}". "keywords'>{$proj_keywords}</div></td></tr>\n";
 	}
 	echo "</table>\n";
 	echo "</li>";

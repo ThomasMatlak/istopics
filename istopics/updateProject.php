@@ -2,10 +2,7 @@
 $page_title = "Update Project";
 include("header.php");
 
-$servername = "localhost";
-$username = "istopics";
-$password = "password"; //NOTE: CHANGE THE PASSWORD BEFORE GOING INTO PRODUCTION
-$dbname = "istopics";
+require_once 'db_credentials.php';
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -75,7 +72,7 @@ echo <<<EOT
     {$major_list}
     </div>
     <label for="abstract" class="control-label">Abstract:</label>
-    <textarea cols="80" name="abstract" form="update_project" id="abstract" class="form-control">{$abstract}></textarea>
+    <textarea cols="80" name="abstract" form="update_project" id="abstract" class="form-control">{$abstract}</textarea>
     <label for="keywords" class="control-label">Keywords:</label>
     <textarea cols="80" name="keywords" form="update_project" id="keywords" class="form-control">{$keywords}</textarea>
     <label for="comments" class="control-label">Additional Comments:</label>

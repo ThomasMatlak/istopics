@@ -9,10 +9,7 @@ $page_title = "View Project";
 include("header.php");
 echo "\n<div class='container-fluid'>";
 
-$servername = "localhost";
-$username = "istopics";
-$password = "password"; //NOTE: CHANGE THE PASSWORD BEFORE GOING INTO PRODUCTION
-$dbname = "istopics";
+require_once 'db_credentials.php';
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
