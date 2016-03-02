@@ -62,7 +62,7 @@ else {
      $_SESSION["error"] = 1;
      $_SESSION["error_msg"] = "You must be signed in to perform this action";
 
-     /Redirect to home page
+     // Redirect to home page
      header("Location: showAllProjects.php");
      exit;
 }

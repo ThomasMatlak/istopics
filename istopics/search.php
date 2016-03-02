@@ -7,7 +7,6 @@
 
 $page_title = "Search";
 include("header.php");
-echo "\n<div class='container-fluid'>";
 
 $servername = "localhost";
 $username = "istopics";
@@ -50,6 +49,5 @@ if ($result->num_rows > 0) {
 $stmt->close();
 $conn->close();
 
-echo "</div>";
 include("footer.php");
 ?>

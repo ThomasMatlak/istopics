@@ -13,7 +13,6 @@ if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"])) {
 $major_list = file_get_contents("majors.html");
 
 echo <<<EOT
-<div class="container-fluid">
 <form id="new_project" action="newProjectController.php" method="POST" class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
   <div class="form-group">
     <div id="check_title">
@@ -33,7 +32,6 @@ echo <<<EOT
     <button type="submit" id="submit" class="btn btn-warning form-control">Submit</button>
   </div>
 </form>
-</div>
 
 <script>
 //Set all fields to default filled state

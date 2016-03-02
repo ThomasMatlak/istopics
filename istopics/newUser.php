@@ -3,7 +3,6 @@ $page_title = "Register";
 include("header.php");
 ?>
 
-<div class="container-fluid">
 <form id="new_user" action="newUserController.php" method="POST" class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
   <div class="form-group">
     <div id="check_first_name">
@@ -36,7 +35,6 @@ include("header.php");
     <button type="submit" id="submit" class="btn btn-warning form-control">Submit</button>
   </div>
 </form>
-</div>
 
 <script>
 //Set all fields to default filled state

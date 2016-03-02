@@ -59,7 +59,6 @@ if ($user_id != $_SESSION["sess_user_id"]) {
 $major_list = file_get_contents("majors.html");
 
 echo <<<EOT
-<div class="container-fluid">
 <form id="update_project" action="updateProjectController.php" method="POST" class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
   <div class="form-group">
     <input type="hidden" name="project_id" value="{$id}">
@@ -84,7 +83,6 @@ echo <<<EOT
     <input type="hidden" name="project_id" value="{$id}">
     <button type="submit" class="btn btn-danger">Delete Project</button>
 </form>
-</div>
 
 <script>
 //Set default field states

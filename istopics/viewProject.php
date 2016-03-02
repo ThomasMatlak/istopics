@@ -7,7 +7,6 @@
 
 $page_title = "View Project";
 include("header.php");
-echo "\n<div class='container-fluid'>";
 
 require_once 'db_credentials.php';
 
@@ -56,7 +55,6 @@ EOT;
 $conn->close();
 }
 
-echo "</div>";
 include("footer.php");
 
 ?>

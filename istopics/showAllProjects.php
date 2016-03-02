@@ -8,10 +8,6 @@
 
 $page_title = "View All Projects";
 include("header.php");
-echo <<<EOT
-     <div class='container-fluid'>
-     <h1>{$page_title}</h1>
-EOT;
 
 require_once 'db_credentials.php';
 
@@ -64,6 +60,5 @@ EOT;
 //Close connection
 $conn->close();
 
-echo "</div>";
 include("footer.php");
 ?>

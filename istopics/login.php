@@ -16,7 +16,6 @@ $page_title = "Sign In";
 include("header.php");
 ?>
 
-<div class="container-fluid">
 <form class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12" action="loginController.php" method="GET">
   <div class="form-group">
     <label for="email" class="control-label">Email</label>
@@ -45,7 +44,6 @@ include("header.php");
     </div>
   </div>
 </form>
-</div>
 
 <?php 
 include("footer.php")
