@@ -33,9 +33,8 @@ session_start();
     <?php
        if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"])) {
            //user is signed in
+	   echo "<li><p class='navbar-text'>Hello <a href='viewProfile.php' class='btn btn-link navbar-btn'>{$_SESSION['sess_user_name']}</a></p></li>";
 	   echo <<<EOT
-	   
-           <li><p class='navbar-text'>Hello {$_SESSION["sess_user_name"]}</p></li>
 	   <li><a href='logout.php' class='nav btn btn-link navbar-btn'>Sign Out</a></li>
 	   </ul>
 EOT;
@@ -113,3 +112,5 @@ EOT;
     unset($_SESSION["msg"]);
 }
 ?>
+
+<div class="container-fluid">
