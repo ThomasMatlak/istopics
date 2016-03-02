@@ -41,8 +41,11 @@ This project has the following file structure:
     |--newUserController.php
     |--search.php
     |--showAllProjects.php
+    |--updateProfile.php
+    |--updateProfileController.php
     |--updateProject.php
     |--updateProjectController.php
+    |--viewProfile.php
     |--viewProject.php
 |--majors/
     |--convert_majors_to_html.py
