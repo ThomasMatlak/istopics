@@ -32,9 +32,9 @@ if ($result->num_rows > 0) {
 
    $author_name = $row["first_name"]. " ". $row["last_name"];
    $major       = $row["discipline"];
-   $abstract    = $row["abstract"]
-   $comments    = $row["comments"]
-   $keywords    = $row["keywords"]
+   $abstract    = $row["abstract"];
+   $comments    = $row["comments"];
+   $keywords    = $row["keywords"];
 
    echo <<<EOT
    	<strong>{$row["title"]}</strong>

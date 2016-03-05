@@ -43,11 +43,16 @@ if ($user_id != $_SESSION["sess_user_id"]) {
 }
 
 //Prepare the SQL statement
-$stmt = $conn->prepare("DELETE from projects WHERE id=?");
+$stmt = $conn->prepare("DELETE FROM projects WHERE id=?");
 $stmt->bind_param("s", $id);
 
 //Submit the SQL statement
 $stmt->execute();
+$stmt->close();
+
+//Remove the connection between the user and the project
+$stmt = $conn->prepare("DELETE FROM user_project_connections WHERE projectid=?");
+$stmt->bind_param("s", $id);
 
 $stmt->close();
 $conn->close();
