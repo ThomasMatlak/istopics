@@ -37,6 +37,7 @@ include("header.php");
 </form>
 
 <script src="js/newUserValidation.js"></script>
+<script src="js/generateUserEmail.js"></script>
 
 <?php 
 include("footer.php")
