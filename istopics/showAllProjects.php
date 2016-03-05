@@ -23,8 +23,12 @@ $result = $conn->query($sql);
 
 //Display Projects
 if ($result->num_rows > 0) {
-    echo "<ul class='list-unstyled'>";
-    
+    echo "<div class='col-lg-offset-5 col-lg-7'><form class='form-inline'><div class='form-group'><input type='text' name='search' id='search' placeholder='Search Projects' class='form-control'></div></form></div>";
+
+    echo "<ul class='list-unstyled col-lg-12' id='results'>";
+
+    $max_proj_id = $conn->query("SELECT id FROM projects ORDER BY id DESC")->fetch_assoc()['id'];
+
     while($row = $result->fetch_assoc()) {
         $proj_id         = $row["proj_id"];
 	$proj_title      = $row["title"];
@@ -35,7 +39,7 @@ if ($result->num_rows > 0) {
 	$author_name     = $row['first_name']. " ". $row['last_name'];
 
 	echo <<<EOT
-	<hr>
+	<div id="{$proj_id}">
     	<li>
 	<table class='table'>
         <form action='viewProject.php' method='GET'><input type='hidden' name='project_id' value='{$proj_id}'><button type='submit' class='btn btn-link'><strong>{$proj_title}</strong></button></form>
@@ -50,9 +54,12 @@ EOT;
 	}
 	echo "</table>\n";
 	echo "</li>";
-	
+	echo "</div><hr>";
     }
     echo "</ul>";
+    echo "<script src='js/searchAllProjects.js'></script>";
+    //echo "<p>{$max_proj_id}</p>";
+    echo "<input type='hidden' value='{$max_proj_id}' id='max_proj_id' name='max_proj_id'>";
 } else {
     echo "<p>Showing 0 results.</p>";
 }
