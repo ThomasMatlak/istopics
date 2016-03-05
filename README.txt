@@ -26,6 +26,13 @@ This project has the following file structure:
     |--css/
         |--istopics.css
     |--images/
+    |--js/
+	|--generateUserEmail.js
+	|--newProjectValidation.js
+	|--newUsrValidation.js
+	|--searchAllProjects.js
+	|--updateProfileValidation.js
+	|--updateProjectValidation.js
     |--db_credentials.php
     |--deleteProjectController.php
     |--favicon.ico
