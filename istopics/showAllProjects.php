@@ -40,7 +40,7 @@ if ($result->num_rows > 0) {
 	<table class='table'>
         <form action='viewProject.php' method='GET'><input type='hidden' name='project_id' value='{$proj_id}'><button type='submit' class='btn btn-link'><strong>{$proj_title}</strong></button></form>
 	<caption>{$author_name}</caption>
-	<tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Discipline:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'>{$proj_discipline}</td></tr>
+	<tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Major:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'>{$proj_discipline}</td></tr>
 EOT;
 	if ($proj_abstract != NULL) {
 	   echo "<tr><th><a role='button' data-toggle='collapse' href='#{$proj_id}". "abstract' aria-expanded='false' aria-controls='{$proj_id}". "abstract'>Abstract:</a></th><td><div class='collapse' id='{$proj_id}". "abstract'>{$proj_abstract}</div></td></tr>\n";

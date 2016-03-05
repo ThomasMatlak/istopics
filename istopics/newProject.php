@@ -20,7 +20,7 @@ echo <<<EOT
     <input type="text" name="title" id="title" class="form-control">
     </div>
     <div id="discipline_check">
-    <label for="discipline" class="control-label">Discipline:</label><span id="proj_disc"></span>
+    <label for="discipline" class="control-label">Major:</label><span id="proj_disc"></span>
     {$major_list}
     </div>
     <label for="abstract" class="control-label">Abstract:</label>

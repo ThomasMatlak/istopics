@@ -31,16 +31,20 @@ if ($result->num_rows > 0) {
    $row = $result->fetch_assoc();
 
    $author_name = $row["first_name"]. " ". $row["last_name"];
+   $major       = $row["discipline"];
+   $abstract    = $row["abstract"]
+   $comments    = $row["comments"]
+   $keywords    = $row["keywords"]
 
    echo <<<EOT
    	<strong>{$row["title"]}</strong>
 	<table class='table table-striped'>\n
 
    	<caption>{$author_name}</caption>
-   	<tr><th>Discipline:</th><td>{$row["discipline"]}</td></tr>
-   	<tr><th>Abstract:</th><td>{$row["abstract"]}</td></tr>\n
-   	<tr><th>Comments:</th><td>{$row["comments"]}</td></tr>\n
-   	<tr><th>Keywords:</th><td>{$row["keywords"]}</td></tr>\n
+   	<tr><th>Major:</th><td>{$major}</td></tr>
+   	<tr><th>Abstract:</th><td>{$abstract}</td></tr>\n
+   	<tr><th>Comments:</th><td>{$comments}</td></tr>\n
+   	<tr><th>Keywords:</th><td>{$keywords}</td></tr>\n
 
    	</table>\n
 
