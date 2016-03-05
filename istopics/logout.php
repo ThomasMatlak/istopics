@@ -1,4 +1,10 @@
 <?php
+/*
+* logout.php
+*
+* Clear session variables and destroy the session to sign out the user
+*/
+
 session_start();
 
 //Clean up the session

@@ -26,7 +26,7 @@ else {
 $sql = "SELECT projects.id, projects.title, projects.discipline, projects.abstract, projects.comments, projects.keywords, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE projects.id={$proj_id}";
 $result = $conn->query($sql);
 
-//Display Project
+// Display Project
 if ($result->num_rows > 0) {
    $row = $result->fetch_assoc();
 
@@ -55,7 +55,7 @@ EOT;
     echo "<p>Project Not Found.</p>";
 }
 
-//Close connection
+// Close connection
 $conn->close();
 }
 

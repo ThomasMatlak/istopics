@@ -1,4 +1,10 @@
 <?php
+/*
+* header.php
+*
+* The view to display at the top of every page
+*/
+
 session_start();
 ?>
 
@@ -51,7 +57,7 @@ EOT;
     ?>
 <div class="nav navbar-right">
     <noscript>
-    <form id="search" action="search.php" method="GET" class="navbar-form">
+    <form id="search_html" action="search.php" method="GET" class="navbar-form">
       <div class="form-group">
 	<input type="text" class="form-control" name="search_term" id="search_term" placeholder="search">
 	<button type="submit" class="btn btn-warning">Search</button>

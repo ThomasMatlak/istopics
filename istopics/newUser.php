@@ -1,4 +1,10 @@
 <?php
+/*
+* newUser.php
+*
+* Present the user with a form to create a new user profile
+*/
+
 $page_title = "Register";
 include("header.php");
 ?>
@@ -31,7 +37,6 @@ include("header.php");
     <label for="confirm_password" class="control-label">Confirm Password:</label>
     <input type="password" name="confirm_password" id="confirm_password" class="form-control"><span id='password_not_same'></span>
     </div>
-
     <button type="submit" id="submit" class="btn btn-warning form-control">Submit</button>
   </div>
 </form>

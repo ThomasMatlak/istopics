@@ -3,7 +3,7 @@
 * showAllProjects.php
 * 
 * Display all of the projects in the istopics database.
-* Topics are sorted alphabetically be default.
+* Topics are sorted alphabetically by default.
 */
 
 $page_title = "View All Projects";
@@ -19,9 +19,10 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 $sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.abstract, projects.keywords, users.id AS user_id, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id ORDER BY title";
+
 $result = $conn->query($sql);
 
-//Display Projects
+// Display Projects
 if ($result->num_rows > 0) {
     echo "<div class='col-lg-offset-5 col-lg-7'><form class='form-inline'><div class='form-group'><input type='text' name='search' id='search' placeholder='Search Projects' class='form-control'></div></form></div>";
 
@@ -39,10 +40,10 @@ if ($result->num_rows > 0) {
 	$author_name     = $row['first_name']. " ". $row['last_name'];
 
 	echo <<<EOT
+	<li>
 	<div id="{$proj_id}">
-    	<li>
-	<table class='table'>
         <form action='viewProject.php' method='GET'><input type='hidden' name='project_id' value='{$proj_id}'><button type='submit' class='btn btn-link'><strong>{$proj_title}</strong></button></form>
+	<table class='table'>
 	<caption>{$author_name}</caption>
 	<tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Major:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'>{$proj_discipline}</td></tr>
 EOT;
@@ -52,19 +53,22 @@ EOT;
 	if ($proj_keywords != NULL) {
 	   echo "<tr><th><a role='button' data-toggle='collapse' href='#{$proj_id}". "keywords' aria-expanded='false' aria-controls='{$proj_id}". "keywords'>Keywords:</a></th><td><div class='collapse' id='{$proj_id}". "keywords'>{$proj_keywords}</div></td></tr>\n";
 	}
-	echo "</table>\n";
-	echo "</li>";
-	echo "</div><hr>";
+	echo <<<EOT
+	    </table>
+	    </div>
+	    </li>
+EOT;
     }
-    echo "</ul>";
-    echo "<script src='js/searchAllProjects.js'></script>";
-    //echo "<p>{$max_proj_id}</p>";
-    echo "<input type='hidden' value='{$max_proj_id}' id='max_proj_id' name='max_proj_id'>";
+    echo <<<EOT
+        </ul>
+        <script src='js/searchAllProjects.js'></script>
+        <input type='hidden' value='{$max_proj_id}' id='max_proj_id' name='max_proj_id'>
+EOT;
 } else {
     echo "<p>Showing 0 results.</p>";
 }
 
-//Close connection
+// Close connection
 $conn->close();
 
 include("footer.php");

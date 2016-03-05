@@ -1,4 +1,9 @@
 <?php
+/*
+* login.php
+*
+* Present the user with a form to sign into a user profile
+*/
 
 session_start();
 if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"])) {

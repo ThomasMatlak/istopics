@@ -1,4 +1,9 @@
 <?php
+/*
+* newProject.php
+*
+* Present the user with a form to create a new project
+*/
 
 session_start();
 
@@ -6,9 +11,9 @@ $page_title = "Add a New Project";
 include("header.php");
 
 if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"])) {
-//user is signed in
+// user is signed in
 
-//Print the new project page
+// Print the new project page
 
 $major_list = file_get_contents("majors.html");
 
@@ -38,11 +43,11 @@ echo <<<EOT
 EOT;
 }
 else {
-     //user is not signed in, set error message
+     // user is not signed in, set error message
      $_SESSION["error"] = 1;
      $_SESSION["error_msg"] = "You must be signed in to perform this action.";
      
-     //Redirect to home page
+     // Redirect to home page
      header("Location: showAllProjects.php");
      exit();
 }

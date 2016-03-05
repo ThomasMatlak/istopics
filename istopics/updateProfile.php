@@ -1,4 +1,9 @@
 <?php
+/*
+* updateProfile.php
+*
+* Present the user with a form to update their profile information
+*/
 
 // ADD CHANGE PASSWORD OPTION
 

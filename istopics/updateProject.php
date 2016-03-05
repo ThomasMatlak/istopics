@@ -1,4 +1,10 @@
 <?php
+/*
+* updateProject.php
+*
+* Present the user with a form to update their project
+*/
+
 session_start();
 
 $page_title = "Update Project";
@@ -13,7 +19,6 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-//echo "<p>Connected successfully</p>";
 
 $sql = "SELECT * FROM projects where id={$_GET["project_id"]}";
 $result = $conn->query($sql);
@@ -24,37 +29,37 @@ if ($result->num_rows == 0) {
 
 $row = $result->fetch_assoc();
 
-$id = $row["id"];
-$title = $row["title"];
+$id         = $row["id"];
+$title      = $row["title"];
 $discipline = $row["discipline"];
-$abstract = $row["abstract"];
-$keywords = $row["keywords"];
-$comments = $row["comments"];
+$abstract   = $row["abstract"];
+$keywords   = $row["keywords"];
+$comments   = $row["comments"];
 
 if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"])) {
-//user is signed in
+// user is signed in
 
-//Check that the user has the correct id
+// Check that the user has the correct id
 $sql = "SELECT userid FROM user_project_connections WHERE projectid={$id}";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 
 $user_id = $row["userid"];
 
-//Close connection
+// Close connection
 $conn->close();
 
 if ($user_id != $_SESSION["sess_user_id"]) {
-   //the correct user is not signed in, set error message
+   // the correct user is not signed in, set error message
      $_SESSION["error"] = 1;
      $_SESSION["error_msg"] = "You are not authorized to perform this action.";
      
-     //Redirect to home page
+     // Redirect to home page
      header("Location: showAllProjects.php");
      exit();
 }
 
-//Print the edit project page
+// Print the edit project page
 
 $major_list = file_get_contents("majors.html");
 
@@ -88,11 +93,11 @@ echo <<<EOT
 EOT;
 }
 else {
-     //user is not signed in, set error message
+     // user is not signed in, set error message
      $_SESSION["error"] = 1;
      $_SESSION["error_msg"] = "You must be signed in to perform this action.";
      
-     //Redirect to home page
+     // Redirect to home page
      header("Location: showAllProjects.php");
      exit();
 }
