@@ -1,6 +1,7 @@
 //Set default field states
 $('#check_title').attr("class", "has-success");
 $('#discipline_check').attr("class", "has-error");
+$('#submit').attr("disabled", "true");
 
 //Check that the title is there
 $('#title').on('input', function() {

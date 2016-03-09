@@ -32,7 +32,7 @@ $row = $result->fetch_assoc();
 $id         = $row["id"];
 $title      = $row["title"];
 $discipline = $row["discipline"];
-$abstract   = $row["abstract"];
+$proposal   = $row["proposal"];
 $keywords   = $row["keywords"];
 $comments   = $row["comments"];
 
@@ -75,8 +75,8 @@ echo <<<EOT
     <label for="discipline" class="control-label">Major:</label><span id="proj_disc"></span>
     {$major_list}
     </div>
-    <label for="abstract" class="control-label">Abstract:</label>
-    <textarea cols="80" name="abstract" form="update_project" id="abstract" class="form-control">{$abstract}</textarea>
+    <label for="proposal" class="control-label">Project Proposal:</label>
+    <textarea cols="80" name="proposal" form="update_project" id="proposal" class="form-control">{$proposal}</textarea>
     <label for="keywords" class="control-label">Keywords:</label>
     <textarea cols="80" name="keywords" form="update_project" id="keywords" class="form-control">{$keywords}</textarea>
     <label for="comments" class="control-label">Additional Comments:</label>

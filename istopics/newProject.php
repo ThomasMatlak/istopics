@@ -28,8 +28,8 @@ echo <<<EOT
     <label for="discipline" class="control-label">Major:</label><span id="proj_disc"></span>
     {$major_list}
     </div>
-    <label for="abstract" class="control-label">Abstract:</label>
-    <textarea rows="5" cols="80" name="abstract" form="new_project" id="abstract" class="form-control"></textarea>
+    <label for="proposal" class="control-label">Project Proposal:</label>
+    <textarea rows="5" cols="80" name="proposal" form="new_project" id="proposal" class="form-control"></textarea>
     <label for="keywords" class="control-label">Keywords:</label>
     <textarea rows="1" cols="80" name="keywords" form="new_project" id="keywords" class="form-control"></textarea>
     <label for="comments" class="control-label">Additional Comments:</label>

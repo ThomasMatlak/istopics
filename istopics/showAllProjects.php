@@ -18,7 +18,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.abstract, projects.keywords, users.id AS user_id, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id ORDER BY title";
+$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.keywords, users.id AS user_id, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id ORDER BY title";
 
 $result = $conn->query($sql);
 
@@ -39,7 +39,7 @@ if ($result->num_rows > 0) {
         $proj_id         = $row["proj_id"];
 	$proj_title      = $row["title"];
 	$proj_discipline = $row["discipline"];
-	$proj_proposal   = $row["abstract"];
+	$proj_proposal   = $row["proposal"];
 	$proj_keywords   = $row["keywords"];
 	$user_id         = $row["user_id"];
 	$author_name     = $row['first_name']. " ". $row['last_name'];

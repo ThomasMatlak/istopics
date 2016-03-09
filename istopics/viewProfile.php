@@ -58,7 +58,7 @@ if ($result->num_rows > 0) {
 	<hr>
 EOT;
 
-$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.abstract, projects.keywords FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE users.id={$user_id} ORDER BY title";
+$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.keywords FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE users.id={$user_id} ORDER BY title";
 
 $result = $conn->query($sql);
 
@@ -72,7 +72,7 @@ if ($result->num_rows > 0) {
         $proj_id         = $row["proj_id"];
 	$proj_title      = $row["title"];
 	$proj_major      = $row["discipline"];
-	$proj_abstract   = $row["abstract"];
+	$proj_proposal   = $row["proposal"];
 	$proj_keywords   = $row["keywords"];
 
 	echo <<<EOT
@@ -81,8 +81,8 @@ if ($result->num_rows > 0) {
         <form action='viewProject.php' method='GET'><input type='hidden' name='project_id' value='{$proj_id}'><button type='submit' class='btn btn-link'><strong>{$proj_title}</strong></button></form>
 	<tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Major:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'>{$proj_major}</td></tr>
 EOT;
-	if ($proj_abstract != NULL) {
-	   echo "<tr><th><a role='button' data-toggle='collapse' href='#{$proj_id}". "abstract' aria-expanded='false' aria-controls='{$proj_id}". "abstract'>Abstract:</a></th><td><div class='collapse' id='{$proj_id}". "abstract'>{$proj_abstract}</div></td></tr>\n";
+	if ($proj_proposal != NULL) {
+	   echo "<tr><th><a role='button' data-toggle='collapse' href='#{$proj_id}proposal' aria-expanded='false' aria-controls='{$proj_id}proposal'>Proposal:</a></th><td><div class='collapse' id='{$proj_id}proposal'>{$proj_proposal}</div></td></tr>\n";
 	}
 	if ($proj_keywords != NULL) {
 	   echo "<tr><th><a role='button' data-toggle='collapse' href='#{$proj_id}". "keywords' aria-expanded='false' aria-controls='{$proj_id}". "keywords'>Keywords:</a></th><td><div class='collapse' id='{$proj_id}". "keywords'>{$proj_keywords}</div></td></tr>\n";

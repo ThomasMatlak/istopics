@@ -12,7 +12,7 @@ CREATE TABLE users (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, first_name VARCH
 
 #projects
 DROP TABLE IF EXISTS projects;
-create table projects (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, title VARCHAR(500), abstract TEXT, keywords VARCHAR(1000), comments VARCHAR(1000), discipline VARCHAR(100));
+create table projects (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, title VARCHAR(500), proposal TEXT, keywords VARCHAR(1000), comments VARCHAR(1000), discipline VARCHAR(100));
 
 #relational table for users and projects
 DROP TABLE IF EXISTS user_project_connections;

@@ -23,7 +23,7 @@ if (!filter_var($proj_id, FILTER_VALIDATE_INT)) {
    echo "<p>That is not a valid project id.</p>";
 }
 else {
-$sql = "SELECT projects.id, projects.title, projects.discipline, projects.abstract, projects.comments, projects.keywords, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE projects.id={$proj_id}";
+$sql = "SELECT projects.id, projects.title, projects.discipline, projects.proposal, projects.comments, projects.keywords, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE projects.id={$proj_id}";
 $result = $conn->query($sql);
 
 // Display Project
@@ -32,7 +32,7 @@ if ($result->num_rows > 0) {
 
    $author_name = $row["first_name"]. " ". $row["last_name"];
    $major       = $row["discipline"];
-   $abstract    = $row["abstract"];
+   $proposal    = $row["proposal"];
    $comments    = $row["comments"];
    $keywords    = $row["keywords"];
 
@@ -42,7 +42,7 @@ if ($result->num_rows > 0) {
 
    	<caption>{$author_name}</caption>
    	<tr><th>Major:</th><td>{$major}</td></tr>
-   	<tr><th>Abstract:</th><td>{$abstract}</td></tr>\n
+   	<tr><th>Proposal:</th><td>{$proposal}</td></tr>\n
    	<tr><th>Comments:</th><td>{$comments}</td></tr>\n
    	<tr><th>Keywords:</th><td>{$keywords}</td></tr>\n
 

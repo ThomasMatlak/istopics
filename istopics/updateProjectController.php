@@ -44,7 +44,7 @@ if ($user_id != $_SESSION["sess_user_id"]) {
 
 $title      = filter_var($_POST["title"], FILTER_SANITIZE_STRING);
 $discipline = filter_var($_POST["discipline"], FILTER_SANITIZE_STRING);
-$abstract   = filter_var($_POST["abstract"], FILTER_SANITIZE_STRING);
+$proposal   = filter_var($_POST["proposal"], FILTER_SANITIZE_STRING);
 $keywords   = filter_var($_POST["keywords"], FILTER_SANITIZE_STRING);
 $comments   = filter_var($_POST["comments"], FILTER_SANITIZE_STRING);
 
@@ -58,8 +58,8 @@ if (empty($title) || empty(discipline)) {
 }
 
 // Prepare the SQL statement
-$stmt = $conn->prepare("UPDATE projects SET title=?, discipline=?, abstract=?, keywords=?, comments=? WHERE id=?");
-$stmt->bind_param("ssssss", $title, $discipline, $abstract, $keywords, $comments, $id);
+$stmt = $conn->prepare("UPDATE projects SET title=?, discipline=?, proposal=?, keywords=?, comments=? WHERE id=?");
+$stmt->bind_param("ssssss", $title, $discipline, $proposal, $keywords, $comments, $id);
 
 // Submit the SQL statement
 $stmt->execute();
