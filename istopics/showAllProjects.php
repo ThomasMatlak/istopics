@@ -24,10 +24,12 @@ $result = $conn->query($sql);
 
 // Display Projects
 if ($result->num_rows > 0) {
-    echo "<div class='col-lg-12'><form class='form-inline'><div class='form-group'><input type='text' name='search' id='search' placeholder='Search Projects' class='form-control'></div><span class='help-block'>Search by keywords, title, major, or proposal</span></form></div>";
+    echo "<div class='col-lg-12'><form class='form-inline'><div class='form-group'><input type='text' name='search' id='search' placeholder='Search Projects' class='form-control'></div><span class='help-block'>Search by keywords, title, major, author, or proposal</span></form></div>";
 
     if ($result->num_rows == 1) { echo "<p>Showing <span id='num_projects'>{$result->num_rows}</span> <span id='result_or_results'>result</span>.</p>"; }
     else { echo "<p>Showing <span id='num_projects'>{$result->num_rows}</span> <span id='result_or_results'>results</span>.</p>"; }
+
+    echo "<span id='no_results_msg'></span>";
 
     echo "<ul class='list-unstyled col-lg-12' id='results'>";
 
