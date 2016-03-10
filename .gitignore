@@ -2,3 +2,5 @@
 *~
 \#*
 *\#
+db_filler/filler_projects.sql
+db_filler/filler_user_project_connections.sql
