@@ -77,18 +77,26 @@ if ($result->num_rows > 0) {
 
 	echo <<<EOT
     	<li>
+	<div class='panel panel-default'>
+	<div class='panel-heading'>
 	<table class='table'>
-        <form action='viewProject.php' method='GET'><input type='hidden' name='project_id' value='{$proj_id}'><button type='submit' class='btn btn-link'><strong>{$proj_title}</strong></button></form>
+        <form action='viewProject.php' method='GET' class='form-inline'><div class='form-group'><input type='hidden' name='project_id' value='{$proj_id}'><button type='submit' class='btn btn-link form-control'><span>{$proj_title}</span></button></div></form>
+	</div> <!-- panel heading -->
+	<div class='panel-body'>
 	<tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Major:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'>{$proj_major}</td></tr>
 EOT;
 	if ($proj_proposal != NULL) {
-	   echo "<tr><th><a role='button' data-toggle='collapse' href='#{$proj_id}proposal' aria-expanded='false' aria-controls='{$proj_id}proposal'>Proposal:</a></th><td><div class='collapse' id='{$proj_id}proposal'>{$proj_proposal}</div></td></tr>\n";
+	   echo "<tr><th><a role='button' data-toggle='collapse' href='#{$proj_id}proposal' aria-expanded='true' aria-controls='{$proj_id}proposal'>Proposal:</a></th><td><div class='collapse' id='{$proj_id}proposal'>{$proj_proposal}</div></td></tr>\n";
 	}
 	if ($proj_keywords != NULL) {
-	   echo "<tr><th><a role='button' data-toggle='collapse' href='#{$proj_id}". "keywords' aria-expanded='false' aria-controls='{$proj_id}". "keywords'>Keywords:</a></th><td><div class='collapse' id='{$proj_id}". "keywords'>{$proj_keywords}</div></td></tr>\n";
+	   echo "<tr><th><a role='button' data-toggle='collapse' href='#{$proj_id}". "keywords' aria-expanded='true' aria-controls='{$proj_id}". "keywords'>Keywords:</a></th><td><div class='collapse' id='{$proj_id}". "keywords'>{$proj_keywords}</div></td></tr>\n";
 	}
-	echo "</table>\n";
-	echo "</li>";
+	echo  <<<EOT
+	      </table>
+	      <div> <!-- panel body -->
+	      <div> <!-- panel -->
+	      </li>
+EOT;
     }
     echo "</ul>";
 }

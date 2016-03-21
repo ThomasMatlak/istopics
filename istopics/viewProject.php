@@ -37,7 +37,12 @@ if ($result->num_rows > 0) {
    $keywords    = $row["keywords"];
 
    echo <<<EOT
-   	<strong>{$row["title"]}</strong>
+   	<div class="panel panel-default">
+	     <div class="panel-heading">
+   	     	  <span class="panel-title">{$row["title"]}</span>
+	     </div> <!-- panel heading -->
+	<div class="panel-body">
+	
 	<table class='table table-striped'>\n
 
    	<caption>{$author_name}</caption>
@@ -47,8 +52,11 @@ if ($result->num_rows > 0) {
    	<tr><th>Keywords:</th><td>{$keywords}</td></tr>\n
 
    	</table>\n
-
-   	<form action='updateProject.php' method='GET'>\n<input type='hidden' name='project_id' value='{$row["id"]}'><button type='submit' class='btn btn-warning'>Edit Project</button></form>
+	
+	</div> <!-- panel body -->
+	</div> <!-- panel -->
+   	
+	<form action='updateProject.php' method='GET'>\n<input type='hidden' name='project_id' value='{$row["id"]}'><button type='submit' class='btn btn-warning'>Edit Project</button></form>
 EOT;
 
 } else {
