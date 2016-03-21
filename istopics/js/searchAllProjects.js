@@ -24,11 +24,13 @@ $("form :input").on('input', function() {
         var num_projects = 0;
 
 	// Input is not empty; search for and display projects matching search terms
-	for (j = 0; j < searchTerms.length; j++) {
+	//for (j = 0; j < searchTerms.length; j++) {
+	for (i = 0; i <= max_proj_id; i++) {
 	    project_showed = false;
 
-	    for (i = 0; i <= max_proj_id; i++) {
-		var searchTerm = searchTerms[j].trim(); // trim() removes leading and trailing whitespace
+	    //for (i = 0; i <= max_proj_id; i++) {
+	    for (j = 0; j < searchTerms.length; j++) {
+		var searchTerm = searchTerms[j].trim();
 
 		var keywords = $('#'+i+'keywords').text().toLowerCase();
 		var title = $('#'+i+'project_title').text().toLowerCase();
@@ -44,8 +46,8 @@ $("form :input").on('input', function() {
 		    $('#'+i).show();
 		    var project_showed = true;
 		}
+		if (project_showed == true) { num_projects++; }
 	    }
-	    if (project_showed == true) { num_projects++; }
 	}
 	$('#num_projects').text(num_projects);
 	$('#no_results_msg').text('');
