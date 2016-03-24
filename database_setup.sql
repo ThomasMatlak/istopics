@@ -26,7 +26,7 @@ CREATE USER 'istopics'@'localhost' IDENTIFIED BY 'password';
 
 #Grant permissions
 #For use in production
-GRANT SELECT, DELETE, INSERT, UPDATE ON istopics.* TO 'istopics'@'localhost';
+GRANT SELECT, DELETE, INSERT, UPDATE, DROP ON istopics.* TO 'istopics'@'localhost';
 
 #For use in testing
 #GRANT ALL ON istopics.* TO 'istopics'@'localhost';

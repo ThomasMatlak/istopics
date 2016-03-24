@@ -113,6 +113,18 @@ if (isset($_SESSION["message"]) && $_SESSION["message"] == 2) {
 	</div>
 	</div>
 EOT;
+}
+if (isset($_SESSION["message"]) && $_SESSION["message"] == 3) {
+   $msg = $_SESSION["msg"];
+   echo <<<EOT
+   	<div class="container-fluid">
+   	<div class="alert alert-warning" role="alert">
+	     <p>
+		{$msg}
+	     </p>
+	</div>
+	</div>
+EOT;
 
     unset($_SESSION["message"]);
     unset($_SESSION["msg"]);
