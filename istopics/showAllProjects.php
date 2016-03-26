@@ -52,7 +52,7 @@ if ($result->num_rows > 0) {
 	</div> <!-- panel heading -->
 	<div class="panel-body">
 	<table class='table'>
-	<caption><span id="{$proj_id}author">{$author_name}</span></caption>
+	<caption><span id="{$proj_id}author"><a href='viewProfile.php?user_id={$user_id}' method='GET'>{$author_name}</a></span></caption>
 	<tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Major:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'><div id="{$proj_id}project_major">{$proj_discipline}</div></td></tr>
 EOT;
 	if ($proj_proposal != NULL) {

@@ -23,7 +23,7 @@ if (!filter_var($proj_id, FILTER_VALIDATE_INT)) {
    echo "<p>That is not a valid project id.</p>";
 }
 else {
-$sql = "SELECT projects.id, projects.title, projects.discipline, projects.proposal, projects.comments, projects.keywords, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE projects.id={$proj_id}";
+$sql = "SELECT projects.id, projects.title, projects.discipline, projects.proposal, projects.comments, projects.keywords, users.id AS user_id, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE projects.id={$proj_id}";
 $result = $conn->query($sql);
 
 // Display Project
@@ -31,6 +31,7 @@ if ($result->num_rows > 0) {
    $row = $result->fetch_assoc();
 
    $author_name = $row["first_name"]. " ". $row["last_name"];
+   $user_id     = $row["user_id"];
    $major       = $row["discipline"];
    $proposal    = $row["proposal"];
    $comments    = $row["comments"];
@@ -45,7 +46,7 @@ if ($result->num_rows > 0) {
 	
 	<table class='table table-striped'>\n
 
-   	<caption>{$author_name}</caption>
+   	<caption><a href='viewProfile.php?user_id={$user_id}' method='GET'>{$author_name}</a></caption>
    	<tr><th>Major:</th><td>{$major}</td></tr>
    	<tr><th>Proposal:</th><td>{$proposal}</td></tr>\n
    	<tr><th>Comments:</th><td>{$comments}</td></tr>\n
