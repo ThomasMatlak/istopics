@@ -21,6 +21,7 @@ $year       = filter_var($_POST["year"], FILTER_SANITIZE_STRING);
 $major      = filter_var($_POST["discipline"], FILTER_SANITIZE_STRING);
 $email      = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
 $password   = $_POST["password"]; //CHANGE TO NOT PLAIN TEXT
+$role       = "student";
 
 if (empty($first_name) || empty($last_name) || empty($year) || empty($major) || empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL) || empty($password)) {
    $_SESSION["error"] = 1;
@@ -31,8 +32,8 @@ if (empty($first_name) || empty($last_name) || empty($year) || empty($major) || 
 }
 
 // Prepare the SQL statement
-$stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, major, year, password) VALUES (?,?,?,?,?,?)");
-$stmt->bind_param("ssssss", $first_name, $last_name, $email, $major, $year, $password);
+$stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, major, year, password, role) VALUES (?,?,?,?,?,?,?)");
+$stmt->bind_param("ssssss", $first_name, $last_name, $email, $major, $year, $password, $role);
 
 // Submit the SQL statement
 $stmt->execute();

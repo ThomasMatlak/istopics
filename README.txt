@@ -12,6 +12,8 @@ Installation
 -run database_setup.sql in MySQL to set up the database and its tables as well as the mySQL user
 -the mySQL user 'istopics'@'localhost' is created in the above file and granted necessary permissions
     update username and password in the necessary files appropriately.
+-to change a users's role from 'student' to 'admin', from MySQL run the command:
+    UPDATE TABLE users SET role='admin' WHERE email='EMAIL OF THE USER TO BE UPDATATED';
 
 Auto Populate the Dabatase (testing)
 ------------------------------------
@@ -56,9 +58,11 @@ istopics/
 	|--generateUserEmail.js
 	|--newProjectValidation.js
 	|--newUsrValidation.js
+	|--resetDatabaseWarning.js
 	|--searchAllProjects.js
 	|--updateProfileValidation.js
 	|--updateProjectValidation.js
+    |--adminInterface.php
     |--db_credentials.php
     |--deleteProjectController.php
     |--favicon.ico
@@ -72,6 +76,7 @@ istopics/
     |--newProjectController.php
     |--newUser.php
     |--newUserController.php
+    |--resetDatabase.php
     |--search.php
     |--showAllProjects.php
     |--updateProfile.php
