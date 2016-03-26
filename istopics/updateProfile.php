@@ -9,11 +9,12 @@
 
 session_start();
 
-if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"])) {
+if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"]) && isset($_SESSION["sess_user_role"])) {
 
 include_once 'db_credentials.php';
 
-$id = $_SESSION["sess_user_id"];
+//$id = $_SESSION["sess_user_id"];
+$id = $_GET["user_id"];
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -32,7 +33,7 @@ $row = $result->fetch_assoc();
 $user_id = $row["id"];
 $first_name = $row["first_name"];
 
-if ($user_id != $_SESSION["sess_user_id"] || $first_name != $_SESSION["sess_user_name"]) {
+if ((($user_id != $_SESSION["sess_user_id"]) || ($first_name != $_SESSION["sess_user_name"])) && ($_SESSION["sess_user_role"] != "admin")) {
    // the correct user is not signed in, set error message
      $_SESSION["error"] = 1;
      $_SESSION["error_msg"] = "You are not authorized to perform this action.";
@@ -86,6 +87,7 @@ if ($result->num_rows > 0) {
                      <label for="email" class="control-label">Email:</label>
                      <input type="email" name="email" id="email" class="form-control" value="{$email}">
                  </div>
+		 <input type="hidden" name="user_id" value={$user_id}>
 		<button type="submit" id="submit" class="btn btn-warning form-control">Submit</button>
      	    </div>
 	</form>

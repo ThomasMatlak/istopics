@@ -54,7 +54,10 @@ if ($result->num_rows > 0) {
 
 	</table>
 
-	<a href='updateProfile.php' method='GET' class='btn btn-warning'>Edit Profile</a>
+	<form action='updateProfile.php' method='GET'>
+	    <input type='hidden' name='user_id' id='user_id' value='{$user_id}'>
+	    <button class='btn btn-warning'>Edit Profile</button>
+	</form>
 EOT;
 
 $sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.keywords FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE users.id={$user_id} ORDER BY title";

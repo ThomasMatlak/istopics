@@ -17,10 +17,11 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"])) {
+if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"]) && isset($_SESSION["sess_user_role"])) {
 // user is signed in
 
-$user_id    = $_SESSION["sess_user_id"];
+//$user_id    = $_SESSION["sess_user_id"];
+$user_id    = $_POST["user_id"];
 $first_name = filter_var($_POST["first_name"], FILTER_SANITIZE_STRING);
 $last_name  = filter_var($_POST["last_name"], FILTER_SANITIZE_STRING);
 $discipline = filter_var($_POST["discipline"], FILTER_SANITIZE_STRING);
@@ -35,6 +36,17 @@ if (empty($first_name) || empty($last_name) || empty($discipline) || empty($year
      // Redirect to home page
      header("Location: viewProfile.php");
      exit();
+}
+
+// Check that user is authorized to update profile
+if (($_SESSION["sess_user_id"] != $user_id) && ($_SESSION["sess_user_role"] != "admin")) {
+   // user is not authorized, set error message
+   $_SESSION["error"] = 1;
+   $_SESSION["error_msg"] = "You are not authorized to perform this action.";
+
+   // Redirect to home page
+   header("Location: viewProfile.php");
+   exit();
 }
 
 $stmt = $conn->prepare("UPDATE users SET first_name=?, last_name=?, major=?, year=?, email=? WHERE id=?");

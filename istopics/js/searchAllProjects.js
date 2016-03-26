@@ -46,8 +46,8 @@ $("form :input").on('input', function() {
 		    $('#'+i).show();
 		    var project_showed = true;
 		}
-		if (project_showed == true) { num_projects++; }
 	    }
+	    if (project_showed == true) { num_projects++; }
 	}
 	$('#num_projects').text(num_projects);
 	$('#no_results_msg').text('');
