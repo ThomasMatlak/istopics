@@ -1,6 +1,37 @@
 CHANGE LOG
 ==========
 
+2016-03-26
+-admin can update any project
+-admin can update any user
+-added links to user profiles from project views
+-added link to admin interface
+-created index page
+
+2016-03-25
+-added user roles
+-added autofill for major selection
+-user email must be unique
+-various bug fixes
+
+2016-03-24
+-can reset database from admin interface
+
+2016-03-21
+-fixed project search counter
+-added panels to project views
+-started admin interface
+-updated favicon.ico
+
+2016-03-09
+-changed abstract to proposal
+-implemented comma-separated searching
+-wrote scripts to generate filler projects
+
+2016-03-08
+-added searching for all project fields
+-show number of search results
+
 2016-03-05
 -basic javaScript search functionality
 -various bug fixes

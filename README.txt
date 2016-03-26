@@ -68,6 +68,7 @@ istopics/
     |--favicon.ico
     |--footer.php
     |--header.php
+    |--index.php
     |--login.php
     |--loginController.php
     |--logout.php
