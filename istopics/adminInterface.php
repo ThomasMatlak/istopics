@@ -10,7 +10,7 @@ session_start();
 $page_title = "Database Administration";
 include("header.php");
 
-if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"]) ){// && isset($_SESSION["sess_user_role"]) && ($_SESSION["sess_user_role"] == "admin")) {
+if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"]) && isset($_SESSION["sess_user_role"]) && ($_SESSION["sess_user_role"] == "admin")) {
 // user is signed in as an admin
 
 echo <<<EOT

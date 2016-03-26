@@ -21,15 +21,16 @@ if ($conn->connect_error) {
 $email = filter_var($_GET["email"], FILTER_SANITIZE_EMAIL);
 $pass  = $_GET["password"];
 
-$sql = "SELECT id, first_name FROM users WHERE email='$email' AND password='$pass'";
+$sql = "SELECT id, first_name, role FROM users WHERE email='$email' AND password='$pass'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
    $row = $result->fetch_assoc();
    
    // set session variables
-   $_SESSION["sess_user_id"] = $row["id"];
+   $_SESSION["sess_user_id"]   = $row["id"];
    $_SESSION["sess_user_name"] = $row["first_name"];
+   $_SESSION["sess_user_role"] = $row["role"];
    
    // reset error variables
    unset($_SESSION["error"]);
