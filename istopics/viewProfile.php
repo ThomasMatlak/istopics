@@ -55,7 +55,6 @@ if ($result->num_rows > 0) {
 	</table>
 
 	<a href='updateProfile.php' method='GET' class='btn btn-warning'>Edit Profile</a>
-	<hr>
 EOT;
 
 $sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.keywords FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE users.id={$user_id} ORDER BY title";
@@ -64,12 +63,14 @@ $result = $conn->query($sql);
 
 // Display user's projects
 if ($result->num_rows > 0) {
-    echo "<ul class='list-unstyled'>";
-    
-    echo "<h4>{$first_name}'s Projects</h4>";
+   echo <<<EOT
+   	<hr>
+   	<ul class='list-unstyled'>
+	<h4>{$first_name}'s Projects</h4>
+EOT;
 
-    while($row = $result->fetch_assoc()) {
-        $proj_id         = $row["proj_id"];
+   while($row = $result->fetch_assoc()) {
+   	$proj_id         = $row["proj_id"];
 	$proj_title      = $row["title"];
 	$proj_major      = $row["discipline"];
 	$proj_proposal   = $row["proposal"];

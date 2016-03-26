@@ -60,6 +60,8 @@ if ($result->num_rows > 0) {
     $major      = $row["major"];
     $year       = $row["year"];
 
+    $major_list = file_get_contents("majors.html");
+
     echo <<<EOT
     	 <form id="update_user" action="updateProfileController.php" method="POST" class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
  	     <div class="form-group">
@@ -73,10 +75,8 @@ if ($result->num_rows > 0) {
     	   	 </div>
     		 <div id="discipline_check">
                      <label for="discipline" class="control-label">Major(s):</label><span id="stud_major"></span>
-		     
-EOT;
-		     include("majors.html");
-    echo <<<EOT
+		     {$major_list}
+		     <input type="hidden" name="st_major" id="st_major" value="{$major}">
 	  	 </div>
     		 <div id="year_check">
                      <label for="year" class="control-label">Graduating Year:</label>
@@ -91,6 +91,7 @@ EOT;
 	</form>
 
 	<script src="js/updateProfileValidation.js"></script>
+	<script src="js/setMajor.js"></script>
 EOT;
 }
 else {

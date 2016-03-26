@@ -64,32 +64,35 @@ if ($user_id != $_SESSION["sess_user_id"]) {
 $major_list = file_get_contents("majors.html");
 
 echo <<<EOT
-<form id="update_project" action="updateProjectController.php" method="POST" class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
-  <div class="form-group">
-    <input type="hidden" name="project_id" value="{$id}">
-    <div id="check_title">
-    <label for="title" class="control-label">Title:</label>
-    <input type="text" name="title" id="title" value="{$title}" class="form-control">
-    </div>
-    <div id="discipline_check">
-    <label for="discipline" class="control-label">Major:</label><span id="proj_disc"></span>
-    {$major_list}
-    </div>
-    <label for="proposal" class="control-label">Project Proposal:</label>
-    <textarea cols="80" name="proposal" form="update_project" id="proposal" class="form-control">{$proposal}</textarea>
-    <label for="keywords" class="control-label">Keywords:</label>
-    <textarea cols="80" name="keywords" form="update_project" id="keywords" class="form-control">{$keywords}</textarea>
-    <label for="comments" class="control-label">Additional Comments:</label>
-    <textarea cols="80" name="comments" form="update_project" id="comments" class="form-control">{$comments}</textarea>
-    <button type="submit" id="submit" class="btn btn-warning form-control">Submit</button>
-  </div>
-</form>
-<form id="delete_project" action="deleteProjectController.php" method="POST">
-    <input type="hidden" name="project_id" value="{$id}">
-    <button type="submit" class="btn btn-danger">Delete Project</button>
-</form>
+    <form id="update_project" action="updateProjectController.php" method="POST" class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="form-group">
+    	    <input type="hidden" name="project_id" value="{$id}">
+    	    <div id="check_title">
+    	        <label for="title" class="control-label">Title:</label>
+    	 	<input type="text" name="title" id="title" value="{$title}" class="form-control">
+    	    </div>
+    	    <div id="discipline_check">
+    	        <label for="discipline" class="control-label">Major:</label><span id="stud_major"></span>
+    	 	{$major_list}
+	 	<input type="hidden" name="st_major" id="st_major" value="{$discipline}">
+    	    </div>
+    	    <label for="proposal" class="control-label">Project Proposal:</label>
+    	    <textarea cols="80" name="proposal" form="update_project" id="proposal" class="form-control">{$proposal}</textarea>
+    	    <label for="keywords" class="control-label">Keywords:</label>
+    	    <textarea cols="80" name="keywords" form="update_project" id="keywords" class="form-control">{$keywords}</textarea>
+    	    <label for="comments" class="control-label">Additional Comments:</label>
+    	    <textarea cols="80" name="comments" form="update_project" id="comments" class="form-control">{$comments}</textarea>
+    	    <button type="submit" id="submit" class="btn btn-warning form-control">Submit</button>
+  	</div>
+    </form>
+    <form id="delete_project" action="deleteProjectController.php" method="POST">
+        <input type="hidden" name="project_id" value="{$id}">
+    	<button type="submit" class="btn btn-danger">Delete Project</button>
+    </form>
 
-<script src="js/updateProjectValidation.js"></script>
+    <script src="js/updateProjectValidation.js"></script>
+    <script src="js/setMajor.js"></script>
+
 EOT;
 }
 else {

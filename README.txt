@@ -13,7 +13,7 @@ Installation
 -the mySQL user 'istopics'@'localhost' is created in the above file and granted necessary permissions
     update username and password in the necessary files appropriately.
 -to change a users's role from 'student' to 'admin', from MySQL run the command:
-    UPDATE TABLE users SET role='admin' WHERE email='EMAIL OF THE USER TO BE UPDATATED';
+    UPDATE users SET role='admin' WHERE email='EMAIL OF THE USER TO BE UPDATATED';
 
 Auto Populate the Dabatase (testing)
 ------------------------------------

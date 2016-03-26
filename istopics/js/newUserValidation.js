@@ -1,4 +1,4 @@
-//Set all fields to default filled state
+// Set all fields to default filled state
 $('#check_first_name').attr("class", "has-error");
 $('#check_last_name').attr("class", "has-error");
 $('#discipline_check').attr("class", "has-error");
@@ -7,7 +7,7 @@ $('#email_check').attr("class", "has-success");
 $('#password_group').attr("class", "has-error");
 $('#submit').attr("disabled", "true");
 
-//Check that names are there
+// Check that names are there
 $('#first_name').on('input', function() {
     if ($('#first_name').val()) {
         $('#check_first_name').attr("class", "has-success");
@@ -27,7 +27,7 @@ $('#last_name').on('input', function() {
     }
 });
 
-//Display the user's selection of major(s)
+// Display the user's selection of major(s)
 $('#discipline').on('input', function() {
     if ($('#discipline').val()) {
         $('#stud_major').text($('#discipline').val());
@@ -40,7 +40,7 @@ $('#discipline').on('input', function() {
     }
 });
 
-//Check that the graduating year is valid
+// Check that the graduating year is valid
 $('#year').on('input', function() {
     if ($('#year').val()) {
         $('#year_check').attr("class", "has-success");
@@ -51,9 +51,9 @@ $('#year').on('input', function() {
     }
 });
 
-//Check that the email is valid
+// Check that the email is valid
 $('#email').on('input', function() {
-//VALIDATE AND AUTO FILL EMAIL
+// VALIDATE AND AUTO FILL EMAIL
     if ($('#email').val()) {
         $('#email_check').attr("class", "has-success");
     }
@@ -63,7 +63,7 @@ $('#email').on('input', function() {
     }
 });
 
-//Check that passwords match
+// Check that passwords match
 $('#password').on('input', function() {
     if ($('#confirm_password').val() != $('#password').val()) {
         $('#password_not_same').text('passwords must match');
@@ -97,9 +97,12 @@ $('#confirm_password').on('input', function() {
     }
 });
 
-//Check that all fields are filled
+// Check that all fields are filled
 $("form :input").on('input', function() {
-    if ($('#first_name').val() && $('#last_name').val() && $('#discipline').val() && $('#year').val() && $('#email').val() && $('#password').val() && $('#confirm_password').val()) {
-       document.getElementById("submit").disabled = false;
+    if ($('#first_name').val() && $('#last_name').val() && $('#discipline').val() && $('#year').val() && $('#email').val() && $('#password').val() && $('#confirm_password').val() && ($('#password').val() == $('#confirm_password').val())) {
+	document.getElementById("submit").disabled = false;
+    }
+    else {
+	$('#submit').attr("disabled", "true");
     }
 });

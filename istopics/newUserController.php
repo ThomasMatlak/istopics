@@ -33,7 +33,7 @@ if (empty($first_name) || empty($last_name) || empty($year) || empty($major) || 
 
 // Prepare the SQL statement
 $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, major, year, password, role) VALUES (?,?,?,?,?,?,?)");
-$stmt->bind_param("ssssss", $first_name, $last_name, $email, $major, $year, $password, $role);
+$stmt->bind_param("sssssss", $first_name, $last_name, $email, $major, $year, $password, $role);
 
 // Submit the SQL statement
 $stmt->execute();
