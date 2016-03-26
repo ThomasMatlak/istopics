@@ -37,18 +37,20 @@ session_start();
     <li><a href="newProject.php" class="btn btn-link navbar-btn">Add a New Project</a></li>
    
     <?php
-       if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"])) {
+       if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"]) && isset($_SESSION["sess_user_role"])) {
            //user is signed in
-	   echo "<li><p class='navbar-text'>Hello <a href='viewProfile.php' class='btn btn-link navbar-btn'>{$_SESSION['sess_user_name']}</a></p></li>";
 	   echo <<<EOT
+	   <li><a href='viewProfile.php' class='btn btn-link navbar-btn'>Hello {$_SESSION['sess_user_name']}</a></p></li>
 	   <li><a href='logout.php' class='nav btn btn-link navbar-btn'>Sign Out</a></li>
-	   </ul>
 EOT;
+	if ($_SESSION["sess_user_role"] == "admin") {
+	   echo "<li><a href='adminInterface.php' class='btn btn-link navbar-btn'>Administrator Interface</a></li>";
+	}
+	echo "</ul>";
        }
        else {
            //user is not signed in
 	   echo <<<EOT
-	   
            <li><a href='login.php' class='nav btn btn-link navbar-btn'>Sign In</a></li>
            <li><a href='newUser.php' class='nav btn btn-link navbar-btn'>New User?</a></li>
 	   </ul>
