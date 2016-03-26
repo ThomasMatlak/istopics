@@ -1,4 +1,4 @@
-// Set all fields to default filled state
+0// Set all fields to default filled state
 $('#check_title').attr("class", "has-error");
 $('#discipline_check').attr("class", "has-error");
 $('#check_keywords').attr("class", "has-error");

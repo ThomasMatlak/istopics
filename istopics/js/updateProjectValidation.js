@@ -1,9 +1,10 @@
-//Set default field states
+// Set default field states
 $('#check_title').attr("class", "has-success");
-$('#discipline_check').attr("class", "has-error");
-$('#submit').attr("disabled", "true");
+$('#discipline_check').attr("class", "has-success");
+$('#check_keywords').attr("class", "has-success");
+document.getElementById("submit").disabled = false;
 
-//Check that the title is there
+// Check that the title is there
 $('#title').on('input', function() {
     if ($('#title').val()) {
         $('#check_title').attr("class", "has-success");
@@ -14,7 +15,7 @@ $('#title').on('input', function() {
     }
 });
 
-//Display the user's selection of major(s)
+// Display the user's selection of major(s)
 $('#discipline').on('input', function() {
     if ($('#discipline').val()) {
         $('#proj_disc').text($('#discipline').val());
@@ -27,7 +28,18 @@ $('#discipline').on('input', function() {
     }
 });
 
-//Check that all required fields are filled
+// Check that the user has input keywords
+$('#keywords').on('input', function() {
+    if ($('#keywords').val()) {
+        $('#check_keywords').attr("class", "has-success");
+    }
+    else {
+    	$('#check_keywords').attr("class", "has-error");
+	$('#submit').attr("disabled", "true");
+    }
+});
+
+// Check that all required fields are filled
 $("form :input").on('input', function() {
     if ($('#title').val() && $('#discipline').val()) {
        document.getElementById("submit").disabled = false;

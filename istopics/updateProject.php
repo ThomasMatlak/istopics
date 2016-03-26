@@ -78,9 +78,11 @@ echo <<<EOT
     	    </div>
     	    <label for="proposal" class="control-label">Project Proposal:</label>
     	    <textarea cols="80" name="proposal" form="update_project" id="proposal" class="form-control">{$proposal}</textarea>
-    	    <label for="keywords" class="control-label">Keywords:</label>
-    	    <textarea cols="80" name="keywords" form="update_project" id="keywords" class="form-control">{$keywords}</textarea>
-    	    <label for="comments" class="control-label">Additional Comments:</label>
+    	    <div id="check_keywords">
+	        <label for="keywords" class="control-label">Keywords:</label>
+    	        <textarea cols="80" name="keywords" form="update_project" id="keywords" class="form-control">{$keywords}</textarea>
+    	    </div>
+	    <label for="comments" class="control-label">Additional Comments:</label>
     	    <textarea cols="80" name="comments" form="update_project" id="comments" class="form-control">{$comments}</textarea>
     	    <button type="submit" id="submit" class="btn btn-warning form-control">Submit</button>
   	</div>

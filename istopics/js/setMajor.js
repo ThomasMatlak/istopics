@@ -6,7 +6,6 @@ $(document).ready(function() {
 
     for (i = 0; i < majors.length; i++) {
 	if ($('#st_major').val().search(majors[i].value) != -1) {
-	    //$('#discipline.val("' + majors[i].value + '")').attr('selected', true);
 	    student_majors.push(majors[i].value);
 	    $('#discipline_check').attr("class", "has-success");
 	}
