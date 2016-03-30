@@ -48,9 +48,9 @@ if ($result->num_rows > 0) {
    	<strong>{$first_name} {$last_name}</strong>
 	<table class='table table-striped'>
 
-	<tr><th>Major(s):</th><td>{$major}</td></tr>
-	<tr><th>Graduation Year:</th><td>{$year}</td></tr>
-	<tr><th>Email:</th><td>{$email}</td></tr>
+	<tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Major(s):</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'>{$major}</td></tr>
+	<tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Graduation Year:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'>{$year}</td></tr>
+	<tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Email:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'>{$email}</td></tr>
 
 	</table>
 
@@ -68,8 +68,9 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
    echo <<<EOT
    	<hr>
-   	<ul class='list-unstyled'>
 	<h4>{$first_name}'s Projects</h4>
+
+   	<ul class='list-unstyled'>
 EOT;
 
    while($row = $result->fetch_assoc()) {
@@ -81,13 +82,15 @@ EOT;
 
 	echo <<<EOT
     	<li>
-	<div class='panel panel-default'>
-	<div class='panel-heading'>
-	<table class='table'>
-        <form action='viewProject.php' method='GET' class='form-inline'><div class='form-group'><input type='hidden' name='project_id' value='{$proj_id}'><button type='submit' class='btn btn-link form-control'><span>{$proj_title}</span></button></div></form>
-	</div> <!-- panel heading -->
-	<div class='panel-body'>
-	<tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Major:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'>{$proj_major}</td></tr>
+	    <div class='panel panel-default'>
+	        <div class='panel-heading'>
+                    <form action='viewProject.php' method='GET' class='form-inline'>
+    	                <input type='hidden' name='project_id' value='{$proj_id}'><button type='submit' class='btn btn-link form-control'><span>{$proj_title}</span></button>
+		    </form>
+	        </div> <!-- panel heading -->
+	        <div class='panel-body'>
+		    <table class='table'>
+	                <tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Major:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'>{$proj_major}</td></tr>
 EOT;
 	if ($proj_proposal != NULL) {
 	   echo "<tr><th><a role='button' data-toggle='collapse' href='#{$proj_id}proposal' aria-expanded='true' aria-controls='{$proj_id}proposal'>Proposal:</a></th><td><div class='collapse' id='{$proj_id}proposal'>{$proj_proposal}</div></td></tr>\n";
@@ -96,10 +99,10 @@ EOT;
 	   echo "<tr><th><a role='button' data-toggle='collapse' href='#{$proj_id}". "keywords' aria-expanded='true' aria-controls='{$proj_id}". "keywords'>Keywords:</a></th><td><div class='collapse' id='{$proj_id}". "keywords'>{$proj_keywords}</div></td></tr>\n";
 	}
 	echo  <<<EOT
-	      </table>
-	      <div> <!-- panel body -->
-	      <div> <!-- panel -->
-	      </li>
+	            </table>
+	        <div> <!-- panel body -->
+	    <div> <!-- panel -->
+	</li>
 EOT;
     }
     echo "</ul>";

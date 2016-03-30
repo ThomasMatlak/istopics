@@ -39,22 +39,18 @@ if ($result->num_rows > 0) {
 
    echo <<<EOT
    	<div class="panel panel-default">
-	     <div class="panel-heading">
-   	     	  <span class="panel-title">{$row["title"]}</span>
-	     </div> <!-- panel heading -->
-	<div class="panel-body">
-	
-	<table class='table table-striped'>\n
-
-   	<caption><a href='viewProfile.php?user_id={$user_id}' method='GET'>{$author_name}</a></caption>
-   	<tr><th>Major:</th><td>{$major}</td></tr>
-   	<tr><th>Proposal:</th><td>{$proposal}</td></tr>\n
-   	<tr><th>Comments:</th><td>{$comments}</td></tr>\n
-   	<tr><th>Keywords:</th><td>{$keywords}</td></tr>\n
-
-   	</table>\n
-	
-	</div> <!-- panel body -->
+	    <div class="panel-heading">
+   	        <span class="panel-title">{$row["title"]}</span>
+	    </div> <!-- panel heading -->
+	    <div class="panel-body">
+	        <table class='table table-striped'>
+   	            <caption><a href='viewProfile.php?user_id={$user_id}' method='GET'>{$author_name}</a></caption>
+   	            <tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Major:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'>{$major}</td></tr>
+   	            <tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Proposal:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'>{$proposal}</td></tr>
+   	            <tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Comments:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'>{$comments}</td></tr>
+   	            <tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Keywords:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'>{$keywords}</td></tr>
+   	        </table>
+	    </div> <!-- panel body -->
 	</div> <!-- panel -->
    	
 	<form action='updateProject.php' method='GET'>\n<input type='hidden' name='project_id' value='{$row["id"]}'><button type='submit' class='btn btn-warning'>Edit Project</button></form>

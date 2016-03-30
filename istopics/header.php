@@ -16,30 +16,35 @@ session_start();
 
   <!-- include Bootstrap style sheets -->
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <!-- custom css -->
+  <link rel="stylesheet" href="css/istopics.css">
+
   <!-- include jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
   <!-- include Bootstrap javaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
-  <title><?php echo $page_title; ?></title>
   <link rel="icon" href="favicon.ico">
+  <title><?php echo $page_title; ?></title>
 
 </head>
 
 <body>
 
-<nav class="navbar navbar-inverse navbar-static-top col-lg-12 col-md-12 col-sm-12 col-sx-12">
+<div class="wrapper">
+
+<nav class="navbar navbar-inverse navbar-static-top">
 <div class="container-fluid">
   <a href="showAllProjects.php" class="navbar-brand">Home</a>
   <ul class="nav nav-pills navbar-left">
     <li><a href="showAllProjects.php" class="btn btn-link navbar-btn">View All Projects</a></li>
-    <li><a href="newProject.php" class="btn btn-link navbar-btn">Add a New Project</a></li>
    
     <?php
        if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"]) && isset($_SESSION["sess_user_role"])) {
            //user is signed in
 	   echo <<<EOT
+	   <li><a href="newProject.php" class="btn btn-link navbar-btn">Add a New Project</a></li>
 	   <li><a href='viewProfile.php' class='btn btn-link navbar-btn'>Hello {$_SESSION['sess_user_name']}</a></p></li>
 	   <li><a href='logout.php' class='nav btn btn-link navbar-btn'>Sign Out</a></li>
 EOT;

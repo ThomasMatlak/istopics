@@ -6,12 +6,15 @@
 */
 ?>
 
+<div class="push"></div>
 </div>
+</div> <!-- content wrapper -->
 
 <footer class="footer">
-<div class="container-fluid">
-  <p>Test of Footer</p>
-</div>
+    <div class="container-fluid">
+            <p>Test of Footer</p>
+        </nav>
+    </div>
 </footer>
 
 </body>
