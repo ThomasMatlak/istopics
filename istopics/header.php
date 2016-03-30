@@ -81,11 +81,10 @@ if (isset($_SESSION["error"]) && $_SESSION["error"] != 0) {
    $error_msg = $_SESSION["error_msg"];
    echo <<<EOT
    	<div class="container-fluid">
-   	<div class="alert alert-danger" role="alert">
-	     <p>
+   	    <div class="alert alert-danger" role="alert">
+	        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		{$error_msg}
-	     </p>
-	</div>
+	    </div>
 	</div>
 EOT;
 
@@ -98,11 +97,10 @@ if (isset($_SESSION["message"]) && $_SESSION["message"] == 1) {
    $msg = $_SESSION["msg"];
    echo <<<EOT
    	<div class="container-fluid">
-   	<div class="alert alert-success" role="alert">
-	     <p>
-		{$msg}
-	     </p>
-	</div>
+   	    <div class="alert alert-success alert-dismissible" role="alert">
+	    	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        {$msg}
+	    </div>
 	</div>
 EOT;
 
@@ -113,11 +111,10 @@ if (isset($_SESSION["message"]) && $_SESSION["message"] == 2) {
    $msg = $_SESSION["msg"];
    echo <<<EOT
    	<div class="container-fluid">
-   	<div class="alert alert-info" role="alert">
-	     <p>
-		{$msg}
-	     </p>
-	</div>
+   	    <div class="alert alert-info alert-dismissible" role="alert">
+	    	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {$msg}
+	    </div>
 	</div>
 EOT;
 }
@@ -125,11 +122,10 @@ if (isset($_SESSION["message"]) && $_SESSION["message"] == 3) {
    $msg = $_SESSION["msg"];
    echo <<<EOT
    	<div class="container-fluid">
-   	<div class="alert alert-warning" role="alert">
-	     <p>
-		{$msg}
-	     </p>
-	</div>
+   	    <div class="alert alert-warning alert-dismissible" role="alert">
+	    	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        {$msg}
+	    </div>
 	</div>
 EOT;
 
