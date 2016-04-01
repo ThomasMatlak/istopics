@@ -34,19 +34,15 @@ include("header.php");
       <input type="password" class="form-control" id="password" name="password" placeholder="Password">
     </div>
   </div>
-  <div class="form-group">
-    <div class="">
+<!--  <div class="form-group">
       <div class="checkbox">
         <label>
           <input type="checkbox" id="remember" name="remember"> Remember me
         </label>
       </div>
-    </div>
-  </div>
+  </div>-->
   <div class="form-group">
-    <div class="">
       <button type="submit" class="btn btn-default">Sign in</button>
-    </div>
   </div>
 </form>
 

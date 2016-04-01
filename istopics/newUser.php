@@ -33,8 +33,7 @@ include("header.php");
     </div>
     <div id="password_group" class="form-group">
         <label for="password" class="control-label">Password:</label>
-        <input type="password" name="password" id="password" class="form-control visible-lg-inline visible-md-inline" placeholder="A good password includes Capital and lowercase letters, numbers, and special characters and is at least 10 characters long">
-        <input type="password" name="password" id="password" class="form-control visible-sm-inline visible-xs-inline" placeholder="Please use a strong password">
+        <input type="password" name="password" id="password" class="form-control" placeholder="Please use a strong password">
     	<label for="confirm_password" class="control-label">Confirm Password:</label>
     	<input type="password" name="confirm_password" id="confirm_password" class="form-control"><span id='password_not_same'></span>
     </div>
