@@ -3,7 +3,7 @@ $('#check_first_name').attr("class", "has-error");
 $('#check_last_name').attr("class", "has-error");
 $('#discipline_check').attr("class", "has-error");
 $('#year_check').attr("class", "has-warning");
-$('#email_check').attr("class", "has-warning");
+$('#email_check').attr("class", "has-error");
 $('#password_group').attr("class", "has-error");
 $('#submit').attr("disabled", "true");
 

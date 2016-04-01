@@ -72,18 +72,18 @@ echo <<<EOT
     	 	<input type="text" name="title" id="title" value="{$title}" class="form-control">
     	    </div>
     	    <div id="discipline_check">
-    	        <label for="discipline" class="control-label">Major:</label><span id="stud_major"></span>
+    	        <label for="discipline" class="control-label">Major:</label> <span id="stud_major"></span>
     	 	{$major_list}
 	 	<input type="hidden" name="st_major" id="st_major" value="{$discipline}">
     	    </div>
     	    <label for="proposal" class="control-label">Project Proposal:</label>
-    	    <textarea cols="80" name="proposal" form="update_project" id="proposal" class="form-control">{$proposal}</textarea>
+    	    <textarea cols="80" name="proposal" form="update_project" id="proposal" class="form-control" placeholder="Your IS proposal (optional)">{$proposal}</textarea>
     	    <div id="check_keywords">
 	        <label for="keywords" class="control-label">Keywords:</label>
     	        <textarea cols="80" name="keywords" form="update_project" id="keywords" class="form-control">{$keywords}</textarea>
     	    </div>
 	    <label for="comments" class="control-label">Additional Comments:</label>
-    	    <textarea cols="80" name="comments" form="update_project" id="comments" class="form-control">{$comments}</textarea>
+    	    <textarea cols="80" name="comments" form="update_project" id="comments" class="form-control" placeholder="Have someone you would like to work with? Have anything else to say? Put it here.">{$comments}</textarea>
     	    <button type="submit" id="submit" class="btn btn-warning form-control">Submit</button>
   	</div>
     </form>

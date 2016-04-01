@@ -42,21 +42,32 @@ echo <<<EOT
   <div class="form-group">
     <div id="check_title">
     	 <label for="title" class="control-label">Title:</label>
-    	 <input type="text" name="title" id="title" class="form-control">
+    	 <input type="text" name="title" id="title" class="form-control" placeholder="Your project's working title">
     </div>
     <div id="discipline_check">
-    	 <label for="discipline" class="control-label">Major:</label><span id="stud_major"></span>
+    	 <label for="discipline" class="control-label">Major:</label> <span id="stud_major"></span>
     	 {$major_list}
 	 <input type="hidden" name="st_major" id="st_major" value="{$user_major}">
     </div>
     <label for="proposal" class="control-label">Project Proposal:</label>
-    <textarea rows="5" cols="80" name="proposal" form="new_project" id="proposal" class="form-control"></textarea>
+    <textarea rows="5" cols="80" name="proposal" form="new_project" id="proposal" class="form-control" placeholder="Your IS proposal (optional)"></textarea>
     <div id="check_keywords">
     	 <label for="keywords" class="control-label">Keywords:</label>
-    	 <textarea rows="1" cols="80" name="keywords" form="new_project" id="keywords" class="form-control"></textarea>
+    	 <div class="visible-lg-inline">
+	      <textarea rows="1" cols="80" name="keywords" form="new_project" id="keywords" class="form-control" placeholder="Put some comma separated keywords here. e.g. if your project is about game theory, you might put game, theory, economics, decision making"></textarea>
+	 </div>
+	 <div class="visible-md-inline">
+	      <textarea rows="1" cols="80" name="keywords" form="new_project" id="keywords" class="form-control" placeholder="Put some comma separated keywords here. e.g. if your project is about game theory, you might put game, theory, economics, decision making"></textarea>
+	 </div>
+	 <div class="visible-sm-inline">
+	      <textarea rows="1" cols="80" name="keywords" form="new_project" id="keywords" class="form-control" placeholder="Put some comma separated keywords here"></textarea>
+	 </div>
+	 <div class="visible-xs-inline">
+	      <textarea rows="1" cols="80" name="keywords" form="new_project" id="keywords" class="form-control" placeholder="Input some comma separated keywords"></textarea>
+	 </div>
     </div>
     <label for="comments" class="control-label">Additional Comments:</label>
-    <textarea rows="2" cols="80" name="comments" form="new_project" id="comments" class="form-control"></textarea>
+    <textarea rows="2" cols="80" name="comments" form="new_project" id="comments" class="form-control" placeholder="Have someone you would like to work with? Have anything else to say? Put it here."></textarea>
     <button type="submit" id="submit" class="btn btn-warning form-control">Submit</button>
   </div>
 </form>
