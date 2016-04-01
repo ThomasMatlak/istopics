@@ -21,12 +21,24 @@ if ($conn->connect_error) {
 $email = filter_var($_GET["email"], FILTER_SANITIZE_EMAIL);
 $pass  = $_GET["password"];
 
-$sql = "SELECT id, first_name, role FROM users WHERE email='$email' AND password='$pass'";
+$sql = "SELECT id, first_name, role, password FROM users WHERE email='$email'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
    $row = $result->fetch_assoc();
    
+   if (!password_verify($pass, $row["password"])) {
+       // Close connections
+       $conn->close();
+
+       $_SESSION["error"] = 1;
+       $_SESSION["error_msg"] = "Username or password does not match.";
+
+       // Redirect to login page
+       header("Location: login.php");
+       exit();
+   }
+
    // set session variables
    $_SESSION["sess_user_id"]   = $row["id"];
    $_SESSION["sess_user_name"] = $row["first_name"];
@@ -50,7 +62,7 @@ if ($result->num_rows > 0) {
     $_SESSION["error"] = 1;
     $_SESSION["error_msg"] = "Username or password does not match.";
 
-    // Redirect to home page
+    // Redirect to login page
     header("Location: login.php");
     exit();
 }

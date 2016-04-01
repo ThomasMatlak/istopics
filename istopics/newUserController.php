@@ -22,7 +22,7 @@ $last_name  = filter_var($_POST["last_name"], FILTER_SANITIZE_STRING);
 $year       = filter_var($_POST["year"], FILTER_SANITIZE_STRING);
 $major      = filter_var($_POST["discipline"], FILTER_SANITIZE_STRING);
 $email      = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL); //. "@wooster.edu";
-$password   = $_POST["password"]; //CHANGE TO NOT PLAIN TEXT
+$password   = password_hash($_POST["password"], PASSWORD_DEFAULT); //CHANGE TO NOT PLAIN TEXT
 $role       = "student";
 
 if (empty($first_name) || empty($last_name) || empty($year) || empty($major) || empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL) || empty($password) || (!preg_match("/@wooster.edu/", $email))) {
