@@ -1,6 +1,17 @@
 CHANGE LOG
 ==========
 
+2016-03-31
+-store passwords as hashes
+-add hint text to inputs
+-more useful user creation error messages
+-various bug fixes
+
+2016-03-30
+-touch up styling
+-made alerts dismissible
+-fixed OSx scrollbar issue
+
 2016-03-26
 -admin can update any project
 -admin can update any user
