@@ -63,10 +63,10 @@ if ($result->num_rows > 0) {
 	                <tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Major:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'><div id="{$proj_id}project_major">{$proj_discipline}</div></td></tr>
 EOT;
 	if ($proj_proposal != NULL) {
-	   echo "<tr><th><a role='button' data-toggle='collapse' href='#{$proj_id}proposal' aria-expanded='true' aria-controls='{$proj_id}proposal'>Proposal:</a></th><td><div class='collapse' id='{$proj_id}proposal'>{$proj_proposal}</div></td></tr>\n";
+	   echo "<tr><th><a role='button' data-toggle='collapse' href='#{$proj_id}proposal' aria-expanded='true' aria-controls='{$proj_id}proposal'>Proposal:</a></th><td><div class='collapse in' id='{$proj_id}proposal'>{$proj_proposal}</div></td></tr>\n";
 	}
 	if ($proj_keywords != NULL) {
-	   echo "<tr><th><a role='button' data-toggle='collapse' href='#{$proj_id}keywords' aria-expanded='true' aria-controls='{$proj_id}keywords'>Keywords:</a></th><td><div class='collapse' id='{$proj_id}keywords'>{$proj_keywords}</div></td></tr>\n";
+	   echo "<tr><th><a role='button' data-toggle='collapse' href='#{$proj_id}keywords' aria-expanded='true' aria-controls='{$proj_id}keywords'>Keywords:</a></th><td><div class='collapse in' id='{$proj_id}keywords'>{$proj_keywords}</div></td></tr>\n";
 	}
 	echo <<<EOT
 	            </table>

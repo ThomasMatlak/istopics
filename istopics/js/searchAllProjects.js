@@ -1,6 +1,6 @@
 // Search all projects based on keywords or title content
 $("form :input").on('input', function() {
-    var searchTerms = $('#search').val().toLowerCase().split(",");
+    var searchTerms = $('#search').val().toLowerCase().split(" ");
 
     var max_proj_id = $('#max_proj_id').val();
 
@@ -24,7 +24,7 @@ $("form :input").on('input', function() {
         var num_projects = 0;
 
 	// Input is not empty; search for and display projects matching search terms
-	//for (j = 0; j < searchTerms.length; j++) {
+	// for (j = 0; j < searchTerms.length; j++) {
 	for (i = 0; i <= max_proj_id; i++) {
 	    project_showed = false;
 

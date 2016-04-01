@@ -18,11 +18,11 @@ $('#title').on('input', function() {
 // Display the user's selection of major(s)
 $('#discipline').on('input', function() {
     if ($('#discipline').val()) {
-        $('#proj_disc').text($('#discipline').val());
+        $('#stud_major').text($('#discipline').val());
 	$('#discipline_check').attr("class", "has-success");
     }
     else {
-    	$('#proj_disc').text('');
+    	$('#stud_major').text('');
     	$('#discipline_check').attr("class", "has-error");
 	$('#submit').attr("disabled", "true");
     }
