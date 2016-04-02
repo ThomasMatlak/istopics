@@ -27,7 +27,7 @@ if (isset($_SESSION['sess_user_id']) && isset($_SESSION['sess_user_name']) && is
      exit();
    }
 /*
-   $sql = "TRUNCATE TABLE users";
+   $sql = "DELETE FROM users WHERE role!='admin'";
    if (!$conn->query($sql)) {
      $_SESSION["error"] = 3;
      $_SESSION["error_msg"] = "Error Removing users";

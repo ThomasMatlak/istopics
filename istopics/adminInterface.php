@@ -16,6 +16,20 @@ if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"]) && is
 echo <<<EOT
      <script src='js/resetDatabaseWarning.js'></script>
      <button onclick='resetWarning();' class='btn btn-danger'>Reset Database</button>
+     <span class='help-block'>Resetting the database will delete all projects, connections between projects and users, and non-admin users.</span>
+
+     <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#promoteUser" aria-expanded="false" aria-controls="promoteUser">
+         Promote a User to Admin
+     </button>
+     <div class="collapse" id="promoteUser">
+         <form action='promoteUser.php' method='POST' class='form-inline'>
+	     <div class='form=group'>
+	         <label for='email'>Email:</label>
+		 <input type='email' name='email' id='email' class='form-control>' 
+	     </div>
+	     <button type='submit' class='btn btn-primary'>Promote User to Admin</button>
+	 </form>
+     </div>
 EOT;
 }
 else {
