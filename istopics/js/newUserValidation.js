@@ -53,7 +53,7 @@ $('#year').on('input', function() {
 
 // Check that the email is valid
 $('#email').on('input', function() {
-// VALIDATE AND AUTO FILL EMAIL
+// VALIDATE THAT EMAIL IS A wooster.edu EMAIL
     if ($('#email').val()) {
         $('#email_check').attr("class", "has-success");
     }
@@ -99,10 +99,32 @@ $('#confirm_password').on('input', function() {
 
 // Check that all fields are filled
 $("form :input").on('input', function() {
-    if ($('#first_name').val() && $('#last_name').val() && $('#discipline').val() && $('#year').val() && $('#email').val() && $('#password').val() && $('#confirm_password').val() && ($('#password').val() == $('#confirm_password').val())) {
-	document.getElementById("submit").disabled = false;
+    if ($('#studentSelect').is(":checked")) {
+        if ($('#first_name').val() && $('#last_name').val() && $('#discipline').val() && $('#year').val() && $('#email').val() && $('#password').val() && $('#confirm_password').val() && ($('#password').val() == $('#confirm_password').val())) {
+	    document.getElementById("submit").disabled = false;
+        }
+        else {
+	    $('#submit').attr("disabled", "true");
+        }
     }
-    else {
-	$('#submit').attr("disabled", "true");
+    else if ($('#facultySelect').is(":checked")) {
+	if ($('#first_name').val() && $('#last_name').val() && $('#email').val() && $('#password').val() && $('#confirm_password').val() && ($('#password').val() == $('#confirm_password').val())) {
+	    document.getElementById("submit").disabled = false;
+        }
+        else {
+	    $('#submit').attr("disabled", "true");
+        }
     }
 });
+
+// Student/Faculty Toggle
+function stud_faculty_toggle() {
+    if ($('#studentSelect').is(":checked")) {
+	$('#discipline_check').show();
+	$('#year_check').show();
+    }
+    else if ($('#facultySelect').is(":checked")) {
+	$('#discipline_check').hide();
+	$('#year_check').hide();
+    }
+}

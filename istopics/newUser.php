@@ -10,6 +10,15 @@ include("header.php");
 ?>
 
 <form id="new_user" action="newUserController.php" method="POST" class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="form-group">
+        <label for="studentSelect">I am a: </label>
+	<label class="radio-inline">
+    	    <input type="radio" name="stud_or_faculty" id="studentSelect" value="student" onclick="stud_faculty_toggle();" checked> Student
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="stud_or_faculty" id="facultySelect" value="faculty" onclick="stud_faculty_toggle();"> Faculty Member
+    	</label>
+    </div>
     <div id="check_first_name" class="form-group">
         <label for="first_name" class="control-label">First Name:</label>
     	<input type="text" name="first_name" id="first_name" class="form-control">
@@ -29,7 +38,6 @@ include("header.php");
     <div id="email_check" class="form-group">
         <label for="email" class="control-label">Email:</label>
     	<input type="email" name="email" id="email" class="form-control visible-lg-inline visible-md-inline visible-sm-inline visible-xs-inline" placeholder="Use your Wooster email">
-	<!--<input type="text" value="@wooster.edu" class="form-control visible-lg-inline visible-md-inline visible-sm-inline visible-xs-inline" readonly>-->
     </div>
     <div id="password_group" class="form-group">
         <label for="password" class="control-label">Password:</label>
