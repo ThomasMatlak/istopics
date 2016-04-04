@@ -11,7 +11,7 @@ Installation
     (probably at /var/www/html)
 -run database_setup.sql in MySQL to set up the database and its tables as well as the mySQL user
 -the mySQL user 'istopics'@'localhost' is created in the above file and granted necessary permissions
-    update username and password in /istopics/db_credentials.php
+    update username and password in /istopics/db_credentials.php and in database_setup.sql
 -to change a users's role from 'student' to 'admin', from MySQL run the command:
     UPDATE users SET role='admin' WHERE email='EMAIL OF THE USER TO BE UPDATATED';
 

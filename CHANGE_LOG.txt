@@ -1,6 +1,15 @@
 CHANGE LOG
 ==========
 
+2016-04-04
+-users can change passwords
+-added student/faculty new user toggle
+-modified views and forms to allow for faculty sign ins
+-bug fixes
+
+2016-04-03
+-admins can promote other users to admin
+
 2016-03-31
 -store passwords as hashes
 -add hint text to inputs
