@@ -64,7 +64,12 @@ $('#email').on('input', function() {
 
 // Check that all fields are filled
 $("form :input").on('input', function() {
-    if ($('#first_name').val() && $('#last_name').val() && $('#discipline').val() && $('#year').val() && $('#email').val()) {
-       document.getElementById("submit").disabled = false;
+    if ($('#first_name').val() && $('#last_name').val() && $('#email').val()) {
+        if ($('#user_role').val() == "student" && ($('#discipline').val() && $('#year').val())) {
+            document.getElementById("submit").disabled = false;
+	}
+	else {
+	    document.getElementById("submit").disabled = false;
+	}
     }
 });

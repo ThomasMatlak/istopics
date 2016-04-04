@@ -42,19 +42,23 @@ session_start();
    
     <?php
        if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"]) && isset($_SESSION["sess_user_role"])) {
-           //user is signed in
+           // user is signed in
+	   if ($_SESSION["sess_user_role"] == "student") {
+	       // user is a student
+	       echo "<li><a href='newProject.php' class='btn btn-link navbar-btn'>Add a New Project</a></li>";
+	   }
 	   echo <<<EOT
-	   <li><a href="newProject.php" class="btn btn-link navbar-btn">Add a New Project</a></li>
-	   <li><a href='viewProfile.php' class='btn btn-link navbar-btn'>Hello {$_SESSION['sess_user_name']}</a></p></li>
-	   <li><a href='logout.php' class='nav btn btn-link navbar-btn'>Sign Out</a></li>
+	       <li><a href='viewProfile.php' class='btn btn-link navbar-btn'>Hello {$_SESSION['sess_user_name']}</a></p></li>
+	       <li><a href='logout.php' class='nav btn btn-link navbar-btn'>Sign Out</a></li>
 EOT;
 	if ($_SESSION["sess_user_role"] == "admin") {
+	   // user is an admin
 	   echo "<li><a href='adminInterface.php' class='btn btn-link navbar-btn'>Administrator Interface</a></li>";
 	}
 	echo "</ul>";
        }
        else {
-           //user is not signed in
+           // user is not signed in
 	   echo <<<EOT
            <li><a href='login.php' class='nav btn btn-link navbar-btn'>Sign In</a></li>
            <li><a href='newUser.php' class='nav btn btn-link navbar-btn'>New User?</a></li>

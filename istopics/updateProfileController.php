@@ -28,14 +28,21 @@ $discipline = filter_var($_POST["discipline"], FILTER_SANITIZE_STRING);
 $year       = filter_var($_POST["year"], FILTER_SANITIZE_STRING);
 $email      = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
 
-if (empty($first_name) || empty($last_name) || empty($discipline) || empty($year) || empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-   // Some input is not valid
-     $_SESSION["error"] = 1;
-     $_SESSION["error_msg"] = "Your input was invalid.";
+if (empty($first_name) || empty($last_name) || empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    // Some input is not valid
+    $_SESSION["error"] = 1;
+    $_SESSION["error_msg"] = "Your input was invalid.";
      
-     // Redirect to home page
-     header("Location: viewProfile.php");
-     exit();
+    header("Location: viewProfile.php");
+    exit();
+}
+if (($_SESSION["sess_user_role"] == "student") && (empty($discipline) || empty($year))) {
+    // Some input is not valid
+    $_SESSION["error"] = 1;
+    $_SESSION["error_msg"] = "Your input was invalid.";
+     
+    header("Location: viewProfile.php");
+    exit();
 }
 
 // Check that user is authorized to update profile

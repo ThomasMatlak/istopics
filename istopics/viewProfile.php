@@ -31,7 +31,7 @@ if (!filter_var($user_id, FILTER_VALIDATE_INT)) {
    echo "<p>That is not a valid user id.</p>";
 }
 else {
-$sql = "SELECT id, first_name, last_name, major, year, email FROM users WHERE id={$user_id}";
+$sql = "SELECT id, first_name, last_name, major, year, email, role FROM users WHERE id={$user_id}";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -43,13 +43,19 @@ if ($result->num_rows > 0) {
    $major      = $row["major"];
    $year       = $row["year"];
    $email      = $row["email"];
+   $role       = $row["role"];
 
    echo <<<EOT
    	<strong>{$first_name} {$last_name}</strong>
 	<table class='table table-striped'>
-
-	<tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Major(s):</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'>{$major}</td></tr>
-	<tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Graduation Year:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'>{$year}</td></tr>
+EOT;
+	if ($role == "student") {
+	    echo <<<EOT
+	        <tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Major(s):</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'>{$major}</td></tr>
+		<tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Graduation Year:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'>{$year}</td></tr>
+EOT;
+	}
+   echo <<<EOT
 	<tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Email:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'>{$email}</td></tr>
 
 	</table>

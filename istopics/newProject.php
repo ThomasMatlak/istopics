@@ -10,8 +10,8 @@ session_start();
 $page_title = "Add a New Project";
 include("header.php");
 
-if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"])) {
-// user is signed in
+if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"]) && isset($_SESSION["sess_user_role"]) && ($_SESSION["sess_user_role"] == "student")) {
+// user is signed in as a student
 
 // Get the student's major
 require_once 'db_credentials.php';
@@ -69,7 +69,7 @@ EOT;
 else {
      // user is not signed in, set error message
      $_SESSION["error"] = 1;
-     $_SESSION["error_msg"] = "You must be signed in to perform this action.";
+     $_SESSION["error_msg"] = "You are not authorized to perform this action.";
      
      // Redirect to home page
      header("Location: showAllProjects.php");

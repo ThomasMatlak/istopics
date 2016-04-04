@@ -49,7 +49,7 @@ if ((($user_id != $_SESSION["sess_user_id"]) || ($first_name != $_SESSION["sess_
 $page_title = "Update User Information";
 include('header.php');
 
-$sql = "SELECT id, first_name, last_name, email, major, year FROM users where id={$user_id}";
+$sql = "SELECT id, first_name, last_name, email, major, year, role FROM users where id={$user_id}";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -60,10 +60,12 @@ if ($result->num_rows > 0) {
     $email      = $row["email"];
     $major      = $row["major"];
     $year       = $row["year"];
+    $role       = $row["role"];
 
     $major_list = file_get_contents("majors.html");
 
     echo <<<EOT
+    	 <input type="hidden" id="user_role" value="{$role}">
     	 <form id="update_user" action="updateProfileController.php" method="POST" class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
  	     <div class="form-group">
     	         <div id="check_first_name">
@@ -74,6 +76,9 @@ if ($result->num_rows > 0) {
                      <label for="last_name" class="control-label">Last Name:</label>
     	             <input type="text" name="last_name" id="last_name" class="form-control" value="{$last_name}">
     	   	 </div>
+EOT;
+            if ($role == "student") {
+	        echo <<<EOT
     		 <div id="discipline_check">
                      <label for="discipline" class="control-label">Major(s):</label><span id="stud_major"></span>
 		     {$major_list}
@@ -83,6 +88,9 @@ if ($result->num_rows > 0) {
                      <label for="year" class="control-label">Graduating Year:</label>
                      <input type="number" name="year" id="year" class="form-control" value="{$year}">
     	         </div>
+EOT;
+            }
+    echo <<<EOT
     		 <div id="email_check">
                      <label for="email" class="control-label">Email:</label>
                      <input type="email" name="email" id="email" class="form-control" value="{$email}">
