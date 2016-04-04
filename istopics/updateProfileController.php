@@ -62,6 +62,18 @@ $stmt->bind_param("ssssss", $first_name, $last_name, $discipline, $year, $email,
 // Submit the SQL statement
 $stmt->execute();
 
+if (isset($_POST["new_password"]) && $_POST["new_password"] != "") {
+    // update password
+
+    $new_password = password_hash($_POST["new_password"], PASSWORD_DEFAULT);
+
+    $stmt = $conn->prepare("UPDATE users SET password=? WHERE id=?");
+    $stmt->bind_param("ss", $new_password, $user_id);
+
+    // Submit the SQL statement
+    $stmt->execute();
+}
+
 $stmt->close();
 $conn->close();
 

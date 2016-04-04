@@ -96,7 +96,10 @@ EOT;
                      <input type="email" name="email" id="email" class="form-control" value="{$email}">
                  </div>
 		 <input type="hidden" name="user_id" value={$user_id}>
-		<button type="submit" id="submit" class="btn btn-warning form-control">Submit</button>
+		 <hr>
+	    	 <label for="new_password">Change Password</label>
+	    	 <input type="password" id="new_password" name="new_password" class="form-control">
+		 <button type="submit" id="submit" class="btn btn-warning form-control">Submit</button>
      	    </div>
 	</form>
 
