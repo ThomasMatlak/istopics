@@ -30,6 +30,7 @@ echo <<<EOT
 	     <button type='submit' class='btn btn-primary'>Promote User to Admin</button>
 	 </form>
      </div>
+     </div>
 EOT;
 }
 else {
