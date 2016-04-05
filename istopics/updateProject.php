@@ -83,7 +83,7 @@ echo <<<EOT
     	        <textarea cols="80" name="keywords" form="update_project" id="keywords" class="form-control">{$keywords}</textarea>
     	    </div>
 	    <label for="comments" class="control-label">Additional Comments:</label>
-    	    <textarea cols="80" name="comments" form="update_project" id="comments" class="form-control" placeholder="Have someone you would like to work with? Have anything else to say? Put it here.">{$comments}</textarea>
+    	    <textarea cols="80" name="comments" form="update_project" id="comments" class="form-control" placeholder="Are there particular skills you are looking for in a collaborative partner? Is there a specific discipline you are hoping to work with?">{$comments}</textarea>
     	    <button type="submit" id="submit" class="btn btn-warning form-control">Submit</button>
   	</div>
     </form>
