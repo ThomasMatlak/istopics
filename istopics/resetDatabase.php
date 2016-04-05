@@ -2,7 +2,7 @@
 /*
 * resetDatabase.php
 *
-* Reset the database by removing all /*users*/, projects, and connection between the two
+* Reset the database by removing all users, projects, and connection between the two
 */
 
 session_start();
