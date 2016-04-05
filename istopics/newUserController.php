@@ -71,7 +71,7 @@ if (($stu_or_fac == "student")) {
     $role = "student";
 }
 else if (($stu_or_fac == "faculty")) {
-    $role = "faculty";
+    $role = "prof";
 }
 
 // Prepare the SQL statement

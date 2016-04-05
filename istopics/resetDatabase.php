@@ -2,7 +2,7 @@
 /*
 * resetDatabase.php
 *
-* Reset the database by removing all /*users*/, projects, and connection between the two
+* Reset the database by removing all non-admin users, projects, and connections between the two
 */
 
 session_start();
@@ -17,7 +17,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-if (isset($_SESSION['sess_user_id']) && isset($_SESSION['sess_user_name']) && isset($_SESSION['sess_user_role']) && $_SESSION['sess_user_role'] == 'admin') {
+if (isset($_SESSION['sess_user_id']) && isset($_SESSION['sess_user_name']) && isset($_SESSION['sess_user_role']) && ($_SESSION['sess_user_role'] == 'admin')) {
    $sql = "TRUNCATE TABLE projects";
    if (!$conn->query($sql)) {
      $_SESSION["error"] = 3;
@@ -26,8 +26,8 @@ if (isset($_SESSION['sess_user_id']) && isset($_SESSION['sess_user_name']) && is
      header("Location: adminInterface.php");
      exit();
    }
-/*
-   $sql = "DELETE FROM users WHERE role!='admin'";
+
+   $sql = "DELETE FROM users WHERE role!='admin' AND role!='prof'";
    if (!$conn->query($sql)) {
      $_SESSION["error"] = 3;
      $_SESSION["error_msg"] = "Error Removing users";
@@ -35,7 +35,7 @@ if (isset($_SESSION['sess_user_id']) && isset($_SESSION['sess_user_name']) && is
      header("Location: adminInterface.php");
      exit();
    }
-*/
+
    $sql = "TRUNCATE TABLE user_project_connections";
    if (!$conn->query($sql)) {
      $_SESSION["error"] = 3;
