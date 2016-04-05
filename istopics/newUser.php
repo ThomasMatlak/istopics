@@ -16,7 +16,7 @@ include("header.php");
     	    <input type="radio" name="stud_or_faculty" id="studentSelect" value="student" onclick="stud_faculty_toggle();" checked> Student
         </label>
         <label class="radio-inline">
-            <input type="radio" name="stud_or_faculty" id="facultySelect" value="faculty" onclick="stud_faculty_toggle();"> Faculty Member
+            <input type="radio" name="stud_or_faculty" id="facultySelect" value="faculty" onclick="stud_faculty_toggle();"> Faculty or Staff Member
     	</label>
     </div>
     <div id="check_first_name" class="form-group">
