@@ -63,6 +63,7 @@ istopics/
 	|--updateProfileValidation.js
 	|--updateProjectValidation.js
     |--adminInterface.php
+    |--analyticstracking.php
     |--db_credentials.php
     |--deleteProjectController.php
     |--favicon.ico
