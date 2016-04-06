@@ -52,9 +52,11 @@ if ($result->num_rows > 0) {
    	        </table>
 	    </div> <!-- panel body -->
 	</div> <!-- panel -->
-   	
-	<form action='updateProject.php' method='GET'>\n<input type='hidden' name='project_id' value='{$row["id"]}'><button type='submit' class='btn btn-warning'>Edit Project</button></form>
 EOT;
+
+    if (($_SESSION["sess_user_role"] == "admin") || ($_SESSION["sess_user_id"] == $user_id)) {
+        echo "<form action='updateProject.php' method='GET'>\n<input type='hidden' name='project_id' value='{$row['user_id']}'><button type='submit' class='btn btn-warning'>Edit Project</button></form>";
+    }
 
 } else {
     echo "<p>Project Not Found.</p>";

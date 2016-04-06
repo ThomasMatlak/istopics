@@ -59,13 +59,16 @@ EOT;
 	<tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Email:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'>{$email}</td></tr>
 
 	</table>
-
-	<form action='updateProfile.php' method='GET'>
-	    <input type='hidden' name='user_id' id='user_id' value='{$user_id}'>
-	    <button class='btn btn-warning'>Edit Profile</button>
-	</form>
 EOT;
-
+    if (($_SESSION["sess_user_role"] == "admin") || ($_SESSION["sess_user_id"] == $user_id)) {
+        echo <<<EOT
+ 
+       	    <form action='updateProfile.php' method='GET'>
+	        <input type='hidden' name='user_id' id='user_id' value='{$user_id}'>
+	        <button class='btn btn-warning'>Edit Profile</button>
+	    </form>
+EOT;
+    }
 $sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.keywords FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE users.id={$user_id} ORDER BY title";
 
 $result = $conn->query($sql);
@@ -104,8 +107,13 @@ EOT;
 	if ($proj_keywords != NULL) {
 	   echo "<tr><th><a role='button' data-toggle='collapse' href='#{$proj_id}". "keywords' aria-expanded='true' aria-controls='{$proj_id}". "keywords'>Keywords:</a></th><td><div class='collapse in' id='{$proj_id}". "keywords'>{$proj_keywords}</div></td></tr>\n";
 	}
-	echo  <<<EOT
-	            </table>
+	echo "</table>";
+	
+	if (($_SESSION["sess_user_role"] == "admin") || ($_SESSION["sess_user_id"] == $user_id)) {
+	    echo "<form action='updateProject.php' method='GET'>\n<input type='hidden' name='project_id' value='{$row['proj_id']}'><button type='submit' class='btn btn-warning'>Edit Project</button></form>";
+	}
+
+	echo <<<EOT
 	        <div> <!-- panel body -->
 	    <div> <!-- panel -->
 	</li>
