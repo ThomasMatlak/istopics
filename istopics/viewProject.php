@@ -23,7 +23,7 @@ if (!filter_var($proj_id, FILTER_VALIDATE_INT)) {
    echo "<p>That is not a valid project id.</p>";
 }
 else {
-$sql = "SELECT projects.id, projects.title, projects.discipline, projects.proposal, projects.comments, projects.keywords, users.id AS user_id, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE projects.id={$proj_id}";
+$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.comments, projects.keywords, users.id AS user_id, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE projects.id={$proj_id}";
 $result = $conn->query($sql);
 
 // Display Project
@@ -32,6 +32,7 @@ if ($result->num_rows > 0) {
 
    $author_name = $row["first_name"]. " ". $row["last_name"];
    $user_id     = $row["user_id"];
+   $proj_id     = $row["proj_id"];
    $major       = $row["discipline"];
    $proposal    = $row["proposal"];
    $comments    = $row["comments"];
@@ -55,7 +56,7 @@ if ($result->num_rows > 0) {
 EOT;
 
     if (($_SESSION["sess_user_role"] == "admin") || ($_SESSION["sess_user_id"] == $user_id)) {
-        echo "<form action='updateProject.php' method='GET'>\n<input type='hidden' name='project_id' value='{$row['user_id']}'><button type='submit' class='btn btn-warning'>Edit Project</button></form>";
+        echo "<form action='updateProject.php' method='GET'>\n<input type='hidden' name='project_id' value='{$proj_id}'><button type='submit' class='btn btn-warning'>Edit Project</button></form>";
     }
 
 } else {

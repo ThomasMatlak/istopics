@@ -24,9 +24,20 @@ if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"]) && is
 $user_id    = $_POST["user_id"];
 $first_name = filter_var($_POST["first_name"], FILTER_SANITIZE_STRING);
 $last_name  = filter_var($_POST["last_name"], FILTER_SANITIZE_STRING);
-$discipline = filter_var($_POST["discipline"], FILTER_SANITIZE_STRING);
 $year       = filter_var($_POST["year"], FILTER_SANITIZE_STRING);
 $email      = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
+
+$discipline = "";
+$discipline_array = $_POST["discipline"];
+$last_discipline  = end($discipline_array);
+
+foreach ($discipline_array as $selected_major) {
+    $selected_major = filter_var($selected_major, FILTER_SANITIZE_STRING);
+    $discipline = $discipline. $selected_major;
+    if ($selected_major != $last_discipline) {
+        $discipline = $discipline. ", ";
+    }
+}
 
 if (empty($first_name) || empty($last_name) || empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     // Some input is not valid

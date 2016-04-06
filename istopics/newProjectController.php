@@ -29,10 +29,21 @@ if ($conn->connect_error) {
 
 // Set variables and sanitize input
 $title      = filter_var($_POST["title"], FILTER_SANITIZE_STRING);
-$discipline = filter_var($_POST["discipline"], FILTER_SANITIZE_STRING);
 $proposal   = filter_var($_POST["proposal"], FILTER_SANITIZE_STRING);
 $keywords   = filter_var($_POST["keywords"], FILTER_SANITIZE_STRING);
 $comments   = filter_var($_POST["comments"], FILTER_SANITIZE_STRING);
+
+$discipline = "";
+$discipline_array = $_POST["discipline"];
+$last_discipline  = end($discipline_array);
+
+foreach ($discipline_array as $selected_major) {
+    $selected_major = filter_var($selected_major, FILTER_SANITIZE_STRING);
+    $discipline = $discipline. $selected_major;
+    if ($selected_major != $last_discipline) {
+        $discipline = $discipline. ", ";
+    }
+}
 
 if (empty($title) || empty($discipline)) {
    // redirect to home page
