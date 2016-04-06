@@ -16,8 +16,8 @@ $("form :input").on('input', function() {
 	}
 	$('#no_results_msg').text('');
 	$('#num_projects').text($('#initial_num_results').val());
-	if (num_projects == 1) { $('#result_or_results').text('result'); }
- 	else { $('#result_or_results').text('results'); }
+	if (num_projects == 1) { $('#result_or_results').text('project'); }
+ 	else { $('#result_or_results').text('projects'); }
     }
     else {
         // Keep track of how many projects are being shown
@@ -51,8 +51,8 @@ $("form :input").on('input', function() {
 	}
 	$('#num_projects').text(num_projects);
 	$('#no_results_msg').text('');
-	if (num_projects == 0) { $('#no_results_msg').text('No results were found. Try different keywords'); }
-	else if (num_projects == 1) { $('#result_or_results').text('result'); }
-	else { $('#result_or_results').text('results'); }
+	if (num_projects == 0) { $('#no_results_msg').text('No projects were found. Try different keywords'); }
+	else if (num_projects == 1) { $('#result_or_results').text('project'); }
+	else { $('#result_or_results').text('projects'); }
     }
 });

@@ -31,6 +31,7 @@ session_start();
 </head>
 
 <body>
+<?php include_once("analyticstracking.php") ?>
 
 <div class="wrapper">
 

@@ -46,7 +46,7 @@ if ($result->num_rows > 0) {
    $role       = $row["role"];
 
    echo <<<EOT
-   	<strong>{$first_name} {$last_name}</strong>
+   	<h3>{$first_name} {$last_name}</h3>
 	<table class='table table-striped'>
 EOT;
 	if ($role == "student") {

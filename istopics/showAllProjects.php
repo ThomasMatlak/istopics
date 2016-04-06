@@ -27,10 +27,10 @@ if ($result->num_rows > 0) {
     echo "<form class='form-inline'><div class='form-group'><input type='text' name='search' id='search' placeholder='Search Projects' class='form-control'></div><span class='help-block'>Search by keywords, title, major, author, or proposal</span></form>";
 
     if ($result->num_rows == 1) {
-        echo "<p>Showing <span id='num_projects'>{$result->num_rows}</span> <span id='result_or_results'>result</span>.</p>";
+        echo "<p>Showing <span id='num_projects'>{$result->num_rows}</span> <span id='result_or_results'>project</span>.</p>";
     }
     else {
-        echo "<p>Showing <span id='num_projects'>{$result->num_rows}</span> <span id='result_or_results'>results</span>.</p>";
+        echo "<p>Showing <span id='num_projects'>{$result->num_rows}</span> <span id='result_or_results'>projects</span>.</p>";
     }
 
     echo "<span id='no_results_msg'></span>";
@@ -83,7 +83,7 @@ EOT;
 	<input type='hidden' value='{$result->num_rows}' id='initial_num_results'>
 EOT;
 } else {
-    echo "<p>Showing 0 results.</p>";
+    echo "<p>Showing 0 projects.</p>";
 }
 
 // Close connection

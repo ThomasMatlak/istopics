@@ -53,10 +53,10 @@ echo <<<EOT
     <textarea rows="5" cols="80" name="proposal" form="new_project" id="proposal" class="form-control" placeholder="Your IS proposal (optional)"></textarea>
     <div id="check_keywords">
     	 <label for="keywords" class="control-label">Keywords:</label>
-	 <textarea rows="1" cols="80" name="keywords" form="new_project" id="keywords" class="form-control" placeholder="Input some comma separated keywords"></textarea>
+	 <textarea rows="1" cols="80" name="keywords" form="new_project" id="keywords" class="form-control" placeholder="Type keywords that describe major ideas and methodologies of your IS topic, separated by commas. E.g. beekeeping, ethnography"></textarea>
     </div>
     <label for="comments" class="control-label">Additional Comments:</label>
-    <textarea rows="2" cols="80" name="comments" form="new_project" id="comments" class="form-control" placeholder="Have someone you would like to work with? Have anything else to say? Put it here."></textarea>
+    <textarea rows="2" cols="80" name="comments" form="new_project" id="comments" class="form-control" placeholder="Are there particular skills you are looking for in a collaborative partner? Is there a specific discipline you are hoping to work with?"></textarea>
     <button type="submit" id="submit" class="btn btn-warning form-control">Submit</button>
   </div>
 </form>
