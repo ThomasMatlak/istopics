@@ -75,11 +75,29 @@ else if (($stu_or_fac == "faculty")) {
 }
 
 // Prepare the SQL statement
-$stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, major, year, password, role) VALUES (?,?,?,?,?,?,?)");
-$stmt->bind_param("sssssss", $first_name, $last_name, $email, $major, $year, $password, $role);
+if (!($stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, major, year, password, role) VALUES (?,?,?,?,?,?,?)"))) {
+    $_SESSION["error"] = 1;
+    $_SESSION["error_msg"] = "Something went wrong.";
+
+    header("Location: newUser.php");
+    exit();
+}
+if (!($stmt->bind_param("sssssss", $first_name, $last_name, $email, $major, $year, $password, $role))) {
+    $_SESSION["error"] = 1;
+    $_SESSION["error_msg"] = "Something went wrong.";
+
+    header("Location: newUser.php");
+    exit();
+}
 
 // Submit the SQL statement
-$stmt->execute();
+if (!($stmt->execute())) {
+    $_SESSION["error"] = 1;
+    $_SESSION["error_msg"] = "Error creating new user. This email is probably already in use.";
+
+    header("Location: newUser.php");
+    exit();
+}
 
 $stmt->close();
 $conn->close();
