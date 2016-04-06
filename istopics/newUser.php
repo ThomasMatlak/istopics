@@ -37,7 +37,7 @@ include("header.php");
     </div>
     <div id="email_check" class="form-group">
         <label for="email" class="control-label">Email:</label>
-    	<input type="email" name="email" id="email" class="form-control visible-lg-inline visible-md-inline visible-sm-inline visible-xs-inline" placeholder="Use your Wooster email">
+    	<input type="email" name="email" id="email" class="form-control visible-lg-inline visible-md-inline visible-sm-inline visible-xs-inline" placeholder="Use your Wooster email"><span id="invalid_email"></span>
     </div>
     <div id="password_group" class="form-group">
         <label for="password" class="control-label">Password:</label>

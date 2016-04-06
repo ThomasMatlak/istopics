@@ -52,9 +52,16 @@ $('#year').on('input', function() {
 
 // Check that the email is valid
 $('#email').on('input', function() {
-//VALIDATE EMAIL
     if ($('#email').val()) {
-        $('#email_check').attr("class", "has-success");
+        if ($('#email').val().match(/@wooster.edu/)) {
+            $('#invalid_email').text('');
+	    $('#email_check').attr("class", "has-success");
+	}
+	else if (!$('#email').val().match(/@wooster.edu/)) {
+	    $('#invalid_email').text('You must use a *@wooster.edu email address');
+	    $('#email_check').attr("class", "has-error");
+	    $('#submit').attr("disabled", "true");
+	}
     }
     else {
     	$('#email_check').attr("class", "has-error");

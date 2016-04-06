@@ -93,7 +93,7 @@ EOT;
     echo <<<EOT
     		 <div id="email_check">
                      <label for="email" class="control-label">Email:</label>
-                     <input type="email" name="email" id="email" class="form-control" value="{$email}">
+                     <input type="email" name="email" id="email" class="form-control" value="{$email}"><span id="invalid_email"></span>
                  </div>
 		 <input type="hidden" name="user_id" value={$user_id}>
 		 <hr>
