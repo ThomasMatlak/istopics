@@ -17,7 +17,6 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-//Set variables and sanitize input
 $email = filter_var($_GET["email"], FILTER_SANITIZE_EMAIL);
 $pass  = $_GET["password"];
 
@@ -51,9 +50,19 @@ if ($result->num_rows > 0) {
    // Close connections
    $conn->close();
 
-   //Redirect to home page
-   header("Location: showAllProjects.php");
-   exit();
+   // Redirect to appropriate page
+   if ($_GET["just_registered"] == "student") {
+      header("Location: newProject.php");
+      exit();
+   }
+   else if ($_GET["just_registered"] == "prof") {
+      header("Location: showAllProjects.php");
+      exit();
+   }
+   else {
+   	header("Location: showAllProjects.php");
+   	exit();
+   }
 
 } else {
     // Close connections

@@ -118,7 +118,7 @@ $conn->close();
 $_SESSION["message"] = 1;
 $_SESSION["msg"] = "New User Succesfully Added";
 
-// Redirect to login page
-header("Location: login.php");
+// Sign the user in
+header("Location: loginController.php?email={$email}&password={$_POST['password']}&just_registered={$role}");
 exit();
 ?>
