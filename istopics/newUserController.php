@@ -55,7 +55,6 @@ if (empty($stu_or_fac) || (empty($first_name) || empty($last_name) || empty($ema
 }
 if (($stu_or_fac == "student")) {
     $year  = filter_var($_POST["year"], FILTER_SANITIZE_STRING);
-    $major = filter_var($_POST["discipline"], FILTER_SANITIZE_STRING);
 
     $major = "";
     $discipline_array = $_POST["discipline"];
@@ -63,9 +62,9 @@ if (($stu_or_fac == "student")) {
 
     foreach ($discipline_array as $selected_major) {
         $selected_major = filter_var($selected_major, FILTER_SANITIZE_STRING);
-    	$major = $discipline. $selected_major;
+    	$major = $major. $selected_major;
     	if ($selected_major != $last_discipline) {
-            $major = $discipline. ", ";
+            $major = $major. ", ";
     	}
     }
 
