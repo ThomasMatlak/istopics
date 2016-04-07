@@ -5,7 +5,10 @@
 * The view to display at the top of every page
 */
 
-session_start();
+if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 ?>
 
 <!Doctype HTML>
