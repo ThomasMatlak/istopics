@@ -35,13 +35,13 @@ $("form :input").on('input', function() {
 
 	    project_showed = false;
 
-	    for (j = 1; j < searchTerms.length; j++) {
+	    for (j = 0; j < searchTerms.length; j++) {
 		var searchTerm = removeDiacritics(searchTerms[j].trim());
 
-		var keywords = removeDiacritics($('#'+i+'full_keywords').text().toLowerCase());
+		var keywords = removeDiacritics($('#'+i+'full_keywords').val().toLowerCase());
 		var title    = removeDiacritics($('#'+i+'project_title').text().toLowerCase());
 		var major    = removeDiacritics($('#'+i+'project_major').text().toLowerCase());
-		var proposal = removeDiacritics($('#'+i+'full_proposal').text().toLowerCase());
+		var proposal = removeDiacritics($('#'+i+'full_proposal').val().toLowerCase());
 		var name     = removeDiacritics($('#'+i+'author').text().toLowerCase());
 
 		// Search term is empty -- there is nothing after the comma in the search terms
