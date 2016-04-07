@@ -42,3 +42,7 @@ height: 4em;
 .btn {
     white-space: normal;
 }
+
+.container-fluid {
+max-width: 960px;
+}
