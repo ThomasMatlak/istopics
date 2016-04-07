@@ -1,6 +1,21 @@
 CHANGE LOG
 ==========
 
+2016-04-07
+-ellipsify proposal and keywords on view all projects if they are too long
+-fixed various display issues
+-fixed various bugs
+
+2016-04-06
+-client side verification of wooster.edu email
+-can save multiple majors
+-throw error when making a duplicate user
+-changed who can see edit project and edit user buttons
+-added edit project button to user profile view
+-can search through both accented and unaccented characters
+-tell admin if user being promoted doesn't exist
+-new user creation redirects to appropriate page
+
 2016-04-04
 -users can change passwords
 -added student/faculty new user toggle

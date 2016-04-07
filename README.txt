@@ -55,6 +55,8 @@ istopics/
         |--istopics.css
     |--images/
     |--js/
+	|--ellipsify.js
+	|--expand_contract_pk.js
 	|--generateUserEmail.js
 	|--newProjectValidation.js
 	|--newUsrValidation.js
