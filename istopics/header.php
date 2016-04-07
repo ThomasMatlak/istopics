@@ -65,8 +65,12 @@ EOT;
            <li><a href='newUser.php' class='nav btn btn-link navbar-btn'>New User?</a></li>
 	   </ul>
 EOT;
-
-echo <<<EOT
+       }
+    ?>
+    
+    <!-- Header logo file -->
+    <?php
+    echo <<<EOT
         <ul class='nav navbar-nav navbar-right'>
         <li>
             <a href='http://www.wooster.edu'>
@@ -75,8 +79,8 @@ echo <<<EOT
         </li>
         </ul>
 EOT;
-       }
     ?>
+    
 <div class="nav navbar-right">
     <noscript>
     <form id="search_html" action="search.php" method="GET" class="navbar-form">
