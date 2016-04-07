@@ -5,7 +5,10 @@
 * The view to display at the top of every page
 */
 
-session_start();
+if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
 ?>
 
 <!Doctype HTML>
@@ -67,6 +70,20 @@ EOT;
 EOT;
        }
     ?>
+    
+    <!-- Header logo file -->
+    <?php
+    echo <<<EOT
+        <ul class='nav navbar-nav navbar-right'>
+        <li>
+            <a href='http://www.wooster.edu'>
+            <img src='wordmark.png' height=28px alt='The College of Wooster'/>
+            </a>
+        </li>
+        </ul>
+EOT;
+    ?>
+    
 <div class="nav navbar-right">
     <noscript>
     <form id="search_html" action="search.php" method="GET" class="navbar-form">
