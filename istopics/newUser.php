@@ -33,7 +33,7 @@ include("header.php");
     </div>
     <div id="year_check" class="form-group">
         <label for="year" class="control-label">Graduating Year:</label>
-        <input type="number" name="year" id="year" class="form-control" value="<?php echo date("Y"); ?>">
+        <input type="number" name="year" id="year" class="form-control" value="<?php echo date("Y")+1; ?>">
     </div>
     <div id="email_check" class="form-group">
         <label for="email" class="control-label">Email:</label>
