@@ -22,6 +22,11 @@ $sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, proj
 
 $result = $conn->query($sql);
 
+echo <<<EOT
+    <script src='js/ellipsify.js'></script>
+    <script src='js/expand_contract_pk.js'></script>
+EOT;
+
 // Display Projects
 if ($result->num_rows > 0) {
     echo "<form class='form-inline'><div class='form-group'><input type='text' name='search' id='search' placeholder='Search Projects' class='form-control'></div><span class='help-block'>Search by keywords, title, major, author, or proposal</span></form>";
@@ -63,10 +68,17 @@ if ($result->num_rows > 0) {
 	                <tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Major:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'><div id="{$proj_id}project_major">{$proj_discipline}</div></td></tr>
 EOT;
 	if ($proj_proposal != NULL) {
-	   echo "<tr><th><a role='button' data-toggle='collapse' href='#{$proj_id}proposal' aria-expanded='true' aria-controls='{$proj_id}proposal'>Proposal:</a></th><td><div class='collapse in' id='{$proj_id}proposal'>{$proj_proposal}</div></td></tr>\n";
+	   echo <<<EOT
+	       <tr><th>Proposal:</th><td><div id='{$proj_id}proposal'><span id='{$proj_id}proposal_text'>{$proj_proposal}</span><a id='{$proj_id}show_proposal' role='button' onclick='expand_proposal({$proj_id});'> <span id='{$proj_id}show_or_hide_p'></span></a></div></td></tr>
+	       <input type='hidden' id='{$proj_id}full_proposal' value='{$proj_proposal}'>
+EOT;
 	}
 	if ($proj_keywords != NULL) {
-	   echo "<tr><th><a role='button' data-toggle='collapse' href='#{$proj_id}keywords' aria-expanded='true' aria-controls='{$proj_id}keywords'>Keywords:</a></th><td><div class='collapse in' id='{$proj_id}keywords'>{$proj_keywords}</div></td></tr>\n";
+	   echo <<<EOT
+	       <tr><th>Keywords::</th><td><div id='{$proj_id}keywords'><span id='{$proj_id}keywords_text'>{$proj_keywords}</span><a id='{$proj_id}show_keywords' role='button' onclick='expand_keywords({$proj_id});'> <span id='{$proj_id}show_or_hide_k'></span></a></div></td></tr>
+	       <input type='hidden' id='{$proj_id}full_keywords' value='{$proj_keywords}'>
+EOT;
+
 	}
 	echo <<<EOT
 	            </table>
@@ -78,7 +90,8 @@ EOT;
     echo <<<EOT
         </ul>
 
-        <script src='js/searchAllProjects.js'></script>
+	<script src='js/searchAllProjects.js'></script>
+
         <input type='hidden' value='{$max_proj_id}' id='max_proj_id'>
 	<input type='hidden' value='{$result->num_rows}' id='initial_num_results'>
 EOT;

@@ -1,18 +1,24 @@
-// Search all projects based on keywords or title content
+/*
+* Search all projects based on keywords or title content
+*/
 $("form :input").on('input', function() {
     var searchTerms = $('#search').val().toLowerCase().split(" ");
 
     var max_proj_id = $('#max_proj_id').val();
 
     // Hide everything by default
-    for (i = 0; i <= max_proj_id; i++) {
-	$('#'+i).hide();
+    for (i = 1; i <= max_proj_id; i++) {
+	if ($('#' + i + 'project_title').text()) {
+	    $('#'+i).hide();
+	}
     }
 
     if (!$('#search').val()) {
 	// Input is empty; display all projects
-	for (i = 0; i <= max_proj_id; i++) {
-	    $('#'+i).show();
+	for (i = 1; i <= max_proj_id; i++) {
+	    if ($('#' + i + 'project_title').text()) {
+		$('#'+i).show();
+	    }
 	}
 	$('#no_results_msg').text('');
 	$('#num_projects').text($('#initial_num_results').val());
@@ -24,18 +30,18 @@ $("form :input").on('input', function() {
         var num_projects = 0;
 
 	// Input is not empty; search for and display projects matching search terms
-	// for (j = 0; j < searchTerms.length; j++) {
-	for (i = 0; i <= max_proj_id; i++) {
+	for (i = 1; i <= max_proj_id; i++) {
+	    if (!$('#' + i + 'project_title').text()) { break; }
+
 	    project_showed = false;
 
-	    //for (i = 0; i <= max_proj_id; i++) {
-	    for (j = 0; j < searchTerms.length; j++) {
+	    for (j = 1; j < searchTerms.length; j++) {
 		var searchTerm = removeDiacritics(searchTerms[j].trim());
 
-		var keywords = removeDiacritics($('#'+i+'keywords').text().toLowerCase());
+		var keywords = removeDiacritics($('#'+i+'full_keywords').text().toLowerCase());
 		var title    = removeDiacritics($('#'+i+'project_title').text().toLowerCase());
 		var major    = removeDiacritics($('#'+i+'project_major').text().toLowerCase());
-		var proposal = removeDiacritics($('#'+i+'proposal').text().toLowerCase());
+		var proposal = removeDiacritics($('#'+i+'full_proposal').text().toLowerCase());
 		var name     = removeDiacritics($('#'+i+'author').text().toLowerCase());
 
 		// Search term is empty -- there is nothing after the comma in the search terms
