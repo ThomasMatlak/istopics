@@ -45,7 +45,7 @@ if ($result->num_rows > 0) {
 	    </div> <!-- panel heading -->
 	    <div class="panel-body">
 	        <table class='table table-striped'>
-   	            <caption><a href='viewProfile.php?user_id={$user_id}' method='GET'>{$author_name}</a></caption>
+   	            <caption><a href='viewProfile.php?user_id={$user_id}'>{$author_name}</a></caption>
    	            <tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Major:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'>{$major}</td></tr>
    	            <tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Proposal:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'>{$proposal}</td></tr>
    	            <tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Comments:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'>{$comments}</td></tr>

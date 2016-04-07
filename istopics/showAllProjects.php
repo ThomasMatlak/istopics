@@ -64,24 +64,24 @@ if ($result->num_rows > 0) {
 	        </div> <!-- panel heading -->
 	        <div class="panel-body">
 	            <table class='table'>
-	                <caption><span id="{$proj_id}author"><a href='viewProfile.php?user_id={$user_id}' method='GET'>{$author_name}</a></span></caption>
+	                <caption><span id="{$proj_id}author"><a href='viewProfile.php?user_id={$user_id}'>{$author_name}</a></span></caption>
 	                <tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Major:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'><div id="{$proj_id}project_major">{$proj_discipline}</div></td></tr>
 EOT;
 	if ($proj_proposal != NULL) {
 	   echo <<<EOT
 	       <tr><th>Proposal:</th><td><div id='{$proj_id}proposal'><span id='{$proj_id}proposal_text'>{$proj_proposal}</span><a id='{$proj_id}show_proposal' role='button' onclick='expand_proposal({$proj_id});'> <span id='{$proj_id}show_or_hide_p'></span></a></div></td></tr>
-	       <input type='hidden' id='{$proj_id}full_proposal' value='{$proj_proposal}'>
 EOT;
 	}
 	if ($proj_keywords != NULL) {
 	   echo <<<EOT
-	       <tr><th>Keywords::</th><td><div id='{$proj_id}keywords'><span id='{$proj_id}keywords_text'>{$proj_keywords}</span><a id='{$proj_id}show_keywords' role='button' onclick='expand_keywords({$proj_id});'> <span id='{$proj_id}show_or_hide_k'></span></a></div></td></tr>
-	       <input type='hidden' id='{$proj_id}full_keywords' value='{$proj_keywords}'>
+	       <tr><th>Keywords:</th><td><div id='{$proj_id}keywords'><span id='{$proj_id}keywords_text'>{$proj_keywords}</span><a id='{$proj_id}show_keywords' role='button' onclick='expand_keywords({$proj_id});'> <span id='{$proj_id}show_or_hide_k'></span></a></div></td></tr>
 EOT;
 
 	}
 	echo <<<EOT
 	            </table>
+		    <input type='hidden' id='{$proj_id}full_proposal' value='{$proj_proposal}'>
+		    <input type='hidden' id='{$proj_id}full_keywords' value='{$proj_keywords}'>
 	        </div> <!-- panel body -->
 	    </div> <!-- panel -->
 	</li>

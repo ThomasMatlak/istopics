@@ -1,5 +1,7 @@
 // Set the major in the select multiple input
 $(document).ready(function() {
+    if (document.getElementById('discipline') == null) { return 0; }
+
     var majors = document.getElementById('discipline').options;
 
     var student_majors = [];

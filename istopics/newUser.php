@@ -13,10 +13,10 @@ include("header.php");
     <div class="form-group">
         <label for="studentSelect">I am a: </label>
 	<label class="radio-inline">
-    	    <input type="radio" name="stud_or_faculty" id="studentSelect" value="student" onclick="stud_faculty_toggle();" checked> Student
+    	    <input type="radio" name="stud_or_faculty" id="studentSelect" value="student" onclick="stud_faculty_toggle();" checked> <span class='glyphicon glyphicon-education'></span> Student
         </label>
         <label class="radio-inline">
-            <input type="radio" name="stud_or_faculty" id="facultySelect" value="faculty" onclick="stud_faculty_toggle();"> Faculty or Staff Member
+            <input type="radio" name="stud_or_faculty" id="facultySelect" value="faculty" onclick="stud_faculty_toggle();"> <span class='glyphicon glyphicon-apple'></span> Faculty or Staff Member
     	</label>
     </div>
     <div id="check_first_name" class="form-group">

@@ -49,7 +49,7 @@ session_start();
 	       echo "<li><a href='newProject.php' class='btn btn-link navbar-btn'>Add a New Project</a></li>";
 	   }
 	   echo <<<EOT
-	       <li><a href='viewProfile.php' class='btn btn-link navbar-btn'>Hello {$_SESSION['sess_user_name']}</a></p></li>
+	       <li><a href='viewProfile.php' class='btn btn-link navbar-btn'>Hello {$_SESSION['sess_user_name']}</a></li>
 	       <li><a href='logout.php' class='nav btn btn-link navbar-btn'>Sign Out</a></li>
 EOT;
 	if ($_SESSION["sess_user_role"] == "admin") {

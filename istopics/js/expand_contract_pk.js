@@ -1,4 +1,4 @@
-var shorten_to = 100
+var shorten_to = 100;
 
 /*
 * Shorten/expand proposals
@@ -6,9 +6,9 @@ var shorten_to = 100
 function shorten_proposal (proj_id) {
     if ($('#' + proj_id + 'full_proposal').val().length > shorten_to) {
 	$('#' + proj_id + 'proposal_text').html(ellipsify($('#' + proj_id + 'full_proposal').val(), shorten_to));
+	$('#' + proj_id + 'show_or_hide_p').text('show more');
     }
     $('#' + proj_id + 'show_proposal').attr('onclick', 'expand_proposal(' + proj_id + ');');
-    $('#' + proj_id + 'show_or_hide_p').text('show more');
 }
 
 function expand_proposal (proj_id) {
@@ -23,9 +23,9 @@ function expand_proposal (proj_id) {
 function shorten_keywords (proj_id) {
     if ($('#' + proj_id + 'full_keywords').val().length > shorten_to) {
 	$('#' + proj_id + 'keywords_text').html(ellipsify($('#' + proj_id + 'full_keywords').val(), shorten_to));
+	$('#' + proj_id + 'show_or_hide_k').text('show more');
     }
     $('#' + proj_id + 'show_keywords').attr('onclick', 'expand_keywords(' + proj_id + ');');
-    $('#' + proj_id + 'show_or_hide_k').text('show more');
 }
 
 function expand_keywords (proj_id) {
