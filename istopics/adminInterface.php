@@ -18,6 +18,8 @@ echo <<<EOT
      <button onclick='resetWarning();' class='btn btn-danger'>Reset Database</button>
      <span class='help-block'>Resetting the database will delete all projects, connections between projects and users, and non-admin users.</span>
 
+     <hr>
+
      <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#promoteUser" aria-expanded="false" aria-controls="promoteUser">
          Promote a User to Admin
      </button>

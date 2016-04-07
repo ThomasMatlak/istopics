@@ -22,6 +22,7 @@ if (!isset($_POST['email']) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     header("Location: showAllProjects.php");
     exit();
 }
+
 require_once 'db_credentials.php';
 
 // Create connection
@@ -32,10 +33,41 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "UPDATE users SET role='admin' WHERE email='{$email}'";
+// Prepare the SQL statement
+if (!($stmt = $conn->prepare("UPDATE users SET role='admin' WHERE email=?"))) {
+    $_SESSION["error"] = 1;
+    $_SESSION["error_msg"] = "Something went wrong.";
 
-$conn->query($sql);
+    header("Location: adminInterface.php");
+    exit();
+}
+if (!($stmt->bind_param("s", $email))) {
+    $_SESSION["error"] = 1;
+    $_SESSION["error_msg"] = "Something went wrong.";
 
+    header("Location: adminInterface.php");
+    exit();
+}
+
+// Submit the SQL statement
+if (!($stmt->execute())) {
+    $_SESSION["error"] = 1;
+    $_SESSION["error_msg"] = "Something went wrong.";
+
+    header("Location: adminInterface.php");
+    exit();
+}
+
+// Check if any changes were made
+if (mysqli_affected_rows($conn) <= 0) {
+    $_SESSION["error"] = 1;
+    $_SESSION["error_msg"] = "No changes were made. Perhaps user {$email} doesn't exist?";
+
+    header("Location: adminInterface.php");
+    exit();
+}
+
+$stmt->close();
 $conn->close();
 
 $_SESSION['message'] = 1;
