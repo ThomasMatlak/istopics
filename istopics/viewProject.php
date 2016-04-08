@@ -11,14 +11,6 @@ include("header.php");
 require_once 'db_credentials.php';
 require_once 'displayProject.php';
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 $proj_id = $_GET["project_id"];
 if (!filter_var($proj_id, FILTER_VALIDATE_INT)) {
    echo "<p>That is not a valid project id.</p>";

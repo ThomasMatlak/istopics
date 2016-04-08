@@ -25,14 +25,6 @@ if (!isset($_POST['email']) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
 require_once 'db_credentials.php';
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 // Prepare the SQL statement
 if (!($stmt = $conn->prepare("UPDATE users SET role='admin' WHERE email=?"))) {
     $_SESSION["error"] = 1;

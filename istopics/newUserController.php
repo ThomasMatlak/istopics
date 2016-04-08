@@ -9,14 +9,6 @@ session_start();
 
 require_once 'db_credentials.php';
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 $stu_or_fac = $_POST["stud_or_faculty"];
 $first_name = filter_var($_POST["first_name"], FILTER_SANITIZE_STRING);
 $last_name  = filter_var($_POST["last_name"], FILTER_SANITIZE_STRING);

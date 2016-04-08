@@ -9,14 +9,6 @@ session_start();
 
 require_once 'db_credentials.php';
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 $email = filter_var($_GET["email"], FILTER_SANITIZE_EMAIL);
 $pass  = $_GET["password"];
 

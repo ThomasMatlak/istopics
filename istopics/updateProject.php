@@ -12,14 +12,6 @@ include("header.php");
 
 require_once 'db_credentials.php';
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 $sql = "SELECT * FROM projects where id={$_GET["project_id"]}";
 $result = $conn->query($sql);
 

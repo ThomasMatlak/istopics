@@ -19,14 +19,6 @@ if (!isset($_SESSION["sess_user_id"]) || !isset($_SESSION["sess_user_name"]) && 
 
 require_once 'db_credentials.php';
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 // Set variables and sanitize input
 $title      = filter_var($_POST["title"], FILTER_SANITIZE_STRING);
 $proposal   = filter_var($_POST["proposal"], FILTER_SANITIZE_STRING);
