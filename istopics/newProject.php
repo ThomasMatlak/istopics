@@ -38,6 +38,7 @@ if ($result->num_rows > 0) {
 $major_list = file_get_contents("majors.html");
 
 echo <<<EOT
+<h3>Add a new project</h3>
 <form id="new_project" action="newProjectController.php" method="POST" class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
   <div class="form-group">
     <div id="check_title">
