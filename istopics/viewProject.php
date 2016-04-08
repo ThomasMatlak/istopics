@@ -9,6 +9,7 @@ $page_title = "View Project";
 include("header.php");
 
 require_once 'db_credentials.php';
+require_once 'displayProject.php';
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -33,27 +34,17 @@ if ($result->num_rows > 0) {
    $author_name = $row["first_name"]. " ". $row["last_name"];
    $user_id     = $row["user_id"];
    $proj_id     = $row["proj_id"];
+   $proj_title  = $row["title"];
    $major       = $row["discipline"];
    $proposal    = $row["proposal"];
    $comments    = $row["comments"];
    $keywords    = $row["keywords"];
 
-   echo <<<EOT
-   	<div class="panel panel-default">
-	    <div class="panel-heading">
-   	        <span class="panel-title">{$row["title"]}</span>
-	    </div> <!-- panel heading -->
-	    <div class="panel-body">
-	        <table class='table table-striped'>
-   	            <caption><a href='viewProfile.php?user_id={$user_id}'>{$author_name}</a></caption>
-   	            <tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Major:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'>{$major}</td></tr>
-   	            <tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Proposal:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'>{$proposal}</td></tr>
-   	            <tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Comments:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'>{$comments}</td></tr>
-   	            <tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Keywords:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'>{$keywords}</td></tr>
-   	        </table>
-	    </div> <!-- panel body -->
-	</div> <!-- panel -->
-EOT;
+   echo "<ul class='list-unstyled'>";
+
+   display_project($proj_id, $author_name, $user_id, $proj_title, $major, $proposal, $keywords, $comments, true, true);
+
+   echo "</ul>";
 
     if (($_SESSION["sess_user_role"] == "admin") || ($_SESSION["sess_user_id"] == $user_id)) {
         echo "<form action='updateProject.php' method='GET'>\n<input type='hidden' name='project_id' value='{$proj_id}'><button type='submit' class='btn btn-warning'>Edit Project</button></form>";

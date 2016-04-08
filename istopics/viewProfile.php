@@ -11,6 +11,7 @@ $page_title = "View Profile";
 include("header.php");
 
 require_once 'db_credentials.php';
+require_once 'displayProject.php';
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -33,6 +34,11 @@ if (!filter_var($user_id, FILTER_VALIDATE_INT)) {
 else {
 $sql = "SELECT id, first_name, last_name, major, year, email, role FROM users WHERE id={$user_id}";
 $result = $conn->query($sql);
+
+echo <<<EOT
+       <script src='js/ellipsify.js'></script>
+       <script src='js/expand_contract_pk.js'></script>
+EOT;
 
 if ($result->num_rows > 0) {
    $row = $result->fetch_assoc();
@@ -89,37 +95,18 @@ EOT;
 	$proj_proposal   = $row["proposal"];
 	$proj_keywords   = $row["keywords"];
 
-	echo <<<EOT
-    	<li>
-	    <div class='panel panel-default'>
-	        <div class='panel-heading'>
-                    <form action='viewProject.php' method='GET' class='form-inline'>
-    	                <input type='hidden' name='project_id' value='{$proj_id}'><button type='submit' class='btn btn-link form-control'><span>{$proj_title}</span></button>
-		    </form>
-	        </div> <!-- panel heading -->
-	        <div class='panel-body'>
-		    <table class='table'>
-	                <tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Major:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'>{$proj_major}</td></tr>
-EOT;
-	if ($proj_proposal != NULL) {
-	   echo "<tr><th><a role='button' data-toggle='collapse' href='#{$proj_id}proposal' aria-expanded='true' aria-controls='{$proj_id}proposal'>Proposal:</a></th><td><div class='collapse in' id='{$proj_id}proposal'>{$proj_proposal}</div></td></tr>\n";
-	}
-	if ($proj_keywords != NULL) {
-	   echo "<tr><th><a role='button' data-toggle='collapse' href='#{$proj_id}". "keywords' aria-expanded='true' aria-controls='{$proj_id}". "keywords'>Keywords:</a></th><td><div class='collapse in' id='{$proj_id}". "keywords'>{$proj_keywords}</div></td></tr>\n";
-	}
-	echo "</table>";
-	
-	if (($_SESSION["sess_user_role"] == "admin") || ($_SESSION["sess_user_id"] == $user_id)) {
-	    echo "<form action='updateProject.php' method='GET'>\n<input type='hidden' name='project_id' value='{$row['proj_id']}'><button type='submit' class='btn btn-warning'>Edit Project</button></form>";
-	}
+	display_project($proj_id, "", "", $proj_title, $proj_major, $proj_proposal, $proj_keywords, "", false, false);
 
-	echo <<<EOT
-	        <div> <!-- panel body -->
-	    <div> <!-- panel -->
-	</li>
-EOT;
+
     }
-    echo "</ul>";
+
+    $max_proj_id = $conn->query("SELECT id FROM projects ORDER BY id DESC")->fetch_assoc()['id'];
+
+    echo <<<EOT
+        </ul>
+	<input type='hidden' value='{$max_proj_id}' id='max_proj_id'>
+EOT;
+    
 }
 
 }
