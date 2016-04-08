@@ -46,3 +46,7 @@ height: 4em;
 .container-fluid {
 max-width: 960px;
 }
+
+div#promoteUser{
+padding-top:10px;
+}
