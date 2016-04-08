@@ -6,7 +6,7 @@ $(document).ready(function () {
 
     var student_majors = [];
 
-    var st_majors = $('#st_major').val().split(",");
+    var st_majors = $('#st_major').val().split(", ");
 
     for (i = 0; i < majors.length; i++) {
 	for (j = 0; j < st_majors.length; j++) {
@@ -16,6 +16,7 @@ $(document).ready(function () {
 	    }
 	}
     }
+
     $('#discipline').val(student_majors);
     $('#stud_major').text($('#discipline').val());
 });
