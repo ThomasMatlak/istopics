@@ -19,7 +19,6 @@ if (isset($_GET["user_id"])) {
 elseif (isset($_SESSION["sess_user_id"])) {
    $user_id = $_SESSION["sess_user_id"];
 }
-else
 
 if (!filter_var($user_id, FILTER_VALIDATE_INT)) {
    echo "<p>That is not a valid user id.</p>";
@@ -68,7 +67,9 @@ EOT;
 	    </form>
 EOT;
     }
-$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.keywords FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE users.id={$user_id} ORDER BY title";
+
+
+$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.last_updated, projects.keywords FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE users.id={$user_id} ORDER BY title";
 
 $result = $conn->query($sql);
 
@@ -87,8 +88,9 @@ EOT;
 	$proj_major      = $row["discipline"];
 	$proj_proposal   = $row["proposal"];
 	$proj_keywords   = $row["keywords"];
+	$last_updated    = $row["last_updated"];
 
-	display_project($proj_id, "", "", $proj_title, $proj_major, $proj_proposal, $proj_keywords, "", false, false);
+	display_project($proj_id, "", "", $proj_title, $proj_major, $proj_proposal, $proj_keywords, "", $last_updated, false, false);
     }
 
     $max_proj_id = $conn->query("SELECT id FROM projects ORDER BY id DESC")->fetch_assoc()['id'];

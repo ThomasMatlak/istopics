@@ -44,7 +44,7 @@ if (empty($title) || empty($discipline)) {
 }
 
 // Prepare the SQL statement
-$stmt = $conn->prepare("INSERT INTO projects (title, discipline, proposal, keywords, comments) VALUES (?, ?, ?, ?, ?)");
+$stmt = $conn->prepare("INSERT INTO projects (title, discipline, proposal, keywords, comments, date_created, last_updated) VALUES (?, ?, ?, ?, ?, now(), now())");
 $stmt->bind_param("sssss", $title, $discipline, $proposal, $keywords, $comments);
 
 // Submit the SQL statement

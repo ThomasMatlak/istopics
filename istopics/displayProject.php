@@ -9,7 +9,7 @@
 * before calling display_project()
 */
 
-function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, $proj_comments, $show_comments, $show_author) {
+function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, $proj_comments, $last_updated, $show_comments, $show_author) {
 /*
 * proj_id         - the id of the project being displayed
 * proj_author     - the name of the author of the project
@@ -19,6 +19,7 @@ function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_
 * proj_proposal   - the project's proposal
 * proj_keywords   - the project's keywords
 * proj_comments   - the project's comments
+* last_updated    - when the project was last updated
 * show_comments   - do you want to show the project's comments (true/false)
 * show_author     - do you want to show the project's author (true/false)
 *
@@ -50,7 +51,7 @@ EOT;
 EOT;
 	}
 
-	if ($show_comments == true) {
+	if ($show_comments == true && $proj_comments != NULL) {
 	    echo "<tr><th>Comments:</th><td>{$proj_comments}</td></tr>";
 	}
 
@@ -61,6 +62,7 @@ EOT;
 	}
 	echo <<<EOT
 	            </table>
+		    Last Updated: {$last_updated}
 		    <input type='hidden' id='{$proj_id}full_proposal' value='{$proj_proposal}'>
 		    <input type='hidden' id='{$proj_id}full_keywords' value='{$proj_keywords}'>
 	        </div> <!-- panel body -->

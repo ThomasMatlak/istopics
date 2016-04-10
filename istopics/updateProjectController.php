@@ -61,7 +61,7 @@ if (empty($title) || empty(discipline)) {
 }
 
 // Prepare the SQL statement
-$stmt = $conn->prepare("UPDATE projects SET title=?, discipline=?, proposal=?, keywords=?, comments=? WHERE id=?");
+$stmt = $conn->prepare("UPDATE projects SET title=?, discipline=?, proposal=?, keywords=?, comments=?, last_updated=now() WHERE id=?");
 $stmt->bind_param("ssssss", $title, $discipline, $proposal, $keywords, $comments, $id);
 
 // Submit the SQL statement

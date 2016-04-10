@@ -12,7 +12,9 @@ include("header.php");
 require_once 'db_credentials.php';
 require_once 'displayProject.php';
 
-$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.keywords, users.id AS user_id, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id ORDER BY title";
+//$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.keywords, users.id AS user_id, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id ORDER BY title";
+
+$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.keywords, projects.last_updated, users.id AS user_id, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id ORDER BY projects.last_updated DESC";
 
 $result = $conn->query($sql);
 
@@ -48,8 +50,9 @@ if ($result->num_rows > 0) {
 	$proj_keywords   = $row["keywords"];
 	$user_id         = $row["user_id"];
 	$author_name     = $row['first_name']. " ". $row['last_name'];
+	$last_updated    = $row['last_updated'];
 	
-	display_project($proj_id, $author_name, $user_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, "", false, true);
+	display_project($proj_id, $author_name, $user_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, "", $last_updated, false, true);
 
 	$keywords_list = explode(",", $proj_keywords);
 
