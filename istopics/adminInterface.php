@@ -5,7 +5,7 @@
 * Provide an admin interface such that the database can be edited and reset
 */
 
-session_start();
+if (!isset($_SESSION)) {session_start();}
 
 $page_title = "Database Administration";
 include("header.php");

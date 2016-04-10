@@ -7,7 +7,7 @@
 
 // ADD CHANGE PASSWORD OPTION
 
-session_start();
+if (!isset($_SESSION)) {session_start();}
 
 if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"]) && isset($_SESSION["sess_user_role"])) {
 

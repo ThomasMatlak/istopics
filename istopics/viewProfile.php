@@ -5,7 +5,7 @@
 * View a user profile
 */
 
-session_start();
+if (!isset($_SESSION)) {session_start();}
 
 $page_title = "View Profile";
 include("header.php");
@@ -16,9 +16,10 @@ require_once 'displayProject.php';
 if (isset($_GET["user_id"])) {
    $user_id = $_GET["user_id"];
 }
-else {
+elseif (isset($_SESSION["sess_user_id"])) {
    $user_id = $_SESSION["sess_user_id"];
 }
+else
 
 if (!filter_var($user_id, FILTER_VALIDATE_INT)) {
    echo "<p>That is not a valid user id.</p>";
@@ -58,7 +59,7 @@ EOT;
 
 	</table>
 EOT;
-    if (($_SESSION["sess_user_role"] == "admin") || ($_SESSION["sess_user_id"] == $user_id)) {
+    if (isset($_SESSION["sess_user_role"]) && isset($_SESSION["sess_user_id"]) && ($_SESSION["sess_user_role"] == "admin") || ($_SESSION["sess_user_id"] == $user_id)) {
         echo <<<EOT
  
        	    <form action='updateProfile.php' method='GET'>
@@ -88,8 +89,6 @@ EOT;
 	$proj_keywords   = $row["keywords"];
 
 	display_project($proj_id, "", "", $proj_title, $proj_major, $proj_proposal, $proj_keywords, "", false, false);
-
-
     }
 
     $max_proj_id = $conn->query("SELECT id FROM projects ORDER BY id DESC")->fetch_assoc()['id'];

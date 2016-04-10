@@ -5,7 +5,7 @@
 * Sign a user in using their email and password and create a session
 */
 
-session_start();
+if (!isset($_SESSION)) {session_start();}
 
 require_once 'db_credentials.php';
 

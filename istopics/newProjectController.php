@@ -5,7 +5,7 @@
 * Add a new project to the istopics database.
 */
 
-session_start();
+if (!isset($_SESSION)) {session_start();}
 
 if (!isset($_SESSION["sess_user_id"]) || !isset($_SESSION["sess_user_name"]) && isset($_SESSION["sess_user_role"]) && ($_SESSION["sess_user_role"] == "student")) {
    // user is not signed in, set error message

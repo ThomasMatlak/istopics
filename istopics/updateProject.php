@@ -5,7 +5,7 @@
 * Present the user with a form to update their project
 */
 
-session_start();
+if (!isset($_SESSION)) {session_start();}
 
 $page_title = "Update Project";
 include("header.php");

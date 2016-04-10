@@ -5,7 +5,7 @@
 * Delete a project from the istopics database.
 */
 
-session_start();
+if (!isset($_SESSION)) {session_start();}
 
 require_once 'db_credentials.php';
 

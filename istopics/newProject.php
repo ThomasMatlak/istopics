@@ -5,7 +5,7 @@
 * Present the user with a form to create a new project
 */
 
-session_start();
+if (!isset($_SESSION)) {session_start();}
 
 $page_title = "Add a New Project";
 include("header.php");

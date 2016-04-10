@@ -5,7 +5,7 @@
 * Reset the database by removing all non-admin users, projects, and connections between the two
 */
 
-session_start();
+if (!isset($_SESSION)) {session_start();}
 
 require_once 'db_credentials.php';
 

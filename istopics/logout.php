@@ -5,7 +5,7 @@
 * Clear session variables and destroy the session to sign out the user
 */
 
-session_start();
+if (!isset($_SESSION)) {session_start();}
 
 //Clean up the session
 session_unset();
