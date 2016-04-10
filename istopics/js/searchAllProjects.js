@@ -36,7 +36,7 @@ $("form :input").on('input', function() {
 	    project_showed = false;
 
 	    for (j = 0; j < searchTerms.length; j++) {
-		var searchTerm = removeDiacritics(searchTerms[j].trim());
+		var searchTerm = removeDiacritics(searchTerms[j].trim()).replace(",", "");
 
 		var keywords = removeDiacritics($('#'+i+'full_keywords').val().toLowerCase());
 		var title    = removeDiacritics($('#'+i+'project_title').text().toLowerCase());
