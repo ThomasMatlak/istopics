@@ -9,6 +9,8 @@
 * before calling display_project()
 */
 
+require_once('timeElapsed.php');
+
 function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, $proj_comments, $last_updated, $show_comments, $show_author) {
 /*
 * proj_id         - the id of the project being displayed
@@ -60,9 +62,17 @@ EOT;
 	       <tr><th>Keywords:</th><td><div id='{$proj_id}keywords'><span id='{$proj_id}keywords_text'>{$proj_keywords}</span><a id='{$proj_id}show_keywords' role='button' onclick='expand_keywords({$proj_id});'> <span id='{$proj_id}show_or_hide_k'></span></a></div></td></tr>
 EOT;
 	}
+/*
+	$date_updated = new \DateTime();
+	$date_updated->setTimestamp($last_updated);
+	$interval = $date_updated->diff(new \DateTime('now'));
+*/	
+
+	$updated_x_ago = time_elapsed($last_updated);
+
 	echo <<<EOT
 	            </table>
-		    Last Updated: {$last_updated}
+		    Last Updated {$updated_x_ago}
 		    <input type='hidden' id='{$proj_id}full_proposal' value='{$proj_proposal}'>
 		    <input type='hidden' id='{$proj_id}full_keywords' value='{$proj_keywords}'>
 	        </div> <!-- panel body -->
