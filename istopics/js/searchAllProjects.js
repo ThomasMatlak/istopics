@@ -1,7 +1,12 @@
 /*
 * Search all projects based on keywords or title content
 */
+
 $("form :input").on('input', function() {
+    search();
+});
+
+function search() {
     var searchTerms = $('#search').val().toLowerCase().split(" ");
 
     var max_proj_id = $('#max_proj_id').val();
@@ -61,7 +66,7 @@ $("form :input").on('input', function() {
 	else if (num_projects == 1) { $('#result_or_results').text('project'); }
 	else { $('#result_or_results').text('projects'); }
     }
-});
+}
 
 /*
 * Remove diacritics while searching

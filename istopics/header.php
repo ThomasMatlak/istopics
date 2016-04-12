@@ -8,7 +8,7 @@
 if(!isset($_SESSION)) 
     { 
         session_start(); 
-    } 
+    }
 ?>
 
 <!Doctype HTML>
