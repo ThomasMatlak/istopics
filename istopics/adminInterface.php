@@ -14,6 +14,10 @@ if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"]) && is
 // user is signed in as an admin
 
 echo <<<EOT
+     <a href='dbToCSV.php' class='btn btn-primary'>Download Projects as CSV</a>
+
+     <hr>
+
      <script src='js/resetDatabaseWarning.js'></script>
      <button onclick='resetWarning();' class='btn btn-danger'>Reset Database</button>
      <span class='help-block'>Resetting the database will delete all projects, connections between projects and users, and non-admin users.</span>
