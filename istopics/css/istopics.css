@@ -55,3 +55,13 @@ padding-top:10px;
 .table {
 margin-bottom:0px;
 }
+
+/* Even out the padding on the table headers */
+.panel-body {
+padding-top:2px;
+}
+
+/* Shrink the panel heading */
+.panel-heading{
+padding: 5px 10px;
+}
