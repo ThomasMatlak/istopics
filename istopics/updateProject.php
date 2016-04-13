@@ -61,18 +61,18 @@ echo <<<EOT
     	    <input type="hidden" name="project_id" value="{$id}">
     	    <div id="check_title">
     	        <label for="title" class="control-label">Title:</label>
-    	 	<input type="text" name="title" id="title" value="{$title}" class="form-control">
+    	 	<input type="text" name="title" id="title" value="{$title}" class="form-control" required>
     	    </div>
     	    <div id="discipline_check">
     	        <label for="discipline" class="control-label">Major:</label> <span id="stud_major"></span>
     	 	{$major_list}
-	 	<input type="hidden" name="st_major" id="st_major" value="{$discipline}">
+	 	<input type="hidden" name="st_major" id="st_major" value="{$discipline}" required>
     	    </div>
     	    <label for="proposal" class="control-label">Project Proposal:</label>
     	    <textarea cols="80" name="proposal" form="update_project" id="proposal" class="form-control" placeholder="Your IS proposal (optional)">{$proposal}</textarea>
     	    <div id="check_keywords">
 	        <label for="keywords" class="control-label">Keywords:</label>
-    	        <textarea cols="80" name="keywords" form="update_project" id="keywords" class="form-control">{$keywords}</textarea>
+    	        <textarea cols="80" name="keywords" form="update_project" id="keywords" class="form-control" required>{$keywords}</textarea>
     	    </div>
 	    <label for="comments" class="control-label">Additional Comments:</label>
     	    <textarea cols="80" name="comments" form="update_project" id="comments" class="form-control" placeholder="Are there particular skills you are looking for in a collaborative partner? Is there a specific discipline you are hoping to work with?">{$comments}</textarea>

@@ -62,11 +62,11 @@ if ($result->num_rows > 0) {
  	     <div class="form-group">
     	         <div id="check_first_name">
     		     <label for="first_name" class="control-label">First Name:</label>
-		     <input type="text" name="first_name" id="first_name" class="form-control" value="{$first_name}">
+		     <input type="text" name="first_name" id="first_name" class="form-control" value="{$first_name}" required>
     		 </div>
     		 <div id="check_last_name">
                      <label for="last_name" class="control-label">Last Name:</label>
-    	             <input type="text" name="last_name" id="last_name" class="form-control" value="{$last_name}">
+    	             <input type="text" name="last_name" id="last_name" class="form-control" value="{$last_name}" required>
     	   	 </div>
 EOT;
             if ($role == "student") {
@@ -78,14 +78,14 @@ EOT;
 	  	 </div>
     		 <div id="year_check">
                      <label for="year" class="control-label">Graduating Year:</label>
-                     <input type="number" name="year" id="year" class="form-control" value="{$year}">
+                     <input type="number" name="year" id="year" class="form-control" value="{$year}" required>
     	         </div>
 EOT;
             }
     echo <<<EOT
     		 <div id="email_check">
                      <label for="email" class="control-label">Email:</label>
-                     <input type="email" name="email" id="email" class="form-control" value="{$email}"><span id="invalid_email"></span>
+                     <input type="email" name="email" id="email" class="form-control" value="{$email}" required><span id="invalid_email"></span>
                  </div>
 		 <input type="hidden" name="user_id" value={$user_id}>
 		 <hr>
@@ -115,8 +115,6 @@ else {
      header("Location: showAllProjects.php");
      exit;
 }
-?>
 
-<?php
 include("footer.php");
 ?>

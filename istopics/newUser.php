@@ -21,11 +21,11 @@ include("header.php");
     </div>
     <div id="check_first_name" class="form-group">
         <label for="first_name" class="control-label">First Name:</label>
-    	<input type="text" name="first_name" id="first_name" class="form-control">
+    	<input type="text" name="first_name" id="first_name" class="form-control" required>
     </div>
     <div id="check_last_name" class="form-group">
         <label for="last_name" class="control-label">Last Name:</label>
-        <input type="text" name="last_name" id="last_name" class="form-control">
+        <input type="text" name="last_name" id="last_name" class="form-control" required>
     </div>
     <div id="discipline_check" class="form-group">
         <label for="discipline" class="control-label">Major(s):</label> <span id="stud_major"></span>
@@ -37,13 +37,13 @@ include("header.php");
     </div>
     <div id="email_check" class="form-group">
         <label for="email" class="control-label">Email:</label>
-    	<input type="email" name="email" id="email" class="form-control visible-lg-inline visible-md-inline visible-sm-inline visible-xs-inline" placeholder="Use your Wooster email"><span id="invalid_email"></span>
+    	<input type="email" name="email" id="email" class="form-control visible-lg-inline visible-md-inline visible-sm-inline visible-xs-inline" placeholder="Use your Wooster email" required><span id="invalid_email"></span>
     </div>
     <div id="password_group" class="form-group">
         <label for="password" class="control-label">Password:</label>
-        <input type="password" name="password" id="password" class="form-control" placeholder="Please use a strong password">
+        <input type="password" name="password" id="password" class="form-control" placeholder="Please use a strong password" required>
     	<label for="confirm_password" class="control-label">Confirm Password:</label>
-    	<input type="password" name="confirm_password" id="confirm_password" class="form-control"><span id='password_not_same'></span>
+    	<input type="password" name="confirm_password" id="confirm_password" class="form-control" required><span id='password_not_same'></span>
     </div>
     <button type="submit" id="submit" class="btn btn-warning form-control">Submit</button>
 </form>

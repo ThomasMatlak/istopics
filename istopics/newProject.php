@@ -43,18 +43,18 @@ echo <<<EOT
   <div class="form-group">
     <div id="check_title">
     	 <label for="title" class="control-label">Title:</label>
-    	 <input type="text" name="title" id="title" class="form-control" placeholder="Your project's working title">
+    	 <input type="text" name="title" id="title" class="form-control" placeholder="Your project's working title" required>
     </div>
     <div id="discipline_check">
     	 <label for="discipline" class="control-label">Major:</label> <span id="stud_major"></span>
     	 {$major_list}
-	 <input type="hidden" name="st_major" id="st_major" value="{$user_major}">
+	 <input type="hidden" name="st_major" id="st_major" value="{$user_major}" required>
     </div>
     <label for="proposal" class="control-label">Project Proposal:</label>
     <textarea rows="5" cols="80" name="proposal" form="new_project" id="proposal" class="form-control" placeholder="Your IS proposal (optional)"></textarea>
     <div id="check_keywords">
     	 <label for="keywords" class="control-label">Keywords:</label>
-	 <textarea rows="1" cols="80" name="keywords" form="new_project" id="keywords" class="form-control" placeholder="Type keywords that describe major ideas and methodologies of your IS topic, separated by commas. E.g. beekeeping, ethnography"></textarea>
+	 <textarea rows="1" cols="80" name="keywords" form="new_project" id="keywords" class="form-control" placeholder="Type keywords that describe major ideas and methodologies of your IS topic, separated by commas. E.g. beekeeping, ethnography" required></textarea>
     </div>
     <label for="comments" class="control-label">Additional Comments:</label>
     <textarea rows="2" cols="80" name="comments" form="new_project" id="comments" class="form-control" placeholder="Are there particular skills you are looking for in a collaborative partner? Is there a specific discipline you are hoping to work with?"></textarea>
