@@ -79,7 +79,7 @@ echo <<<EOT
     	    <button type="submit" id="submit" class="btn btn-warning form-control">Submit</button>
   	</div>
     </form>
-    <form id="delete_project" action="deleteProjectController.php" method="POST">
+    <form id="delete_project" action="/deleteProjectController.php" method="POST">
         <input type="hidden" name="project_id" value="{$id}">
     	<button type="submit" class="btn btn-danger">Delete Project</button>
     </form>

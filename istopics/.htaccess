@@ -17,3 +17,11 @@ RewriteRule ^project/edit/?$ updateProject.php [NC]
 RewriteRule ^admin/?$ adminInterface.php [NC]
 
 # Allow adminInterface.php to only be accessed by the College of Wooster's network
+<Files "adminInterface|dbToCSV|promoteUser|resetDatabase\.php">
+    Require all denied
+    # Allow localhost for testing
+    Require ip 127.0.0.1
+    
+    # Allow Wooster IPs
+    #Require ip 140.103.*.*
+</Files>

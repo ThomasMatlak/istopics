@@ -139,6 +139,9 @@ if (isset($_SESSION["message"]) && $_SESSION["message"] == 2) {
 	    </div>
 	</div>
 EOT;
+
+    unset($_SESSION["message"]);
+    unset($_SESSION["msg"]);
 }
 if (isset($_SESSION["message"]) && $_SESSION["message"] == 3) {
    $msg = $_SESSION["msg"];
