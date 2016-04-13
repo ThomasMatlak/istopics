@@ -1,0 +1,19 @@
+# Hide .php extension from users
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php
+
+RewriteRule ^signin/?$ login.php [NC]
+RewriteRule ^register/?$ newUser.php [NC]
+RewriteRule ^user/?$ viewProfile.php [NC]
+RewriteRule ^user/edit/?$ updateProfile.php [NC]
+
+RewriteRule ^project/all/?$ showAllProjects.php [NC]
+RewriteRule ^project/?$ viewProject.php [NC]
+RewriteRule ^project/new/?$ newProject.php [NC]
+RewriteRule ^project/edit/?$ updateProject.php [NC]
+
+RewriteRule ^admin/?$ adminInterface.php [NC]
+
+# Allow adminInterface.php to only be accessed by the College of Wooster's network
