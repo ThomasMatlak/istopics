@@ -23,5 +23,5 @@ RewriteRule ^admin/?$ adminInterface.php [NC]
     Require ip 127.0.0.1
     
     # Allow Wooster IPs
-    #Require ip 140.103.*.*
+    Require ip 140.103
 </Files>

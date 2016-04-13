@@ -5,6 +5,18 @@ Configuration
 -------------
 The web server should have support for MySQL and a php interpreter with the MySQLi extension installed.
 
+To allow for the .htaccess file to work, the server must be configured to allow this
+    This can be accomplished on a Linux Apache server by editing /etc/apache2/sites-enabled/000-default.conf (or a very similar name) to include the following code:
+
+        <Directory /var/www/html>
+	    AllowOverride All
+	</Directory>
+
+    Replace /var/www/html with the server's web root
+
+    Then, the command "a2enmod rewrite" must be run to enable mod_rewrite
+    Finally, restart the server: "service apache2 restart"
+
 Installation
 ------------
 -place the /istopics folder on the web server
@@ -53,21 +65,27 @@ istopics/
 |--istopics/
     |--css/
         |--istopics.css
+	|--jquery.ui.min.css
     |--images/
     |--js/
+	|--autocompleteSearch.js
 	|--ellipsify.js
 	|--expand_contract_pk.js
 	|--generateUserEmail.js
+	|--jquery-ui.min.js
 	|--newProjectValidation.js
 	|--newUsrValidation.js
 	|--resetDatabaseWarning.js
 	|--searchAllProjects.js
+	|--setMajor.js
 	|--updateProfileValidation.js
 	|--updateProjectValidation.js
     |--adminInterface.php
     |--analyticstracking.php
     |--db_credentials.php
+    |--dbToCSV.php
     |--deleteProjectController.php
+    |--displayProject.php
     |--favicon.ico
     |--footer.php
     |--header.php
@@ -80,15 +98,18 @@ istopics/
     |--newProjectController.php
     |--newUser.php
     |--newUserController.php
+    |--promoteUser.php
     |--resetDatabase.php
     |--search.php
     |--showAllProjects.php
+    |--timeElapsed.php
     |--updateProfile.php
     |--updateProfileController.php
     |--updateProject.php
     |--updateProjectController.php
     |--viewProfile.php
     |--viewProject.php
+    |--wordmark.png
 |--majors/
     |--convert_majors_to_html.py
     |--majors.html

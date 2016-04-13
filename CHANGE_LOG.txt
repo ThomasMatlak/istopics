@@ -1,6 +1,21 @@
 CHANGE LOG
 ==========
 
+2016-04-13
+-add required attribute to some some inputs
+-added .htaccess to change urls
+-admin pages can only be accessed from Wooster ips
+
+2016-04-12
+-can download all projects as an admin from adminInterface
+-improved autocomplete
+-improve project timestamp
+
+2016-04-10
+-added autocomplete of keywords when searching projects
+-display when a project was last updated
+
+
 2016-04-07
 -ellipsify proposal and keywords on view all projects if they are too long
 -fixed various display issues
