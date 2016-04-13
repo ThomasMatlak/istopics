@@ -15,7 +15,7 @@ if (isset($_SESSION['sess_user_id']) && isset($_SESSION['sess_user_name']) && is
      $_SESSION["error"] = 3;
      $_SESSION["error_msg"] = "Error Removing projects";
      
-     header("Location: adminInterface.php");
+     header("Location: /admin");
      exit();
    }
 
@@ -24,7 +24,7 @@ if (isset($_SESSION['sess_user_id']) && isset($_SESSION['sess_user_name']) && is
      $_SESSION["error"] = 3;
      $_SESSION["error_msg"] = "Error Removing users";
      
-     header("Location: adminInterface.php");
+     header("Location: /admin");
      exit();
    }
 
@@ -33,14 +33,14 @@ if (isset($_SESSION['sess_user_id']) && isset($_SESSION['sess_user_name']) && is
      $_SESSION["error"] = 3;
      $_SESSION["error_msg"] = "Error Removing user_project_connections";
      
-     header("Location: adminInterface.php");
+     header("Location: /admin");
      exit();
    }
 
    $_SESSION["error"] = 2;
    $_SESSION["error_msg"] = "Succesfully Reset the Database";
      
-   header("Location: adminInterface.php");
+   header("Location: /admin");
    exit();
 
 }
@@ -50,7 +50,7 @@ else {
      $_SESSION["error_msg"] = "You are not authorized to perform this action.";
      
      // Redirect to home page
-     header("Location: showAllProjects.php");
+     header("Location: /project/all");
      exit();
 }
 ?>

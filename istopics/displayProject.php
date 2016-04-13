@@ -32,7 +32,7 @@ function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_
     	<li>
 	    <div id="{$proj_id}" class="panel panel-default">
 	        <div class="panel-heading">
-                    <form action='viewProject.php' method='GET' class='form-inline'>
+                    <form action='/project' method='GET' class='form-inline'>
 		        <input type='hidden' name='project_id' value='{$proj_id}'>
 			<button type='submit' class='btn btn-link'><span id="{$proj_id}project_title">{$proj_title}</span></button>
 		    </form>
@@ -42,7 +42,7 @@ function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_
 EOT;
 
 	if ($show_author == true) {
-	    echo "<caption><span id='{$proj_id}author'><a href='viewProfile.php?user_id={$author_id}'>{$proj_author}</a></span></caption>";
+	    echo "<caption><span id='{$proj_id}author'><a href='/user?user_id={$author_id}'>{$proj_author}</a></span></caption>";
 	}
 
 	echo "<tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Major:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'><div id='{$proj_id}project_major'>{$proj_discipline}</div></td></tr>";
@@ -62,11 +62,6 @@ EOT;
 	       <tr><th>Keywords:</th><td><div id='{$proj_id}keywords'><span id='{$proj_id}keywords_text'>{$proj_keywords}</span><a id='{$proj_id}show_keywords' role='button' onclick='expand_keywords({$proj_id});'> <span id='{$proj_id}show_or_hide_k'></span></a></div></td></tr>
 EOT;
 	}
-/*
-	$date_updated = new \DateTime();
-	$date_updated->setTimestamp($last_updated);
-	$interval = $date_updated->diff(new \DateTime('now'));
-*/	
 
 	$updated_x_ago = time_elapsed($last_updated);
 

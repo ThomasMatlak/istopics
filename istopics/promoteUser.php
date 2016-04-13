@@ -19,7 +19,7 @@ if (!isset($_POST['email']) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $_SESSION["error"] = 1;
     $_SESSION["error_msg"] = "That's not an email";
      
-    header("Location: showAllProjects.php");
+    header("Location: /project/all");
     exit();
 }
 
@@ -30,14 +30,14 @@ if (!($stmt = $conn->prepare("UPDATE users SET role='admin' WHERE email=?"))) {
     $_SESSION["error"] = 1;
     $_SESSION["error_msg"] = "Something went wrong.";
 
-    header("Location: adminInterface.php");
+    header("Location: /admin");
     exit();
 }
 if (!($stmt->bind_param("s", $email))) {
     $_SESSION["error"] = 1;
     $_SESSION["error_msg"] = "Something went wrong.";
 
-    header("Location: adminInterface.php");
+    header("Location: /admin");
     exit();
 }
 
@@ -46,7 +46,7 @@ if (!($stmt->execute())) {
     $_SESSION["error"] = 1;
     $_SESSION["error_msg"] = "Something went wrong.";
 
-    header("Location: adminInterface.php");
+    header("Location: /admin");
     exit();
 }
 
@@ -55,7 +55,7 @@ if (mysqli_affected_rows($conn) <= 0) {
     $_SESSION["error"] = 1;
     $_SESSION["error_msg"] = "No changes were made. Perhaps user {$email} doesn't exist?";
 
-    header("Location: adminInterface.php");
+    header("Location: /admin");
     exit();
 }
 
@@ -65,7 +65,7 @@ $conn->close();
 $_SESSION['message'] = 1;
 $_SESSION['msg'] = "Succesfully promoted {$email} to an admin";
 
-header("Location: adminInterface.php");
+header("Location: /admin");
 exit();
 
 }
@@ -75,7 +75,7 @@ else {
      $_SESSION["error_msg"] = "You must be signed in to perform this action.";
      
      // Redirect to home page
-     header("Location: showAllProjects.php");
+     header("Location: /project/all");
      exit();
 }
 

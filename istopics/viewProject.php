@@ -40,7 +40,7 @@ if ($result->num_rows > 0) {
    echo "</ul>";
 
     if (isset($_SESSION["sess_user_role"]) && isset($_SESSION["sess_user_id"]) && ($_SESSION["sess_user_role"] == "admin") || ($_SESSION["sess_user_id"] == $user_id)) {
-        echo "<form action='updateProject.php' method='GET'>\n<input type='hidden' name='project_id' value='{$proj_id}'><button type='submit' class='btn btn-warning'>Edit Project</button></form>";
+        echo "<form action='/project/edit' method='GET'>\n<input type='hidden' name='project_id' value='{$proj_id}'><button type='submit' class='btn btn-warning'>Edit Project</button></form>";
     }
 
 } else {

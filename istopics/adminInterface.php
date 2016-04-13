@@ -14,11 +14,11 @@ if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"]) && is
 // user is signed in as an admin
 
 echo <<<EOT
-     <a href='dbToCSV.php' class='btn btn-primary'>Download Projects as CSV</a>
+     <a href='/dbToCSV.php' class='btn btn-primary'>Download Projects as CSV</a>
 
      <hr>
 
-     <script src='js/resetDatabaseWarning.js'></script>
+     <script src='/js/resetDatabaseWarning.js'></script>
      <button onclick='resetWarning();' class='btn btn-danger'>Reset Database</button>
      <span class='help-block'>Resetting the database will delete all projects, connections between projects and users, and non-admin users.</span>
 
@@ -28,7 +28,7 @@ echo <<<EOT
          Promote a User to Admin
      </button>
      <div class="collapse" id="promoteUser">
-         <form action='promoteUser.php' method='POST' class='form-inline'>
+         <form action='/promoteUser.php' method='POST' class='form-inline'>
 	     <div class='form-group'>
 	         <label for='email'>Email:</label>
 		 <input type='email' name='email' id='email' class='form-control'>
@@ -44,7 +44,7 @@ else {
      $_SESSION["error_msg"] = "You must be signed in to perform this action.";
      
      // Redirect to home page
-     header("Location: showAllProjects.php");
+     header("Location: /project/all");
      exit();
 }
 

@@ -9,7 +9,7 @@ $page_title = "Register";
 include("header.php");
 ?>
 
-<form id="new_user" action="newUserController.php" method="POST" class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<form id="new_user" action="/newUserController.php" method="POST" class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <div class="form-group">
         <label for="studentSelect">I am a: </label>
 	<label class="radio-inline">
@@ -48,7 +48,7 @@ include("header.php");
     <button type="submit" id="submit" class="btn btn-warning form-control">Submit</button>
 </form>
 
-<script src="js/newUserValidation.js"></script>
+<script src="/js/newUserValidation.js"></script>
 
 <?php 
 include("footer.php")

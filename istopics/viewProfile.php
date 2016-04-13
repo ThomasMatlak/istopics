@@ -28,8 +28,8 @@ $sql = "SELECT id, first_name, last_name, major, year, email, role FROM users WH
 $result = $conn->query($sql);
 
 echo <<<EOT
-       <script src='js/ellipsify.js'></script>
-       <script src='js/expand_contract_pk.js'></script>
+       <script src='/js/ellipsify.js'></script>
+       <script src='/js/expand_contract_pk.js'></script>
 EOT;
 
 if ($result->num_rows > 0) {
@@ -61,7 +61,7 @@ EOT;
     if (isset($_SESSION["sess_user_role"]) && isset($_SESSION["sess_user_id"]) && ($_SESSION["sess_user_role"] == "admin") || ($_SESSION["sess_user_id"] == $user_id)) {
         echo <<<EOT
  
-       	    <form action='updateProfile.php' method='GET'>
+       	    <form action='/user/edit' method='GET'>
 	        <input type='hidden' name='user_id' id='user_id' value='{$user_id}'>
 	        <button class='btn btn-warning'>Edit Profile</button>
 	    </form>

@@ -19,8 +19,8 @@ $sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, proj
 $result = $conn->query($sql);
 
 echo <<<EOT
-    <script src='js/ellipsify.js'></script>
-    <script src='js/expand_contract_pk.js'></script>
+    <script src='/js/ellipsify.js'></script>
+    <script src='/js/expand_contract_pk.js'></script>
 EOT;
 
 // Display Projects
@@ -66,7 +66,7 @@ if ($result->num_rows > 0) {
     echo <<<EOT
         </ul>
 
-	<script src='js/searchAllProjects.js'></script>
+	<script src='/js/searchAllProjects.js'></script>
 
         <input type='hidden' value='{$max_proj_id}' id='max_proj_id'>
 	<input type='hidden' value='{$result->num_rows}' id='initial_num_results'>
@@ -81,9 +81,9 @@ EOT;
     echo "'>";
 
     echo <<<EOT
-        <link rel="stylesheet" href="css/jquery-ui.min.css">
-	<script src="js/jquery-ui.min.js"></script>
-	<script src="js/autocompleteSearch.js"></script>
+        <link rel="stylesheet" href="/css/jquery-ui.min.css">
+	<script src="/js/jquery-ui.min.js"></script>
+	<script src="/js/autocompleteSearch.js"></script>
 EOT;
 
 } else {

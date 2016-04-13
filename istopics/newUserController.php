@@ -42,7 +42,7 @@ if (empty($stu_or_fac) || (empty($first_name) || empty($last_name) || empty($ema
    }
 
    // redirect to home page
-   header("Location: newUser.php");
+   header("Location: /register");
    exit();
 }
 if (($stu_or_fac == "student")) {
@@ -69,7 +69,7 @@ if (($stu_or_fac == "student")) {
             $_SESSION["error"] = 1;
             $_SESSION["error_msg"] = "You didn't enter your major";
         }
-   	header("Location: newUser.php");
+   	header("Location: /register");
    	exit();
     }
     $role = "student";
@@ -83,14 +83,14 @@ if (!($stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, m
     $_SESSION["error"] = 1;
     $_SESSION["error_msg"] = "Something went wrong.";
 
-    header("Location: newUser.php");
+    header("Location: /register");
     exit();
 }
 if (!($stmt->bind_param("sssssss", $first_name, $last_name, $email, $major, $year, $password, $role))) {
     $_SESSION["error"] = 1;
     $_SESSION["error_msg"] = "Something went wrong.";
 
-    header("Location: newUser.php");
+    header("Location: /regitse");
     exit();
 }
 
@@ -99,7 +99,7 @@ if (!($stmt->execute())) {
     $_SESSION["error"] = 1;
     $_SESSION["error_msg"] = "Error creating new user. This email is probably already in use.";
 
-    header("Location: newUser.php");
+    header("Location: /register");
     exit();
 }
 
@@ -110,6 +110,6 @@ $_SESSION["message"] = 1;
 $_SESSION["msg"] = "New User Succesfully Added";
 
 // Sign the user in
-header("Location: loginController.php?email={$email}&password={$_POST['password']}&just_registered={$role}");
+header("Location: /loginController.php?email={$email}&password={$_POST['password']}&just_registered={$role}");
 exit();
 ?>

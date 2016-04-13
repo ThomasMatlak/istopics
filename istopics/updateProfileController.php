@@ -36,7 +36,7 @@ if (empty($first_name) || empty($last_name) || empty($email) || !filter_var($ema
     $_SESSION["error"] = 1;
     $_SESSION["error_msg"] = "Your input was invalid.";
      
-    header("Location: viewProfile.php");
+    header("Location: /user");
     exit();
 }
 if (($_SESSION["sess_user_role"] == "student") && (empty($discipline) || empty($year))) {
@@ -44,7 +44,7 @@ if (($_SESSION["sess_user_role"] == "student") && (empty($discipline) || empty($
     $_SESSION["error"] = 1;
     $_SESSION["error_msg"] = "Your input was invalid.";
      
-    header("Location: viewProfile.php");
+    header("Location: /user");
     exit();
 }
 
@@ -55,7 +55,7 @@ if (($_SESSION["sess_user_id"] != $user_id) && ($_SESSION["sess_user_role"] != "
    $_SESSION["error_msg"] = "You are not authorized to perform this action.";
 
    // Redirect to home page
-   header("Location: viewProfile.php");
+   header("Location: /user");
    exit();
 }
 
@@ -83,8 +83,7 @@ $conn->close();
 $_SESSION["message"] = 1;
 $_SESSION["msg"] = "Succesfully Updated User Profile";
 
-// Redirect to home page
-header("Location: viewProfile.php");
+header("Location: /user");
 exit();
 }
 else {
@@ -93,7 +92,7 @@ else {
      $_SESSION["error_msg"] = "You must be signed in to perform this action.";
      
      // Redirect to home page
-     header("Location: viewProfile.php");
+     header("Location: /user");
      exit();
 }
 ?>

@@ -13,7 +13,7 @@ if (!isset($_SESSION["sess_user_id"]) || !isset($_SESSION["sess_user_name"]) && 
    $_SESSION["error_msg"] = "You are not authorized to perform this action.";
      
    // Redirect to home page
-   header("Location: showAllProjects.php");
+   header("Location: /project/all");
    exit();
 }
 
@@ -39,7 +39,7 @@ foreach ($discipline_array as $selected_major) {
 
 if (empty($title) || empty($discipline)) {
    // redirect to home page
-   header("Location: showAllProjects.php");
+   header("Location: /project/all");
    exit();
 }
 
@@ -70,6 +70,6 @@ $_SESSION["message"] = 1;
 $_SESSION["msg"] = "Succecfully Added Project";
 
 // Redirect to home page
-header("Location: showAllProjects.php");
+header("Location: /project/all");
 exit();
 ?>

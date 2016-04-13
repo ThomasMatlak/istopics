@@ -30,7 +30,7 @@ if (($user_id != $_SESSION["sess_user_id"]) && ($_SESSION["sess_user_role"] != "
      $conn->close();
 
      //Redirect to home page
-     header("Location: showAllProjects.php");
+     header("Location: /project/all");
      exit();
 }
 
@@ -53,7 +53,7 @@ $_SESSION["message"] = 2;
 $_SESSION["msg"] = "Project Deleted";
 
 // Redirect to home page
-header("Location: showAllProjects.php");
+header("Location: /project/all");
 exit();
 }
 else {
@@ -62,7 +62,7 @@ else {
      $_SESSION["error_msg"] = "You must be signed in to perform this action.";
      
      // Redirect to home page
-     header("Location: showAllProjects.php");
+     header("Location: /project/all");
      exit();
 }
 ?>

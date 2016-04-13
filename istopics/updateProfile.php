@@ -34,7 +34,7 @@ if ((($user_id != $_SESSION["sess_user_id"]) || ($first_name != $_SESSION["sess_
      $conn->close();
 
      // Redirect to home page
-     header("Location: showAllProjects.php");
+     header("Location: /project/all");
      exit();
 }
 
@@ -58,7 +58,7 @@ if ($result->num_rows > 0) {
 
     echo <<<EOT
     	 <input type="hidden" id="user_role" value="{$role}">
-    	 <form id="update_user" action="updateProfileController.php" method="POST" class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    	 <form id="update_user" action="/updateProfileController.php" method="POST" class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
  	     <div class="form-group">
     	         <div id="check_first_name">
     		     <label for="first_name" class="control-label">First Name:</label>
@@ -95,8 +95,8 @@ EOT;
      	    </div>
 	</form>
 
-	<script src="js/updateProfileValidation.js"></script>
-	<script src="js/setMajor.js"></script>
+	<script src="/js/updateProfileValidation.js"></script>
+	<script src="/js/setMajor.js"></script>
 EOT;
 }
 else {

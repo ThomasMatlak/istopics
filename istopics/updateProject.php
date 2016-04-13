@@ -47,16 +47,16 @@ if (($user_id != $_SESSION["sess_user_id"]) && ($_SESSION["sess_user_role"] != "
      $_SESSION["error_msg"] = "You are not authorized to perform this action.";
      
      // Redirect to home page
-     header("Location: showAllProjects.php");
+     header("Location: /project/all");
      exit();
 }
 
 // Print the edit project page
 
-$major_list = file_get_contents("majors.html");
+$major_list = file_get_contents("/majors.html");
 
 echo <<<EOT
-    <form id="update_project" action="updateProjectController.php" method="POST" class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <form id="update_project" action="/updateProjectController.php" method="POST" class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="form-group">
     	    <input type="hidden" name="project_id" value="{$id}">
     	    <div id="check_title">
@@ -84,8 +84,8 @@ echo <<<EOT
     	<button type="submit" class="btn btn-danger">Delete Project</button>
     </form>
 
-    <script src="js/updateProjectValidation.js"></script>
-    <script src="js/setMajor.js"></script>
+    <script src="/js/updateProjectValidation.js"></script>
+    <script src="/js/setMajor.js"></script>
 
 EOT;
 }
@@ -95,7 +95,7 @@ else {
      $_SESSION["error_msg"] = "You must be signed in to perform this action.";
      
      // Redirect to home page
-     header("Location: showAllProjects.php");
+     header("Location: /project/all");
      exit();
 }
 

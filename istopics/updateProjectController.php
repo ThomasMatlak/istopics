@@ -30,7 +30,7 @@ if (($user_id != $_SESSION["sess_user_id"]) && ($_SESSION["sess_user_role"] != "
      $conn->close();
 
      // Redirect to home page
-     header("Location: showAllProjects.php");
+     header("Location: /project/all");
      exit();
 }
 
@@ -56,7 +56,7 @@ if (empty($title) || empty(discipline)) {
    $_SESSION["error_msg"] = "Could Not Update Project";
 
    // redirect to home page
-   header("Location: showAllProjects.php");
+   header("Location: /project/all");
    exit();
 }
 
@@ -74,7 +74,7 @@ $_SESSION["message"] = 1;
 $_SESSION["msg"] = "Succesfully Updated Project";
 
 // Redirect to home page
-header("Location: showAllProjects.php");
+header("Location: /project?project_id={$id}");
 exit();
 }
 else {
@@ -83,7 +83,7 @@ else {
      $_SESSION["error_msg"] = "You must be signed in to perform this action.";
      
      // Redirect to home page
-     header("Location: showAllProjects.php");
+     header("Location: /project/all");
      exit();
 }
 ?>
