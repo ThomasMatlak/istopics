@@ -10,6 +10,9 @@ RewriteRule ^user/?$ viewProfile.php [NC]
 RewriteRule ^user/edit/?$ updateProfile.php [NC]
 
 RewriteRule ^project/all/?$ showAllProjects.php [NC]
+RewriteRule ^project/all/time/?$ showAllProjects.php?order=time [NC]
+RewriteRule ^project/all/title/?$ showAllProjects.php?order=title [NC]
+
 RewriteRule ^project/?$ viewProject.php [NC]
 RewriteRule ^project/new/?$ newProject.php [NC]
 RewriteRule ^project/edit/?$ updateProject.php [NC]
