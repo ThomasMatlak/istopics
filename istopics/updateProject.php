@@ -53,7 +53,7 @@ if (($user_id != $_SESSION["sess_user_id"]) && ($_SESSION["sess_user_role"] != "
 
 // Print the edit project page
 
-$major_list = file_get_contents("/majors.html");
+$major_list = file_get_contents("majors.html");
 
 echo <<<EOT
     <form id="update_project" action="/updateProjectController.php" method="POST" class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">

@@ -6,6 +6,6 @@
 */
 
 // Redirect to home page
-header("Location: showAllProjects.php");
+header("Location: /project/all");
 exit();
 ?>
