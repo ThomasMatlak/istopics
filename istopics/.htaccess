@@ -1,3 +1,5 @@
+Options -Indexes
+
 # Hide .php extension from users
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-d
@@ -8,6 +10,7 @@ RewriteRule ^signin/?$ login.php [NC]
 RewriteRule ^register/?$ newUser.php [NC]
 RewriteRule ^user/?$ viewProfile.php [NC]
 RewriteRule ^user/edit/?$ updateProfile.php [NC]
+RewriteRule ^signin/forgotpassword/?$ forgotPassword.php [NC]
 
 RewriteRule ^project/all/?$ showAllProjects.php [NC]
 RewriteRule ^project/all/time/?$ showAllProjects.php?order=time [NC]
@@ -18,6 +21,10 @@ RewriteRule ^project/new/?$ newProject.php [NC]
 RewriteRule ^project/edit/?$ updateProject.php [NC]
 
 RewriteRule ^admin/?$ adminInterface.php [NC]
+
+# Set custom error pages
+ErrorDocument 403 "/error/403.php"
+ErrorDocument 500 "/error/500.php"
 
 # Allow adminInterface.php to only be accessed by the College of Wooster's network
 <Files "adminInterface|dbToCSV|promoteUser|resetDatabase\.php">
