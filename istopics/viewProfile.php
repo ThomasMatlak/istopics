@@ -12,6 +12,7 @@ include("header.php");
 
 require_once 'db_credentials.php';
 require_once 'displayProject.php';
+require_once 'displayProfile.php';
 
 if (isset($_GET["user_id"])) {
    $user_id = $_GET["user_id"];
@@ -43,31 +44,14 @@ if ($result->num_rows > 0) {
    $email      = $row["email"];
    $role       = $row["role"];
 
-   echo <<<EOT
-   	<h3>{$first_name} {$last_name}</h3>
-	<table class='table table-striped'>
-EOT;
-	if ($role == "student") {
-	    echo <<<EOT
-	        <tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Major(s):</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'>{$major}</td></tr>
-		<tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Graduation Year:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'>{$year}</td></tr>
-EOT;
-	}
-   echo <<<EOT
-	<tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Email:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'>{$email}</td></tr>
 
-	</table>
-EOT;
-    if (isset($_SESSION["sess_user_role"]) && isset($_SESSION["sess_user_id"]) && ($_SESSION["sess_user_role"] == "admin") || ($_SESSION["sess_user_id"] == $user_id)) {
-        echo <<<EOT
- 
-       	    <form action='/user/edit' method='GET'>
-	        <input type='hidden' name='user_id' id='user_id' value='{$user_id}'>
-	        <button class='btn btn-warning'>Edit Profile</button>
-	    </form>
-EOT;
-    }
+   echo "<h3>{$first_name} {$last_name}</h3>";
 
+   echo "<ul class='list-unstyled'>";
+
+   display_profile($user_id, $first_name. " ". $last_name, $false, $major, $year, $email, $role);
+
+   echo "</ul>";
 
 $sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.last_updated, projects.keywords FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE users.id={$user_id} ORDER BY title";
 

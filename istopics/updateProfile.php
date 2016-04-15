@@ -5,16 +5,16 @@
 * Present the user with a form to update their profile information
 */
 
-// ADD CHANGE PASSWORD OPTION
-
 if (!isset($_SESSION)) {session_start();}
+
+$id = $_GET["user_id"];
 
 if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"]) && isset($_SESSION["sess_user_role"])) {
 
 include_once 'db_credentials.php';
 
 //$id = $_SESSION["sess_user_id"];
-$id = $_GET["user_id"];
+//$id = $_GET["user_id"];
 
 // Check that the user has the correct id
 $sql = "SELECT id, first_name FROM users WHERE id={$id}";
@@ -112,7 +112,7 @@ else {
      $_SESSION["error_msg"] = "You must be signed in to perform this action";
 
      // Redirect to home page
-     header("Location: showAllProjects.php");
+     header("Location: /user?user_id={$id}");
      exit;
 }
 
