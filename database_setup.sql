@@ -8,7 +8,7 @@ USE istopics;
 # Create Tables
 # users
 DROP TABLE IF EXISTS users;
-CREATE TABLE users (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, first_name VARCHAR(35), last_name VARCHAR(35), email VARCHAR(255), major VARCHAR(100), password VARCHAR(100), year INT, role VARCHAR(7), UNIQUE (email));
+CREATE TABLE users (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, first_name VARCHAR(35), last_name VARCHAR(35), email VARCHAR(255), major VARCHAR(100), password VARCHAR(100), year INT, role VARCHAR(7), password_reset_key VARCHAR(100), password_reset_expiration DATETIME, activated BOOLEAN, UNIQUE (email));
 
 # projects
 DROP TABLE IF EXISTS projects;

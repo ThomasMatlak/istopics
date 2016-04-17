@@ -6,6 +6,7 @@
 */
 
 session_start();
+
 if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"])) {
    //user is already signed in
 
@@ -44,8 +45,9 @@ include("header.php");
   <div class="form-group">
       <button type="submit" class="btn btn-default">Sign in</button>
   </div>
+  <a href='/signin/forgotpassword' class='btn btn-link'>Forgot Password?</a>
 </form>
 
 <?php 
-include("footer.php")
+include("footer.php");
 ?>
