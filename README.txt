@@ -82,12 +82,16 @@ istopics/
 	|--updateProjectValidation.js
     |--adminInterface.php
     |--analyticstracking.php
+    |--class.phpmailer.php
+    |--class.smtp.php
     |--db_credentials.php
     |--dbToCSV.php
     |--deleteProjectController.php
     |--displayProject.php
+    |--emailPasswordReset.php
     |--favicon.ico
     |--footer.php
+    |--forgotPassword.php
     |--header.php
     |--index.php
     |--login.php
