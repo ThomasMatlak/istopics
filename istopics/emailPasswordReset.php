@@ -21,14 +21,14 @@ $mail->Port       = 25;  // set the SMTP port for the GMAIL server
 $mail->Username   = "wooistopics@gmail.com"; // SMTP account username
 $mail->Password   = ""; // SMTP account password
 
-$mail->setFrom('wooistopics@gmail.com', 'Mailer');
+$mail->setFrom('wooistopics@gmail.com', 'ISTopics');
 $mail->addAddress("{$email}");
-$mail->addReplyTo('wooistopics@gmail.com', 'Information');
+$mail->addReplyTo('wooistopics@gmail.com', 'ISTopics');
 
 $mail->isHTML(true);
 
 $mail->Subject = 'Reset Your ISTopics Password';
-$mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+$mail->Body    = 'Reset your ISTopics password <a href="tmatlak18.wooster.edu">here</a>';
 $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
 if(!$mail->send()) {
