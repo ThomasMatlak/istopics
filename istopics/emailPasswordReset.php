@@ -5,6 +5,9 @@
 * Email the user a unique link to reset their password
 */
 
+require_once 'class.phpmailer.php';
+require_once 'class.smtp.php';
+
 $email = $_POST['email'];
 
 $mail = new PHPMailer();
@@ -15,8 +18,30 @@ $mail->Host       = "smtp.gmail.com";
 $mail->SMTPDebug  = 0; // enables SMTP debug information (for testing)
 $mail->SMTPAuth   = true; // enable SMTP authentication
 $mail->Port       = 25;  // set the SMTP port for the GMAIL server
-$mail->Username   = "wooistopics"; // SMTP account username
+$mail->Username   = "wooistopics@gmail.com"; // SMTP account username
 $mail->Password   = ""; // SMTP account password
+
+$mail->setFrom('wooistopics@gmail.com', 'Mailer');
+$mail->addAddress("{$email}");
+$mail->addReplyTo('wooistopics@gmail.com', 'Information');
+
+$mail->isHTML(true);
+
+$mail->Subject = 'Reset Your ISTopics Password';
+$mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+if(!$mail->send()) {
+    $_SESSION['error'] = 1;
+    $_SESSION['error_msg'] = 'Message could not be sent';
+    echo 'Message could not be sent.';
+    echo 'Mailer Error: ' . $mail->ErrorInfo;
+} else {
+    $_SESSION['message'] = 1;
+    $_SESSION['msg'] = 'Message has been sent.';
+
+    echo 'Message has been sent';
+}
 
 header("Location: /signin");
 exit();
