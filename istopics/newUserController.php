@@ -90,7 +90,7 @@ if (!($stmt->bind_param("sssssss", $first_name, $last_name, $email, $major, $yea
     $_SESSION["error"] = 1;
     $_SESSION["error_msg"] = "Something went wrong.";
 
-    header("Location: /regitse");
+    header("Location: /regitser");
     exit();
 }
 
@@ -110,6 +110,10 @@ $_SESSION["message"] = 1;
 $_SESSION["msg"] = "New User Succesfully Added";
 
 // Sign the user in
-header("Location: /loginController.php?email={$email}&password={$_POST['password']}&just_registered={$role}");
+$_SESSION['email'] = $email;
+$_SESSION['password'] = $_POST['password'];
+
+header("Location: /loginController.php");
 exit();
+
 ?>

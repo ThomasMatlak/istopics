@@ -22,7 +22,7 @@ $page_title = "Sign In";
 include("header.php");
 ?>
 
-<form class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12" action="loginController.php" method="GET">
+<form class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12" action="loginController.php" method="POST">
   <div class="form-group">
     <label for="email" class="control-label">Email</label>
     <div class="">

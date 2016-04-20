@@ -9,9 +9,17 @@ if (!isset($_SESSION)) {session_start();}
 
 require_once 'db_credentials.php';
 
-$email = filter_var($_GET["email"], FILTER_SANITIZE_EMAIL);
-$pass  = $_GET["password"];
+if (isset($_SESSION['email']) && isset($_SESSION['password'])) {
+    $email = filter_var($_SESSION["email"], FILTER_SANITIZE_EMAIL);
+    $pass  = $_SESSION["password"];
 
+    unset($_SESSION['email']);
+    unset($_SESSION['password']);
+}
+else {
+    $email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
+    $pass  = $_POST["password"];
+}
 $sql = "SELECT id, first_name, role, password FROM users WHERE email='$email'";
 $result = $conn->query($sql);
 
