@@ -3,6 +3,14 @@
 * updateProfileController.php
 *
 * Update a user profile
+*
+* $_POST["user_id"]    - the user id of the user to update
+* $_POST["first_name"] - the first name of the user to update
+* $_POST["last_name"]  - the last name of the user to update
+* $_POST["email"]      - the email of the user to update
+* $_POST["year"]       - the class year of the user to update
+* $_POST["discipline"] - the major of the user to update
+* $_POST["password"]   - the password of the user to update
 */
 
 if (!isset($_SESSION)) {session_start();}
@@ -12,7 +20,6 @@ require_once 'db_credentials.php';
 if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"]) && isset($_SESSION["sess_user_role"])) {
 // user is signed in
 
-//$user_id    = $_SESSION["sess_user_id"];
 $user_id    = $_POST["user_id"];
 $first_name = filter_var($_POST["first_name"], FILTER_SANITIZE_STRING);
 $last_name  = filter_var($_POST["last_name"], FILTER_SANITIZE_STRING);

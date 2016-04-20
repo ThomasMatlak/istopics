@@ -3,6 +3,9 @@
 * loginController.php
 * 
 * Sign a user in using their email and password and create a session
+*
+* $_POST['email']    - the email of the user trying to signin
+* $_POST['password'] - the password of the user trying to signin
 */
 
 if (!isset($_SESSION)) {session_start();}

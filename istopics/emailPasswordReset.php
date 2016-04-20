@@ -3,6 +3,8 @@
 * emailPasswordReset.php
 *
 * Email the user a unique link to reset their password
+*
+* $_POST['email'] - the email address the user entered to have the password reset sent to
 */
 
 require_once 'class.phpmailer.php';

@@ -3,6 +3,8 @@
 * adminInterface.php
 *
 * Provide an admin interface such that the database can be edited and reset
+*
+* $_POST['email'] - the email of the user to promote
 */
 
 if (!isset($_SESSION)) {session_start();}

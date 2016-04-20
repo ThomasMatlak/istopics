@@ -3,6 +3,9 @@
 * deleteUserController.php
 *
 * Delete a user from the database
+*
+* $_POST['delete_user_id']   - the id of the user to be deleted
+* $_POST['delete_user_role'] - the role of the user to be deleted
 */
 
 if (!isset($_SESSION)) {session_start();}

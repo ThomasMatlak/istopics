@@ -3,6 +3,13 @@
 * updateProjectController.php
 * 
 * Update a project already in the istopics database.
+*
+* $_POST["project_id"] - the id of the project to update
+* $_POST["title"]      - the title of the project to update
+* $_POST["proposal"]   - the proposal of the project to update
+* $_POST["keywords"]   - the keywords of the project to update
+* $_POST["comments"]   - the comments of the project to update
+* $_POST["discipline"] - the major of the project to update
 */
 
 if (!isset($_SESSION)) {session_start();}
