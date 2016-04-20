@@ -49,7 +49,7 @@ if ($result->num_rows > 0) {
 
    echo "<ul class='list-unstyled'>";
 
-   display_profile($user_id, $first_name. " ". $last_name, $false, $major, $year, $email, $role);
+   display_profile($user_id, $first_name. " ". $last_name, false, $major, $year, $email, $role, false);
 
    echo "</ul>";
 

@@ -10,6 +10,9 @@ if (!isset($_SESSION)) {session_start();}
 $page_title = "Database Administration";
 include("header.php");
 
+require_once 'displayProfile.php';
+require_once 'db_credentials.php';
+
 if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"]) && isset($_SESSION["sess_user_role"]) && ($_SESSION["sess_user_role"] == "admin")) {
 // user is signed in as an admin
 
@@ -36,7 +39,48 @@ echo <<<EOT
 	     <button type='submit' class='btn btn-primary'>Promote User to Admin</button>
 	 </form>
      </div>
+
+     <hr>
+
+     <button class='btn btn-default' type='button' data-toggle='collapse' data-target='#showAllUsers' aria-expanded='false' aria-controls='showAllUsers'>
+         Show a List of All Users
+     </button>
+
+     <div class='collapse' id='showAllUsers'>
+         <ul class='list-unstyled'>
 EOT;
+
+$sql = "SELECT id, first_name, last_name, major, year, email, role FROM users";
+$result = $conn->query($sql);
+
+while ($row = $result->fetch_assoc()) {
+    $user_id    = $row["id"];
+    $first_name = $row["first_name"];
+    $last_name  = $row["last_name"];
+    $major      = $row["major"];
+    $year       = $row["year"];
+    $email      = $row["email"];
+    $role       = $row["role"];
+
+    echo <<<EOT
+        <div class="panel panel-default">
+  	    <div class="panel-body">
+EOT;
+
+    display_profile($user_id, $first_name. " ". $last_name, true, $major, $year, $email, $role, true);
+
+    echo <<<EOT
+            </div>
+	</div>
+EOT;
+}
+
+echo <<<EOT
+        </ul>
+    </div>
+EOT;
+
+
 }
 else {
      // user is not signed in as an admin, set error message
