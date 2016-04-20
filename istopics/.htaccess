@@ -26,8 +26,8 @@ RewriteRule ^admin/?$ adminInterface.php [NC]
 ErrorDocument 403 "/error/403.php"
 ErrorDocument 500 "/error/500.php"
 
-# Allow adminInterface.php to only be accessed by the College of Wooster's network
-<FilesMatch "adminInterface|dbToCSV|promoteUser|resetDatabase\.php">
+# Allow adminInterface.php and newUser.php to only be accessed by the College of Wooster's network
+<FilesMatch "adminInterface|register|dbToCSV|promoteUser|resetDatabase\.php">
     Require all denied
     # Allow localhost for testing
     Require ip 127.0.0.1
