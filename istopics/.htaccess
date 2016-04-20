@@ -27,11 +27,11 @@ ErrorDocument 403 "/error/403.php"
 ErrorDocument 500 "/error/500.php"
 
 # Allow adminInterface.php to only be accessed by the College of Wooster's network
-<Files "adminInterface|dbToCSV|promoteUser|resetDatabase\.php">
+<FilesMatch "adminInterface|dbToCSV|promoteUser|resetDatabase\.php">
     Require all denied
     # Allow localhost for testing
     Require ip 127.0.0.1
     
     # Allow Wooster IPs
     Require ip 140.103
-</Files>
+</FilesMatch>
