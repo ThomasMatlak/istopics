@@ -13,9 +13,6 @@ if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"]) && is
 
 include_once 'db_credentials.php';
 
-//$id = $_SESSION["sess_user_id"];
-//$id = $_GET["user_id"];
-
 // Check that the user has the correct id
 $sql = "SELECT id, first_name FROM users WHERE id={$id}";
 
@@ -26,7 +23,7 @@ $user_id = $row["id"];
 $first_name = $row["first_name"];
 
 if ((($user_id != $_SESSION["sess_user_id"]) || ($first_name != $_SESSION["sess_user_name"])) && ($_SESSION["sess_user_role"] != "admin")) {
-   // the correct user is not signed in, set error message
+     // the correct user is not signed in, set error message
      $_SESSION["error"] = 1;
      $_SESSION["error_msg"] = "You are not authorized to perform this action.";
 
@@ -53,6 +50,18 @@ if ($result->num_rows > 0) {
     $major      = $row["major"];
     $year       = $row["year"];
     $role       = $row["role"];
+
+    if ($user_id != $_SESSION["sess_user_id"] && ($role == 'admin' || $role == 'prof')) {
+        $_SESSION["error"] = 1;
+     	$_SESSION["error_msg"] = "You are not authorized to perform this action.";
+
+     	// Close connection
+     	$conn->close();
+
+     	// Redirect to home page
+     	header("Location: /project/all");
+     	exit();
+    }
 
     $major_list = file_get_contents("majors.html");
 
@@ -95,6 +104,14 @@ EOT;
      	    </div>
 	</form>
 
+	<hr>
+
+	<form action='/deleteUser.php?user_id={$user_id}' method='post' class='form-horizontal'>
+	    <input type='hidden' name='delete_user_id' value='{$user_id}'>
+	    <input type='hidden' name='delete_user_role' value='{$role}'>
+	    <button type='submit' class='btn btn-danger'>Delete Your Account</button>
+	</form>
+
 	<script src="/js/updateProfileValidation.js"></script>
 	<script src="/js/setMajor.js"></script>
 EOT;
@@ -113,7 +130,7 @@ else {
 
      // Redirect to home page
      header("Location: /user?user_id={$id}");
-     exit;
+     exit();
 }
 
 include("footer.php");
