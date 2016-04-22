@@ -62,9 +62,9 @@ EOT;
 	       <tr><th>Keywords:</th><td><div id='{$proj_id}keywords'><span id='{$proj_id}keywords_text'>{$proj_keywords}</span><a id='{$proj_id}show_keywords' role='button' onclick='expand_keywords({$proj_id});'> <span id='{$proj_id}show_or_hide_k'></span></a></div></td></tr>
 EOT;
 	}
-
+/*
 	$updated_x_ago = time_elapsed($last_updated);
-
+*/
 	echo <<<EOT
 	            </table>
 		    Last Updated {$updated_x_ago}

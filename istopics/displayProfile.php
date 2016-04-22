@@ -47,8 +47,7 @@ EOT;
 	</li>
 EOT;
 
-    if (((isset($_SESSION["sess_user_role"]) && isset($_SESSION["sess_user_id"]) && ($_SESSION["sess_user_role"] == "admin")) && !(($_SESSION["sess_user_id"] != $user_id) && ($role != 'student')))) {
-        //if ($role == 'admin' && ) {}
+    if (((isset($_SESSION["sess_user_role"]) && isset($_SESSION["sess_user_id"]) && ($_SESSION["sess_user_role"] == "admin")) || !(($_SESSION["sess_user_id"] != $user_id) && ($role != 'student')))) {
         echo <<<EOT
  
        	    <form action='/user/edit' method='GET'>

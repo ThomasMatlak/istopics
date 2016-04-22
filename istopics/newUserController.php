@@ -121,7 +121,7 @@ $_SESSION["msg"] = "New User Succesfully Added";
 $_SESSION['email'] = $email;
 $_SESSION['password'] = $_POST['password'];
 
-header("Location: /loginController.php");
+header("Location: /loginController.php?just_registered={$role}");
 exit();
 
 ?>
