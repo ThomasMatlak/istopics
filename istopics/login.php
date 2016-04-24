@@ -7,7 +7,9 @@
 
 session_start();
 
-if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"])) {
+require_once 'checkSignIn.php';
+
+if (issignedin() != -1) {
    //user is already signed in
 
    $_SESSION["error"] = 1;

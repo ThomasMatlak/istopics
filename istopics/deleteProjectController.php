@@ -10,10 +10,11 @@
 if (!isset($_SESSION)) {session_start();}
 
 require_once 'db_credentials.php';
+require_once 'checkSignIn.php';
 
 $id = filter_var($_POST["project_id"], FILTER_SANITIZE_STRING);
 
-if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"]) && isset($_SESSION["sess_user_role"])) {
+if (issignedin() != -1) {
 // user is signed in
 
 //Check that the user has the correct id
@@ -24,7 +25,7 @@ $row = $result->fetch_assoc();
 $user_id = $row["userid"];
 
 if (($user_id != $_SESSION["sess_user_id"]) && ($_SESSION["sess_user_role"] != "admin")) {
-   //the correct user is not signed in, set error message
+    // the correct user is not signed in, set error message
      $_SESSION["error"] = 1;
      $_SESSION["error_msg"] = "You are not authorized to perform this action.";
 

@@ -5,9 +5,10 @@
 * Download all projects in the database as a CSV file
 */
 
-require_once('db_credentials.php');
+require_once 'db_credentials.php';
+require_once 'checkSignIn.php';
 
-
+if (issignedin() == 'admin') {
 
 $sql = "SELECT id, title, discipline, keywords, proposal, comments FROM projects";
 
@@ -38,9 +39,13 @@ while ($row = $result->fetch_assoc()) {
 fclose($outputFile);
 
 $conn->close();
+}
+else {
+    $_SESSION["error"] = 1;
+    $_SESSION["error_msg"] = "You are not authorized to perform this action.";
 
-
-
-
+     header("Location: /project/all");
+     exit();
+}
 
 ?>

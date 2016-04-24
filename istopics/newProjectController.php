@@ -13,7 +13,9 @@
 
 if (!isset($_SESSION)) {session_start();}
 
-if (!isset($_SESSION["sess_user_id"]) || !isset($_SESSION["sess_user_name"]) && isset($_SESSION["sess_user_role"]) && ($_SESSION["sess_user_role"] == "student")) {
+require_once 'checkSignIn.php';
+
+if (issignedin() == 'student') {
    // user is not signed in, set error message
    $_SESSION["error"] = 1;
    $_SESSION["error_msg"] = "You are not authorized to perform this action.";

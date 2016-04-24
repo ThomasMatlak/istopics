@@ -16,8 +16,9 @@
 if (!isset($_SESSION)) {session_start();}
 
 require_once 'db_credentials.php';
+require_once 'checkSignIn.php';
 
-if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"]) && isset($_SESSION["sess_user_role"])) {
+if (issignedin() != -1) {
 // user is signed in
 
 $user_id    = $_POST["user_id"];

@@ -9,10 +9,12 @@
 
 if (!isset($_SESSION)) {session_start();}
 
+require_once 'checkSignIn.php';
+
 $page_title = "Database Administration";
 include("header.php");
 
-if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"]) && isset($_SESSION["sess_user_role"]) && ($_SESSION["sess_user_role"] == "admin")) {
+if (issignedin() == 'admin') {
 // user is signed in as an admin
 
 $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);

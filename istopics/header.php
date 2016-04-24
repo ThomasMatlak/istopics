@@ -5,10 +5,9 @@
 * The view to display at the top of every page
 */
 
-if(!isset($_SESSION)) 
-    { 
-        session_start(); 
-    }
+if(!isset($_SESSION)) { session_start(); }
+
+require_once 'checkSignIn.php';
 ?>
 
 <!Doctype HTML>
@@ -45,9 +44,11 @@ if(!isset($_SESSION))
     <li><a href="/project/all" class="btn btn-link navbar-btn">View All Projects</a></li>
    
     <?php
-       if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"]) && isset($_SESSION["sess_user_role"])) {
-           // user is signed in
-	   if ($_SESSION["sess_user_role"] == "student") {
+        $role = issignedin();
+
+        if (issignedin() != -1) {
+            // user is signed in
+	    if ($role == "student") {
 	       // user is a student
 	       echo "<li><a href='/project/new' class='btn btn-link navbar-btn'>Add a New Project</a></li>";
 	   }
@@ -55,7 +56,7 @@ if(!isset($_SESSION))
 	       <li><a href='/user' class='btn btn-link navbar-btn'>Hello {$_SESSION['sess_user_name']}</a></li>
 	       <li><a href='/logout.php' class='nav btn btn-link navbar-btn'>Sign Out</a></li>
 EOT;
-	if ($_SESSION["sess_user_role"] == "admin") {
+	if ($role == "admin") {
 	   // user is an admin
 	   echo "<li><a href='/admin' class='btn btn-link navbar-btn'>Administrator Interface</a></li>";
 	}

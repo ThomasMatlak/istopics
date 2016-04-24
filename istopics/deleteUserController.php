@@ -13,8 +13,9 @@ if (!isset($_SESSION)) {session_start();}
 $id   = $_POST["delete_user_id"];
 $role = $_POST["delete_user_role"];
 
-if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"]) && isset($_SESSION["sess_user_role"])) {
+require_once 'checkSignIn.php';
 
+if (issignedin() != -1) {
 require_once 'db_credentials.php';
 
 // Check that the user has the correct id

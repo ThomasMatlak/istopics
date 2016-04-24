@@ -12,8 +12,9 @@ include("header.php");
 
 require_once 'displayProfile.php';
 require_once 'db_credentials.php';
+require_once 'checkSignIn.php';
 
-if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"]) && isset($_SESSION["sess_user_role"]) && ($_SESSION["sess_user_role"] == "admin")) {
+if (issignedin() == 'admin') {
 // user is signed in as an admin
 
 echo <<<EOT

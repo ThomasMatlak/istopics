@@ -7,9 +7,11 @@
 
 if (!isset($_SESSION)) {session_start();}
 
+require_once 'checkSignIn.php';
+
 $id = $_GET["user_id"];
 
-if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"]) && isset($_SESSION["sess_user_role"])) {
+if (issignedin() != -1) {
 
 include_once 'db_credentials.php';
 
