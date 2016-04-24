@@ -71,32 +71,30 @@ EOT;
 EOT;
 			}
     		    ?>
-    
+
 		    <!-- Header logo file -->
         	    <ul class='nav navbar-nav navbar-right'>
-        	        <li>
+			<li>
             		    <a href='http://www.wooster.edu'>
             		        <img src='/wordmark.png' height=28px alt='The College of Wooster'/>
             		    </a>
 			</li>
-        	    </ul>
-<!--
-                    <div class="nav navbar-right">
-                        <noscript>
-                            <form id="search_html" action="/search.php" method="GET" class="navbar-form">
-                                <div class="form-group">
-	                            <input type="text" class="form-control" name="search_term" id="search_term" placeholder="search">
-				    <button type="submit" class="btn btn-warning">Search</button>
-                                </div>
-                            </form>
-                        </noscript>
-                    </div>
--->
+		    </ul>
+
+		    <noscript>
+		        <form id="search_html" action="/project/search" method="GET" class="navbar-form">
+                            <div class="form-group">
+	                        <input type="text" class="form-control" name="search_term" id="search_term" placeholder="search">
+				<button type="submit" class="btn btn-warning">Search</button>
+                            </div>
+			</form>
+                    </noscript>
+
 	        </div>
             </nav>
 
 <?php
-//Check for an error
+// Check for an error
 if (isset($_SESSION["error"]) && $_SESSION["error"] != 0) {
    $error_msg = $_SESSION["error_msg"];
    echo <<<EOT
@@ -112,7 +110,7 @@ EOT;
     unset($_SESSION["error_msg"]);
 }
 
-//Check for a message
+// Check for a message
 if (isset($_SESSION["message"]) && $_SESSION["message"] == 1) {
    $msg = $_SESSION["msg"];
    echo <<<EOT
