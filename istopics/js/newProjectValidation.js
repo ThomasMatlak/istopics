@@ -1,4 +1,8 @@
-0// Set all fields to default filled state
+/*
+* Check that user input when creating a project is valid
+*/
+
+// Set all fields to default filled state
 $('#check_title').attr("class", "has-error");
 $('#discipline_check').attr("class", "has-error");
 $('#check_keywords').attr("class", "has-error");

@@ -1,3 +1,7 @@
+/*
+* Check that user input is valid when updating their user profile
+*/
+
 // Set all fields to default filled state
 $('#check_first_name').attr("class", "has-success");
 $('#check_last_name').attr("class", "has-success");

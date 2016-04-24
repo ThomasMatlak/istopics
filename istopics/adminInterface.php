@@ -17,70 +17,69 @@ require_once 'checkSignIn.php';
 if (issignedin() == 'admin') {
 // user is signed in as an admin
 
-echo <<<EOT
-     <a href='/dbToCSV.php' class='btn btn-primary'>Download Projects as CSV</a>
+    echo <<<EOT
+        <a href='/dbToCSV.php' class='btn btn-primary'>Download Projects as CSV</a>
 
-     <hr>
+        <hr>
 
-     <script src='/js/resetDatabaseWarning.js'></script>
-     <button onclick='resetWarning();' class='btn btn-danger'>Reset Database</button>
-     <span class='help-block'>Resetting the database will delete all projects, connections between projects and users, and non-admin users.</span>
+     	<script src='/js/resetDatabaseWarning.js'></script>
+    	<button onclick='resetWarning();' class='btn btn-danger'>Reset Database</button>
+     	<span class='help-block'>Resetting the database will delete all projects, connections between projects and users, and non-admin users.</span>
 
-     <hr>
+     	<hr>
 
-     <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#promoteUser" aria-expanded="false" aria-controls="promoteUser">
-         Promote a User to Admin
-     </button>
-     <div class="collapse" id="promoteUser">
-         <form action='/promoteUser.php' method='POST' class='form-inline'>
-	     <div class='form-group'>
-	         <label for='email'>Email:</label>
-		 <input type='email' name='email' id='email' class='form-control'>
-	     </div>
-	     <button type='submit' class='btn btn-primary'>Promote User to Admin</button>
-	 </form>
-     </div>
+     	<button class="btn btn-default" type="button" data-toggle="collapse" data-target="#promoteUser" aria-expanded="false" aria-controls="promoteUser">
+            Promote a User to Admin
+     	</button>
+     	<div class="collapse" id="promoteUser">
+            <form action='/promoteUser.php' method='POST' class='form-inline'>
+	        <div class='form-group'>
+	            <label for='email'>Email:</label>
+		    <input type='email' name='email' id='email' class='form-control'>
+	        </div>
+	        <button type='submit' class='btn btn-primary'>Promote User to Admin</button>
+	    </form>
+      	</div>
 
-     <hr>
+     	<hr>
 
-     <button class='btn btn-default' type='button' data-toggle='collapse' data-target='#showAllUsers' aria-expanded='false' aria-controls='showAllUsers'>
-         Show a List of All Users
-     </button>
+     	<button class='btn btn-default' type='button' data-toggle='collapse' data-target='#showAllUsers' aria-expanded='false' aria-controls='showAllUsers'>
+            Show a List of All Users
+     	</button>
 
-     <div class='collapse' id='showAllUsers'>
-         <ul class='list-unstyled'>
+     	<div class='collapse' id='showAllUsers'>
+            <ul class='list-unstyled'>
 EOT;
 
-$sql = "SELECT id, first_name, last_name, major, year, email, role FROM users";
-$result = $conn->query($sql);
+    $sql = "SELECT id, first_name, last_name, major, year, email, role FROM users";
+    $result = $conn->query($sql);
 
-while ($row = $result->fetch_assoc()) {
-    $user_id    = $row["id"];
-    $first_name = $row["first_name"];
-    $last_name  = $row["last_name"];
-    $major      = $row["major"];
-    $year       = $row["year"];
-    $email      = $row["email"];
-    $role       = $row["role"];
+    while ($row = $result->fetch_assoc()) {
+        $user_id    = $row["id"];
+   	$first_name = $row["first_name"];
+    	$last_name  = $row["last_name"];
+    	$major      = $row["major"];
+    	$year       = $row["year"];
+    	$email      = $row["email"];
+    	$role       = $row["role"];
+
+    	echo <<<EOT
+            <div class="panel panel-default">
+  	        <div class="panel-body">
+EOT;
+
+        display_profile($user_id, $first_name. " ". $last_name, true, $major, $year, $email, $role, true);
+
+        echo <<<EOT
+                </div>
+	    </div>
+EOT;
+    }
 
     echo <<<EOT
-        <div class="panel panel-default">
-  	    <div class="panel-body">
+            </ul>
+        </div>
 EOT;
-
-    display_profile($user_id, $first_name. " ". $last_name, true, $major, $year, $email, $role, true);
-
-    echo <<<EOT
-            </div>
-	</div>
-EOT;
-}
-
-echo <<<EOT
-        </ul>
-    </div>
-EOT;
-
 
 }
 else {
@@ -88,7 +87,6 @@ else {
      $_SESSION["error"] = 1;
      $_SESSION["error_msg"] = "You must be signed in to perform this action.";
      
-     // Redirect to home page
      header("Location: /project/all");
      exit();
 }

@@ -1,6 +1,8 @@
 /*
 * Shorten a string to shorten_to characters before adding an ellipsis
-* set shorten_to = the length you want to shorten string to
+*
+* str        - the string to shorten
+* shorten_to - how short to make str
 */
 
 function ellipsify (str, shorten_to) {

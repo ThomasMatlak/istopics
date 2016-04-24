@@ -23,6 +23,7 @@ else {
     $email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
     $pass  = $_POST["password"];
 }
+
 $sql = "SELECT id, first_name, role, password FROM users WHERE email='$email'";
 $result = $conn->query($sql);
 

@@ -15,23 +15,22 @@ if (!isset($_SESSION)) {session_start();}
 
 require_once 'checkSignIn.php';
 
-if (issignedin() == 'student') {
-   // user is not signed in, set error message
-   $_SESSION["error"] = 1;
-   $_SESSION["error_msg"] = "You are not authorized to perform this action.";
+if (issignedin() != 'student') {
+    // user is not signed in, set error message
+    $_SESSION["error"] = 1;
+    $_SESSION["error_msg"] = "You are not authorized to perform this action.";
      
-   // Redirect to home page
-   header("Location: /project/all");
-   exit();
+    header("Location: /project/all");
+    exit();
 }
 
 require_once 'db_credentials.php';
 
 // Set variables and sanitize input
-$title      = filter_var($_POST["title"], FILTER_SANITIZE_STRING);
-$proposal   = filter_var($_POST["proposal"], FILTER_SANITIZE_STRING);
-$keywords   = filter_var($_POST["keywords"], FILTER_SANITIZE_STRING);
-$comments   = filter_var($_POST["comments"], FILTER_SANITIZE_STRING);
+$title    = filter_var($_POST["title"], FILTER_SANITIZE_STRING);
+$proposal = filter_var($_POST["proposal"], FILTER_SANITIZE_STRING);
+$keywords = filter_var($_POST["keywords"], FILTER_SANITIZE_STRING);
+$comments = filter_var($_POST["comments"], FILTER_SANITIZE_STRING);
 
 $discipline = "";
 $discipline_array = $_POST["discipline"];
@@ -46,9 +45,8 @@ foreach ($discipline_array as $selected_major) {
 }
 
 if (empty($title) || empty($discipline)) {
-   // redirect to home page
-   header("Location: /project/all");
-   exit();
+    header("Location: /project/all");
+    exit();
 }
 
 // Prepare the SQL statement
@@ -77,7 +75,6 @@ $conn->close();
 $_SESSION["message"] = 1;
 $_SESSION["msg"] = "Succecfully Added Project";
 
-// Redirect to home page
 header("Location: /project/all");
 exit();
 ?>

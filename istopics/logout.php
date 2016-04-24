@@ -7,12 +7,12 @@
 
 if (!isset($_SESSION)) {session_start();}
 
-//Clean up the session
+// Clean up the session
 session_unset();
 
 session_destroy();
 
-//Redirect to home page
+// Redirect to home page
 header("Location: /project/all");
 exit();
 

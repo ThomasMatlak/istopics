@@ -25,74 +25,74 @@ if (!filter_var($user_id, FILTER_VALIDATE_INT)) {
    echo "<p>That is not a valid user id.</p>";
 }
 else {
-$sql = "SELECT id, first_name, last_name, major, year, email, role FROM users WHERE id={$user_id}";
-$result = $conn->query($sql);
-
-echo <<<EOT
-       <script src='/js/ellipsify.js'></script>
-       <script src='/js/expand_contract_pk.js'></script>
-EOT;
-
-if ($result->num_rows > 0) {
-   $row = $result->fetch_assoc();
-
-   $user_id    = $row["id"];
-   $first_name = $row["first_name"];
-   $last_name  = $row["last_name"];
-   $major      = $row["major"];
-   $year       = $row["year"];
-   $email      = $row["email"];
-   $role       = $row["role"];
-
-
-   echo "<h3>{$first_name} {$last_name}</h3>";
-
-   echo "<ul class='list-unstyled'>";
-
-   display_profile($user_id, $first_name. " ". $last_name, false, $major, $year, $email, $role, false);
-
-   echo "</ul>";
-
-$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.last_updated, projects.keywords FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE users.id={$user_id} ORDER BY title";
-
-$result = $conn->query($sql);
-
-// Display user's projects
-if ($result->num_rows > 0) {
-   echo <<<EOT
-   	<hr>
-	<h4>{$first_name}'s Projects</h4>
-
-   	<ul class='list-unstyled'>
-EOT;
-
-   while($row = $result->fetch_assoc()) {
-   	$proj_id         = $row["proj_id"];
-	$proj_title      = $row["title"];
-	$proj_major      = $row["discipline"];
-	$proj_proposal   = $row["proposal"];
-	$proj_keywords   = $row["keywords"];
-	$last_updated    = $row["last_updated"];
-
-	display_project($proj_id, "", "", $proj_title, $proj_major, $proj_proposal, $proj_keywords, "", $last_updated, false, false);
-    }
-
-    $max_proj_id = $conn->query("SELECT id FROM projects ORDER BY id DESC")->fetch_assoc()['id'];
+    $sql = "SELECT id, first_name, last_name, major, year, email, role FROM users WHERE id={$user_id}";
+    $result = $conn->query($sql);
 
     echo <<<EOT
-        </ul>
-	<input type='hidden' value='{$max_proj_id}' id='max_proj_id'>
+        <script src='/js/ellipsify.js'></script>
+       	<script src='/js/expand_contract_pk.js'></script>
+EOT;
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+
+   	$user_id    = $row["id"];
+   	$first_name = $row["first_name"];
+   	$last_name  = $row["last_name"];
+   	$major      = $row["major"];
+   	$year       = $row["year"];
+   	$email      = $row["email"];
+   	$role       = $row["role"];
+
+
+   	echo "<h3>{$first_name} {$last_name}</h3>";
+
+   	echo "<ul class='list-unstyled'>";
+
+   	display_profile($user_id, $first_name. " ". $last_name, false, $major, $year, $email, $role, false);
+
+   	echo "</ul>";
+
+	$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.last_updated, projects.keywords FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE users.id={$user_id} ORDER BY title";
+
+	$result = $conn->query($sql);
+
+	// Display user's projects
+	if ($result->num_rows > 0) {
+   	    echo <<<EOT
+   	        <hr>
+		<h4>{$first_name}'s Projects</h4>
+
+   		<ul class='list-unstyled'>
+EOT;
+
+	while($row = $result->fetch_assoc()) {
+   	    $proj_id         = $row["proj_id"];
+	    $proj_title      = $row["title"];
+	    $proj_major      = $row["discipline"];
+	    $proj_proposal   = $row["proposal"];
+	    $proj_keywords   = $row["keywords"];
+	    $last_updated    = $row["last_updated"];
+
+	    display_project($proj_id, "", "", $proj_title, $proj_major, $proj_proposal, $proj_keywords, "", $last_updated, false, false);
+        }
+
+    	$max_proj_id = $conn->query("SELECT id FROM projects ORDER BY id DESC")->fetch_assoc()['id'];
+
+    	echo <<<EOT
+            </ul>
+	    <input type='hidden' value='{$max_proj_id}' id='max_proj_id'>
 EOT;
     
-}
+        }
 
-}
-else {
-     echo "<p>User not found.</p>";
-}
+    }
+    else {
+        echo "<p>User not found.</p>";
+    }
 
-// Close connection
-$conn->close();
+    // Close connection
+    $conn->close();
 }
 
 include("footer.php");

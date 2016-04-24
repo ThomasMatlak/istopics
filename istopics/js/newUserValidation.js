@@ -1,3 +1,7 @@
+/*
+* Check that user input when making a new user profile is valid
+*/
+
 // Set all fields to default filled state
 $('#check_first_name').attr("class", "has-error");
 $('#check_last_name').attr("class", "has-error");

@@ -25,29 +25,31 @@ include("header.php");
 ?>
 
 <form class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12" action="loginController.php" method="POST">
-  <div class="form-group">
-    <label for="email" class="control-label">Email</label>
-    <div class="">
-      <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+    <div class="form-group">
+        <label for="email" class="control-label">Email</label>
+    	<div class="">
+      	    <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+        </div>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="password" class="control-label">Password</label>
-    <div class="">
-      <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+    <div class="form-group">
+        <label for="password" class="control-label">Password</label>
+    	<div class="">
+      	    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+        </div>
     </div>
-  </div>
-<!--  <div class="form-group">
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" id="remember" name="remember"> Remember me
-        </label>
-      </div>
-  </div>-->
-  <div class="form-group">
-      <button type="submit" class="btn btn-default">Sign in</button>
-  </div>
-  <a href='/signin/forgotpassword' class='btn btn-link'>Forgot Password?</a>
+<!--
+    <div class="form-group">
+        <div class="checkbox">
+            <label>
+              <input type="checkbox" id="remember" name="remember"> Remember me
+            </label>
+        </div>
+    </div>
+-->
+    <div class="form-group">
+        <button type="submit" class="btn btn-default">Sign in</button>
+    </div>
+    <a href='/signin/forgotpassword' class='btn btn-link'>Forgot Password?</a>
 </form>
 
 <?php 

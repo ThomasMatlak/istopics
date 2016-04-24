@@ -1,3 +1,7 @@
+/*
+* Check that user input is valid when updating a project
+*/
+
 // Set default field states
 $('#check_title').attr("class", "has-success");
 $('#discipline_check').attr("class", "has-success");
