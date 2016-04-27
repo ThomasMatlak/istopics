@@ -1,4 +1,4 @@
-var shorten_to = 100;
+var shorten_to = 500;
 
 /*
 * Shorten/expand proposals
