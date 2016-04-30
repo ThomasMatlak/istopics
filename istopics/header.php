@@ -76,7 +76,7 @@ EOT;
         	    <ul class='nav navbar-nav navbar-right'>
 			<li>
             		    <a href='http://www.wooster.edu'>
-            		        <img src='/wordmark.png' height=28px alt='The College of Wooster'/>
+            		        <img src='/wordmark.png' height="28" alt='The College of Wooster'/>
             		    </a>
 			</li>
 		    </ul>

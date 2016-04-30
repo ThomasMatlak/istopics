@@ -89,7 +89,7 @@ EOT;
     echo "'>";
 
     echo <<<EOT
-        <link rel="stylesheet" href="/css/jquery-ui.min.css">
+        <link rel="stylesheet" property='stylesheet' href="/css/jquery-ui.min.css">
 	<script src="/js/jquery-ui.min.js"></script>
 	<script src="/js/autocompleteSearch.js"></script>
 EOT;

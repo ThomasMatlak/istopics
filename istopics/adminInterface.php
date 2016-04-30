@@ -63,17 +63,7 @@ EOT;
     	$email      = $row["email"];
     	$role       = $row["role"];
 
-    	echo <<<EOT
-            <div class="panel panel-default">
-  	        <div class="panel-body">
-EOT;
-
         display_profile($user_id, $first_name. " ". $last_name, true, $major, $year, $email, $role, true);
-
-        echo <<<EOT
-                </div>
-	    </div>
-EOT;
     }
 
     echo <<<EOT
