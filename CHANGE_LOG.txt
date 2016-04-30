@@ -1,6 +1,20 @@
 CHANGE LOG
 ==========
 
+2016-04-29
+-added dropdown navigation for small screens
+-various styling improvements
+
+2016-04-27
+-improved who can see the Edit Profile button
+
+2016-04-23
+-added non-JS search
+
+2016-04-20
+-can delete user profiles
+-can view a list of all users as an admin
+
 2016-04-15
 -moved profile diaplaying to a function
 -added custom error pages
