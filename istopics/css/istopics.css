@@ -43,6 +43,31 @@ height: 4em;
     white-space: normal;
 }
 
+/*
+* Cursomize Button Colors
+*/
+.navbar-inverse .navbar-brand {
+    color: #ffcc00;
+}
+
+.btn-warning {
+    color: #333;
+    background-color: #ffcc00;
+    border-color: #bf0000;
+}
+
+.btn-danger {
+    background-color: #bf0000;
+}
+
+.navbar-inverse .btn-link {
+    color: #ffcc00;
+}
+
+.navbar-inverse .btn-link:focus, .navbar-inverse .btn-link:hover {
+    color: #333;
+}
+
 .container-fluid {
     max-width: 960px;
 }
