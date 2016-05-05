@@ -64,6 +64,34 @@ height: 4em;
     background-color: #bf0000;
 }
 
+.btn-link {
+    font-weight: 400;
+    color: #ffcc00;
+    border-radius: 0;
+}
+
+.btn-link:focus, .btn-link:hover {
+    color: #ffcc00;
+    text-decoration: underline;
+    background-color: transparent;
+}
+
+.panel-default>.panel-heading {
+    color: #333;
+    background-color: #333;
+    border-color: #bf0000;
+}
+
+a {
+    color: #bf0000;
+    text-decoration: none;
+}
+
+a:focus, a:hover {
+    color: #bf0000;
+    text-decoration: underline;
+}
+
 .navbar-inverse .btn-link {
     color: #ffcc00;
 }
