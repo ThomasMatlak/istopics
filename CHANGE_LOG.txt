@@ -1,6 +1,10 @@
 CHANGE LOG
 ==========
 
+2016-05-04
+-added ability to favorite projects
+-updated styling
+
 2016-04-29
 -added dropdown navigation for small screens
 -various styling improvements

@@ -93,6 +93,7 @@ istopics/
     |--displayProject.php
     |--emailPasswordReset.php
     |--favicon.ico
+    |--favorite.php
     |--footer.php
     |--forgotPassword.php
     |--header.php
