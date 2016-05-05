@@ -48,6 +48,8 @@ if (issignedin() != -1) {
     $stmt = $conn->prepare("DELETE FROM user_project_connections WHERE projectid=?");
     $stmt->bind_param("s", $id);
 
+    $stmt->execute();
+
     $stmt->close();
     $conn->close();
 
