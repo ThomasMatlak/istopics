@@ -11,6 +11,7 @@ RewriteRule ^register/?$ newUser.php [NC]
 RewriteRule ^user/?$ viewProfile.php [NC]
 RewriteRule ^user/edit/?$ updateProfile.php [NC]
 RewriteRule ^signin/forgotpassword/?$ forgotPassword.php [NC]
+RewriteRule ^user/favorites/?$ viewFavorites.php [NC]
 
 RewriteRule ^project/all/?$ showAllProjects.php [NC]
 RewriteRule ^project/all/time/?$ showAllProjects.php?order=time [NC]

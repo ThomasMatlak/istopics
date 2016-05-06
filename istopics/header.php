@@ -58,6 +58,7 @@ require_once 'checkSignIn.php';
 	   		    }
 	   		echo <<<EOT
 	       		    <li><a href='/user' class='btn btn-link navbar-btn'>Hello {$_SESSION['sess_user_name']}</a></li>
+			    <li><a href='/user/favorites' class='btn btn-link navbar-btn'>Your Favorites</a></li>
 	       		    <li><a href='/logout.php' class='nav btn btn-link navbar-btn'>Sign Out</a></li>
 EOT;
 			    if ($role == "admin") {
@@ -92,6 +93,7 @@ EOT;
 	   		    }
 	   		echo <<<EOT
 	       		    <li><a href='/user' class='btn btn-link navbar-btn'>Hello {$_SESSION['sess_user_name']}</a></li>
+			    <li><a href='/user/favorites' class='btn btn-link navbar-btn'>Your Favorites</a></li>
 	       		    <li><a href='/logout.php' class='nav btn btn-link navbar-btn'>Sign Out</a></li>
 EOT;
 			    if ($role == "admin") {
