@@ -38,6 +38,12 @@ if ((issignedin() != -1)) {
 	$stmt->execute();
 	$stmt->close();
 	$conn->close();
+	
+	$_SESSION["message"] = 1;
+	$_SESSION["msg"] = "Project Favorited.";
+
+	header("Location: /project/all");
+	exit();
     }
     elseif ($favorite_status == 'remove') {
         $stmt = $conn->prepare("DELETE FROM user_project_favorites WHERE userid=? AND projectid=?");
@@ -46,14 +52,13 @@ if ((issignedin() != -1)) {
 	$stmt->execute();
 	$stmt->close();
 	$conn->close();
+		
+	$_SESSION["message"] = 1;
+	$_SESSION["msg"] = "Project Unfavorited.";
+
+	header("Location: /project/all");
+	exit();
     }
-
-    $_SESSION["message"] = 1;
-    $_SESSION["msg"] = "Project Favorited.";
-
-    header("Location: /project/all");
-    exit();
-
 }
 else {
     $_SESSION["error"] = 1;

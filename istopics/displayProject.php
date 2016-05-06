@@ -9,6 +9,7 @@
 * before calling display_project()
 */
 
+require_once 'db_credentials.php';
 require_once 'timeElapsed.php';
 require_once 'checkSignIn.php';
 
@@ -39,13 +40,36 @@ function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_
 		    </form>
 EOT;
 		    if (issignedin() != -1) {
-		        echo <<<EOT
-		    	    <form action="/favorite.php" method="POST" class="col-lg-1">
-			        <input type='hidden' name="projectid" value="{$proj_id}">
-				<input type="hidden" name="favorite_status" value="add">
-				<button type="submit" class="btn btn-link"><span class="glyphicon glyphicon-star-empty"></span></button>
-		    	    </form>
-EOT;
+		        echo "<form action='/favorite.php' method='POST' class='col-lg-1'>";
+			echo "<input type='hidden' name='projectid' value='{$proj_id}'>";
+
+			$userid = $_SESSION['sess_user_id'];
+			$sql = "SELECT userid, projectid FROM user_project_favorites WHERE projectid={$proj_id} AND userid={$userid}";
+
+// This is here because require_once 'db_credentials.php'; wasn't working
+$servername = "localhost";
+$username = "istopics";
+$password = "password"; //NOTE: CHANGE THE PASSWORD BEFORE GOING INTO PRODUCTION
+$dbname = "istopics";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+			$result = $conn->query($sql);
+
+			if ($result->num_rows > 0) {
+			    // user has already favorited the project, present the removal option
+			    echo "<input type='hidden' name='favorite_status' value='remove'>";
+			    echo "<button type='submit' class='btn btn-link'><span class='glyphicon glyphicon-star'></span></button>";
+			}
+			else {
+			    // user has not yet favorited the project, present the add option
+			    echo "<input type='hidden' name='favorite_status' value='add'>";
+			    echo "<button type='submit' class='btn btn-link'><span class='glyphicon glyphicon-star-empty'></span></button>";
+			}
+			
+		    	echo "</form>";
+			$conn->close();
+
 		    }
     echo<<<EOT
 	        </div> <!-- panel heading -->
