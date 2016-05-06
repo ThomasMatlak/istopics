@@ -9,7 +9,8 @@
 * before calling display_project()
 */
 
-require_once('timeElapsed.php');
+require_once 'timeElapsed.php';
+require_once 'checkSignIn.php';
 
 function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, $proj_comments, $last_updated, $show_comments, $show_author) {
 /*
@@ -32,17 +33,21 @@ function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_
     	<li>
 	    <div id="{$proj_id}" class="panel panel-default">
 	        <div class="panel-heading container-fluid">
-		    <!--<div class="container-fluid">-->
-                    	<form action='/project' method='GET' class='form-inline col-lg-10'>
-		            <input type='hidden' name='project_id' value='{$proj_id}'>
-			    <button type='submit' class='btn btn-link'><span id="{$proj_id}project_title">{$proj_title}</span></button>
-		    	</form>
-			<form action="/favorite.php" method="POST" class="col-lg-2">
-			    <input type='hidden' name="projectid" value="{$proj_id}">
-			    <input type="hidden" name="favorite_status" value="add">
-			    <button type="submit" class="btn btn-link"><span class="glyphicon glyphicon-star-empty"></span></button>
-			</form>
-		    <!--</div>-->
+                    <form action='/project' method='GET' class='form-inline col-lg-11'>
+		        <input type='hidden' name='project_id' value='{$proj_id}'>
+		        <button type='submit' class='btn btn-link'><span id="{$proj_id}project_title">{$proj_title}</span></button>
+		    </form>
+EOT;
+		    if (issignedin() != -1) {
+		        echo <<<EOT
+		    	    <form action="/favorite.php" method="POST" class="col-lg-1">
+			        <input type='hidden' name="projectid" value="{$proj_id}">
+				<input type="hidden" name="favorite_status" value="add">
+				<button type="submit" class="btn btn-link"><span class="glyphicon glyphicon-star-empty"></span></button>
+		    	    </form>
+EOT;
+		    }
+    echo<<<EOT
 	        </div> <!-- panel heading -->
 	        <div class="panel-body">
 	            <table class='table'>
