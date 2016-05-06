@@ -67,6 +67,9 @@ EOT;
 	<input type='hidden' value='{$max_proj_id}' id='max_proj_id'>
 EOT;
 }
+else {
+    echo "<p>You do not have any favorited projects.</p>";
+}
 
 include('footer.php');
 

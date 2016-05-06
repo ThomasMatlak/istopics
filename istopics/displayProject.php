@@ -34,13 +34,13 @@ function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_
     	<li>
 	    <div id="{$proj_id}" class="panel panel-default">
 	        <div class="panel-heading container-fluid">
-                    <form action='/project' method='GET' class='form-inline col-lg-11'>
+                    <form action='/project' method='GET' class='form-inline col-lg-11 col-md-11 col-sm-11 col-xs-11'>
 		        <input type='hidden' name='project_id' value='{$proj_id}'>
 		        <button type='submit' class='btn btn-link'><span id="{$proj_id}project_title">{$proj_title}</span></button>
 		    </form>
 EOT;
 		    if (issignedin() != -1) {
-		        echo "<form action='/favorite.php' method='POST' class='col-lg-1'>";
+		        echo "<form action='/favorite.php' method='POST' class='col-lg-1 col-md-1 col-sm-1 col-xs-1'>";
 			echo "<input type='hidden' name='projectid' value='{$proj_id}'>";
 
 			$userid = $_SESSION['sess_user_id'];

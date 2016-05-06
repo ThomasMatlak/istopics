@@ -42,7 +42,7 @@ if ((issignedin() != -1)) {
 	$_SESSION["message"] = 1;
 	$_SESSION["msg"] = "Project Favorited.";
 
-	header("Location: /project/all");
+	header("Location: ". $_SERVER['HTTP_REFERER']);
 	exit();
     }
     elseif ($favorite_status == 'remove') {
@@ -53,10 +53,10 @@ if ((issignedin() != -1)) {
 	$stmt->close();
 	$conn->close();
 		
-	$_SESSION["message"] = 1;
+	$_SESSION["message"] = 2;
 	$_SESSION["msg"] = "Project Unfavorited.";
 
-	header("Location: /project/all");
+	header("Location: ". $_SERVER['HTTP_REFERER']);
 	exit();
     }
 }
