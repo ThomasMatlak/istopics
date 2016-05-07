@@ -3,10 +3,10 @@
 */
 
 $("form :input").on('input', function() {
-    search();
+    search_all();
 });
 
-function search() {
+function search_all() {
     var searchTerms = $('#search').val().toLowerCase().split(" ");
 
     var max_proj_id = $('#max_proj_id').val();
@@ -36,12 +36,9 @@ function search() {
 
 	// Input is not empty; search for and display projects matching search terms
 	for (i = 1; i <= max_proj_id; i++) {
-	    if (!$('#' + i + 'project_title').text()) { break; }
+	    if ($('#'+i+'project_title').text()) {
 
-	    project_showed = false;
-
-	    for (j = 0; j < searchTerms.length; j++) {
-		var searchTerm = removeDiacritics(searchTerms[j].trim()).replace(",", "");
+		var project_showed = false; 
 
 		var keywords = removeDiacritics($('#'+i+'full_keywords').val().toLowerCase());
 		var title    = removeDiacritics($('#'+i+'project_title').text().toLowerCase());
@@ -49,16 +46,20 @@ function search() {
 		var proposal = removeDiacritics($('#'+i+'full_proposal').val().toLowerCase());
 		var name     = removeDiacritics($('#'+i+'author').text().toLowerCase());
 
-		// Search term is empty -- there is nothing after the comma in the search terms
-		if (searchTerm == "") { break; }
+		for (j = 0; j < searchTerms.length; j++) {
+		    var searchTerm = removeDiacritics(searchTerms[j].trim()).replace(",", "");
 
-		if ((keywords.search(searchTerm) != -1) || (title.search(searchTerm) != -1) || (major.search(searchTerm) != -1) || (proposal.search(searchTerm) != -1) || (name.search(searchTerm) != -1)) {
-		    // Some keywords or words in the title match the search term; display the project
-		    $('#'+i).show();
-		    var project_showed = true;
+		    // Search term is empty -- there is nothing after the comma in the search terms
+		    if (searchTerm == "") { break; }
+
+		    if ((keywords.search(searchTerm) != -1) || (title.search(searchTerm) != -1) || (major.search(searchTerm) != -1) || (proposal.search(searchTerm) != -1) || (name.search(searchTerm) != -1)) {
+			// Some keywords or words in the title match the search term; display the project
+			$('#'+i).show();
+			project_showed = true;
+		    }
 		}
+		if (project_showed == true) { num_projects++; }
 	    }
-	    if (project_showed == true) { num_projects++; }
 	}
 	$('#num_projects').text(num_projects);
 	$('#no_results_msg').text('');
