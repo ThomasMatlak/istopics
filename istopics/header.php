@@ -8,6 +8,7 @@
 if(!isset($_SESSION)) { session_start(); }
 
 require_once 'checkSignIn.php';
+require_once 'db_credentials.php';
 ?>
 
 <!Doctype HTML>
@@ -39,87 +40,81 @@ require_once 'checkSignIn.php';
 
 	    <nav class="navbar navbar-inverse navbar-static-top">
 	        <div class="container-fluid">
-		    <!--<a href="/project/all" class="navbar-brand">Home</a>-->
 		    <a href='http://www.wooster.edu' class="navbar-brand">
             	        <img src='/wordmark.png' height="28" alt='The College of Wooster'/>
             	    </a>
   		    <ul class="nav nav-pills navbar-left visible-xs">
 			<li><ul class="dropdown-menu">
-			<li><a href="/project/all" class="btn btn-link navbar-btn">View All Projects</a></li>
-   
 		    <?php
         	        $role = issignedin();
 
-        		if (issignedin() != -1) {
-            		    // user is signed in
-	    		    if ($role == "student") {
-	       		        // user is a student
-	       			echo "<li><a href='/project/new' class='btn btn-link navbar-btn'>Add a New Project</a></li>";
-	   		    }
-	   		echo <<<EOT
-	       		    <li><a href='/user' class='btn btn-link navbar-btn'>Hello {$_SESSION['sess_user_name']}</a></li>
-			    <li><a href='/user/favorites' class='btn btn-link navbar-btn'>Your Favorites</a></li>
-	       		    <li><a href='/logout.php' class='nav btn btn-link navbar-btn'>Sign Out</a></li>
-EOT;
-			    if ($role == "admin") {
-	   		        // user is an admin
-	   			echo "<li><a href='/admin' class='btn btn-link navbar-btn'>Administrator Interface</a></li>";
+			$sql = "SELECT link, visible_text, required_priveleges from header_links ORDER BY link_order ASC";
+			$result = $conn->query($sql);
+
+			while ($row = $result->fetch_assoc()) {
+			    $required_role = $row['required_priveleges'];
+			    $link          = $row['link'];
+			    $visible_text  = $row['visible_text'];
+
+			    if ($link == '/user') {
+			        $visible_text = $visible_text. " {$_SESSION['sess_user_name']}";
 			    }
-			    echo '</ul><button type="button" class="btn btn-link navbar-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger"></span></button></ul>';
-                    	}
-       			else {
-           		    // user is not signed in
-	   		    echo <<<EOT
-           		        <li><a href='/signin' class='nav btn btn-link navbar-btn'>Sign In</a></li>
-           			<li><a href='/register' class='nav btn btn-link navbar-btn'>New User?</a></li>
-	   			</ul>
-				<button type="button" class="btn btn-link navbar-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-				</ul>
-EOT;
+
+			    if ($required_role == 'none') {
+			        echo "<li><a href='{$link}' class='btn btn-link navbar-btn'>{$visible_text}</a></li>";
+			    }
+			    if (($required_role == 'signin') && ($role != -1)) {
+			        echo "<li><a href='{$link}' class='btn btn-link navbar-btn'>{$visible_text}</a></li>";
+			    }
+			    if (($required_role == 'signout') && ($role == -1)) {
+			        echo "<li><a href='{$link}' class='btn btn-link navbar-btn'>{$visible_text}</a></li>";
+			    }
+			    if (($required_role == 'student') && ($role == 'student')) {
+			        echo "<li><a href='{$link}' class='btn btn-link navbar-btn'>{$visible_text}</a></li>";
+			    }
+			    if (($required_role == 'admin') && ($role == 'admin')) {
+			        echo "<li><a href='{$link}' class='btn btn-link navbar-btn'>{$visible_text}</a></li>";
+			    }
 			}
+
+			echo "</ul><button type='button' class='btn btn-link navbar-btn dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'><span class='glyphicon glyphicon-menu-hamburger'></span></button></li>";
     		    ?>
+		    </ul>
 
 		    <ul class="nav nav-pills navbar-left hidden-xs">
-    		        <li><a href="/project/all" class="btn btn-link navbar-btn">View All Projects</a></li>
-   
 		    <?php
         	        $role = issignedin();
 
-        		if (issignedin() != -1) {
-            		    // user is signed in
-	    		    if ($role == "student") {
-	       		        // user is a student
-	       			echo "<li><a href='/project/new' class='btn btn-link navbar-btn'>Add a New Project</a></li>";
-	   		    }
-	   		echo <<<EOT
-	       		    <li><a href='/user' class='btn btn-link navbar-btn'>Hello {$_SESSION['sess_user_name']}</a></li>
-			    <li><a href='/user/favorites' class='btn btn-link navbar-btn'>Your Favorites</a></li>
-	       		    <li><a href='/logout.php' class='nav btn btn-link navbar-btn'>Sign Out</a></li>
-EOT;
-			    if ($role == "admin") {
-	   		        // user is an admin
-	   			echo "<li><a href='/admin' class='btn btn-link navbar-btn'>Administrator Interface</a></li>";
+			$sql = "SELECT link, visible_text, required_priveleges from header_links ORDER BY link_order ASC";
+			$result = $conn->query($sql);
+
+			while ($row = $result->fetch_assoc()) {
+			    $required_role = $row['required_priveleges'];
+			    $link          = $row['link'];
+			    $visible_text  = $row['visible_text'];
+
+			    if ($link == '/user') {
+			        $visible_text = $visible_text. " {$_SESSION['sess_user_name']}";
 			    }
-			    echo "</ul>";
-                    	}
-       			else {
-           		    // user is not signed in
-	   		    echo <<<EOT
-           		        <li><a href='/signin' class='nav btn btn-link navbar-btn'>Sign In</a></li>
-           			<li><a href='/register' class='nav btn btn-link navbar-btn'>New User?</a></li>
-	   			</ul>
-EOT;
+
+			    if ($required_role == 'none') {
+			        echo "<li><a href='{$link}' class='btn btn-link navbar-btn'>{$visible_text}</a></li>";
+			    }
+			    if (($required_role == 'signin') && ($role != -1)) {
+			        echo "<li><a href='{$link}' class='btn btn-link navbar-btn'>{$visible_text}</a></li>";
+			    }
+			    if (($required_role == 'signout') && ($role == -1)) {
+			        echo "<li><a href='{$link}' class='btn btn-link navbar-btn'>{$visible_text}</a></li>";
+			    }
+			    if (($required_role == 'student') && ($role == 'student')) {
+			        echo "<li><a href='{$link}' class='btn btn-link navbar-btn'>{$visible_text}</a></li>";
+			    }
+			    if (($required_role == 'admin') && ($role == 'admin')) {
+			        echo "<li><a href='{$link}' class='btn btn-link navbar-btn'>{$visible_text}</a></li>";
+			    }
 			}
     		    ?>
-
-		    <!-- Header logo file -->
-        	    <!--<ul class='nav navbar-nav navbar-right'>
-			<li>
-            		    <a href='http://www.wooster.edu'>
-            		        <img src='/wordmark.png' height="28" alt='The College of Wooster'/>
-            		    </a>
-			</li>
-		    </ul>-->
+		    </ul>
 
 		    <noscript>
 		        <form id="search_html" action="/project/search" method="GET" class="navbar-form">
