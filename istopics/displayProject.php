@@ -9,7 +9,7 @@
 * before calling display_project()
 */
 
-require_once 'db_credentials.php';
+//require_once 'db_credentials.php';
 require_once 'timeElapsed.php';
 require_once 'checkSignIn.php';
 

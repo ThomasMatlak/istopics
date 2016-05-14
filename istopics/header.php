@@ -94,7 +94,9 @@ require_once 'db_credentials.php';
 			    $visible_text  = $row['visible_text'];
 
 			    if ($link == '/user') {
-			        $visible_text = $visible_text. " {$_SESSION['sess_user_name']}";
+			        if ($role != -1) {
+			            $visible_text = $visible_text. " {$_SESSION['sess_user_name']}";
+				}
 			    }
 
 			    if ($required_role == 'none') {
