@@ -32,32 +32,54 @@ if ((issignedin() != -1)) {
     $userid = $_SESSION['sess_user_id'];
 
     if ($favorite_status == 'add') {
-        $stmt = $conn->prepare("INSERT INTO user_project_favorites (userid, projectid) VALUES (?,?)");
-	$stmt->bind_param("ss", $userid, $projectid);
+        if ($stmt = $conn->prepare("INSERT INTO user_project_favorites (userid, projectid) VALUES (?,?)")) {
+	    $stmt->bind_param("ss", $userid, $projectid);
 
-	$stmt->execute();
-	$stmt->close();
-	$conn->close();
-	
-	$_SESSION["message"] = 1;
-	$_SESSION["msg"] = "Project Favorited.";
+	    $stmt->execute();
+	    $stmt->close();
+	    $conn->close();
 
-	header("Location: ". $_SERVER['HTTP_REFERER']);
-	exit();
+	    $_SESSION["message"] = 1;
+	    $_SESSION["msg"] = "Project Favorited.";
+
+	    header("Location: ". $_SERVER['HTTP_REFERER']);
+	    exit();
+	}
+	else {
+	    $stmt->close();
+	    $conn->close();
+
+	    $_SESSION["error"] = 1;
+	    $_SESSION["error_msg"] = "There was a problem favoriting the project.";
+
+	    header("Location: ". $_SERVER['HTTP_REFERER']);
+	    exit();
+	}
     }
     elseif ($favorite_status == 'remove') {
-        $stmt = $conn->prepare("DELETE FROM user_project_favorites WHERE userid=? AND projectid=?");
-	$stmt->bind_param("ss", $userid, $projectid);
+        if ($stmt = $conn->prepare("DELETE FROM user_project_favorites WHERE userid=? AND projectid=?")) {
+	    $stmt->bind_param("ss", $userid, $projectid);
 
-	$stmt->execute();
-	$stmt->close();
-	$conn->close();
-		
-	$_SESSION["message"] = 2;
-	$_SESSION["msg"] = "Project Unfavorited.";
+	    $stmt->execute();
+	    $stmt->close();
+	    $conn->close();
 
-	header("Location: ". $_SERVER['HTTP_REFERER']);
-	exit();
+	    $_SESSION["message"] = 2;
+	    $_SESSION["msg"] = "Project Unfavorited.";
+
+	    header("Location: ". $_SERVER['HTTP_REFERER']);
+	    exit();
+	}
+	else {
+	    $stmt->close();
+	    $conn->close();
+
+	    $_SESSION["error"] = 1;
+	    $_SESSION["erroe_msg"] = "There was a problem unfavoriting the project.";
+
+	    header("Location: ". $_SERVER['HTTP_REFERER']);
+	    exit();
+	}
     }
 }
 else {
