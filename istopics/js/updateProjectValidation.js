@@ -1,6 +1,6 @@
-/*
-* Check that user input is valid when updating a project
-*/
+/**
+ * Check that user input is valid when updating a project
+ */
 
 // Set default field states
 $('#check_title').attr("class", "has-success");
@@ -15,7 +15,7 @@ $('#title').on('input', function() {
     }
     else {
     	$('#check_title').attr("class", "has-error");
-	$('#submit').attr("disabled", "true");
+	    $('#submit').attr("disabled", "true");
     }
 });
 
@@ -23,12 +23,12 @@ $('#title').on('input', function() {
 $('#discipline').on('input', function() {
     if ($('#discipline').val()) {
         $('#stud_major').text($('#discipline').val());
-	$('#discipline_check').attr("class", "has-success");
+	    $('#discipline_check').attr("class", "has-success");
     }
     else {
     	$('#stud_major').text('');
     	$('#discipline_check').attr("class", "has-error");
-	$('#submit').attr("disabled", "true");
+	    $('#submit').attr("disabled", "true");
     }
 });
 
@@ -39,7 +39,7 @@ $('#keywords').on('input', function() {
     }
     else {
     	$('#check_keywords').attr("class", "has-error");
-	$('#submit').attr("disabled", "true");
+	    $('#submit').attr("disabled", "true");
     }
 });
 

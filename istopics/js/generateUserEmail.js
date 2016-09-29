@@ -1,4 +1,8 @@
-// Auto fill the user's email as they enter their information during registration
+/**
+ *  Auto fill the user's email as they enter their information during registration
+ * 
+ * @deprecated
+ */
 
 $("form :input").on('input', function() {
     var first_name = $('#first_name').val();

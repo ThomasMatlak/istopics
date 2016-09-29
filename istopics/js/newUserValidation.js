@@ -1,6 +1,6 @@
-/*
-* Check that user input when making a new user profile is valid
-*/
+/**
+ * Check that user input when making a new user profile is valid
+ */
 
 // Set all fields to default filled state
 $('#check_first_name').attr("class", "has-error");
@@ -18,7 +18,7 @@ $('#first_name').on('input', function() {
     }
     else {
     	$('#check_first_name').attr("class", "has-error");
-	$('#submit').attr("disabled", "true");
+	    $('#submit').attr("disabled", "true");
     }
 });
 $('#last_name').on('input', function() {
@@ -27,7 +27,7 @@ $('#last_name').on('input', function() {
     }
     else {
     	$('#check_last_name').attr("class", "has-error");
-	$('#submit').attr("disabled", "true");
+	    $('#submit').attr("disabled", "true");
     }
 });
 
@@ -35,12 +35,12 @@ $('#last_name').on('input', function() {
 $('#discipline').on('input', function() {
     if ($('#discipline').val()) {
         $('#stud_major').text($('#discipline').val());
-	$('#discipline_check').attr("class", "has-success");
+	    $('#discipline_check').attr("class", "has-success");
     }
     else {
     	$('#stud_major').text('');
     	$('#discipline_check').attr("class", "has-error");
-	$('#submit').attr("disabled", "true");
+	    $('#submit').attr("disabled", "true");
     }
 });
 
@@ -51,26 +51,26 @@ $('#year').on('input', function() {
     }
     else {
     	$('#year_check').attr("class", "has-error");
-	$('#submit').attr("disabled", "true");
+	    $('#submit').attr("disabled", "true");
     }
 });
 
 // Check that the email is valid
 $('#email').on('input', function() {
     if ($('#email').val()) {
-	if ($('#email').val().match(/@wooster.edu/)) {
+        if ($('#email').val().match(/@wooster.edu/)) {
             $('#invalid_email').text('');
-	    $('#email_check').attr("class", "has-success");
-	}
-	else if (!$('#email').val().match(/@wooster.edu/)) {
-	    $('#invalid_email').text('You must use a *@wooster.edu email address');
-	    $('#email_check').attr("class", "has-error");
-	    $('#submit').attr("disabled", "true");
-	}
+            $('#email_check').attr("class", "has-success");
+        }
+        else if (!$('#email').val().match(/@wooster.edu/)) {
+            $('#invalid_email').text('You must use a *@wooster.edu email address');
+            $('#email_check').attr("class", "has-error");
+            $('#submit').attr("disabled", "true");
+        }
     }
     else {
     	$('#email_check').attr("class", "has-error");
-	$('#submit').attr("disabled", "true");
+	    $('#submit').attr("disabled", "true");
     }
 });
 
@@ -84,11 +84,11 @@ $('#password').on('input', function() {
     else {
         $('#password_not_same').text('');
         if ($('#first_name').val() != "" && $('#last_name').val() != "") {
-	    $('#password_group').attr("class", "has-success");
+            $('#password_group').attr("class", "has-success");
         }
-	else {
-	     $('#submit').attr("disabled", "true");
-	}
+        else {
+            $('#submit').attr("disabled", "true");
+        }
     }
 });
 $('#confirm_password').on('input', function() {
@@ -100,11 +100,11 @@ $('#confirm_password').on('input', function() {
     else {
         $('#password_not_same').text('');
         if ($('#first_name').val() != "" && $('#last_name').val() != "") {
-	    $('#password_group').attr("class", "has-success");
+	        $('#password_group').attr("class", "has-success");
         }
-	else {
-	     $('#submit').attr("disabled", "true");
-	}
+        else {
+            $('#submit').attr("disabled", "true");
+        }
     }
 });
 
@@ -112,18 +112,18 @@ $('#confirm_password').on('input', function() {
 $("form :input").on('input', function() {
     if ($('#studentSelect').is(":checked")) {
         if ($('#first_name').val() && $('#last_name').val() && $('#discipline').val() && $('#year').val() && $('#email').val() && $('#password').val() && $('#confirm_password').val() && ($('#password').val() == $('#confirm_password').val())) {
-	    document.getElementById("submit").disabled = false;
+	        document.getElementById("submit").disabled = false;
         }
         else {
-	    $('#submit').attr("disabled", "true");
+	        $('#submit').attr("disabled", "true");
         }
     }
     else if ($('#facultySelect').is(":checked")) {
-	if ($('#first_name').val() && $('#last_name').val() && $('#email').val() && $('#password').val() && $('#confirm_password').val() && ($('#password').val() == $('#confirm_password').val())) {
-	    document.getElementById("submit").disabled = false;
+        if ($('#first_name').val() && $('#last_name').val() && $('#email').val() && $('#password').val() && $('#confirm_password').val() && ($('#password').val() == $('#confirm_password').val())) {
+            document.getElementById("submit").disabled = false;
         }
         else {
-	    $('#submit').attr("disabled", "true");
+            $('#submit').attr("disabled", "true");
         }
     }
 });
@@ -131,11 +131,11 @@ $("form :input").on('input', function() {
 // Student/Faculty Toggle
 function stud_faculty_toggle() {
     if ($('#studentSelect').is(":checked")) {
-	$('#discipline_check').show();
-	$('#year_check').show();
+        $('#discipline_check').show();
+        $('#year_check').show();
     }
     else if ($('#facultySelect').is(":checked")) {
-	$('#discipline_check').hide();
-	$('#year_check').hide();
+        $('#discipline_check').hide();
+        $('#year_check').hide();
     }
 }

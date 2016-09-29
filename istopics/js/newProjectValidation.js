@@ -1,6 +1,6 @@
-/*
-* Check that user input when creating a project is valid
-*/
+/**
+ * Check that user input when creating a project is valid
+ */
 
 // Set all fields to default filled state
 $('#check_title').attr("class", "has-error");
@@ -15,7 +15,7 @@ $('#title').on('input', function() {
     }
     else {
     	$('#check_title').attr("class", "has-error");
-	$('#submit').attr("disabled", "true");
+	    $('#submit').attr("disabled", "true");
     }
 });
 
@@ -23,12 +23,12 @@ $('#title').on('input', function() {
 $('#discipline').on('input', function() {
     if ($('#discipline').val()) {
         $('#stud_major').text($('#discipline').val());
-	$('#discipline_check').attr("class", "has-success");
+	    $('#discipline_check').attr("class", "has-success");
     }
     else {
     	$('#stud_major').text('');
     	$('#discipline_check').attr("class", "has-error");
-	$('#submit').attr("disabled", "true");
+	    $('#submit').attr("disabled", "true");
     }
 });
 
@@ -39,16 +39,16 @@ $('#keywords').on('input', function() {
     }
     else {
     	$('#check_keywords').attr("class", "has-error");
-	$('#submit').attr("disabled", "true");
+	    $('#submit').attr("disabled", "true");
     }
 });
 
 // Check that all required fields are filled
 $("form :input").on('input', function() {
     if ($('#title').val() && $('#discipline').val() && $('#keywords').val()) {
-	document.getElementById("submit").disabled = false;
+	    document.getElementById("submit").disabled = false;
     }
     else {
-	$('#submit').attr("disabled", "true");
+	    $('#submit').attr("disabled", "true");
     }
 });
