@@ -1,9 +1,7 @@
 <?php
-/*
-* forgotPassword.php
-*
-* Present the user with a form to email them a password reset link
-*/
+/**
+ * Present the user with a form to email them a password reset link
+ */
 
 include 'header.php';
 ?>
@@ -16,4 +14,3 @@ include 'header.php';
 
 <?php
 include 'footer.php';
-?>

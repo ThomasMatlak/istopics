@@ -1,17 +1,15 @@
 <?php
-/*
-* newUserController.php
-* 
-* Add a new user to the istopics database.
-*
-* $_POST["stud_or_faculty"] - is the user a student of faculty member?
-* $_POST["first_name"]      - the first name of the user to add
-* $_POST["last_name"]       - the last name of the user to add
-* $_POST["email"]           - the email of the user to add
-* $_POST["year"]            - the class year of the user to add
-* $_POST["discipline"]      - the major of the user to add
-* $_POST["password"]        - the password of the user to add
-*/
+/**
+ * Add a new user to the istopics database.
+ *
+ * $_POST["stud_or_faculty"] - is the user a student of faculty member?
+ * $_POST["first_name"]      - the first name of the user to add
+ * $_POST["last_name"]       - the last name of the user to add
+ * $_POST["email"]           - the email of the user to add
+ * $_POST["year"]            - the class year of the user to add
+ * $_POST["discipline"]      - the major of the user to add
+ * $_POST["password"]        - the password of the user to add
+ */
 
 if (!isset($_SESSION)) {session_start();}
 
@@ -123,5 +121,3 @@ $_SESSION['password'] = $_POST['password'];
 
 header("Location: /loginController.php?just_registered={$role}");
 exit();
-
-?>

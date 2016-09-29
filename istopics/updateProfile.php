@@ -1,9 +1,7 @@
 <?php
-/*
-* updateProfile.php
-*
-* Present the user with a form to update their profile information
-*/
+/**
+ * Present the user with a form to update their profile information
+ */
 
 if (!isset($_SESSION)) {session_start();}
 
@@ -67,56 +65,56 @@ if ($result->num_rows > 0) {
 
     $major_list = file_get_contents("majors.html");
 
-    echo <<<EOT
-    	 <input type="hidden" id="user_role" value="{$role}">
-    	 <form id="update_user" action="/updateProfileController.php" method="POST" class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
- 	     <div class="form-group">
-    	         <div id="check_first_name">
-    		     <label for="first_name" class="control-label">First Name:</label>
-		     <input type="text" name="first_name" id="first_name" class="form-control" value="{$first_name}" required>
-    		 </div>
-    		 <div id="check_last_name">
-                     <label for="last_name" class="control-label">Last Name:</label>
-    	             <input type="text" name="last_name" id="last_name" class="form-control" value="{$last_name}" required>
-    	   	 </div>
-EOT;
+?>
+<input type="hidden" id="user_role" value="<?php echo $role ?>">
+<form id="update_user" action="/updateProfileController.php" method="POST" class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<div class="form-group">
+		<div id="check_first_name">
+		<label for="first_name" class="control-label">First Name:</label>
+	<input type="text" name="first_name" id="first_name" class="form-control" value="<?php echo $first_name ?>" required>
+	</div>
+	<div id="check_last_name">
+			<label for="last_name" class="control-label">Last Name:</label>
+			<input type="text" name="last_name" id="last_name" class="form-control" value="<?php echo $last_name ?>" required>
+	</div>
+<?php
             if ($role == "student") {
-	        echo <<<EOT
-    		 <div id="discipline_check">
-                     <label for="discipline" class="control-label">Major(s):</label><span id="stud_major"></span>
-		     {$major_list}
-		     <input type="hidden" name="st_major" id="st_major" value="{$major}">
-	  	 </div>
-    		 <div id="year_check">
-                     <label for="year" class="control-label">Graduating Year:</label>
-                     <input type="number" name="year" id="year" class="form-control" value="{$year}" required>
-    	         </div>
-EOT;
+?>
+	<div id="discipline_check">
+			<label for="discipline" class="control-label">Major(s):</label><span id="stud_major"></span>
+	<?php echo $major_list ?>
+	<input type="hidden" name="st_major" id="st_major" value="<?php echo $major ?>">
+</div>
+	<div id="year_check">
+			<label for="year" class="control-label">Graduating Year:</label>
+			<input type="number" name="year" id="year" class="form-control" value="<?php echo $year ?>" required>
+		</div>
+<?php
             }
-    echo <<<EOT
-    		 <div id="email_check">
-                     <label for="email" class="control-label">Email:</label>
-                     <input type="email" name="email" id="email" class="form-control" value="{$email}" required><span id="invalid_email"></span>
-                 </div>
-		 <input type="hidden" name="user_id" value={$user_id}>
-		 <hr>
-	    	 <label for="new_password">Change Password</label>
-	    	 <input type="password" id="new_password" name="new_password" class="form-control">
-		 <button type="submit" id="submit" class="btn btn-warning form-control">Submit</button>
-     	    </div>
-	</form>
+?>
+			<div id="email_check">
+					<label for="email" class="control-label">Email:</label>
+					<input type="email" name="email" id="email" class="form-control" value="<?php echo $email ?>" required><span id="invalid_email"></span>
+				</div>
+		<input type="hidden" name="user_id" value="<?php echo $user_id ?>">
+		<hr>
+			<label for="new_password">Change Password</label>
+			<input type="password" id="new_password" name="new_password" class="form-control">
+		<button type="submit" id="submit" class="btn btn-warning form-control">Submit</button>
+		</div>
+</form>
 
-	<hr>
+<hr>
 
-	<form action='/deleteUser.php?user_id={$user_id}' method='post' class='form-horizontal'>
-	    <input type='hidden' name='delete_user_id' value='{$user_id}'>
-	    <input type='hidden' name='delete_user_role' value='{$role}'>
-	    <button type='submit' class='btn btn-danger'>Delete Your Account</button>
-	</form>
+<form action='/deleteUser.php?user_id=<?php echo $user_id ?>' method='post' class='form-horizontal'>
+	<input type='hidden' name='delete_user_id' value='<?php echo $user_id ?>'>
+	<input type='hidden' name='delete_user_role' value='<?php echo $role ?>'>
+	<button type='submit' class='btn btn-danger'>Delete Your Account</button>
+</form>
 
-	<script src="/js/updateProfileValidation.js"></script>
-	<script src="/js/setMajor.js"></script>
-EOT;
+<script src="/js/updateProfileValidation.js"></script>
+<script src="/js/setMajor.js"></script>
+<?php
 }
 else {
      echo "<p>User Not Found.</p>";
@@ -135,4 +133,3 @@ else {
 }
 
 include("footer.php");
-?>

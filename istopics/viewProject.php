@@ -1,9 +1,7 @@
 <?php
-/*
-* viewProject.php
-* 
-* Display the project 
-*/
+/**
+ * Display the project 
+ */
 
 $page_title = "View Project";
 include("header.php");
@@ -54,5 +52,3 @@ else {
 }
 
 include("footer.php");
-
-?>

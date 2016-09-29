@@ -1,11 +1,9 @@
 <?php
-/*
-* deleteProjectController.php
-* 
-* Delete a project from the istopics database.
-*
-* $_POST['project_id'] - the id of the project to delete
-*/
+/**
+ * Delete a project from the istopics database.
+ *
+ * $_POST['project_id'] - the id of the project to delete
+ */
 
 if (!isset($_SESSION)) {session_start();}
 
@@ -67,4 +65,3 @@ else {
      header("Location: /project/all");
      exit();
 }
-?>

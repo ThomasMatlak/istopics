@@ -1,9 +1,7 @@
 <?php
-/*
-* newUser.php
-*
-* Present the user with a form to create a new user profile
-*/
+/**
+ * Present the user with a form to create a new user profile
+ */
 
 $page_title = "Register";
 include("header.php");
@@ -51,5 +49,4 @@ include("header.php");
 <script src="/js/newUserValidation.js"></script>
 
 <?php 
-include("footer.php")
-?>
+include("footer.php");

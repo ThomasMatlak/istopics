@@ -1,17 +1,15 @@
 <?php
-/*
-* updateProfileController.php
-*
-* Update a user profile
-*
-* $_POST["user_id"]    - the user id of the user to update
-* $_POST["first_name"] - the first name of the user to update
-* $_POST["last_name"]  - the last name of the user to update
-* $_POST["email"]      - the email of the user to update
-* $_POST["year"]       - the class year of the user to update
-* $_POST["discipline"] - the major of the user to update
-* $_POST["password"]   - the password of the user to update
-*/
+/**
+ * Update a user profile
+ *
+ * $_POST["user_id"]    - the user id of the user to update
+ * $_POST["first_name"] - the first name of the user to update
+ * $_POST["last_name"]  - the last name of the user to update
+ * $_POST["email"]      - the email of the user to update
+ * $_POST["year"]       - the class year of the user to update
+ * $_POST["discipline"] - the major of the user to update
+ * $_POST["password"]   - the password of the user to update
+ */
 
 if (!isset($_SESSION)) {session_start();}
 
@@ -102,4 +100,3 @@ else {
      header("Location: /user");
      exit();
 }
-?>

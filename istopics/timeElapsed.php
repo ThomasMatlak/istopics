@@ -1,14 +1,16 @@
 <?php
-/*
-* timeElapsed.php
-*
-* A function to give output for how long it has been since some timestamp
-*
-* Function taken from
-*     http://stackoverflow.com/questions/1416697/converting-timestamp-to-time-ago-in-php-e-g-1-day-ago-2-days-ago/18602474#18602474
-*/
+/**
+ * A function to give output for how long it has been since some timestamp
+ *
+ * Function taken from
+ *     http://stackoverflow.com/questions/1416697/converting-timestamp-to-time-ago-in-php-e-g-1-day-ago-2-days-ago/18602474#18602474
+ */
 
 function time_elapsed($datetime, $full = false) {
+    /**
+     * @param string $datetime
+     * @param bool   $full
+     */
     $now = new DateTime;
     $ago = new DateTime($datetime);
     $diff = $now->diff($ago);
@@ -36,5 +38,3 @@ function time_elapsed($datetime, $full = false) {
     if (!$full) $string = array_slice($string, 0, 1);
     return $string ? implode(', ', $string) . ' ago' : 'just now';
 }
-
-?>

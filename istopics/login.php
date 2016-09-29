@@ -1,9 +1,7 @@
 <?php
-/*
-* login.php
-*
-* Present the user with a form to sign into a user profile
-*/
+/**
+ * Present the user with a form to sign into a user profile
+ */
 
 session_start();
 
@@ -37,15 +35,6 @@ include("header.php");
       	    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
         </div>
     </div>
-<!--
-    <div class="form-group">
-        <div class="checkbox">
-            <label>
-              <input type="checkbox" id="remember" name="remember"> Remember me
-            </label>
-        </div>
-    </div>
--->
     <div class="form-group">
         <button type="submit" class="btn btn-default">Sign in</button>
     </div>
@@ -54,4 +43,3 @@ include("header.php");
 
 <?php 
 include("footer.php");
-?>

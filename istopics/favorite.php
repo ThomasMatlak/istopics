@@ -1,9 +1,7 @@
 <?php
-/*
-* favorite.php
-*
-* Change the status of a project's favoritness
-*/
+/**
+ * Change the status of a project's favoritness
+ */
 
 if (!isset($_SESSION)) {session_start();}
 
@@ -89,4 +87,3 @@ else {
     header("Location: /project/all");
     exit();
 }
-?>

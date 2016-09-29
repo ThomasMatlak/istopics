@@ -1,9 +1,7 @@
 <?php
-/*
-* dbToCSV.php
-*
-* Download all projects in the database as a CSV file
-*/
+/**
+ * Download all projects in the database as a CSV file
+ */
 
 require_once 'db_credentials.php';
 require_once 'checkSignIn.php';
@@ -47,5 +45,3 @@ else {
     header("Location: /project/all");
     exit();
 }
-
-?>

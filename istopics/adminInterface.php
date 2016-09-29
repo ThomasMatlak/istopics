@@ -1,9 +1,7 @@
 <?php
-/*
-* adminInterface.php
-*
-* Provide an admin interface such that the database can be edited and reset
-*/
+/**
+ * Provide an admin interface such that the database can be edited and reset
+ */
 
 if (!isset($_SESSION)) {session_start();}
 
@@ -16,40 +14,39 @@ require_once 'checkSignIn.php';
 
 if (issignedin() == 'admin') {
 // user is signed in as an admin
+?>
+<a href='/dbToCSV.php' class='btn btn-primary'>Download Projects as CSV</a>
 
-    echo <<<EOT
-        <a href='/dbToCSV.php' class='btn btn-primary'>Download Projects as CSV</a>
+<hr>
 
-        <hr>
+<script src='/js/resetDatabaseWarning.js'></script>
+<button onclick='resetWarning();' class='btn btn-danger'>Reset Database</button>
+<span class='help-block'>Resetting the database will delete all projects, connections between projects and users, and non-admin users.</span>
 
-     	<script src='/js/resetDatabaseWarning.js'></script>
-    	<button onclick='resetWarning();' class='btn btn-danger'>Reset Database</button>
-     	<span class='help-block'>Resetting the database will delete all projects, connections between projects and users, and non-admin users.</span>
+<hr>
 
-     	<hr>
+<button class="btn btn-default" type="button" data-toggle="collapse" data-target="#promoteUser" aria-expanded="false" aria-controls="promoteUser">
+	Promote a User to Admin
+</button>
+<div class="collapse" id="promoteUser">
+	<form action='/promoteUser.php' method='POST' class='form-inline'>
+	<div class='form-group'>
+		<label for='email'>Email:</label>
+	<input type='email' name='email' id='email' class='form-control'>
+	</div>
+	<button type='submit' class='btn btn-primary'>Promote User to Admin</button>
+</form>
+</div>
 
-     	<button class="btn btn-default" type="button" data-toggle="collapse" data-target="#promoteUser" aria-expanded="false" aria-controls="promoteUser">
-            Promote a User to Admin
-     	</button>
-     	<div class="collapse" id="promoteUser">
-            <form action='/promoteUser.php' method='POST' class='form-inline'>
-	        <div class='form-group'>
-	            <label for='email'>Email:</label>
-		    <input type='email' name='email' id='email' class='form-control'>
-	        </div>
-	        <button type='submit' class='btn btn-primary'>Promote User to Admin</button>
-	    </form>
-      	</div>
+<hr>
 
-     	<hr>
+<button class='btn btn-default' type='button' data-toggle='collapse' data-target='#showAllUsers' aria-expanded='false' aria-controls='showAllUsers'>
+	Show a List of All Users
+</button>
 
-     	<button class='btn btn-default' type='button' data-toggle='collapse' data-target='#showAllUsers' aria-expanded='false' aria-controls='showAllUsers'>
-            Show a List of All Users
-     	</button>
-
-     	<div class='collapse' id='showAllUsers'>
-            <ul class='list-unstyled'>
-EOT;
+<div class='collapse' id='showAllUsers'>
+	<ul class='list-unstyled'>
+<?php
 
     $sql = "SELECT id, first_name, last_name, major, year, email, role FROM users";
     $result = $conn->query($sql);
@@ -65,11 +62,10 @@ EOT;
 
         display_profile($user_id, $first_name. " ". $last_name, true, $major, $year, $email, $role, true);
     }
-
-    echo <<<EOT
-            </ul>
-        </div>
-EOT;
+?>
+	</ul>
+</div>
+<?php
 
 }
 else {
@@ -82,4 +78,3 @@ else {
 }
 
 include("footer.php");
-?>

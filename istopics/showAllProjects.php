@@ -1,10 +1,8 @@
 <?php
-/*
-* showAllProjects.php
-* 
-* Display all of the projects in the istopics database.
-* Topics are sorted alphabetically by default.
-*/
+/**
+ * Display all of the projects in the istopics database.
+ * Topics are sorted alphabetically by default.
+ */
 
 $page_title = "View All Projects";
 include("header.php");
@@ -26,10 +24,10 @@ else {
 
 $result = $conn->query($sql);
 
-echo <<<EOT
+?>
     <script src='/js/ellipsify.js'></script>
     <script src='/js/expand_contract_pk.js'></script>
-EOT;
+<?php
 
 // Display Projects
 if ($result->num_rows > 0) {
@@ -52,33 +50,33 @@ if ($result->num_rows > 0) {
 
     while($row = $result->fetch_assoc()) {
         $proj_id         = $row["proj_id"];
-	$proj_title      = $row["title"];
-	$proj_discipline = $row["discipline"];
-	$proj_proposal   = $row["proposal"];
-	$proj_keywords   = $row["keywords"];
-	$user_id         = $row["user_id"];
-	$author_name     = $row['first_name']. " ". $row['last_name'];
-	$last_updated    = $row['last_updated'];
-	
-	display_project($proj_id, $author_name, $user_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, "", $last_updated, false, true);
+        $proj_title      = $row["title"];
+        $proj_discipline = $row["discipline"];
+        $proj_proposal   = $row["proposal"];
+        $proj_keywords   = $row["keywords"];
+        $user_id         = $row["user_id"];
+        $author_name     = $row['first_name']. " ". $row['last_name'];
+        $last_updated    = $row['last_updated'];
+        
+        display_project($proj_id, $author_name, $user_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, "", $last_updated, false, true);
 
-	$keywords_list = explode(",", $proj_keywords);
+        $keywords_list = explode(",", $proj_keywords);
 
         foreach ($keywords_list as $word) {
             if (!in_array($word, $all_keywords)) {
-	        array_push($all_keywords, chop($word, "."));
-	    }
+                array_push($all_keywords, chop($word, "."));
+            }
         }
 
     }
-    echo <<<EOT
-        </ul>
+?>
+    </ul>
 
-	<script src='/js/searchAllProjects.js'></script>
+<script src='/js/searchAllProjects.js'></script>
 
-        <input type='hidden' value='{$max_proj_id}' id='max_proj_id'>
+    <input type='hidden' value='{$max_proj_id}' id='max_proj_id'>
 	<input type='hidden' value='{$result->num_rows}' id='initial_num_results'>
-EOT;
+<?php
 
     echo "<input type='hidden' id='all_keywords' value='";
 
@@ -88,11 +86,11 @@ EOT;
 
     echo "'>";
 
-    echo <<<EOT
-        <link rel="stylesheet" property='stylesheet' href="/css/jquery-ui.min.css">
-	<script src="/js/jquery-ui.min.js"></script>
-	<script src="/js/autocompleteSearch.js"></script>
-EOT;
+?>
+<link rel="stylesheet" property='stylesheet' href="/css/jquery-ui.min.css">
+<script src="/js/jquery-ui.min.js"></script>
+<script src="/js/autocompleteSearch.js"></script>
+<?php
 
 } else {
     echo "<p>Showing 0 projects.</p>";
@@ -102,4 +100,3 @@ EOT;
 $conn->close();
 
 include("footer.php");
-?>

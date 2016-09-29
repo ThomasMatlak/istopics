@@ -1,9 +1,7 @@
 <?php
-/*
-* logout.php
-*
-* Clear session variables and destroy the session to sign out the user
-*/
+/**
+ * Clear session variables and destroy the session to sign out the user
+ */
 
 if (!isset($_SESSION)) {session_start();}
 
@@ -15,5 +13,3 @@ session_destroy();
 // Redirect to home page
 header("Location: /project/all");
 exit();
-
-?>

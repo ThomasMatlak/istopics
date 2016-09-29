@@ -1,13 +1,10 @@
 <?php
-/*
-* checkSignIn.php
-*
-* Check if a user is signed in and return their role if they are sign in
-*
-* To use: place
-*     require_once 'checkSignIn.php';
-* before calling the function
-*/
+/**
+ * Check if a user is signed in and return their role if they are sign in
+ *
+ * To use: place require_once 'checkSignIn.php';
+ *         before calling the function
+ */
 
 if (!isset($_SESSION)) {session_start();}
 
@@ -21,5 +18,3 @@ function issignedin() {
 	return -1;
     }
 }
-
-?>

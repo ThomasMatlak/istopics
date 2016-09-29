@@ -1,9 +1,7 @@
 <?php
-/*
-* header.php
-*
-* The view to display at the top of every page
-*/
+/**
+ * The view to display at the top of every page
+ */
 
 if(!isset($_SESSION)) { session_start(); }
 
@@ -134,14 +132,14 @@ require_once 'db_credentials.php';
 // Check for an error
 if (isset($_SESSION["error"]) && $_SESSION["error"] != 0) {
    $error_msg = $_SESSION["error_msg"];
-   echo <<<EOT
+?>
    	<div class="container-fluid">
    	    <div class="alert alert-danger" role="alert">
 	        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span class='glyphicon glyphicon-remove' aria-hidden="true"></span></button>
 		{$error_msg}
 	    </div>
 	</div>
-EOT;
+<?php
 
     unset($_SESSION["error"]);
     unset($_SESSION["error_msg"]);
@@ -150,42 +148,42 @@ EOT;
 // Check for a message
 if (isset($_SESSION["message"]) && $_SESSION["message"] == 1) {
    $msg = $_SESSION["msg"];
-   echo <<<EOT
+?>
    	<div class="container-fluid">
    	    <div class="alert alert-success alert-dismissible" role="alert">
 	    	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span class='glyphicon glyphicon-remove' aria-hidden="true"></span></button>
 	        {$msg}
 	    </div>
 	</div>
-EOT;
+<?php
 
     unset($_SESSION["message"]);
     unset($_SESSION["msg"]);
 }
 if (isset($_SESSION["message"]) && $_SESSION["message"] == 2) {
    $msg = $_SESSION["msg"];
-   echo <<<EOT
+?>
    	<div class="container-fluid">
    	    <div class="alert alert-info alert-dismissible" role="alert">
 	    	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span class='glyphicon glyphicon-remove' aria-hidden="true"></span></button>
                 {$msg}
 	    </div>
 	</div>
-EOT;
+<?php
 
     unset($_SESSION["message"]);
     unset($_SESSION["msg"]);
 }
 if (isset($_SESSION["message"]) && $_SESSION["message"] == 3) {
    $msg = $_SESSION["msg"];
-   echo <<<EOT
+?>
    	<div class="container-fluid">
    	    <div class="alert alert-warning alert-dismissible" role="alert">
 	    	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span class='glyphicon glyphicon-remove' aria-hidden="true"></span></button>
 	        {$msg}
 	    </div>
 	</div>
-EOT;
+<?php
 
     unset($_SESSION["message"]);
     unset($_SESSION["msg"]);

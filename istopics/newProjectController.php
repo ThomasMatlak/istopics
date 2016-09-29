@@ -1,15 +1,13 @@
 <?php
-/*
-* newProjectController.php
-* 
-* Add a new project to the istopics database.
-*
-* $_POST["title"]      - the title of the project to add
-* $_POST["proposal"]   - the proposal of the project to add
-* $_POST["keywords"]   - the keywords of the project to add
-* $_POST["comments"]   - the comments of the project to add
-* $_POST["discipline"] - the major of the project to add
-*/
+/**
+ * Add a new project to the istopics database.
+ *
+ * $_POST["title"]      - the title of the project to add
+ * $_POST["proposal"]   - the proposal of the project to add
+ * $_POST["keywords"]   - the keywords of the project to add
+ * $_POST["comments"]   - the comments of the project to add
+ * $_POST["discipline"] - the major of the project to add
+ */
 
 if (!isset($_SESSION)) {session_start();}
 
@@ -77,4 +75,3 @@ $_SESSION["msg"] = "Succecfully Added Project";
 
 header("Location: /project/all");
 exit();
-?>

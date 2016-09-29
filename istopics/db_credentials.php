@@ -1,9 +1,7 @@
 <?php
-/*
-* db_credentials.php
-*
-* database credentials for inclusion in all php files which require it
-*/
+/**
+ * Database credentials for inclusion in all php files which require it
+ */
 
 $servername = "localhost";
 $username = "istopics";
@@ -17,5 +15,3 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
-?>

@@ -1,9 +1,7 @@
 <?php
-/*
-* search.php
-* 
-* Search for projects with specified terms in the title or keywords
-*/
+/**
+ * Search for projects with specified terms in the title or keywords
+ */
 
 $page_title = "Search";
 include("header.php");
@@ -49,4 +47,3 @@ else {
 $conn->close();
 
 include("footer.php");
-?>

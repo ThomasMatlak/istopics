@@ -1,9 +1,7 @@
 <?php
-/*
-* resetDatabase.php
-*
-* Reset the database by removing all non-admin users, projects, and connections between the two
-*/
+/**
+ * Reset the database by removing all non-admin users, projects, and connections between the two
+ */
 
 if (!isset($_SESSION)) {session_start();}
 
@@ -54,4 +52,3 @@ else {
      header("Location: /project/all");
      exit();
 }
-?>

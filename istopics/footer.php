@@ -1,9 +1,7 @@
 <?php
-/*
-* footer.php
-*
-* The view to display at the bottom of every page
-*/
+/**
+ * The view to display at the bottom of every page
+ */
 ?>
 
 <div class="push"></div>
