@@ -12,9 +12,8 @@ class Project {
 	}
 
 	/**
-	 * Attempt to adda a project to the database
+	 * Attempt to add a project to the database
 	 *
-	 * @param int    $id
 	 * @param string $title
 	 * @param string $proposal
 	 * @param string $keywords
@@ -23,8 +22,24 @@ class Project {
 	 *
 	 * @return int
 	 */
-	function create($id, $title, $proposal, $keywords, $comments, $discipline) {
-		
+	function create($title, $proposal, $keywords, $comments, $discipline) {
+		$stmt = $conn->prepare("INSERT INTO projects (title, discipline, proposal, keywords, comments, date_created, last_updated) VALUES (?, ?, ?, ?, ?, now(), now())");
+		$stmt->bind_param("sssss", $title, $discipline, $proposal, $keywords, $comments);
+
+		$stmt->execute();
+
+		$proj_id = $conn->insert_id;
+
+		// Link the project to the currently signed in user
+		$stmt = $conn->prepare("INSERT INTO user_project_connections (userid, projectid) VALUES (?, ?)");
+
+		$user_id = $_SESSION["sess_user_id"];
+		$stmt->bind_param("ss", $user_id, $proj_id);
+
+		$stmt->execute();
+		$stmt->close();
+
+		return $proj_id;
 	}
 
 	/**
@@ -32,10 +47,13 @@ class Project {
 	 *
 	 * @param int $id
 	 *
-	 * @return 
+	 * @return array
 	 */
 	function get($id) {
-		
+		$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.comments, projects.keywords, projects.last_updated, users.id AS user_id, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE projects.id={$proj_id}";
+    	$result = $conn->query($sql);
+
+		return $result->fetch_assoc();
 	}
 
 	/**
@@ -51,7 +69,13 @@ class Project {
 	 * @return bool
 	 */
 	function update($id, $title, $proposal, $keywords, $comments, $discipline) {
-		
+		$stmt = $conn->prepare("UPDATE projects SET title=?, discipline=?, proposal=?, keywords=?, comments=?, last_updated=now() WHERE id=?");
+		$stmt->bind_param("ssssss", $title, $discipline, $proposal, $keywords, $comments, $id);
+
+		$stmt->execute();
+		$stmt->close();
+
+		return true;
 	}
 
 	/**
@@ -62,7 +86,19 @@ class Project {
 	 * @return bool
 	 */
 	function delete($id) {
-		
+		$stmt = $conn->prepare("DELETE FROM projects WHERE id=?");
+		$stmt->bind_param("s", $id);
+
+		$stmt->execute();
+
+		// Remove the connection between the user and the project
+		$stmt = $conn->prepare("DELETE FROM user_project_connections WHERE projectid=?");
+		$stmt->bind_param("s", $id);
+
+		$stmt->execute();
+		$stmt->close();
+
+		return true;
 	}
 
 	/**

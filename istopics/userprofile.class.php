@@ -32,6 +32,8 @@ class UserProfile {
 
 		$stmt->execute();
 		$stmt->close();
+
+		return $conn->insert_id;
 	}
 
 	/**
@@ -68,6 +70,8 @@ class UserProfile {
 
 		$stmt->execute();
 		$stmt->close();
+
+		return true;
 	}
 
 	/**
@@ -82,7 +86,15 @@ class UserProfile {
 		$stmt->bind_param("s", $id);
 
 		$stmt->execute();
+
+		// Remove connection between the user and projects
+		$stmt = $conn->prepare("DELETE FROM user_project_connections WHERE userid=?");
+		$stmt->bind_param("s", $id);
+
+		$stmt->execute();
 		$stmt->close();
+
+		return true;
 	}
 
 	/**
