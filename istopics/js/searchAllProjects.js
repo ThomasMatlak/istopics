@@ -27,7 +27,7 @@ function search_all() {
         }
         $('#no_results_msg').text('');
         $('#num_projects').text($('#initial_num_results').val());
-        if (num_projects == 1) { $('#result_or_results').text('project'); }
+        if (num_projects === 1) { $('#result_or_results').text('project'); }
         else { $('#result_or_results').text('projects'); }
     }
     else {
@@ -63,8 +63,8 @@ function search_all() {
         }
         $('#num_projects').text(num_projects);
         $('#no_results_msg').text('');
-        if (num_projects == 0) { $('#no_results_msg').text('No projects were found. Try different keywords'); }
-        else if (num_projects == 1) { $('#result_or_results').text('project'); }
+        if (num_projects === 0) { $('#no_results_msg').text('No projects were found. Try different keywords'); }
+        else if (num_projects === 1) { $('#result_or_results').text('project'); }
         else { $('#result_or_results').text('projects'); }
     }
 }

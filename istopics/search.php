@@ -28,15 +28,15 @@ if ($result->num_rows > 0) {
 
     while($row = $result->fetch_assoc()) {
     	$proj_id         = $row["proj_id"];
-	$proj_title      = $row["title"];
-	$proj_discipline = $row["discipline"];
-	$proj_proposal   = $row["proposal"];
-	$proj_keywords   = $row["keywords"];
-	$user_id         = $row["user_id"];
-	$author_name     = $row['first_name']. " ". $row['last_name'];
-	$last_updated    = $row['last_updated'];
+        $proj_title      = $row["title"];
+        $proj_discipline = $row["discipline"];
+        $proj_proposal   = $row["proposal"];
+        $proj_keywords   = $row["keywords"];
+        $user_id         = $row["user_id"];
+        $author_name     = $row['first_name']. " ". $row['last_name'];
+        $last_updated    = $row['last_updated'];
 	
-	display_project($proj_id, $author_name, $user_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, "", $last_updated, false, true);
+	    display_project($proj_id, $author_name, $user_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $conn);
     }
     echo "</ul>";
 }
@@ -44,6 +44,6 @@ else {
     echo "<p>Showing 0 projects.</p>";
 }
 
-$conn->close();
+// $conn->close();
 
 include("footer.php");

@@ -74,8 +74,8 @@ if ($result->num_rows > 0) {
 
 <script src='/js/searchAllProjects.js'></script>
 
-    <input type='hidden' value='{$max_proj_id}' id='max_proj_id'>
-	<input type='hidden' value='{$result->num_rows}' id='initial_num_results'>
+    <input type='hidden' value='<?php echo $max_proj_id; ?>' id='max_proj_id'>
+	<input type='hidden' value='<?php echo $result->num_rows; ?>' id='initial_num_results'>
 <?php
 
     echo "<input type='hidden' id='all_keywords' value='";
