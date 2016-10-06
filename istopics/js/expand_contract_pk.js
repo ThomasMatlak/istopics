@@ -50,11 +50,11 @@ function expand_keywords (proj_id) {
 
 $(document).ready(function () {
     var max_proj_id = $('#max_proj_id').val();
-    
-    for (i = 1; i <= max_proj_id; i++) {
-        if ($('#' + i + 'project_title').text()) {
-            shorten_proposal(i);
-            shorten_keywords(i);
+
+    projects.forEach( function(item, index, array) {
+        if ($('#' + item + 'project_title').text()) {
+            shorten_proposal(item);
+            shorten_keywords(item);
         }
-    }
+    });
 });

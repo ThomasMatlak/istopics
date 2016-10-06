@@ -48,6 +48,8 @@ if ($result->num_rows > 0) {
 
     $all_keywords = array();
 
+    $project_array = array();
+
     while($row = $result->fetch_assoc()) {
         $proj_id         = $row["proj_id"];
         $proj_title      = $row["title"];
@@ -62,6 +64,8 @@ if ($result->num_rows > 0) {
 
         $keywords_list = explode(",", $proj_keywords);
 
+        $project_array[] = $proj_id;
+
         foreach ($keywords_list as $word) {
             if (!in_array($word, $all_keywords)) {
                 array_push($all_keywords, chop($word, "."));
@@ -71,6 +75,10 @@ if ($result->num_rows > 0) {
     }
 ?>
     </ul>
+
+<script>
+    var projects = [<?php foreach($project_array as $project) { echo "{$project},"; } ?>];
+</script>
 
 <script src='/js/searchAllProjects.js'></script>
 

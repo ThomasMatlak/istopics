@@ -7,44 +7,50 @@ $("form :input").on('input', function() {
 });
 
 function search_all() {
-    var searchTerms = $('#search').val().toLowerCase().split(" ");
+    // var searchTerms = $('#search').val().toLowerCase().split(" ");
+    var searchTerms = $('#search').val().toLowerCase().split(",");
 
     var max_proj_id = $('#max_proj_id').val();
 
-    // Hide everything by default
-    for (i = 1; i <= max_proj_id; i++) {
-        if ($('#' + i + 'project_title').text()) {
-            $('#'+i).hide();
+    // Hide all projects to start with
+    projects.forEach( function(item, index, array) {
+        if ($('#' + item + 'project_title').text()) {
+            $('#'+item).hide();
         }
-    }
+    });
 
     if (!$('#search').val()) {
         // Input is empty; display all projects
-        for (i = 1; i <= max_proj_id; i++) {
-            if ($('#' + i + 'project_title').text()) {
-                $('#'+i).show();
+        projects.forEach( function(item, index, array) {
+            if ($('#' + item + 'project_title').text()) {
+                $('#'+item).show();
             }
-        }
+        });
+
         $('#no_results_msg').text('');
         $('#num_projects').text($('#initial_num_results').val());
-        if (num_projects === 1) { $('#result_or_results').text('project'); }
-        else { $('#result_or_results').text('projects'); }
+
+        if (num_projects === 1) {
+            $('#result_or_results').text('project');
+        }
+        else {
+            $('#result_or_results').text('projects');
+        }
     }
     else {
         // Keep track of how many projects are being shown
         var num_projects = 0;
 
         // Input is not empty; search for and display projects matching search terms
-        for (i = 1; i <= max_proj_id; i++) {
-            if ($('#'+i+'project_title').text()) {
-
+        projects.forEach( function(item, index, array) {
+            if ($('#'+item+'project_title').text()) {
                 var project_showed = false; 
 
-                var keywords = removeDiacritics($('#'+i+'full_keywords').val().toLowerCase());
-                var title    = removeDiacritics($('#'+i+'project_title').text().toLowerCase());
-                var major    = removeDiacritics($('#'+i+'project_major').text().toLowerCase());
-                var proposal = removeDiacritics($('#'+i+'full_proposal').val().toLowerCase());
-                var name     = removeDiacritics($('#'+i+'author').text().toLowerCase());
+                var keywords = removeDiacritics($('#'+item+'full_keywords').val().toLowerCase());
+                var title    = removeDiacritics($('#'+item+'project_title').text().toLowerCase());
+                var major    = removeDiacritics($('#'+item+'project_major').text().toLowerCase());
+                var proposal = removeDiacritics($('#'+item+'full_proposal').val().toLowerCase());
+                var name     = removeDiacritics($('#'+item+'author').text().toLowerCase());
 
                 for (j = 0; j < searchTerms.length; j++) {
                     var searchTerm = removeDiacritics(searchTerms[j].trim()).replace(",", "");
@@ -53,19 +59,28 @@ function search_all() {
                     if (searchTerm == "") { break; }
 
                     if ((keywords.search(searchTerm) != -1) || (title.search(searchTerm) != -1) || (major.search(searchTerm) != -1) || (proposal.search(searchTerm) != -1) || (name.search(searchTerm) != -1)) {
-                    // Some keywords or words in the title match the search term; display the project
-                    $('#'+i).show();
-                    project_showed = true;
+                        // Some keywords or words in the title match the search term; display the project
+                        $('#'+item).show();
+                        project_showed = true;
                     }
                 }
-                if (project_showed == true) { num_projects++; }
+                if (project_showed == true) {
+                    num_projects++;
+                }
             }
-        }
+        });
         $('#num_projects').text(num_projects);
         $('#no_results_msg').text('');
-        if (num_projects === 0) { $('#no_results_msg').text('No projects were found. Try different keywords'); }
-        else if (num_projects === 1) { $('#result_or_results').text('project'); }
-        else { $('#result_or_results').text('projects'); }
+        if (num_projects === 0) {
+            $('#no_results_msg').text('No projects were found. Try different keywords');
+            $('#result_or_results').text('projects');
+        }
+        else if (num_projects === 1) {
+            $('#result_or_results').text('project');
+        }
+        else {
+            $('#result_or_results').text('projects');
+        }
     }
 }
 
