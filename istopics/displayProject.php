@@ -11,7 +11,7 @@
 require_once 'timeElapsed.php';
 require_once 'checkSignIn.php';
 
-function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, $proj_comments, $last_updated, $show_comments, $show_author) {
+function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, $proj_comments, $last_updated, $show_comments, $show_author, $conn) {
 /**
  * @param int    $proj_id         - the id of the project being displayed
  * @param string $proj_author     - the name of the author of the project
@@ -45,12 +45,12 @@ function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_
 				$sql = "SELECT userid, projectid FROM user_project_favorites WHERE projectid={$proj_id} AND userid={$userid}";
 
 				// This is here because require_once 'db_credentials.php'; wasn't working
-				$servername = "localhost";
-				$username = "istopics";
-				$password = "password"; //NOTE: CHANGE THE PASSWORD BEFORE GOING INTO PRODUCTION
-				$dbname = "istopics";
+				// $servername = "localhost";
+				// $username = "istopics";
+				// $password = "password"; //NOTE: CHANGE THE PASSWORD BEFORE GOING INTO PRODUCTION
+				// $dbname = "istopics";
 
-				$conn = new mysqli($servername, $username, $password, $dbname);
+				// $conn = new mysqli($servername, $username, $password, $dbname);
 
 				$result = $conn->query($sql);
 
@@ -66,7 +66,7 @@ function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_
 				}
 				
 				echo "</form>";
-				$conn->close();
+				// $conn->close();
 
 		    }
 ?>
@@ -82,7 +82,7 @@ function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_
 	echo "<tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Major:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'><div id='{$proj_id}project_major'>{$proj_discipline}</div></td></tr>";
 
 	if ($proj_proposal != NULL) {
-	       echo "<tr><th>Proposal:</th><td><div id='{$proj_id}proposal'><span id='{$proj_id}proposal_text'>{$proj_proposal}</span><a id='{$proj_id}show_proposal' role='button' onclick='expand_proposal({$proj_id});'> <span id='{$proj_id}show_or_hide_p'></span></a></div></td></tr>";
+		echo "<tr><th>Proposal:</th><td><div id='{$proj_id}proposal'><span id='{$proj_id}proposal_text'>{$proj_proposal}</span><a id='{$proj_id}show_proposal' role='button' onclick='expand_proposal({$proj_id});'> <span id='{$proj_id}show_or_hide_p'></span></a></div></td></tr>";
 	}
 
 	if ($show_comments == true && $proj_comments != NULL) {

@@ -33,7 +33,7 @@ else {
 
    	echo "<ul class='list-unstyled'>";
 
-   	display_project($proj_id, $author_name, $user_id, $proj_title, $major, $proposal, $keywords, $comments, $last_updated, true, true);
+   	display_project($proj_id, $author_name, $user_id, $proj_title, $major, $proposal, $keywords, $comments, $last_updated, true, true, $conn);
 
    	echo "</ul>";
 

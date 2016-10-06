@@ -58,7 +58,7 @@ if ($result->num_rows > 0) {
         $author_name     = $row['first_name']. " ". $row['last_name'];
         $last_updated    = $row['last_updated'];
         
-        display_project($proj_id, $author_name, $user_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, "", $last_updated, false, true);
+        display_project($proj_id, $author_name, $user_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $conn);
 
         $keywords_list = explode(",", $proj_keywords);
 
