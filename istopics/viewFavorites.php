@@ -55,7 +55,7 @@ if ($result->num_rows > 0) {
         $author_id   = $author_info_row["id"];
         $author_name = $author_info_row['first_name']. " ". $author_info_row['last_name'];
 
-        display_project($proj_id, $author_name, $author_id, $proj_title, $proj_major, $proj_proposal, $proj_keywords, "", $last_updated, false, true);
+        display_project($proj_id, $author_name, $author_id, $proj_title, $proj_major, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $conn);
     }
 
     $max_proj_id = $conn->query("SELECT id FROM projects ORDER BY id DESC")->fetch_assoc()['id'];

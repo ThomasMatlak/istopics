@@ -71,7 +71,7 @@ else {
 				$proj_keywords   = $row["keywords"];
 				$last_updated    = $row["last_updated"];
 
-				display_project($proj_id, "", "", $proj_title, $proj_major, $proj_proposal, $proj_keywords, "", $last_updated, false, false);
+				display_project($proj_id, "", "", $proj_title, $proj_major, $proj_proposal, $proj_keywords, "", $last_updated, false, false, $conn);
 			}
 
 			$max_proj_id = $conn->query("SELECT id FROM projects ORDER BY id DESC")->fetch_assoc()['id'];
