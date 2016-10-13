@@ -34,14 +34,15 @@ function search_all() {
         // Keep track of how many projects are being shown
         var num_projects = 0;
 
-        // Input is not empty; search for and display projects matching search terms
-        p.projects.forEach( function(item, index, array) {
-            var project_showed = false; 
+        var all_projects = p.projects;
+
+        // Input is not empty; give each project a score based on search terms
+        all_projects.forEach( function(item, index, array) {
+            item.score = 0;
 
             var keywords = removeDiacritics(item.keywords.toLowerCase());
             var title    = removeDiacritics(item.title.toLowerCase());
             var major    = removeDiacritics(item.discipline.toLowerCase());
-            // var proposal = removeDiacritics($('#'+item.id+'full_proposal').val().toLowerCase());
             var name     = removeDiacritics(item.author_name.toLowerCase());
 
             for (j = 0; j < searchTerms.length; j++) {
@@ -50,16 +51,38 @@ function search_all() {
                 // Search term is empty -- there is nothing after the comma in the search terms
                 if (searchTerm == "") { break; }
 
-                if ((keywords.search(searchTerm) != -1) || (title.search(searchTerm) != -1) || (major.search(searchTerm) != -1) /* || (proposal.search(searchTerm) != -1)*/ || (name.search(searchTerm) != -1)) {
-                    // Some keywords or words in the title match the search term; display the project
-                    project_showed = true;
+                if (title.search(searchTerm) != -1) {
+                    item.score += 1;
+                    // break;
+                }
+                if (major.search(searchTerm) != -1) {
+                    item.score += .75;
+                    // break;
+                }
+                if (name.search(searchTerm) != -1) {
+                    item.score += .75;
+                    // break;
+                }
+                if (keywords.search(searchTerm) != -1) {
+                    item.score += .5;
+                    // break;
                 }
             }
-            if (project_showed == true) {
-                $('#results').append(project(item.id, item.title, item.author_name, item.user_id, item.discipline, item.proposal, item.keywords));
+        });
+
+        // sort projects based on scores
+        all_projects.sort(function(a,b) {
+            return parseFloat(b.score) - parseFloat(a.score);
+        });
+
+        // display projects with a score > 0
+        all_projects.forEach(function(item, index, array) {
+            if (item.score > 0) {
                 ++num_projects;
+                $('#results').append(project(item.id, item.title, item.author_name, item.user_id, item.discipline, item.proposal, item.keywords));
             }
         });
+
         $('#num_projects').text(num_projects);
         $('#no_results_msg').text('');
         if (num_projects === 0) {
