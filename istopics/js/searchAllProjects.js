@@ -7,28 +7,21 @@ $("form :input").on('input', function() {
 });
 
 function search_all() {
-    // var searchTerms = $('#search').val().toLowerCase().split(" ");
     var searchTerms = $('#search').val().toLowerCase().split(",");
 
-    var max_proj_id = $('#max_proj_id').val();
-
     // Hide all projects to start with
-    projects.forEach( function(item, index, array) {
-        if ($('#' + item + 'project_title').text()) {
-            $('#'+item).hide();
-        }
+    p.projects.forEach( function(item, index, array) {
+        $('.'+item.id).remove();
     });
 
     if (!$('#search').val()) {
         // Input is empty; display all projects
-        projects.forEach( function(item, index, array) {
-            if ($('#' + item + 'project_title').text()) {
-                $('#'+item).show();
-            }
+        p.projects.forEach( function(item, index, array) {
+            $('#results').append(project(item.id, item.title, item.author_name, item.user_id, item.discipline, item.proposal, item.keywords));
         });
 
         $('#no_results_msg').text('');
-        $('#num_projects').text($('#initial_num_results').val());
+        var num_projects = $('#num_projects').text($('#initial_num_results').val());
 
         if (num_projects === 1) {
             $('#result_or_results').text('project');
@@ -42,31 +35,29 @@ function search_all() {
         var num_projects = 0;
 
         // Input is not empty; search for and display projects matching search terms
-        projects.forEach( function(item, index, array) {
-            if ($('#'+item+'project_title').text()) {
-                var project_showed = false; 
+        p.projects.forEach( function(item, index, array) {
+            var project_showed = false; 
 
-                var keywords = removeDiacritics($('#'+item+'full_keywords').val().toLowerCase());
-                var title    = removeDiacritics($('#'+item+'project_title').text().toLowerCase());
-                var major    = removeDiacritics($('#'+item+'project_major').text().toLowerCase());
-                var proposal = removeDiacritics($('#'+item+'full_proposal').val().toLowerCase());
-                var name     = removeDiacritics($('#'+item+'author').text().toLowerCase());
+            var keywords = removeDiacritics(item.keywords.toLowerCase());
+            var title    = removeDiacritics(item.title.toLowerCase());
+            var major    = removeDiacritics(item.discipline.toLowerCase());
+            // var proposal = removeDiacritics($('#'+item.id+'full_proposal').val().toLowerCase());
+            var name     = removeDiacritics(item.author_name.toLowerCase());
 
-                for (j = 0; j < searchTerms.length; j++) {
-                    var searchTerm = removeDiacritics(searchTerms[j].trim()).replace(",", "");
+            for (j = 0; j < searchTerms.length; j++) {
+                var searchTerm = removeDiacritics(searchTerms[j].trim()).replace(",", "");
 
-                    // Search term is empty -- there is nothing after the comma in the search terms
-                    if (searchTerm == "") { break; }
+                // Search term is empty -- there is nothing after the comma in the search terms
+                if (searchTerm == "") { break; }
 
-                    if ((keywords.search(searchTerm) != -1) || (title.search(searchTerm) != -1) || (major.search(searchTerm) != -1) || (proposal.search(searchTerm) != -1) || (name.search(searchTerm) != -1)) {
-                        // Some keywords or words in the title match the search term; display the project
-                        $('#'+item).show();
-                        project_showed = true;
-                    }
+                if ((keywords.search(searchTerm) != -1) || (title.search(searchTerm) != -1) || (major.search(searchTerm) != -1) /* || (proposal.search(searchTerm) != -1)*/ || (name.search(searchTerm) != -1)) {
+                    // Some keywords or words in the title match the search term; display the project
+                    project_showed = true;
                 }
-                if (project_showed == true) {
-                    num_projects++;
-                }
+            }
+            if (project_showed == true) {
+                $('#results').append(project(item.id, item.title, item.author_name, item.user_id, item.discipline, item.proposal, item.keywords));
+                ++num_projects;
             }
         });
         $('#num_projects').text(num_projects);

@@ -27,6 +27,7 @@ $result = $conn->query($sql);
 ?>
     <script src='/js/ellipsify.js'></script>
     <script src='/js/expand_contract_pk.js'></script>
+    <script src='/js/projectTemplate.js'></script>
 <?php
 
 // Display Projects
@@ -48,14 +49,15 @@ if ($result->num_rows > 0) {
 
     $all_keywords = array();
 
-    $project_array = array();
+    $project_json = '\'{"projects":[';
+    $first = true; // add a comma before all entries except the first one
 
     while($row = $result->fetch_assoc()) {
         $proj_id         = $row["proj_id"];
-        $proj_title      = $row["title"];
+        $proj_title      = str_replace('"', '\"', $row["title"]);
         $proj_discipline = $row["discipline"];
-        $proj_proposal   = $row["proposal"];
-        $proj_keywords   = $row["keywords"];
+        $proj_proposal   = str_replace('"', '\"', $row["proposal"]);
+        $proj_keywords   = str_replace('"', '\"', $row["keywords"]);
         $user_id         = $row["user_id"];
         $author_name     = $row['first_name']. " ". $row['last_name'];
         $last_updated    = $row['last_updated'];
@@ -64,20 +66,24 @@ if ($result->num_rows > 0) {
 
         $keywords_list = explode(",", $proj_keywords);
 
-        $project_array[] = $proj_id;
+        ($first === false) ? $project_json .= ',' : $first = false;
+
+        $project_json .= "{";
+        $project_json .= "\"id\":\"{$proj_id}\",\"title\":\"{$proj_title}\",\"discipline\":\"{$proj_discipline}\",\"proposal\":\"{$proj_proposal}\",\"keywords\":\"{$proj_keywords}\",\"user_id\":\"{$user_id}\",\"author_name\":\"{$author_name}\",\"last_updated\":\"{$last_updated}\"";
+        $project_json .= "}";
 
         foreach ($keywords_list as $word) {
             if (!in_array($word, $all_keywords)) {
-                array_push($all_keywords, chop($word, "."));
+                array_push($all_keywords, rtrim($word, "."));
             }
         }
-
     }
+
+    $project_json .= "]}'";
 ?>
     </ul>
-
 <script>
-    var projects = [<?php foreach($project_array as $project) { echo "{$project},"; } ?>];
+    var p = JSON.parse(<?php echo $project_json; ?>);
 </script>
 
 <script src='/js/searchAllProjects.js'></script>

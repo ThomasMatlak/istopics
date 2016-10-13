@@ -51,10 +51,10 @@ function expand_keywords (proj_id) {
 $(document).ready(function () {
     var max_proj_id = $('#max_proj_id').val();
 
-    projects.forEach( function(item, index, array) {
-        if ($('#' + item + 'project_title').text()) {
-            shorten_proposal(item);
-            shorten_keywords(item);
+    p.projects.forEach( function(item, index, array) {
+        if ($('#' + item.id + 'project_title').text()) {
+            shorten_proposal(item.id);
+            shorten_keywords(item.id);
         }
     });
 });
