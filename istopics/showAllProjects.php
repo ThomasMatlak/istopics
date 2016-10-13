@@ -32,7 +32,7 @@ $result = $conn->query($sql);
 
 // Display Projects
 if ($result->num_rows > 0) {
-    echo "<form class='form-inline'><div class='form-group'><input type='text' name='search' id='search' placeholder='Search Projects' class='form-control'></div><span class='help-block'>Search by keywords, title, major, author, or proposal</span></form>";
+    echo "<form class='form-inline'><div class='form-group'><input type='text' name='search' id='search' placeholder='Search Projects' class='form-control'></div><span class='help-block'>Search by keywords, title, major, or author. Separate search terms with commas.</span></form>";
 
     if ($result->num_rows == 1) {
         echo "<p>Showing <span id='num_projects'>{$result->num_rows}</span> <span id='result_or_results'>project</span>.</p>";
@@ -95,7 +95,7 @@ if ($result->num_rows > 0) {
     echo "<input type='hidden' id='all_keywords' value='";
 
     foreach ($all_keywords as $keyword) {
-        echo "{$keyword} ";
+        echo "{$keyword},";
     }
 
     echo "'>";

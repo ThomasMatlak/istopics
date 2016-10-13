@@ -5,7 +5,7 @@
  */
 
 $(document).ready(function() {
-    var availableTerms = $('#all_keywords').val().split(" "); // the terms to suggest
+    var availableTerms = $('#all_keywords').val().split(","); // the terms to suggest
 
     function split( val ) {
       	return val.split( /,\s*/ );
