@@ -29,13 +29,10 @@ function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_
  */
 
 ?>
-<li>
-<div id="<?php echo $proj_id; ?>" class="panel panel-default">
+<li class="<?php echo $proj_id; ?>">
+<div class="panel panel-default">
 	<div class="panel-heading container-fluid">
-			<form action='/project' method='GET' class='form-inline col-lg-11 col-md-11 col-sm-11 col-xs-11'>
-		<input type='hidden' name='project_id' value='<?php echo $proj_id; ?>'>
-		<button type='submit' class='btn btn-link'><span id="<?php echo $proj_id; ?>project_title"><?php echo $proj_title; ?></span></button>
-	</form>
+		<a href="/project?project_id=<?php echo $proj_id; ?>" id="<?php echo $proj_id; ?>project_title" class="btn btn-link text-left col-xs-11 col-sm-11 col-md-11 col-ls-11"><?php echo $proj_title; ?></a>
 <?php
 		    if (issignedin() != -1) {
 		        echo "<form action='/favorite.php' method='POST' class='col-lg-1 col-md-1 col-sm-1 col-xs-1'>";
@@ -43,14 +40,6 @@ function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_
 
 				$userid = $_SESSION['sess_user_id'];
 				$sql = "SELECT userid, projectid FROM user_project_favorites WHERE projectid={$proj_id} AND userid={$userid}";
-
-				// This is here because require_once 'db_credentials.php'; wasn't working
-				// $servername = "localhost";
-				// $username = "istopics";
-				// $password = "password"; //NOTE: CHANGE THE PASSWORD BEFORE GOING INTO PRODUCTION
-				// $dbname = "istopics";
-
-				// $conn = new mysqli($servername, $username, $password, $dbname);
 
 				$result = $conn->query($sql);
 
@@ -66,8 +55,6 @@ function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_
 				}
 				
 				echo "</form>";
-				// $conn->close();
-
 		    }
 ?>
 </div> <!-- panel heading -->
