@@ -17,7 +17,7 @@ function search_all() {
     if (!$('#search').val()) {
         // Input is empty; display all projects
         p.projects.forEach( function(item, index, array) {
-            $('#results').append(project(item.id, item.title, item.author_name, item.user_id, item.discipline, item.proposal, item.keywords));
+            $('#results').append(project(item.id, item.title, item.author_name, item.user_id, item.discipline, item.proposal, item.keywords, item.last_updated));
         });
 
         $('#no_results_msg').text('');
@@ -79,7 +79,7 @@ function search_all() {
         all_projects.forEach(function(item, index, array) {
             if (item.score > 0) {
                 ++num_projects;
-                $('#results').append(project(item.id, item.title, item.author_name, item.user_id, item.discipline, item.proposal, item.keywords));
+                $('#results').append(project(item.id, item.title, item.author_name, item.user_id, item.discipline, item.proposal, item.keywords, item.last_updated));
             }
         });
 

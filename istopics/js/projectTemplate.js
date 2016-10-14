@@ -1,4 +1,4 @@
-function project(id, title, author, author_id, discipline, proposal, keywords) {
+function project(id, title, author, author_id, discipline, proposal, keywords, timestamp) {
     var list_item = document.createElement("li");
     list_item.className = id;
 
@@ -27,6 +27,8 @@ function project(id, title, author, author_id, discipline, proposal, keywords) {
     caption.innerHTML = "<span id='" + id + "author'><a href='/user?user_id=" + author_id + "'>" + author + "</a></span></caption>";
     table.appendChild(caption);
 
+    var table_body = document.createElement("tbody");
+
     // discipline
     var discipline_row = document.createElement("tr");
     var discipline_head = document.createElement("th");
@@ -38,7 +40,7 @@ function project(id, title, author, author_id, discipline, proposal, keywords) {
     discipline_data.innerText = discipline;
 
     discipline_row.appendChild(discipline_data);
-    table.appendChild(discipline_row);
+    table_body.appendChild(discipline_row);
 
     // proposal
     var prop = document.createElement("tr");
@@ -49,7 +51,7 @@ function project(id, title, author, author_id, discipline, proposal, keywords) {
     prop_data.innerText = proposal;
 
     prop.appendChild(prop_data);
-    table.appendChild(prop);
+    table_body.appendChild(prop);
 
     // keywords
     var key = document.createElement("tr");
@@ -60,11 +62,61 @@ function project(id, title, author, author_id, discipline, proposal, keywords) {
     key_data.innerText = keywords;
 
     key.appendChild(key_data);
-    table.appendChild(key);
+    table_body.appendChild(key);
 
+    table.appendChild(table_body);
     panel_body.appendChild(table);
+
+    var last_updated_msg = document.createElement("span");
+    last_updated_msg.innerText = time_elapsed(timestamp);
+
+    panel_body.appendChild(last_updated_msg);
     panel.appendChild(panel_body);
     list_item.appendChild(panel);
 
     return list_item;
+}
+
+/**
+ * @param Date timestamp
+ * @return string
+ */
+function time_elapsed(timestamp) {
+    var now = new Date();
+    var ago = new Date(timestamp);
+    var diff = now - ago;
+
+    diff /= 1000; // remove milliseconds
+    var seconds = Math.round(diff % 60);
+    diff = Math.floor(diff / 60);
+
+    var minutes = Math.round(diff % 60);
+    diff = Math.floor(diff / 60);
+
+    var hours = Math.round(diff % 24);
+    diff = Math.floor(diff / 24);
+
+    var days = diff;
+
+    var msg = "Last Updated ";
+    if (days > 0) {
+        msg += days + ((days > 1) ? " days" : " day");
+    }
+    else if (hours > 0) {
+        msg += hours + ((hours > 1) ? " hours" : " hour");
+    }
+    else if (minutes > 0) {
+        msg += minutes + ((minutes > 1) ? " minutes" : " minutes");
+    }
+    else if (seconds > 30) {
+        msg += seconds + " seconds";
+    }
+    else {
+        msg += "just now."
+        return msg;
+    }
+
+    msg += " ago.";
+
+    return msg;
 }

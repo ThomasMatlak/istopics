@@ -11,6 +11,9 @@ function time_elapsed($datetime, $full = false) {
      * @param string $datetime
      * @param bool   $full
      */
+
+     date_default_timezone_set('America/New_York');
+
     $now = new DateTime;
     $ago = new DateTime($datetime);
     $diff = $now->diff($ago);
