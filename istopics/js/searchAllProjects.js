@@ -68,6 +68,11 @@ function search_all() {
                     // break;
                 }
             }
+
+            if (item.score > 0) {
+                var time = new Date(item.last_updated)
+                item.score += (time / 10000000000000); // give very slight priority to more recently updated projects
+            }
         });
 
         // sort projects based on scores
