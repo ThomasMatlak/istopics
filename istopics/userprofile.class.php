@@ -27,13 +27,13 @@ class UserProfile {
 	 */
 	function create($first_name, $last_name, $email, $major, $role, $password, $year = null, $conn) {
 		$sql = 'INSERT INTO users (first_name, last_name, email, ';
-		$parm_bindings = 'sss';
+		$param_bindings = 'sss';
 		if ($role === 'student') {
 			$sql .= 'major, year, ';
-			$parm_bindings .= 'ss';
+			$param_bindings .= 'ss';
 		}
 		$sql .= 'password, role) VALUES (?,?,?,';
-		$parm_bindings .= 'ss';
+		$param_bindings .= 'ss';
 		if ($role === 'student') {
 			$sql .= '?,?,';
 		}
@@ -42,10 +42,10 @@ class UserProfile {
 		$stmt = $conn->prepare($sql);
 
 		if ($role === 'student') {
-			$stmt->bind_param($parm_bindings, $first_name, $last_name, $email, $major, $year, $password, $role);
+			$stmt->bind_param($param_bindings, $first_name, $last_name, $email, $major, $year, $password, $role);
 		}
 		else {
-			$stmt->bind_param($parm_bindings, $first_name, $last_name, $email, $password, $role);
+			$stmt->bind_param($param_bindings, $first_name, $last_name, $email, $password, $role);
 		}
 
 		$stmt->execute();
@@ -94,9 +94,39 @@ class UserProfile {
 	 *
 	 * @return bool
 	 */
-	function update($id, $first_name, $last_name, $email, $major, $role, $password = null, $year = null, $conn) {
-		$stmt = $conn->prepare("UPDATE users SET first_name=?, last_name=?, major=?, year=?, email=?, password=? WHERE id=?");
-		$stmt->bind_param("sssssss", $first_name, $last_name, $major, $year, $email, $id, $password);
+	function update($id, $first_name, $last_name, $email, $major, $role, $password, $year, $conn) {
+		$sql = "UPDATE users SET first_name=?, last_name=?, ";
+		$param_bindings = "ss";
+		if ($role === 'student') {
+			$sql .= "major=?, year=?, ";
+			$param_bindings .= "ss";
+		}
+		$sql .= "email=? ";
+		$param_bindings .= "s";
+		if ($password !== false) {
+			$sql .= ", password=? ";
+			$param_bindings .= "s";
+		}
+		$sql .= "WHERE id=?";
+		$param_bindings .= "s";
+
+		$stmt = $conn->prepare($sql);
+		if ($role === 'student') {
+			if ($password !== false) {
+				$stmt->bind_param($param_bindings, $first_name, $last_name, $major, $year, $email, $password, $id);
+			}
+			else {
+				$stmt->bind_param($param_bindings, $first_name, $last_name, $major, $year, $email, $id);
+			}
+		}
+		else {
+			if ($password !== false) {
+				$stmt->bind_param($param_bindings, $first_name, $last_name, $email, $password, $id);
+			}
+			else {
+				$stmt->bind_param($param_bindings, $first_name, $last_name, $email, $id);
+			}
+		}
 
 		$stmt->execute();
 		$stmt->close();

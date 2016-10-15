@@ -106,7 +106,7 @@ if ($result->num_rows > 0) {
 
 <hr>
 
-<form action='/deleteUser.php?user_id=<?php echo $user_id ?>' method='post' class='form-horizontal'>
+<form action='/deleteUserController.php?user_id=<?php echo $user_id ?>' method='post' class='form-horizontal'>
 	<input type='hidden' name='delete_user_id' value='<?php echo $user_id ?>'>
 	<input type='hidden' name='delete_user_role' value='<?php echo $role ?>'>
 	<button type='submit' class='btn btn-danger'>Delete Your Account</button>

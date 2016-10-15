@@ -15,6 +15,7 @@ if (!isset($_SESSION)) {session_start();}
 
 require_once 'db_credentials.php';
 require_once 'checkSignIn.php';
+require_once 'userprofile.class.php';
 
 if (issignedin() != -1) {
 // user is signed in
@@ -57,32 +58,23 @@ if (issignedin() != -1) {
     // Check that user is authorized to update profile
     if (($_SESSION["sess_user_id"] != $user_id) && ($_SESSION["sess_user_role"] != "admin")) {
         // user is not authorized, set error message
-   	$_SESSION["error"] = 1;
-   	$_SESSION["error_msg"] = "You are not authorized to perform this action.";
+        $_SESSION["error"] = 1;
+        $_SESSION["error_msg"] = "You are not authorized to perform this action.";
 
-   	header("Location: /user");
-   	exit();
+        header("Location: /user");
+        exit();
     }
 
-    $stmt = $conn->prepare("UPDATE users SET first_name=?, last_name=?, major=?, year=?, email=? WHERE id=?");
-    $stmt->bind_param("ssssss", $first_name, $last_name, $discipline, $year, $email, $user_id);
-
-    // Submit the SQL statement
-    $stmt->execute();
-
+    $user_profile = new UserProfile();
     if (isset($_POST["new_password"]) && $_POST["new_password"] != "") {
-        // update password
+        $new_password = password_hash($_POST["new_password"], PASSWORD_DEFAULT);
 
-	$new_password = password_hash($_POST["new_password"], PASSWORD_DEFAULT);
-
-     	$stmt = $conn->prepare("UPDATE users SET password=? WHERE id=?");
-    	$stmt->bind_param("ss", $new_password, $user_id);
-
-    	// Submit the SQL statement
-    	$stmt->execute();
+        $user_profile->update($id, $first_name, $last_name, $email, $discipline, $_SESSION['sess_user_role'], $new_password, $year, $conn);
+    }
+    else {
+        $user_profile->update($id, $first_name, $last_name, $email, $discipline, $_SESSION['sess_user_role'], false, $year, $conn);
     }
 
-    $stmt->close();
     $conn->close();
 
     $_SESSION["message"] = 1;
