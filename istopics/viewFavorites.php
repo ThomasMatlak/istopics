@@ -46,10 +46,10 @@ if ($result->num_rows > 0) {
 
     while($row = $result->fetch_assoc()) {
         $proj_id           = $row["proj_id"];
-        $proj_title        = $row["title"];
-        $proj_major        = $row["discipline"];
-        $proj_proposal     = $row["proposal"];
-        $proj_keywords     = $row["keywords"];
+        $proj_title        = addslashes($row["title"]);
+        $proj_major        = addslashes($row["discipline"]);
+        $proj_proposal     = addslashes($row["proposal"]);
+        $proj_keywords     = addslashes($row["keywords"]);
         $last_updated      = $row["last_updated"];
 
         $author_info_sql = "SELECT users.id, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON users.id=user_project_connections.userid WHERE user_project_connections.projectid={$proj_id}";
@@ -57,7 +57,7 @@ if ($result->num_rows > 0) {
         $author_info_row = $conn->query($author_info_sql)->fetch_assoc();
 
         $author_id   = $author_info_row["id"];
-        $author_name = $author_info_row['first_name']. " ". $author_info_row['last_name'];
+        $author_name = addslashes($author_info_row['first_name']. " ". $author_info_row['last_name']);
 
         display_project($proj_id, $author_name, $author_id, $proj_title, $proj_major, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $conn);
     }

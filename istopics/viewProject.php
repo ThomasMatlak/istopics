@@ -22,14 +22,14 @@ else {
     if ($result !== false) {
         $row = $result;
 
-		$author_name = $row["first_name"]. " ". $row["last_name"];
+		$author_name = addslashes($row["first_name"]. " ". $row["last_name"]);
 		$user_id     = $row["user_id"];
 		$proj_id     = $row["proj_id"];
-		$proj_title  = $row["title"];
-		$major       = $row["discipline"];
-		$proposal    = $row["proposal"];
-		$comments    = $row["comments"];
-		$keywords    = $row["keywords"];
+		$proj_title  = addslashes($row["title"]);
+		$major       = addslashes($row["discipline"]);
+		$proposal    = addslashes($row["proposal"]);
+		$comments    = addslashes($row["comments"]);
+		$keywords    = addslashes($row["keywords"]);
 		$last_updated = $row["last_updated"];
 
 		echo "<ul class='list-unstyled'>";

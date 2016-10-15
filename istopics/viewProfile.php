@@ -34,9 +34,9 @@ else {
 		$row = $result;
 
 		$user_id    = $row["id"];
-		$first_name = $row["first_name"];
-		$last_name  = $row["last_name"];
-		$major      = $row["major"];
+		$first_name = addslashes($row["first_name"]);
+		$last_name  = addslashes($row["last_name"]);
+		$major      = addslashes($row["major"]);
 		$year       = $row["year"];
 		$email      = $row["email"];
 		$role       = $row["role"];
@@ -67,10 +67,10 @@ else {
 <?php
 			while($row = $result->fetch_assoc()) {
 				$proj_id         = $row["proj_id"];
-				$proj_title      = $row["title"];
-				$proj_major      = $row["discipline"];
-				$proj_proposal   = $row["proposal"];
-				$proj_keywords   = $row["keywords"];
+				$proj_title      = addslashes($row["title"]);
+				$proj_major      = addslashes($row["discipline"]);
+				$proj_proposal   = addslashes($row["proposal"]);
+				$proj_keywords   = addslashes($row["keywords"]);
 				$last_updated    = $row["last_updated"];
 
 				display_project($proj_id, "", "", $proj_title, $proj_major, $proj_proposal, $proj_keywords, "", $last_updated, false, false, $conn);
