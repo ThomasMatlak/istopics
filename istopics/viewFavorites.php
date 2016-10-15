@@ -22,9 +22,13 @@ if (issignedin() == -1) {
 
 $user_id = $_SESSION['sess_user_id'];
 
-$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.last_updated, projects.keywords FROM projects INNER JOIN user_project_favorites ON projects.id=user_project_favorites.projectid INNER JOIN users ON user_project_favorites.userid=users.id WHERE users.id={$user_id} ORDER BY title";
+$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.last_updated, projects.keywords FROM projects INNER JOIN user_project_favorites ON projects.id=user_project_favorites.projectid INNER JOIN users ON user_project_favorites.userid=users.id WHERE users.id=? ORDER BY title";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param('s', $user_id);
+$stmt->execute();
 
-$result = $conn->query($sql);
+$result = $stmt->get_result();
+$stmt->close();
 
 ?>
 <script src='/js/ellipsify.js'></script>
