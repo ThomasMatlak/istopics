@@ -60,13 +60,23 @@ class UserProfile {
 	 * @param int $id
 	 * @param mysqli $conn
 	 *
-	 * @return array
+	 * @return array|bool
 	 */
 	function get($id, $conn) {
-		$sql = "SELECT id, first_name, last_name, major, year, email, role FROM users WHERE id={$id}";
-    	$result = $conn->query($sql);
+		$sql = "SELECT id, first_name, last_name, major, year, email, role FROM users WHERE id=?";
+		$stmt = $conn->prepare($sql);
+		$stmt->bind_param('s', $id);
 
-		return $result->fetch_assoc();
+    	$stmt->execute();
+		$result = $stmt->get_result();
+		$stmt->close();
+
+		if ($result->num_rows > 0) {
+			return $result->fetch_assoc();
+		}
+		else {
+			return false;
+		}
 	}
 
 	/**

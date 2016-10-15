@@ -11,6 +11,7 @@ include("header.php");
 require_once 'db_credentials.php';
 require_once 'displayProject.php';
 require_once 'displayProfile.php';
+require_once 'userprofile.class.php';
 
 if (isset($_GET["user_id"])) {
    $user_id = $_GET["user_id"];
@@ -23,16 +24,14 @@ if (!filter_var($user_id, FILTER_VALIDATE_INT)) {
    echo "<p>That is not a valid user id.</p>";
 }
 else {
-    $sql = "SELECT id, first_name, last_name, major, year, email, role FROM users WHERE id={$user_id}";
-    $result = $conn->query($sql);
-
 ?>
 <script src='/js/ellipsify.js'></script>
 <script src='/js/expand_contract_pk.js'></script>
 <?php
-
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
+	$user_profile = new UserProfile();
+	$result = $user_profile->get($user_id, $conn);
+	if ($result !== false) {
+		$row = $result;
 
 		$user_id    = $row["id"];
 		$first_name = $row["first_name"];
@@ -50,9 +49,13 @@ else {
 
 		echo "</ul>";
 
-		$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.last_updated, projects.keywords FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE users.id={$user_id} ORDER BY title";
+		$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.last_updated, projects.keywords FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE users.id=? ORDER BY title";
+		$stmt = $conn->prepare($sql);
+		$stmt->bind_param('s', $user_id);
+		$stmt->execute();
 
-		$result = $conn->query($sql);
+		$result = $stmt->get_result();
+		$stmt->close();
 
 		// Display user's projects
 		if ($result->num_rows > 0) {
@@ -62,7 +65,6 @@ else {
 
 <ul class='list-unstyled'>
 <?php
-
 			while($row = $result->fetch_assoc()) {
 				$proj_id         = $row["proj_id"];
 				$proj_title      = $row["title"];
@@ -75,14 +77,11 @@ else {
 			}
 
 			$max_proj_id = $conn->query("SELECT id FROM projects ORDER BY id DESC")->fetch_assoc()['id'];
-
 ?>
 	</ul>
 <input type='hidden' value='{$max_proj_id}' id='max_proj_id'>
 <?php
-    
         }
-
     }
     else {
         echo "<p>User not found.</p>";
