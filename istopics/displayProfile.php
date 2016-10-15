@@ -20,7 +20,7 @@ function display_profile($user_id, $name, $show_name, $major, $year, $email, $ro
  */
 
 ?>
-<li class='well'>
+<li class='<?php echo $user_id; ?> well'>
 <table class='table'>
 <?php
 

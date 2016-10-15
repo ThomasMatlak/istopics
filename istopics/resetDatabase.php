@@ -41,7 +41,6 @@ if (issignedin() == 'admin') {
      
    header("Location: /admin");
    exit();
-
 }
 else {
      // user is not authorized, set error message
