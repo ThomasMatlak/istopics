@@ -10,16 +10,31 @@ include("header.php");
 require_once 'db_credentials.php';
 require_once 'displayProject.php';
 
+$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.keywords, projects.last_updated, users.id AS user_id, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id ";
+
 // choose how the projects are sorted
+if (isset($_GET['type']) && $_GET['type'] == 'senior') { // only retrieve Senior IS projects
+    $sql .= "WHERE projects.project_type='senior'";
+}
+else if (isset($_GET['type']) && $_GET['type'] == 'junior') { // only retrive Junior IS projects
+    $sql .= "WHERE projects.project_type='junior'";
+}
+else if (isset($_GET['type']) && $_GET['type'] == 'other') { // only retrieve other projects
+    $sql .= "WHERE projects.project_type='other'";
+}
+else {} // retrive all projects
+
+$sql .= " ORDER BY ";
+
 if (isset($_GET['order']) && ($_GET['order'] == 'title')) {
-    $sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.keywords, projects.last_updated, users.id AS user_id, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id ORDER BY title";
+    $sql .= "title";
 }
 else if (isset($_GET['order']) && ($_GET['order'] == 'time')) {
-    $sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.keywords, projects.last_updated, users.id AS user_id, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id ORDER BY projects.last_updated DESC";
+    $sql .= "projects.last_updated DESC";
 }
 else {
      // default sorting of projects
-    $sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.keywords, projects.last_updated, users.id AS user_id, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id ORDER BY projects.last_updated DESC";
+     $sql .= "projects.last_updated DESC";
 }
 
 $result = $conn->query($sql);
@@ -88,7 +103,6 @@ if ($result->num_rows > 0) {
 
 <script src='/js/searchAllProjects.js'></script>
 
-    <input type='hidden' value='<?php echo $max_proj_id; ?>' id='max_proj_id'>
 	<input type='hidden' value='<?php echo $result->num_rows; ?>' id='initial_num_results'>
 <?php
 
