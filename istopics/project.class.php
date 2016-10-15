@@ -49,13 +49,23 @@ class Project {
 	 * @param int $id
 	 * @param mysqli $conn
 	 *
-	 * @return array
+	 * @return array|bool
 	 */
 	function get($id, $conn) {
-		$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.comments, projects.keywords, projects.last_updated, users.id AS user_id, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE projects.id={$proj_id}";
-    	$result = $conn->query($sql);
+		$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.comments, projects.keywords, projects.last_updated, users.id AS user_id, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE projects.id=?";
+    	$stmt = $conn->prepare($sql);
+		$stmt->bind_param("s", $id);
+		
+		$stmt->execute();
+		$result = $stmt->get_result();
+		$stmt->close();
 
-		return $result->fetch_assoc();
+		if ($result->num_rows > 0) {
+			return $result->fetch_assoc();
+		}
+		else {
+			return false;
+		}
 	}
 
 	/**
