@@ -12,18 +12,17 @@ $id   = $_POST["delete_user_id"];
 $role = $_POST["delete_user_role"];
 
 require_once 'checkSignIn.php';
+require_once 'userprofile.class.php';
 
 if (issignedin() != -1) {
     require_once 'db_credentials.php';
 
+    $user_profile = new UserProfile();
+
     // Check that the user has the correct id
-    $sql = "SELECT id, first_name FROM users WHERE id={$id}";
-
-    $result = $conn->query($sql);
-    $row = $result->fetch_assoc();
-
-    $user_id = $row["id"];
-    $first_name = $row["first_name"];
+    $result = $user_profile->get($id, $conn);
+    $user_id = $result['id'];
+    $first_name = $result['first_name'];
 
     if ((($user_id != $_SESSION["sess_user_id"]) || ($first_name != $_SESSION["sess_user_name"])) && ($_SESSION["sess_user_role"] != "admin")) {
         // the correct user is not signed in, set error message
@@ -33,7 +32,7 @@ if (issignedin() != -1) {
      	// Close connection
      	$conn->close();
 
-	header("Location: /project/all");
+	    header("Location: /project/all");
      	exit();
     }
 
@@ -49,12 +48,9 @@ if (issignedin() != -1) {
     }
 
     // Prepare the SQL statement
-    $stmt = $conn->prepare("DELETE FROM users WHERE id=?");
-    $stmt->bind_param("s", $id);
+    $user_profile->delete($id, $conn);
 
-    // Submit the SQL statement
-    $stmt->execute();
-    $stmt->close();
+    session_unset();
 
     $_SESSION["message"] = 2;
     $_SESSION["msg"] = "User Deleted";

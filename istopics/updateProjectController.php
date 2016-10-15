@@ -14,6 +14,7 @@ if (!isset($_SESSION)) {session_start();}
 
 require_once 'db_credentials.php';
 require_once 'checkSignIn.php';
+require_once 'project.class.php';
 
 $id = $_POST["project_id"];
 
@@ -32,17 +33,17 @@ if (issignedin() != -1) {
      	$_SESSION["error"] = 1;
      	$_SESSION["error_msg"] = "You are not authorized to perform this action.";
      
-	$stmt->close();
+	    $stmt->close();
      	$conn->close();
 
-	header("Location: /project/all");
+	    header("Location: /project/all");
      	exit();
     }
 
-    $title      = filter_var($_POST["title"], FILTER_SANITIZE_STRING);
-    $proposal   = filter_var($_POST["proposal"], FILTER_SANITIZE_STRING);
-    $keywords   = filter_var($_POST["keywords"], FILTER_SANITIZE_STRING);
-    $comments   = filter_var($_POST["comments"], FILTER_SANITIZE_STRING);
+    $title    = filter_var($_POST["title"], FILTER_SANITIZE_STRING);
+    $proposal = filter_var($_POST["proposal"], FILTER_SANITIZE_STRING);
+    $keywords = filter_var($_POST["keywords"], FILTER_SANITIZE_STRING);
+    $comments = filter_var($_POST["comments"], FILTER_SANITIZE_STRING);
 
     $discipline = "";
     $discipline_array = $_POST["discipline"];
@@ -59,20 +60,15 @@ if (issignedin() != -1) {
 
     if (empty($title) || empty(discipline)) {
         $_SESSION["error"] = 1;
-   	$_SESSION["error_msg"] = "Could Not Update Project";
+        $_SESSION["error_msg"] = "Could Not Update Project";
 
-	header("Location: /project/all");
-   	exit();
+        header("Location: /project/all");
+        exit();
     }
 
-    // Prepare the SQL statement
-    $stmt = $conn->prepare("UPDATE projects SET title=?, discipline=?, proposal=?, keywords=?, comments=?, last_updated=now() WHERE id=?");
-    $stmt->bind_param("ssssss", $title, $discipline, $proposal, $keywords, $comments, $id);
+    $project = new Project();
+    $project->update($id, $title, $proposal, $keywords, $comments, $discipline, $conn);
 
-    // Submit the SQL statement
-    $stmt->execute();
-
-    $stmt->close();
     $conn->close();
 
     $_SESSION["message"] = 1;

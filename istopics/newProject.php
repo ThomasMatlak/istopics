@@ -23,7 +23,7 @@ if (issignedin() == 'student') {
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
 
-	$user_major = $row["major"];
+		$user_major = $row["major"];
     }
 
     // Print the new project page
@@ -41,7 +41,7 @@ if (issignedin() == 'student') {
 		<div id="discipline_check">
 			<label for="discipline" class="control-label">Major:</label> <span id="stud_major"></span>
 			<?php echo $major_list ?>
-		<input type="hidden" name="st_major" id="st_major" value="{$user_major}" required>
+		<input type="hidden" name="st_major" id="st_major" value="<?php echo $user_major; ?>" required>
 		</div>
 		<label for="proposal" class="control-label">Project Proposal:</label>
 		<textarea rows="5" cols="80" name="proposal" form="new_project" id="proposal" class="form-control" placeholder="Your IS proposal (optional)"></textarea>

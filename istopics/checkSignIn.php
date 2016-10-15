@@ -11,10 +11,10 @@ if (!isset($_SESSION)) {session_start();}
 function issignedin() {
     if (isset($_SESSION["sess_user_id"]) && isset($_SESSION["sess_user_name"]) && isset($_SESSION["sess_user_role"])) {
         // user is signed in
-	return $_SESSION['sess_user_role'];
+	    return $_SESSION['sess_user_role'];
     }
     else {
         // user is not signed in
-	return -1;
+	    return -1;
     }
 }

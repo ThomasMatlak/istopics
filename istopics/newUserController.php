@@ -14,6 +14,7 @@
 if (!isset($_SESSION)) {session_start();}
 
 require_once 'db_credentials.php';
+require_once 'userprofile.class.php';
 
 $stu_or_fac = $_POST["stud_or_faculty"];
 $first_name = filter_var($_POST["first_name"], FILTER_SANITIZE_STRING);
@@ -38,7 +39,7 @@ if (empty($stu_or_fac) || (empty($first_name) || empty($last_name) || empty($ema
        $_SESSION["error"] = 1;
        $_SESSION["error_msg"] = "That's not a valid email";
    }
-   else if (!preg_match("/@wooster.edu/", $email)) {
+   else if (!preg_match("/([a-zA-Z])+(\d\d)?@wooster.edu/", $email)) {
        $_SESSION["error"] = 1;
        $_SESSION["error_msg"] = "You must use a Wooster email";
    }
@@ -84,32 +85,10 @@ else if (($stu_or_fac == "faculty")) {
     $role = "prof";
 }
 
-// Prepare the SQL statement
-if (!($stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, major, year, password, role) VALUES (?,?,?,?,?,?,?)"))) {
-    $_SESSION["error"] = 1;
-    $_SESSION["error_msg"] = "Something went wrong.";
+$user_profile = new UserProfile();
 
-    header("Location: /register");
-    exit();
-}
-if (!($stmt->bind_param("sssssss", $first_name, $last_name, $email, $major, $year, $password, $role))) {
-    $_SESSION["error"] = 1;
-    $_SESSION["error_msg"] = "Something went wrong.";
+$user_profile->create($first_name, $last_name, $email, $major, $role, $password, $year, $conn);
 
-    header("Location: /regitser");
-    exit();
-}
-
-// Submit the SQL statement
-if (!($stmt->execute())) {
-    $_SESSION["error"] = 1;
-    $_SESSION["error_msg"] = "Error creating new user. This email is probably already in use.";
-
-    header("Location: /register");
-    exit();
-}
-
-$stmt->close();
 $conn->close();
 
 $_SESSION["message"] = 1;

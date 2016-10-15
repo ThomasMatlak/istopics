@@ -69,12 +69,12 @@ if ($result->num_rows > 0) {
 
     while($row = $result->fetch_assoc()) {
         $proj_id         = $row["proj_id"];
-        $proj_title      = str_replace('"', '\"', $row["title"]);
-        $proj_discipline = $row["discipline"];
-        $proj_proposal   = str_replace('"', '\"', $row["proposal"]);
-        $proj_keywords   = str_replace('"', '\"', $row["keywords"]);
+        $proj_title      = addslashes($row["title"]);
+        $proj_discipline = addslashes($row["discipline"]);
+        $proj_proposal   = addslashes($row["proposal"]);
+        $proj_keywords   = addslashes($row["keywords"]);
         $user_id         = $row["user_id"];
-        $author_name     = $row['first_name']. " ". $row['last_name'];
+        $author_name     = addslashes($row['first_name']. " ". $row['last_name']);
         $last_updated    = $row['last_updated'];
         
         display_project($proj_id, $author_name, $user_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $conn);
