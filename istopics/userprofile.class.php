@@ -1,7 +1,5 @@
 <?php
 
-require_once('db_credentials.php');
-
 /**
  * @author Thomas Matlak <tmatlak18@wooster.edu>
  */
@@ -10,7 +8,7 @@ class UserProfile {
 	 * Constructor for the UserProfile class
 	 */
 	function __construct() {
-		
+
 	}
 
 	/**
@@ -23,12 +21,32 @@ class UserProfile {
 	 * @param string $role
 	 * @param string $password
 	 * @param int    $year (optional)
+	 * @param mysqli $conn
 	 *
 	 * @return int
 	 */
-	function create($first_name, $last_name, $email, $major, $role, $password, $year = null) {
-		$stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, major, year, password, role) VALUES (?,?,?,?,?,?,?)");
-		$stmt->bind_param("sssssss", $first_name, $last_name, $email, $major, $year, $password, $role);
+	function create($first_name, $last_name, $email, $major, $role, $password, $year = null, $conn) {
+		$sql = 'INSERT INTO users (first_name, last_name, email, ';
+		$parm_bindings = 'sss';
+		if ($role === 'student') {
+			$sql .= 'major, year, ';
+			$parm_bindings .= 'ss';
+		}
+		$sql .= 'password, role) VALUES (?,?,?,';
+		$parm_bindings .= 'ss';
+		if ($role === 'student') {
+			$sql .= '?,?,';
+		}
+		$sql .= '?,?)';
+
+		$stmt = $conn->prepare($sql);
+
+		if ($role === 'student') {
+			$stmt->bind_param($parm_bindings, $first_name, $last_name, $email, $major, $year, $password, $role);
+		}
+		else {
+			$stmt->bind_param($parm_bindings, $first_name, $last_name, $email, $password, $role);
+		}
 
 		$stmt->execute();
 		$stmt->close();
@@ -40,10 +58,11 @@ class UserProfile {
 	 * Attempt to retrieve a user profile from the database
 	 *
 	 * @param int $id
+	 * @param mysqli $conn
 	 *
 	 * @return array
 	 */
-	function get($id) {
+	function get($id, $conn) {
 		$sql = "SELECT id, first_name, last_name, major, year, email, role FROM users WHERE id={$id}";
     	$result = $conn->query($sql);
 
@@ -61,10 +80,11 @@ class UserProfile {
 	 * @param string $role
 	 * @param string $password (optional)
 	 * @param int    $year (optional)
+	 * @param mysqli $conn
 	 *
 	 * @return bool
 	 */
-	function update($id, $first_name, $last_name, $email, $major, $role, $password = null, $year = null) {
+	function update($id, $first_name, $last_name, $email, $major, $role, $password = null, $year = null, $conn) {
 		$stmt = $conn->prepare("UPDATE users SET first_name=?, last_name=?, major=?, year=?, email=?, password=? WHERE id=?");
 		$stmt->bind_param("sssssss", $first_name, $last_name, $major, $year, $email, $id, $password);
 
@@ -78,10 +98,11 @@ class UserProfile {
 	 * Attempt to delete a user profile from the database
 	 *
 	 * @param int $id
+	 * @param mysqli $conn
 	 *
 	 * @return bool
 	 */
-	function delete($id) {
+	function delete($id, $conn) {
 		$stmt = $conn->prepare("DELETE FROM users WHERE id=?");
 		$stmt->bind_param("s", $id);
 
