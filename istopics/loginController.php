@@ -22,8 +22,13 @@ else {
     $pass  = $_POST["password"];
 }
 
-$sql = "SELECT id, first_name, role, password FROM users WHERE email='$email'";
-$result = $conn->query($sql);
+$sql = "SELECT id, first_name, role, password FROM users WHERE email=?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $email);
+
+$stmt->execute();
+$result = $stmt->get_result();
+$stmt->close();
 
 if ($result->num_rows > 0) {
    $row = $result->fetch_assoc();
