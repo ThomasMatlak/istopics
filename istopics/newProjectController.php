@@ -23,19 +23,21 @@ if (issignedin() != 'student') {
 }
 
 require_once 'db_credentials.php';
+require_once 'project.class.php';
 
 // Set variables and sanitize input
-$title    = filter_var($_POST["title"], FILTER_SANITIZE_STRING);
-$proposal = filter_var($_POST["proposal"], FILTER_SANITIZE_STRING);
-$keywords = filter_var($_POST["keywords"], FILTER_SANITIZE_STRING);
-$comments = filter_var($_POST["comments"], FILTER_SANITIZE_STRING);
+$title    = filter_var(trim($_POST["title"]), FILTER_SANITIZE_SPECIAL_CHARS);
+$proposal = filter_var(trim($_POST["proposal"]), FILTER_SANITIZE_SPECIAL_CHARS);
+$proposal = str_replace("\n", ' ', $proposal); // remove newline characters
+$keywords = filter_var(trim($_POST["keywords"]), FILTER_SANITIZE_SPECIAL_CHARS);
+$comments = filter_var(trim($_POST["comments"]), FILTER_SANITIZE_SPECIAL_CHARS);
 
 $discipline = "";
 $discipline_array = $_POST["discipline"];
 $last_discipline  = end($discipline_array);
 
 foreach ($discipline_array as $selected_major) {
-    $selected_major = filter_var($selected_major, FILTER_SANITIZE_STRING);
+    $selected_major = filter_var($selected_major, FILTER_SANITIZE_SPECIAL_CHARS);
     $discipline = $discipline. $selected_major;
     if ($selected_major != $last_discipline) {
         $discipline = $discipline. ", ";
@@ -47,28 +49,8 @@ if (empty($title) || empty($discipline)) {
     exit();
 }
 
-// Prepare the SQL statement
-$stmt = $conn->prepare("INSERT INTO projects (title, discipline, proposal, keywords, comments, date_created, last_updated) VALUES (?, ?, ?, ?, ?, now(), now())");
-$stmt->bind_param("sssss", $title, $discipline, $proposal, $keywords, $comments);
-
-// Submit the SQL statement
-$stmt->execute();
-
-$proj_id = $conn->insert_id;
-
-$stmt->close();
-
-// Link the project to the currently signed in user
-$stmt = $conn->prepare("INSERT INTO user_project_connections (userid, projectid) VALUES (?, ?)");
-
-$user_id = $_SESSION["sess_user_id"];
-$stmt->bind_param("ss", $user_id, $proj_id);
-
-$stmt->execute();
-
-$stmt->close();
-
-$conn->close();
+$project = new Project();
+$project->create($title, $proposal, $keywords, $comments, $discipline, $_SESSION['sess_user_id'], $conn);
 
 $_SESSION["message"] = 1;
 $_SESSION["msg"] = "Succecfully Added Project";

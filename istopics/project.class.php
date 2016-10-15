@@ -23,7 +23,7 @@ class Project {
 	 *
 	 * @return int
 	 */
-	function create($title, $proposal, $keywords, $comments, $discipline, $conn) {
+	function create($title, $proposal, $keywords, $comments, $discipline, $user_id, $conn) {
 		$stmt = $conn->prepare("INSERT INTO projects (title, discipline, proposal, keywords, comments, date_created, last_updated) VALUES (?, ?, ?, ?, ?, now(), now())");
 		$stmt->bind_param("sssss", $title, $discipline, $proposal, $keywords, $comments);
 
@@ -34,7 +34,6 @@ class Project {
 		// Link the project to the currently signed in user
 		$stmt = $conn->prepare("INSERT INTO user_project_connections (userid, projectid) VALUES (?, ?)");
 
-		$user_id = $_SESSION["sess_user_id"];
 		$stmt->bind_param("ss", $user_id, $proj_id);
 
 		$stmt->execute();
