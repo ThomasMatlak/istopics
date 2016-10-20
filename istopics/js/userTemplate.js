@@ -9,8 +9,10 @@ function user(id, first_name,  last_name, role, major, year, email) {
     var name_row = document.createElement("tr");
     var name_head = document.createElement("th");
     name_head.innerText = "Name:";
+    name_head.className = "col-md-2 col-lg-2";
     var name_data = document.createElement("td");
     name_data.innerText = first_name + " " + last_name;
+    name_data.className = "col-md-10 col-lg-10";
     name_row.appendChild(name_head);
     name_row.appendChild(name_data);
     tbody.appendChild(name_row);
@@ -59,7 +61,7 @@ function user(id, first_name,  last_name, role, major, year, email) {
     var link = document.createElement("a");
     link.innerText = "Edit Profile";
     link.className = "btn btn-warning";
-    link.setAttribute('href', '/user/edit?user_id=' + id);
+    link.setAttribute('href', '/user/' + id + '/edit');
     list_item.appendChild(link);
 
     return list_item;

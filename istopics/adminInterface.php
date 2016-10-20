@@ -39,7 +39,7 @@ if (issignedin() == 'admin') {
 </button>
 
 <div class='collapse' id='showAllUsers'>
-	<form class='form-inline'><div class='form-group'><input type='text' name='search' id='search' placeholder='Filter Users' class='form-control'></div><span class='help-block'>Filter Users by Name</span></form>
+	<form class='form-inline'><div class='form-group'><input type='text' name='search' id='search' placeholder='Filter Users' class='form-control'></div><span class='help-block'>Filter Users by Name, Role, Major, Graduation Year, and Email</span></form>
 
 	<ul id="users_list" class='list-unstyled'>
 <?php
