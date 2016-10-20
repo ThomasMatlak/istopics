@@ -74,7 +74,7 @@ if (issignedin() != -1) {
     $_SESSION["message"] = 1;
     $_SESSION["msg"] = "Succesfully Updated Project";
 
-    header("Location: /project?project_id={$id}");
+    header("Location: /project/{$id}");
     exit();
 }
 else {

@@ -43,7 +43,7 @@ if (issignedin() != -1) {
     	$_SESSION["error"] = 1;
     	$_SESSION["error_msg"] = "Your input was invalid.";
      
-	header("Location: /user");
+	header("Location: /user/{$user_id}");
     	exit();
     }
     if (($_SESSION["sess_user_role"] == "student") && (empty($discipline) || empty($year))) {
@@ -51,7 +51,7 @@ if (issignedin() != -1) {
     	$_SESSION["error"] = 1;
     	$_SESSION["error_msg"] = "Your input was invalid.";
      
-	header("Location: /user");
+	header("Location: /user/{$user_id}");
     	exit();
     }
 
@@ -61,7 +61,7 @@ if (issignedin() != -1) {
         $_SESSION["error"] = 1;
         $_SESSION["error_msg"] = "You are not authorized to perform this action.";
 
-        header("Location: /user");
+        header("Location: /user/{$user_id}");
         exit();
     }
 
@@ -80,7 +80,7 @@ if (issignedin() != -1) {
     $_SESSION["message"] = 1;
     $_SESSION["msg"] = "Succesfully Updated User Profile";
 
-    header("Location: /user");
+    header("Location: /user/{$user_id}");
     exit();
 }
 else {
@@ -89,6 +89,6 @@ else {
      $_SESSION["error_msg"] = "You must be signed in to perform this action.";
      
      // Redirect to home page
-     header("Location: /user");
+     header("Location: /user/{$user_id}");
      exit();
 }

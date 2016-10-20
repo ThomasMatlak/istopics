@@ -13,7 +13,7 @@ require_once 'displayProject.php';
 require_once 'displayProfile.php';
 require_once 'userprofile.class.php';
 
-if (isset($_GET["user_id"])) {
+if (isset($_GET["user_id"]) && $_GET["user_id"] != '') {
    $user_id = $_GET["user_id"];
 }
 elseif (isset($_SESSION["sess_user_id"])) {

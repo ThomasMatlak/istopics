@@ -31,7 +31,7 @@ function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_
 <li class="<?php echo $proj_id; ?>">
 <div class="panel panel-default">
 	<div class="panel-heading container-fluid">
-		<a href="/project?project_id=<?php echo $proj_id; ?>" id="<?php echo $proj_id; ?>project_title" class="btn btn-link text-left col-xs-11 col-sm-11 col-md-11 col-ls-11"><?php echo $proj_title; ?></a>
+		<a href="/project/<?php echo $proj_id; ?>" id="<?php echo $proj_id; ?>project_title" class="btn btn-link text-left col-xs-11 col-sm-11 col-md-11 col-ls-11"><?php echo $proj_title; ?></a>
 <?php
 		    if (issignedin() != -1) {
 		        echo "<form action='/favorite.php' method='POST' class='col-lg-1 col-md-1 col-sm-1 col-xs-1'>";
@@ -62,7 +62,7 @@ function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_
 <?php
 
 	if ($show_author == true) {
-	    echo "<caption><span id='{$proj_id}author'><a href='/user?user_id={$author_id}'>{$proj_author}</a></span></caption>";
+	    echo "<caption><span id='{$proj_id}author'><a href='/user/{$author_id}'>{$proj_author}</a></span></caption>";
 	}
 
 	echo "<tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Major:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'><div id='{$proj_id}project_major'>{$proj_discipline}</div></td></tr>";

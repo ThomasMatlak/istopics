@@ -8,8 +8,8 @@ RewriteRule ^(.*)$ $1.php
 
 RewriteRule ^signin/?$ login.php [NC]
 RewriteRule ^register/?$ newUser.php [NC]
-RewriteRule ^user/?$ viewProfile.php [NC]
-RewriteRule ^user/edit/?$ updateProfile.php [NC]
+RewriteRule ^user/?(\d+)?/?$ viewProfile.php?user_id=$1 [NC]
+RewriteRule ^user/(\d+)/edit/?$ updateProfile.php?user_id=$1 [NC]
 RewriteRule ^signin/forgotpassword/?$ forgotPassword.php [NC]
 RewriteRule ^user/favorites/?$ viewFavorites.php [NC]
 
@@ -19,9 +19,9 @@ RewriteRule ^project/all/title/?$ showAllProjects.php?order=title [NC]
 
 RewriteRule ^project/search/?$ search.php [NC]
 
-RewriteRule ^project/?$ viewProject.php [NC]
+RewriteRule ^project/?(\d+)/?$ viewProject.php?project_id=$1 [NC]
 RewriteRule ^project/new/?$ newProject.php [NC]
-RewriteRule ^project/edit/?$ updateProject.php [NC]
+RewriteRule ^project/(\d+)/edit/?$ updateProject.php?project_id=$1 [NC]
 
 RewriteRule ^admin/?$ adminInterface.php [NC]
 

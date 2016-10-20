@@ -128,7 +128,7 @@ else {
      $_SESSION["error"] = 1;
      $_SESSION["error_msg"] = "You must be signed in to perform this action";
 
-     header("Location: /user?user_id={$id}");
+     header("Location: /user/{$id}");
      exit();
 }
 
