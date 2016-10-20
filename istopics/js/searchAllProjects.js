@@ -53,19 +53,19 @@ function search_all() {
 
                 if (title.search(searchTerm) != -1) {
                     item.score += 1;
-                    // break;
+                    // continue;
                 }
                 if (major.search(searchTerm) != -1) {
                     item.score += .75;
-                    // break;
+                    // continue;
                 }
                 if (name.search(searchTerm) != -1) {
                     item.score += .75;
-                    // break;
+                    // continue;
                 }
                 if (keywords.search(searchTerm) != -1) {
                     item.score += .5;
-                    // break;
+                    // continue;
                 }
             }
 

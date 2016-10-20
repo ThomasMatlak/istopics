@@ -42,29 +42,42 @@ function search_users() {
 
             for (j = 0; j < searchTerms.length; ++j) {
                 var searchTerm = searchTerms[j].trim().replace(",", "").toLowerCase();
+                var matched = false; // user must match all search terms
 
                 if (searchTerm === "") {break;}
 
                 if (first_name.search(searchTerm) != -1) {
                     item.score += 5;
+                    matched = true;
                 }
                 if (last_name.search(searchTerm) != -1) {
                     item.score += 5;
+                    matched = true;
                 }
                 if ((first_name + " " + last_name).search(searchTerm) != -1) {
                     item.score += 10;
+                    matched = true;
                 }
                 if (role.search(searchTerm) != -1) {
                     item.score += 1;
+                    matched = true;
                 }
                 if (major.search(searchTerm) != -1) {
                     item.score += 1;
+                    matched = true;
                 }
                 if (year.search(searchTerm) != -1) {
                     item.score += 1;
+                    matched = true;
                 }
                 if (email.search(searchTerm) != -1) {
                     item.score += 10;
+                    matched = true;
+                }
+
+                if (matched !== true) {
+                    item.score = 0;
+                    break;
                 }
             }
         });
