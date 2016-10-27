@@ -116,14 +116,7 @@ require_once 'db_credentials.php';
     		    ?>
 		    </ul>
 
-		    <noscript>
-		        <form id="search_html" action="/project/search" method="GET" class="navbar-form">
-                            <div class="form-group">
-	                        <input type="text" class="form-control" name="search_term" id="search_term" placeholder="search">
-				<button type="submit" class="btn btn-warning">Search</button>
-                            </div>
-			</form>
-                    </noscript>
+			<a href="/project/search" class="btn btn-warning navbar-btn">Advanced Search</a>
 
 	        </div>
             </nav>
