@@ -46,7 +46,7 @@ include("header.php");
     <button type="submit" id="submit" class="btn btn-warning form-control">Submit</button>
 </form>
 
-<script src="/js/newUserValidation.js"></script>
+<script src="/istopics/js/newUserValidation.js"></script>
 
 <?php 
 include("footer.php");

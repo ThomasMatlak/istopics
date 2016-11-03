@@ -31,8 +31,8 @@ $result = $stmt->get_result();
 $stmt->close();
 
 ?>
-<script src='/js/ellipsify.js'></script>
-<script src='/js/expand_contract_pk.js'></script>
+<script src='/istopics/js/ellipsify.js'></script>
+<script src='/istopics/js/expand_contract_pk.js'></script>
 <?php
 
 // Display user's favorited projects

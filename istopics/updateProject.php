@@ -83,8 +83,8 @@ if (issignedin() != -1) {
 		<button type="submit" class="btn btn-danger">Delete Project</button>
 	</form>
 
-<script src="/js/updateProjectValidation.js"></script>
-<script src="/js/setMajor.js"></script>
+<script src="/istopics/js/updateProjectValidation.js"></script>
+<script src="/istopics/js/setMajor.js"></script>
 
 <?php
 }

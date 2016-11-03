@@ -25,8 +25,8 @@ if (!filter_var($user_id, FILTER_VALIDATE_INT)) {
 }
 else {
 ?>
-<script src='/js/ellipsify.js'></script>
-<script src='/js/expand_contract_pk.js'></script>
+<script src='/istopics/js/ellipsify.js'></script>
+<script src='/istopics/js/expand_contract_pk.js'></script>
 <?php
 	$user_profile = new UserProfile();
 	$result = $user_profile->get($user_id, $conn);

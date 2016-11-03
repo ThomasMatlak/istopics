@@ -112,8 +112,8 @@ if ($result->num_rows > 0) {
 	<button type='submit' class='btn btn-danger'>Delete Your Account</button>
 </form>
 
-<script src="/js/updateProfileValidation.js"></script>
-<script src="/js/setMajor.js"></script>
+<script src="/istopics/js/updateProfileValidation.js"></script>
+<script src="/istopics/js/setMajor.js"></script>
 <?php
 }
 else {

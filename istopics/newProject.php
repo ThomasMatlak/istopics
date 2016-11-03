@@ -55,8 +55,8 @@ if (issignedin() == 'student') {
 	</div>
 </form>
 
-<script src="/js/newProjectValidation.js"></script>
-<script src="/js/setMajor.js"></script>
+<script src="/istopics/js/newProjectValidation.js"></script>
+<script src="/istopics/js/setMajor.js"></script>
 <?php
 }
 else {

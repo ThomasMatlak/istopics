@@ -76,12 +76,12 @@ if (issignedin() == 'admin') {
 	var u = JSON.parse(<?php echo $users_json; ?>);
 </script>
 
-<script src='/js/userTemplate.js'></script>
-<script src='/js/filterUsers.js'></script>
+<script src='/istopics/js/userTemplate.js'></script>
+<script src='/istopics/js/filterUsers.js'></script>
 
 <hr>
 
-<script src='/js/resetDatabaseWarning.js'></script>
+<script src='/istopics/js/resetDatabaseWarning.js'></script>
 <button onclick='resetWarning();' class='btn btn-danger'>Reset Database</button>
 <span class='help-block'>Resetting the database will delete all projects, connections between projects and users, and non-admin users.</span>
 <?php

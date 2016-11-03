@@ -51,9 +51,9 @@ else {
 $result = $conn->query($sql);
 
 ?>
-    <script src='/js/ellipsify.js'></script>
-    <script src='/js/expand_contract_pk.js'></script>
-    <script src='/js/projectTemplate.js'></script>
+    <script src='/istopics/js/ellipsify.js'></script>
+    <script src='/istopics/js/expand_contract_pk.js'></script>
+    <script src='/istopics/js/projectTemplate.js'></script>
 <?php
 
 // Display Projects
@@ -112,7 +112,7 @@ if ($result->num_rows > 0) {
     var p = JSON.parse(<?php echo $project_json; ?>);
 </script>
 
-<script src='/js/searchAllProjects.js'></script>
+<script src='/istopics/js/searchAllProjects.js'></script>
 
 	<input type='hidden' value='<?php echo $result->num_rows; ?>' id='initial_num_results'>
 <?php
@@ -127,8 +127,8 @@ if ($result->num_rows > 0) {
 
 ?>
 <link rel="stylesheet" property='stylesheet' href="/css/jquery-ui.min.css">
-<script src="/js/jquery-ui.min.js"></script>
-<script src="/js/autocompleteSearch.js"></script>
+<script src="/istopics/js/jquery-ui.min.js"></script>
+<script src="/istopics/js/autocompleteSearch.js"></script>
 <?php
 
 } else {
