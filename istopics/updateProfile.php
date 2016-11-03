@@ -31,7 +31,7 @@ if ((($user_id != $_SESSION["sess_user_id"]) || ($first_name != $_SESSION["sess_
      $conn->close();
 
      // Redirect to home page
-     header("Location: /project/all");
+     header("Location: /istopics/project/all");
      exit();
 }
 
@@ -59,7 +59,7 @@ if ($result->num_rows > 0) {
      	$conn->close();
 
      	// Redirect to home page
-     	header("Location: /project/all");
+     	header("Location: /istopics/project/all");
      	exit();
     }
 
@@ -67,7 +67,7 @@ if ($result->num_rows > 0) {
 
 ?>
 <input type="hidden" id="user_role" value="<?php echo $role ?>">
-<form id="update_user" action="/updateProfileController.php" method="POST" class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<form id="update_user" action="/istopics/updateProfileController.php" method="POST" class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
 <div class="form-group">
 		<div id="check_first_name">
 		<label for="first_name" class="control-label">First Name:</label>
@@ -106,7 +106,7 @@ if ($result->num_rows > 0) {
 
 <hr>
 
-<form action='/deleteUserController.php?user_id=<?php echo $user_id ?>' method='post' class='form-horizontal'>
+<form action='/istopics/deleteUserController.php?user_id=<?php echo $user_id ?>' method='post' class='form-horizontal'>
 	<input type='hidden' name='delete_user_id' value='<?php echo $user_id ?>'>
 	<input type='hidden' name='delete_user_role' value='<?php echo $role ?>'>
 	<button type='submit' class='btn btn-danger'>Delete Your Account</button>
@@ -128,7 +128,7 @@ else {
      $_SESSION["error"] = 1;
      $_SESSION["error_msg"] = "You must be signed in to perform this action";
 
-     header("Location: /user/{$id}");
+     header("Location: /istopics/user/{$id}");
      exit();
 }
 

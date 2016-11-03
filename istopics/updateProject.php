@@ -45,7 +45,7 @@ if (issignedin() != -1) {
     	$_SESSION["error"] = 1;
     	$_SESSION["error_msg"] = "You are not authorized to perform this action.";
 
-    	header("Location: /project/all");
+    	header("Location: /istopics/project/all");
     	exit();
     }
 
@@ -54,7 +54,7 @@ if (issignedin() != -1) {
     $major_list = file_get_contents("majors.html");
 
 ?>
-	<form id="update_project" action="/updateProjectController.php" method="POST" class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	<form id="update_project" action="/istopics/updateProjectController.php" method="POST" class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<div class="form-group">
 			<input type="hidden" name="project_id" value="<?php echo $id ?>">
 			<div id="check_title">
@@ -78,7 +78,7 @@ if (issignedin() != -1) {
 		</div>
 	</form>
 
-	<form id="delete_project" action="/deleteProjectController.php" method="POST">
+	<form id="delete_project" action="/istopics/deleteProjectController.php" method="POST">
 		<input type="hidden" name="project_id" value="<?php echo $id ?>">
 		<button type="submit" class="btn btn-danger">Delete Project</button>
 	</form>
@@ -93,7 +93,7 @@ else {
     $_SESSION["error"] = 1;
     $_SESSION["error_msg"] = "You must be signed in to perform this action.";
 
-    header("Location: /project/all");
+    header("Location: /istopics/project/all");
     exit();
 }
 

@@ -49,7 +49,7 @@ if (empty($stu_or_fac) || (empty($first_name) || empty($last_name) || empty($ema
    }
 
    // redirect to home page
-   header("Location: /register");
+   header("Location: /istopics/register");
    exit();
 }
 if (($stu_or_fac == "student")) {
@@ -76,7 +76,7 @@ if (($stu_or_fac == "student")) {
             $_SESSION["error"] = 1;
             $_SESSION["error_msg"] = "You didn't enter your major";
         }
-   	header("Location: /register");
+   	header("Location: /istopics/register");
    	exit();
     }
     $role = "student";
@@ -98,5 +98,5 @@ $_SESSION["msg"] = "New User Succesfully Added";
 $_SESSION['email'] = $email;
 $_SESSION['password'] = $_POST['password'];
 
-header("Location: /loginController.php?just_registered={$role}");
+header("Location: /istopics/loginController.php?just_registered={$role}");
 exit();

@@ -19,13 +19,13 @@ require_once 'db_credentials.php';
   	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   	
 	<!-- custom css -->
-  	<link rel="stylesheet" href="/css/istopics.css">
+  	<link rel="stylesheet" href="/istopics/css/istopics.css">
 
   	<!-- include jQuery -->
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
   	<!-- include Bootstrap javaScript -->
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/istopics/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
   	<link rel="icon" href="/favicon.ico">
   	<title><?php echo $page_title; ?></title>
@@ -39,7 +39,7 @@ require_once 'db_credentials.php';
 	    <nav class="navbar navbar-inverse navbar-static-top">
 	        <div class="container-fluid">
 		    <a href='http://www.wooster.edu' class="navbar-brand">
-            	        <img src='/wordmark.png' height="28" alt='The College of Wooster'/>
+            	        <img src='/istopics/wordmark.png' height="28" alt='The College of Wooster'/>
             	    </a>
   		    <ul class="nav nav-pills navbar-left visible-xs">
 			<li><ul class="dropdown-menu">
@@ -51,10 +51,10 @@ require_once 'db_credentials.php';
 
 			while ($row = $result->fetch_assoc()) {
 			    $required_role = $row['required_priveleges'];
-			    $link          = $row['link'];
+			    $link          = '/istopics' .$row['link'];
 			    $visible_text  = $row['visible_text'];
 
-			    if ($link == '/user') {
+			    if ($link == '/istopics/user') {
 			        $visible_text = $visible_text. " {$_SESSION['sess_user_name']}";
 			    }
 
@@ -88,10 +88,10 @@ require_once 'db_credentials.php';
 
 			while ($row = $result->fetch_assoc()) {
 			    $required_role = $row['required_priveleges'];
-			    $link          = $row['link'];
+			    $link          = '/istopics' .$row['link'];
 			    $visible_text  = $row['visible_text'];
 
-			    if ($link == '/user') {
+			    if ($link == '/istopics/user') {
 			        if ($role != -1) {
 			            $visible_text = $visible_text. " {$_SESSION['sess_user_name']}";
 				}
@@ -116,7 +116,7 @@ require_once 'db_credentials.php';
     		    ?>
 		    </ul>
 
-			<a href="/project/search" class="btn btn-warning navbar-btn">Advanced Search</a>
+			<a href="/istopics/project/search" class="btn btn-warning navbar-btn">Advanced Search</a>
 
 	        </div>
             </nav>

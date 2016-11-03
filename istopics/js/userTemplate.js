@@ -61,7 +61,7 @@ function user(id, first_name,  last_name, role, major, year, email) {
     var link = document.createElement("a");
     link.innerText = "Edit Profile";
     link.className = "btn btn-warning";
-    link.setAttribute('href', '/user/' + id + '/edit');
+    link.setAttribute('href', '/istopics/user/' + id + '/edit');
     list_item.appendChild(link);
 
     return list_item;

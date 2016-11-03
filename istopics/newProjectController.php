@@ -18,7 +18,7 @@ if (issignedin() != 'student') {
     $_SESSION["error"] = 1;
     $_SESSION["error_msg"] = "You are not authorized to perform this action.";
      
-    header("Location: /project/all");
+    header("Location: /istopics/project/all");
     exit();
 }
 
@@ -45,7 +45,7 @@ foreach ($discipline_array as $selected_major) {
 }
 
 if (empty($title) || empty($discipline)) {
-    header("Location: /project/all");
+    header("Location: /istopics/project/all");
     exit();
 }
 
@@ -55,5 +55,5 @@ $project->create($title, $proposal, $keywords, $comments, $discipline, $_SESSION
 $_SESSION["message"] = 1;
 $_SESSION["msg"] = "Succecfully Added Project";
 
-header("Location: /project/all");
+header("Location: /istopics/project/all");
 exit();

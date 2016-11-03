@@ -21,7 +21,7 @@ if (issignedin() == 'admin') {
         $_SESSION["error"] = 1;
     	$_SESSION["error_msg"] = "That's not an email";
      
-	header("Location: /project/all");
+	header("Location: /istopics/project/all");
     	exit();
     }
 
@@ -32,14 +32,14 @@ if (issignedin() == 'admin') {
         $_SESSION["error"] = 1;
     	$_SESSION["error_msg"] = "Something went wrong.";
 
-    	header("Location: /admin");
+    	header("Location: /istopics/admin");
     	exit();
     }
     if (!($stmt->bind_param("s", $email))) {
         $_SESSION["error"] = 1;
     	$_SESSION["error_msg"] = "Something went wrong.";
 
-    	header("Location: /admin");
+    	header("Location: /istopics/admin");
     	exit();
     }
 
@@ -48,7 +48,7 @@ if (issignedin() == 'admin') {
         $_SESSION["error"] = 1;
     	$_SESSION["error_msg"] = "Something went wrong.";
 
-    	header("Location: /admin");
+    	header("Location: /istopics/admin");
     	exit();
     }
 
@@ -57,7 +57,7 @@ if (issignedin() == 'admin') {
         $_SESSION["error"] = 1;
     	$_SESSION["error_msg"] = "No changes were made. Perhaps user {$email} doesn't exist?";
 
-    	header("Location: /admin");
+    	header("Location: /istopics/admin");
     	exit();
     }
 
@@ -67,7 +67,7 @@ if (issignedin() == 'admin') {
     $_SESSION['message'] = 1;
     $_SESSION['msg'] = "Succesfully promoted {$email} to an admin";
 
-    header("Location: /admin");
+    header("Location: /istopics/admin");
     exit();
 }
 else {
@@ -75,7 +75,7 @@ else {
      $_SESSION["error"] = 1;
      $_SESSION["error_msg"] = "You must be signed in to perform this action.";
      
-     header("Location: /project/all");
+     header("Location: /istopics/project/all");
      exit();
 }
 

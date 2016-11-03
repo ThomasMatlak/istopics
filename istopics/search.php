@@ -41,7 +41,7 @@ if (isset($_GET['project_keywords'])) {
 ?>
 <h1>Advanced Search</h1>
 
-<form action="/project/search" method="GET" class="form-horizontal">
+<form action="/istopics/project/search" method="GET" class="form-horizontal">
     <div class="form-group">
         <label for="project_title" class="control-label">Project Title</label>
         <input type="text" name="project_title" id="project_title" value="<?php echo $project_title; ?>" class="form-control">

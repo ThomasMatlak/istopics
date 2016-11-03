@@ -26,14 +26,15 @@ CREATE TABLE user_project_favorites (userid INT, projectid INT);
 # header links
 DROP TABLE IF EXISTS header_links;
 CREATE TABLE header_links (link TEXT, visible_text TEXT, required_priveleges TEXT, link_order INT);
-INSERT INTO header_links (link, visible_text, required_priveleges, link_order) VALUES ('/project/all', 'View All Projects', 'none', 0),
-       	    		 		      	       ('/project/new', 'Add a New Project', 'student', 1),
-						       ('/user', 'Hello ', 'signin', 2),
-						       ('/user/favorites', 'Your Favorites', 'signin', 3),
-						       ('/logout.php', 'Sign Out', 'signin', 4),
-						       ('/admin', 'Administrator Interface', 'admin', 5),
-						       ('/signin', 'Sign In', 'signout', 6),
-						       ('/register', 'New User?', 'signout', 7);
+INSERT INTO header_links (link, visible_text, required_priveleges, link_order) VALUES 
+	('/project/all', 'View All Projects', 'none', 0),
+	('/project/new', 'Add a New Project', 'student', 1),
+	('/user', 'Hello ', 'signin', 2),
+	('/user/favorites', 'Your Favorites', 'signin', 3),
+	('/logout.php', 'Sign Out', 'signin', 4),
+	('/admin', 'Administrator Interface', 'admin', 5),
+	('/signin', 'Sign In', 'signout', 6),
+	('/register', 'New User?', 'signout', 7);
 
 # Remove user istopics if already exists
 DROP USER 'istopics'@'localhost';

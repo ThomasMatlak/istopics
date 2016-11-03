@@ -42,6 +42,6 @@ else {
     $_SESSION["error"] = 1;
     $_SESSION["error_msg"] = "You are not authorized to perform this action.";
 
-    header("Location: /project/all");
+    header("Location: /istopics/project/all");
     exit();
 }

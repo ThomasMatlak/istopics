@@ -32,7 +32,7 @@ if (issignedin() == 'student') {
 
 ?>
 	<h3>Add a new project</h3>
-<form id="new_project" action="/newProjectController.php" method="POST" class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<form id="new_project" action="/istopics/newProjectController.php" method="POST" class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
 	<div class="form-group">
 			<div id="check_title">
 			<label for="title" class="control-label">Title:</label>
@@ -65,7 +65,7 @@ else {
      $_SESSION["error_msg"] = "You are not authorized to perform this action.";
      
      // Redirect to home page
-     header("Location: /project/all");
+     header("Location: /istopics/project/all");
      exit();
 }
 

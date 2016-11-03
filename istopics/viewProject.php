@@ -40,7 +40,7 @@ else {
 
     	if (isset($_SESSION["sess_user_role"]) && isset($_SESSION["sess_user_id"])) {
 			if (($_SESSION["sess_user_role"] == "admin") || ($_SESSION["sess_user_id"] == $user_id)) {
-					echo "<a href='/project/{$proj_id}/edit' class='btn btn-warning'>Edit Project</a>";
+					echo "<a href='/istopics/project/{$proj_id}/edit' class='btn btn-warning'>Edit Project</a>";
 			}
         }
 

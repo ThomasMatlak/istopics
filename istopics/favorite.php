@@ -12,14 +12,14 @@ if (!isset($_POST['favorite_status']) || (($_POST['favorite_status'] != 'add') &
     $_SESSION["error"] = 1;
     $_SESSION["error_msg"] = "Could not favorite project.";
 
-    header("Location: /project/all");
+    header("Location: /istopics/project/all");
     exit();
 }
 if (!isset($_POST['projectid']) && !filter_var((int) $_POST['projectid'], FILTER_VALIDATE_INT)) {
     $_SESSION["error"] = 1;
     $_SESSION["error_msg"] = "Could not favorite project.";
 
-    header("Location: /project/all");
+    header("Location: /istopics/project/all");
     exit();
 }
 
@@ -84,6 +84,6 @@ else {
     $_SESSION["error"] = 1;
     $_SESSION["error_msg"] = "You are not authorized to perform this action.";
 
-    header("Location: /project/all");
+    header("Location: /istopics/project/all");
     exit();
 }

@@ -31,10 +31,10 @@ function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_
 <li class="<?php echo $proj_id; ?>">
 <div class="panel panel-default">
 	<div class="panel-heading container-fluid">
-		<a href="/project/<?php echo $proj_id; ?>" id="<?php echo $proj_id; ?>project_title" class="btn btn-link text-left col-xs-11 col-sm-11 col-md-11 col-ls-11"><?php echo $proj_title; ?></a>
+		<a href="/istopics/project/<?php echo $proj_id; ?>" id="<?php echo $proj_id; ?>project_title" class="btn btn-link text-left col-xs-11 col-sm-11 col-md-11 col-ls-11"><?php echo $proj_title; ?></a>
 <?php
 		    if (issignedin() != -1) {
-		        echo "<form action='/favorite.php' method='POST' class='col-lg-1 col-md-1 col-sm-1 col-xs-1'>";
+		        echo "<form action='/istopics/favorite.php' method='POST' class='col-lg-1 col-md-1 col-sm-1 col-xs-1'>";
 				echo "<input type='hidden' name='projectid' value='{$proj_id}'>";
 
 				$userid = $_SESSION['sess_user_id'];
@@ -62,7 +62,7 @@ function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_
 <?php
 
 	if ($show_author == true) {
-	    echo "<caption><span id='{$proj_id}author'><a href='/user/{$author_id}'>{$proj_author}</a></span></caption>";
+	    echo "<caption><span id='{$proj_id}author'><a href='/istopics/user/{$author_id}'>{$proj_author}</a></span></caption>";
 	}
 
 	echo "<tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Major:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'><div id='{$proj_id}project_major'>";
@@ -76,7 +76,7 @@ function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_
 			echo ", ";
 		}
 
-		echo "<a href='/project/search?project_discipline={$major}'>{$major}</a>";
+		echo "<a href='/istopics/project/search?project_discipline={$major}'>{$major}</a>";
 	}
 
 	echo "</div></td></tr>";
@@ -101,7 +101,7 @@ function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_
 			   else {
 				   echo ", ";
 			   }
-			   echo "<a href='/project/search?project_keywords={$keyword}'>{$keyword}</a>";
+			   echo "<a href='/istopics/project/search?project_keywords={$keyword}'>{$keyword}</a>";
 		   }
 
 		   echo "</span><a id='{$proj_id}show_keywords' role='button' onclick='expand_keywords({$proj_id});'> <span id='{$proj_id}show_or_hide_k'></span></a></div></td></tr>";

@@ -12,7 +12,7 @@ echo <<<EOT
 
     <a href='https://www.youtube.com/watch?v=4Xca6Y9eXmA?start=0s&end=6s&version=3'>I Think I've Broken Something</a>
 
-    <a href='/project/all' class='btn btn-class'>Return to Safety</a>
+    <a href='/istopics/project/all' class='btn btn-class'>Return to Safety</a>
 EOT;
 
 include '../footer.php';

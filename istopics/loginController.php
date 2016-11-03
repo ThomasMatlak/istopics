@@ -41,7 +41,7 @@ if ($result->num_rows > 0) {
        $_SESSION["error_msg"] = "Username or password does not match.";
 
        // Redirect to login page
-       header("Location: /signin");
+       header("Location: /istopics/signin");
        exit();
    }
 
@@ -59,15 +59,15 @@ if ($result->num_rows > 0) {
 
    // Redirect to appropriate page
    if ($_GET["just_registered"] == "student") {
-      header("Location: /project/new");
+      header("Location: /istopics/project/new");
       exit();
    }
    else if ($_GET["just_registered"] == "prof") {
-      header("Location: /project/all");
+      header("Location: /istopics/project/all");
       exit();
    }
    else {
-   	header("Location: /project/all");
+   	header("Location: /istopics/project/all");
    	exit();
    }
 
@@ -79,6 +79,6 @@ if ($result->num_rows > 0) {
     $_SESSION["error_msg"] = "Username or password does not match.";
 
     // Redirect to login page
-    header("Location: /signin");
+    header("Location: /istopics/signin");
     exit();
 }

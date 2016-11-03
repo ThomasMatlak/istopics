@@ -12,7 +12,7 @@ function project(id, title, author, author_id, discipline, proposal, keywords, t
     t.innerText = title;
     t.id = id + 'project_title';
     t.className = "btn btn-link text-left col-xs-11 col-sm-11 col-md-11 col-ls-11";
-    t.href = "/project?project_id=" + id;
+    t.href = "/istopics/project?project_id=" + id;
 
     panel_heading.appendChild(t);
     panel.appendChild(panel_heading);
@@ -24,7 +24,7 @@ function project(id, title, author, author_id, discipline, proposal, keywords, t
     table.className = "table";
 
     var caption = document.createElement("caption");
-    caption.innerHTML = "<span id='" + id + "author'><a href='/user?user_id=" + author_id + "'>" + author + "</a></span></caption>";
+    caption.innerHTML = "<span id='" + id + "author'><a href='/istopics/user?user_id=" + author_id + "'>" + author + "</a></span></caption>";
     table.appendChild(caption);
 
     var table_body = document.createElement("tbody");
@@ -49,7 +49,7 @@ function project(id, title, author, author_id, discipline, proposal, keywords, t
         else {
             d += ", ";
         }
-        d += "<a href='/project/search?project_discipline=" + disciplines[i] + "'>" + disciplines[i] + "</a>";
+        d += "<a href='/istopics/project/search?project_discipline=" + disciplines[i] + "'>" + disciplines[i] + "</a>";
     }
 
     discipline_data.innerHTML = d;
@@ -86,7 +86,7 @@ function project(id, title, author, author_id, discipline, proposal, keywords, t
         else {
             k += ", ";
         }
-        k += "<a href='/project/search?project_keywords=" + keys[i] + "'>" + keys[i] + "</a>";
+        k += "<a href='/istopics/project/search?project_keywords=" + keys[i] + "'>" + keys[i] + "</a>";
     }
 
     key_data.innerHTML = k;

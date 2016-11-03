@@ -31,7 +31,7 @@ if (issignedin() != -1) {
      	//Close connection
      	$conn->close();
 
-     	header("Location: /project/all");
+     	header("Location: /istopics/project/all");
      	exit();
     }
 
@@ -43,7 +43,7 @@ if (issignedin() != -1) {
     $_SESSION["message"] = 2;
     $_SESSION["msg"] = "Project Deleted";
 
-    header("Location: /project/all");
+    header("Location: /istopics/project/all");
     exit();
 }
 else {
@@ -51,6 +51,6 @@ else {
      $_SESSION["error"] = 1;
      $_SESSION["error_msg"] = "You must be signed in to perform this action.";
      
-     header("Location: /project/all");
+     header("Location: /istopics/project/all");
      exit();
 }

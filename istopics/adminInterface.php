@@ -15,7 +15,7 @@ require_once 'checkSignIn.php';
 if (issignedin() == 'admin') {
 // user is signed in as an admin
 ?>
-<a href='/dbToCSV.php' class='btn btn-primary'>Download Projects as CSV</a>
+<a href='/istopics/dbToCSV.php' class='btn btn-primary'>Download Projects as CSV</a>
 
 <hr>
 
@@ -23,7 +23,7 @@ if (issignedin() == 'admin') {
 	Promote a User to Admin
 </button>
 <div class="collapse" id="promoteUser">
-	<form action='/promoteUser.php' method='POST' class='form-inline'>
+	<form action='/istopics/promoteUser.php' method='POST' class='form-inline'>
 	<div class='form-group'>
 		<label for='email'>Email:</label>
 	<input type='email' name='email' id='email' class='form-control'>
@@ -91,7 +91,7 @@ else {
      $_SESSION["error"] = 1;
      $_SESSION["error_msg"] = "You must be signed in to perform this action.";
      
-     header("Location: /project/all");
+     header("Location: /istopics/project/all");
      exit();
 }
 

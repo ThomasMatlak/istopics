@@ -126,7 +126,7 @@ if ($result->num_rows > 0) {
     echo "'>";
 
 ?>
-<link rel="stylesheet" property='stylesheet' href="/css/jquery-ui.min.css">
+<link rel="stylesheet" property='stylesheet' href="/istopics/css/jquery-ui.min.css">
 <script src="/istopics/js/jquery-ui.min.js"></script>
 <script src="/istopics/js/autocompleteSearch.js"></script>
 <?php

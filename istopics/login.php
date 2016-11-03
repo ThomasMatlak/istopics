@@ -38,7 +38,7 @@ include("header.php");
     <div class="form-group">
         <button type="submit" class="btn btn-default">Sign in</button>
     </div>
-    <a href='/signin/forgotpassword' class='btn btn-link'>Forgot Password?</a>
+    <!--<a href='/istopics/signin/forgotpassword' class='btn btn-link'>Forgot Password?</a>-->
 </form>
 
 <?php 

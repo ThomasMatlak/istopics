@@ -36,7 +36,7 @@ if (issignedin() != -1) {
 	    $stmt->close();
      	$conn->close();
 
-	    header("Location: /project/all");
+	    header("Location: /istopics/project/all");
      	exit();
     }
 
@@ -62,7 +62,7 @@ if (issignedin() != -1) {
         $_SESSION["error"] = 1;
         $_SESSION["error_msg"] = "Could Not Update Project";
 
-        header("Location: /project/all");
+        header("Location: /istopics/project/all");
         exit();
     }
 
@@ -74,7 +74,7 @@ if (issignedin() != -1) {
     $_SESSION["message"] = 1;
     $_SESSION["msg"] = "Succesfully Updated Project";
 
-    header("Location: /project/{$id}");
+    header("Location: /istopics/project/{$id}");
     exit();
 }
 else {
@@ -82,6 +82,6 @@ else {
      $_SESSION["error"] = 1;
      $_SESSION["error_msg"] = "You must be signed in to perform this action.";
      
-     header("Location: /project/all");
+     header("Location: /istopics/project/all");
      exit();
 }

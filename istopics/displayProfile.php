@@ -45,7 +45,7 @@ function display_profile($user_id, $name, $show_name, $major, $year, $email, $ro
 <?php
 
     if (isset($_SESSION["sess_user_role"]) && isset($_SESSION["sess_user_id"]) && (($_SESSION["sess_user_role"] == "admin") || ($_SESSION["sess_user_id"] == $user_id)) && !(($_SESSION["sess_user_id"] != $user_id) && ($role == 'admin'))) {
-        echo "<a href='/user/{$user_id}/edit' class='btn btn-warning'>Edit Profile</a>";
+        echo "<a href='/istopics/user/{$user_id}/edit' class='btn btn-warning'>Edit Profile</a>";
     }
 
     echo "</li>";

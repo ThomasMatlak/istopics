@@ -14,7 +14,7 @@ if (issignedin() == 'admin') {
      $_SESSION["error"] = 3;
      $_SESSION["error_msg"] = "Error Removing projects";
      
-     header("Location: /admin");
+     header("Location: /istopics/admin");
      exit();
    }
 
@@ -23,7 +23,7 @@ if (issignedin() == 'admin') {
      $_SESSION["error"] = 3;
      $_SESSION["error_msg"] = "Error Removing users";
      
-     header("Location: /admin");
+     header("Location: /istopics/admin");
      exit();
    }
 
@@ -32,14 +32,14 @@ if (issignedin() == 'admin') {
      $_SESSION["error"] = 3;
      $_SESSION["error_msg"] = "Error Removing user_project_connections";
      
-     header("Location: /admin");
+     header("Location: /istopics/admin");
      exit();
    }
 
    $_SESSION["error"] = 2;
    $_SESSION["error_msg"] = "Succesfully Reset the Database";
      
-   header("Location: /admin");
+   header("Location: /istopics/admin");
    exit();
 }
 else {
@@ -48,6 +48,6 @@ else {
      $_SESSION["error_msg"] = "You are not authorized to perform this action.";
      
      // Redirect to home page
-     header("Location: /project/all");
+     header("Location: /istopics/project/all");
      exit();
 }
