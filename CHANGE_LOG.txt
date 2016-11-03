@@ -1,5 +1,22 @@
 CHANGE LOG
 ==========
+2016-11-2
+-can click on keywords and majors to show only projects with those keywords and majors
+
+2016-10-26
+-added basic version of advanced search
+
+2016-10-19
+-minor tweaks and bug fixes
+
+2016-10-15
+-improved backend for database operations
+-can filter users in the admin interface
+-minor bug fixes
+
+2016-10-14
+-improved sorting algorithm
+
 2016-10-13
 -added sorting of projects based on search terms
 
