@@ -37,7 +37,22 @@ function project(id, title, author, author_id, discipline, proposal, keywords, t
     discipline_row.appendChild(discipline_head);
     var discipline_data = document.createElement("td");
     discipline_data.className = "col-xs-11 col-sm-11 col-md-11 col-lg-11";
-    discipline_data.innerText = discipline;
+
+    var first = true;
+    var disciplines = discipline.split(', ');
+
+    var d = "";
+    for (var i = 0; i < disciplines.length; ++i) {
+        if (first === true) {
+            first = false
+        }
+        else {
+            d += ", ";
+        }
+        d += "<a href='/project/search?project_discipline=" + disciplines[i] + "'>" + disciplines[i] + "</a>";
+    }
+
+    discipline_data.innerHTML = d;
 
     discipline_row.appendChild(discipline_data);
     table_body.appendChild(discipline_row);
@@ -59,7 +74,23 @@ function project(id, title, author, author_id, discipline, proposal, keywords, t
     key_head.innerText = "Keywords:";
     key.appendChild(key_head);
     var key_data = document.createElement("td");
-    key_data.innerText = keywords;
+
+    first = true;
+    var keys = keywords.split(', ');
+
+    var k = "";
+    for (var i = 0; i < keys.length; ++i) {
+        if (first === true) {
+            first = false
+        }
+        else {
+            k += ", ";
+        }
+        k += "<a href='/project/search?project_keywords=" + keys[i] + "'>" + keys[i] + "</a>";
+    }
+
+    key_data.innerHTML = k;
+    // key_data.innerText = keywords;
 
     key.appendChild(key_data);
     table_body.appendChild(key);
