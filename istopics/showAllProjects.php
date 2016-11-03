@@ -10,17 +10,28 @@ include("header.php");
 require_once 'db_credentials.php';
 require_once 'displayProject.php';
 
-$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.keywords, projects.last_updated, users.id AS user_id, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id ";
+$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.keywords, projects.last_updated, users.id AS user_id, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE users.year";
+
+// it is assumed IS projects take place during a student's graduating year
+if (isset($_GET['year']) && is_numeric($_GET['year'])) {
+    $sql .= "=" .$_GET['year'];
+}
+elseif ($_GET['year'] === '') {
+    $sql .= "=YEAR(CURDATE()) OR users.year=(YEAR(CURDATE()) + 1) ";
+}
+else { // show everything
+    $sql .= ">0";
+}
 
 // choose how the projects are sorted
 if (isset($_GET['type']) && $_GET['type'] == 'senior') { // only retrieve Senior IS projects
-    $sql .= "WHERE projects.project_type='senior'";
+    $sql .= "AND projects.project_type='senior'";
 }
 else if (isset($_GET['type']) && $_GET['type'] == 'junior') { // only retrive Junior IS projects
-    $sql .= "WHERE projects.project_type='junior'";
+    $sql .= "AND projects.project_type='junior'";
 }
 else if (isset($_GET['type']) && $_GET['type'] == 'other') { // only retrieve other projects
-    $sql .= "WHERE projects.project_type='other'";
+    $sql .= "AND projects.project_type='other'";
 }
 else {} // retrive all projects
 
