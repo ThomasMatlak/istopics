@@ -16,7 +16,7 @@ $sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, proj
 if (isset($_GET['year']) && is_numeric($_GET['year'])) {
     $sql .= "=" .$_GET['year'];
 }
-elseif ($_GET['year'] === '') {
+elseif (isset($_GET['year']) && $_GET['year'] === '') {
     $sql .= "=YEAR(CURDATE()) OR users.year=(YEAR(CURDATE()) + 1) ";
 }
 else { // show everything
