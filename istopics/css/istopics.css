@@ -46,16 +46,17 @@ height: 4em;
 /*
 * Cursomize Button Colors
 */
-.navbar-inverse .navbar-brand {
+.navbar-inverse {
     color: #ffcc00;
+    background-color: #000;
 }
 
 .dropdown-menu {
-    background-color: #333;
+    background-color: #000;
 }
 
 .btn-warning {
-    color: #333;
+    color: #000;
     background-color: #ffcc00;
     border-color: #bf0000;
 }
@@ -77,8 +78,8 @@ height: 4em;
 }
 
 .panel-default>.panel-heading {
-    color: #333;
-    background-color: #333;
+    color: #000;
+    background-color: #000;
     border-color: #bf0000;
 }
 
@@ -97,7 +98,7 @@ a:focus, a:hover {
 }
 
 .navbar-inverse .btn-link:focus, .navbar-inverse .btn-link:hover {
-    color: #333;
+    color: #000;
     background-color: #ffcc00;
 }
 
