@@ -18,7 +18,6 @@ function search_all() {
         // Input is empty; display all projects
         p.projects.forEach( function(item, index, array) {
             $('#results').append(project(item.id, item.title, item.author_name, item.user_id, item.discipline, item.proposal, item.keywords, item.last_updated, item.fav_status));
-
         });
 
         $('#no_results_msg').text('');
@@ -45,6 +44,7 @@ function search_all() {
             var title    = removeDiacritics(item.title.toLowerCase());
             var major    = removeDiacritics(item.discipline.toLowerCase());
             var name     = removeDiacritics(item.author_name.toLowerCase());
+            var proposal = removeDiacritics(item.proposal.toLowerCase());
 
             for (j = 0; j < searchTerms.length; j++) {
                 var searchTerm = removeDiacritics(searchTerms[j].trim()).replace(",", "");
@@ -66,6 +66,10 @@ function search_all() {
                 }
                 if (keywords.search(searchTerm) != -1) {
                     item.score += .5;
+                    // continue;
+                }
+                if (proposal.search(searchTerm) != -1) {
+                    item.score += .1
                     // continue;
                 }
             }
