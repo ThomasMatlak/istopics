@@ -34,7 +34,24 @@ else {
 
 		echo "<ul class='list-unstyled'>";
 
-		display_project($proj_id, $author_name, $user_id, $proj_title, $major, $proposal, $keywords, $comments, $last_updated, true, true, $conn);
+		if (issignedin() != -1) {
+            $userid = $_SESSION['sess_user_id'];
+            $sql1 = "SELECT userid, projectid FROM user_project_favorites WHERE projectid={$proj_id} AND userid={$userid}";
+
+            $result1 = $conn->query($sql1);
+
+            if ($result1->num_rows > 0) {
+                $fav_status = true;
+            }
+            else {
+                $fav_status = false;
+            }
+        }
+		else {
+            $fav_status = false;
+        }
+
+		display_project($proj_id, $author_name, $user_id, $proj_title, $major, $proposal, $keywords, $comments, $last_updated, true, true, $fav_status, $conn);
 
 		echo "</ul>";
 

@@ -88,14 +88,31 @@ if ($result->num_rows > 0) {
         $author_name     = addslashes($row['first_name']. " ". $row['last_name']);
         $last_updated    = $row['last_updated'];
         
-        display_project($proj_id, $author_name, $user_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $conn);
+        if (issignedin() != -1) {
+            $userid = $_SESSION['sess_user_id'];
+            $sql1 = "SELECT userid, projectid FROM user_project_favorites WHERE projectid={$proj_id} AND userid={$userid}";
+
+            $result1 = $conn->query($sql1);
+
+            if ($result1->num_rows > 0) {
+                $fav_status = true;
+            }
+            else {
+                $fav_status = false;
+            }
+        }
+        else {
+            $fav_status = false;
+        }
+
+        display_project($proj_id, $author_name, $user_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $fav_status, $conn);
 
         $keywords_list = explode(",", $proj_keywords);
 
         ($first === false) ? $project_json .= ',' : $first = false;
 
         $project_json .= "{";
-        $project_json .= "\"id\":\"{$proj_id}\",\"title\":\"{$proj_title}\",\"discipline\":\"{$proj_discipline}\",\"proposal\":\"{$proj_proposal}\",\"keywords\":\"{$proj_keywords}\",\"user_id\":\"{$user_id}\",\"author_name\":\"{$author_name}\",\"last_updated\":\"{$last_updated}\"";
+        $project_json .= "\"id\":\"{$proj_id}\",\"title\":\"{$proj_title}\",\"discipline\":\"{$proj_discipline}\",\"proposal\":\"{$proj_proposal}\",\"keywords\":\"{$proj_keywords}\",\"user_id\":\"{$user_id}\",\"author_name\":\"{$author_name}\",\"last_updated\":\"{$last_updated}\",\"fav_status\":\"{$fav_status}\"";
         $project_json .= "}";
 
         foreach ($keywords_list as $word) {

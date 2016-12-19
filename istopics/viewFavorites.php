@@ -59,7 +59,24 @@ if ($result->num_rows > 0) {
         $author_id   = $author_info_row["id"];
         $author_name = addslashes($author_info_row['first_name']. " ". $author_info_row['last_name']);
 
-        display_project($proj_id, $author_name, $author_id, $proj_title, $proj_major, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $conn);
+        if (issignedin() != -1) {
+            $userid = $_SESSION['sess_user_id'];
+            $sql1 = "SELECT userid, projectid FROM user_project_favorites WHERE projectid={$proj_id} AND userid={$userid}";
+
+            $result1 = $conn->query($sql1);
+
+            if ($result1->num_rows > 0) {
+                $fav_status = true;
+            }
+            else {
+                $fav_status = false;
+            }
+        }
+        else {
+            $fav_status = false;
+        }
+
+        display_project($proj_id, $author_name, $author_id, $proj_title, $proj_major, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $fav_status, $conn);
     }
 
     $max_proj_id = $conn->query("SELECT id FROM projects ORDER BY id DESC")->fetch_assoc()['id'];

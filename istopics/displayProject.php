@@ -10,7 +10,7 @@
 require_once 'timeElapsed.php';
 require_once 'checkSignIn.php';
 
-function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, $proj_comments, $last_updated, $show_comments, $show_author, $conn) {
+function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, $proj_comments, $last_updated, $show_comments, $show_author, $favorited, $conn) {
 /**
  * @param int    $proj_id         - the id of the project being displayed
  * @param string $proj_author     - the name of the author of the project
@@ -33,6 +33,22 @@ function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_
 	<div class="panel-heading container-fluid">
 		<a href="/istopics/project/<?php echo $proj_id; ?>" id="<?php echo $proj_id; ?>project_title" class="btn btn-link text-left col-xs-11 col-sm-11 col-md-11 col-ls-11"><?php echo $proj_title; ?></a>
 <?php
+			if (issignedin() != -1) {
+				echo "<form action='/istopics/favorite.php' method='POST' class='col-lg-1 col-md-1 col-sm-1 col-xs-1'>";
+				echo "<input type='hidden' name='projectid' value='{$proj_id}'>";
+
+				if ($favorited === true) {
+					echo "<input type='hidden' name='favorite_status' value='remove'>";
+					echo "<button type='submit' class='btn btn-link'><span class='glyphicon glyphicon-star'></span></button>";
+				}
+				else {
+					echo "<input type='hidden' name='favorite_status' value='add'>";
+					echo "<button type='submit' class='btn btn-link'><span class='glyphicon glyphicon-star-empty'></span></button>";
+				}
+				echo "</form>";
+			}
+
+/*
 		    if (issignedin() != -1) {
 		        echo "<form action='/istopics/favorite.php' method='POST' class='col-lg-1 col-md-1 col-sm-1 col-xs-1'>";
 				echo "<input type='hidden' name='projectid' value='{$proj_id}'>";
@@ -55,6 +71,7 @@ function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_
 				
 				echo "</form>";
 		    }
+*/
 ?>
 </div> <!-- panel heading -->
 <div class="panel-body">

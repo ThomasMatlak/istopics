@@ -1,4 +1,4 @@
-function project(id, title, author, author_id, discipline, proposal, keywords, timestamp) {
+function project(id, title, author, author_id, discipline, proposal, keywords, timestamp, fav_status) {
     var list_item = document.createElement("li");
     list_item.className = id;
 
@@ -14,7 +14,33 @@ function project(id, title, author, author_id, discipline, proposal, keywords, t
     t.className = "btn btn-link text-left col-xs-11 col-sm-11 col-md-11 col-ls-11";
     t.href = "/istopics/project?project_id=" + id;
 
+    var f = document.createElement("form");
+    f.action = "/istopics/favorite.php";
+    f.method = "POST";
+    f.className = "col-lg-1 col-md-1 col-sm-1 col-xs-1";
+
+    var i1 = document.createElement("input");
+    i1.type = "hidden";
+    i1.name = "projectid";
+    i1.value = id;
+    f.appendChild(i1);
+
+    var i2 = document.createElement("input");
+    i2.type = "hidden";
+    i2.name = "favorite_status";
+    i2.value = (fav_status == true) ? "remove" : "add";
+    f.appendChild(i2);
+
+    var b = document.createElement("button");
+    b.type = "submit";
+    b.className = "btn btn-link";
+    var s = document.createElement("span");
+    s.className = (fav_status == true) ? "glyphicon glyphicon-star" : "glyphicon glyphicon-star-empty"; // change depending on if the project is favorited or not
+    b.appendChild(s);
+    f.appendChild(b);
+
     panel_heading.appendChild(t);
+    panel_heading.appendChild(f);
     panel.appendChild(panel_heading);
 
     var panel_body = document.createElement("div");
