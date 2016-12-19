@@ -21,8 +21,11 @@ if (isset($_GET['project_title'])) {
     $project_title = mysqli_real_escape_string($conn, $_GET['project_title']);
     $search = true;
 }
-if (isset($_GET['project_discipline'])) {
-    $project_discipline = mysqli_real_escape_string($conn, $_GET['project_discipline']);
+if (isset($_GET['discipline'])) {
+    $project_discipline = $_GET['discipline'];
+    foreach ($project_discipline as $disc) {
+        $disc = mysqli_real_escape_string($conn, $disc);
+    }
     $search = true;
 }
 if (isset($_GET['author_first_name'])) {
@@ -47,9 +50,8 @@ if (isset($_GET['project_keywords'])) {
         <input type="text" name="project_title" id="project_title" value="<?php echo $project_title; ?>" class="form-control">
     </div>
     <div class="form-group">
-        <label for="discipline" class="control-label">Discipline</label>
-        <?php // include 'majors.html'; ?>
-        <input type="text" name="project_discipline" id="project_discipline" value="<?php echo $project_discipline; ?>" class="form-control">
+        <label for="discipline" class="control-label">Major/Discipline</label>
+        <?php include 'majors.html'; ?>
     </div>
     <div class="form-group">
         <label for="author_first_name" class="control-label">Author's First Name</label>
@@ -77,25 +79,44 @@ if ($search === true) {
     }
     if ($project_discipline) {
         if ($project_title) {
-            $sql .= ' AND ';
+            // $sql .= ' AND ';
+            $sql .= ' OR ';
         }
-        $sql .= "projects.discipline LIKE '%{$project_discipline}%'";
+
+        if (count($project_discipline) == 1) {
+            $sql .= "projects.discipline LIKE '%{$project_discipline[0]}%'";
+        }
+        else {
+            $first_disc = true;
+            foreach ($project_discipline as $disc) {
+                if ($first_disc !== true) {
+                    $sql .= " OR ";
+                }
+                else {
+                    $first_disc = false;
+                }
+                $sql .= "projects.discipline LIKE '%{$disc}%'";
+            }
+        }
     }
     if ($author_first_name) {
         if ($project_title || $project_discipline) {
-            $sql .= ' AND ';
+            // $sql .= ' AND ';
+            $sql .= ' OR ';
         }
         $sql .= "users.first_name LIKE '%{$author_first_name}%'";
     }
     if ($author_last_name) {
         if ($project_title || $project_discipline || $author_first_name) {
-            $sql .= ' AND ';
+            // $sql .= ' AND ';
+            $sql .= ' OR ';
         }
         $sql .= "users.last_name LIKE '%{$author_last_name}%'";
     }
     if ($project_keywords) {
         if ($project_title || $project_discipline || $author_first_name || $author_last_name) {
-            $sql .= ' AND ';
+            // $sql .= ' AND ';
+            $sql .= ' OR ';
         }
         $sql .= "projects.keywords LIKE '%{$project_keywords}%'";
     }
@@ -117,8 +138,25 @@ if ($search === true) {
             $user_id         = $row["user_id"];
             $author_name     = $row['first_name']. " ". $row['last_name'];
             $last_updated    = $row['last_updated'];
+
+            if (issignedin() != -1) {
+                $userid = $_SESSION['sess_user_id'];
+                $sql1 = "SELECT userid, projectid FROM user_project_favorites WHERE projectid={$proj_id} AND userid={$userid}";
+
+                $result1 = $conn->query($sql1);
+
+                if ($result1->num_rows > 0) {
+                    $fav_status = true;
+                }
+                else {
+                    $fav_status = false;
+                }
+            }
+            else {
+                $fav_status = false;
+            }
         
-            display_project($proj_id, $author_name, $user_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $conn);
+            display_project($proj_id, $author_name, $user_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $fav_status, $conn);
         }
         echo "</ul>";
     }
@@ -128,50 +166,3 @@ if ($search === true) {
 }
 
 include 'footer.php';
-
-/*
-$page_title = "Search";
-include("header.php");
-
-require_once 'db_credentials.php';
-require_once 'displayProject.php';
-
-$search_term = filter_var($_GET["search_term"], FILTER_SANITIZE_STRING);
-
-$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.keywords, projects.last_updated, users.id AS user_id, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE (projects.title LIKE '%{$search_term}%' OR projects.keywords LIKE '%{$search_term}%' OR projects.discipline LIKE '%{$search_term}%' OR projects.proposal LIKE '%{$search_term}%') ORDER BY title";
-
-$result = $conn->query($sql);
-
-// Display Projects
-if ($result->num_rows > 0) {
-    if ($result->num_rows == 1) {
-        echo "<p>Showing <span id='num_projects'>{$result->num_rows}</span> <span id='result_or_results'>project</span>.</p>";
-    }
-    else {
-        echo "<p>Showing <span id='num_projects'>{$result->num_rows}</span> <span id='result_or_results'>projects</span>.</p>";
-    }
-
-    echo "<ul class='list-unstyled' id='results'>";
-
-    while($row = $result->fetch_assoc()) {
-    	$proj_id         = $row["proj_id"];
-        $proj_title      = $row["title"];
-        $proj_discipline = $row["discipline"];
-        $proj_proposal   = $row["proposal"];
-        $proj_keywords   = $row["keywords"];
-        $user_id         = $row["user_id"];
-        $author_name     = $row['first_name']. " ". $row['last_name'];
-        $last_updated    = $row['last_updated'];
-	
-	    display_project($proj_id, $author_name, $user_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $conn);
-    }
-    echo "</ul>";
-}
-else {
-    echo "<p>Showing 0 projects.</p>";
-}
-
-// $conn->close();
-
-include("footer.php");
-*/
