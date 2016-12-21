@@ -2,13 +2,13 @@
 /**
  * Update a user profile
  *
- * $_POST["user_id"]    - the user id of the user to update
- * $_POST["first_name"] - the first name of the user to update
- * $_POST["last_name"]  - the last name of the user to update
- * $_POST["email"]      - the email of the user to update
- * $_POST["year"]       - the class year of the user to update
- * $_POST["discipline"] - the major of the user to update
- * $_POST["password"]   - the password of the user to update
+ * $_POST["user_id"]      - the user id of the user to update
+ * $_POST["first_name"]   - the first name of the user to update
+ * $_POST["last_name"]    - the last name of the user to update
+ * $_POST["email"]        - the email of the user to update
+ * $_POST["year"]         - the class year of the user to update
+ * $_POST["discipline"]   - the major of the user to update
+ * $_POST["new_password"] - the password of the user to update
  */
 
 if (!isset($_SESSION)) {session_start();}
@@ -43,7 +43,7 @@ if (issignedin() != -1) {
     	$_SESSION["error"] = 1;
     	$_SESSION["error_msg"] = "Your input was invalid.";
      
-	header("Location: /istopics/user/{$user_id}");
+	    header("Location: /istopics/user/{$user_id}");
     	exit();
     }
     if (($_SESSION["sess_user_role"] == "student") && (empty($discipline) || empty($year))) {
@@ -51,7 +51,7 @@ if (issignedin() != -1) {
     	$_SESSION["error"] = 1;
     	$_SESSION["error_msg"] = "Your input was invalid.";
      
-	header("Location: /istopics/user/{$user_id}");
+	    header("Location: /istopics/user/{$user_id}");
     	exit();
     }
 
@@ -69,10 +69,10 @@ if (issignedin() != -1) {
     if (isset($_POST["new_password"]) && $_POST["new_password"] != "") {
         $new_password = password_hash($_POST["new_password"], PASSWORD_DEFAULT);
 
-        $user_profile->update($id, $first_name, $last_name, $email, $discipline, $_SESSION['sess_user_role'], $new_password, $year, $conn);
+        $user_profile->update($user_id, $first_name, $last_name, $email, $discipline, $_SESSION['sess_user_role'], $new_password, $year, $conn);
     }
     else {
-        $user_profile->update($id, $first_name, $last_name, $email, $discipline, $_SESSION['sess_user_role'], false, $year, $conn);
+        $user_profile->update($user_id, $first_name, $last_name, $email, $discipline, $_SESSION['sess_user_role'], false, $year, $conn);
     }
 
     $conn->close();
