@@ -47,31 +47,6 @@ function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_
 				}
 				echo "</form>";
 			}
-
-/*
-		    if (issignedin() != -1) {
-		        echo "<form action='/istopics/favorite.php' method='POST' class='col-lg-1 col-md-1 col-sm-1 col-xs-1'>";
-				echo "<input type='hidden' name='projectid' value='{$proj_id}'>";
-
-				$userid = $_SESSION['sess_user_id'];
-				$sql = "SELECT userid, projectid FROM user_project_favorites WHERE projectid={$proj_id} AND userid={$userid}";
-
-				$result = $conn->query($sql);
-
-				if ($result->num_rows > 0) {
-					// user has already favorited the project, present the removal option
-					echo "<input type='hidden' name='favorite_status' value='remove'>";
-					echo "<button type='submit' class='btn btn-link'><span class='glyphicon glyphicon-star'></span></button>";
-				}
-				else {
-					// user has not yet favorited the project, present the add option
-					echo "<input type='hidden' name='favorite_status' value='add'>";
-					echo "<button type='submit' class='btn btn-link'><span class='glyphicon glyphicon-star-empty'></span></button>";
-				}
-				
-				echo "</form>";
-		    }
-*/
 ?>
 </div> <!-- panel heading -->
 <div class="panel-body">
