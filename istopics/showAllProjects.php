@@ -10,6 +10,11 @@ include("header.php");
 require_once 'db_credentials.php';
 require_once 'displayProject.php';
 
+$view = 'list';
+if (isset($_GET['view']) && ($_GET['view'] == 'tabular' || $_GET['view'] == 't')) {
+    $view = 'tabular';
+}
+
 $sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.keywords, projects.last_updated, users.id AS user_id, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE users.year";
 
 // it is assumed IS projects take place during a student's graduating year
@@ -69,7 +74,20 @@ if ($result->num_rows > 0) {
 
     echo "<span id='no_results_msg'></span>";
 
-    echo "<ul class='list-unstyled' id='results'>";
+    if ($view == 'list') {
+        echo "<ul class='list-unstyled' id='results'>";
+    }
+    elseif ($view == 'tabular') {
+?>
+        <table class='table table-bordered table-hover' id='results'>
+        <tr>
+            <th>Project Title</th>
+            <th>Author</th>
+            <th>Discipline</th>
+            <th>Project Year</th>
+        </tr>
+<?php
+    }
 
     $max_proj_id = $conn->query("SELECT id FROM projects ORDER BY id DESC")->fetch_assoc()['id'];
 
@@ -105,7 +123,12 @@ if ($result->num_rows > 0) {
             $fav_status = false;
         }
 
-        display_project($proj_id, $author_name, $user_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $fav_status, $conn);
+        if ($view == 'list') {
+            display_project($proj_id, $author_name, $user_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $fav_status, $conn);
+        }
+        elseif ($view == 'tabular') {
+            display_project_tabular($proj_id, $author_name, $user_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $fav_status, $conn);
+        }
 
         $keywords_list = explode(",", $proj_keywords);
 
@@ -123,8 +146,14 @@ if ($result->num_rows > 0) {
     }
 
     $project_json .= "]}'";
+
+    if ($view == 'list') {
+        echo "</ul>";
+    }
+    elseif ($view == 'tabular') {
+        echo "</table>";
+    }
 ?>
-    </ul>
 <script>
     var p = JSON.parse(<?php echo $project_json; ?>);
 </script>

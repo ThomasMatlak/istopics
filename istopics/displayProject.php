@@ -10,7 +10,7 @@
 require_once 'timeElapsed.php';
 require_once 'checkSignIn.php';
 
-function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, $proj_comments, $last_updated, $show_comments, $show_author, $favorited, $conn) {
+function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, $proj_comments, $last_updated, $show_comments, $show_author, $favorited, $conn)
 /**
  * @param int    $proj_id         - the id of the project being displayed
  * @param string $proj_author     - the name of the author of the project
@@ -26,7 +26,7 @@ function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_
  *
  * Note that there must be a list opening tag preceding the use of this function in order to display correctly 
  */
-
+{
 ?>
 <li class="<?php echo $proj_id; ?>">
 <div class="panel panel-default">
@@ -109,5 +109,48 @@ function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_
 		</div> <!-- panel body -->
 	</div> <!-- panel -->
 </li>
+<?php
+}
+
+function display_project_tabular($proj_id, $proj_author, $author_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, $proj_comments, $last_updated, $show_comments, $show_author, $favorited, $conn)
+/**
+ * @param int    $proj_id         - the id of the project being displayed
+ * @param string $proj_author     - the name of the author of the project
+ * @param int    $author_id       - the id of the author of the project
+ * @param string $proj_title      - the title of the project
+ * @param string $proj_discipline - the project's discipline/major
+ * @param string $proj_proposal   - the project's proposal
+ * @param string $proj_keywords   - the project's keywords
+ * @param string $proj_comments   - the project's comments
+ * @param string $last_updated    - when the project was last updated
+ * @param bool   $show_comments   - do you want to show the project's comments (true/false)
+ * @param bool   $show_author     - do you want to show the project's author (true/false)
+ *
+ * For display in a tabular environment
+ *
+ * Note that there must be a table opening tag preceding the use of this function in order to display correctly 
+ */
+{
+?>
+<tr class="<?php echo $proj_id; ?>">
+	<td><a href='/istopics/project/<?php echo $proj_id; ?>'><?php echo $proj_title; ?></a></td>
+	<td><a href='/istopics/user/<?php echo $author_id; ?>'><?php echo $proj_author; ?></a></td>
+	<td>
+		<?php
+		$first = true;
+		foreach (explode(', ', $proj_discipline) as $major) {
+			if ($first === true) {
+				$first = false;
+			}
+			else {
+				echo ", ";
+			}
+
+			echo "<a href='/istopics/project/search?project_discipline={$major}'>{$major}</a>";
+		}
+		?>
+	</td>
+	<td><?php echo date("Y", strtotime($last_updated)); ?></td>
+</tr>
 <?php
 }
