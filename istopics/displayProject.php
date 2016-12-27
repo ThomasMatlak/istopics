@@ -24,7 +24,7 @@ function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_
  * @param bool   $show_comments   - do you want to show the project's comments (true/false)
  * @param bool   $show_author     - do you want to show the project's author (true/false)
  *
- * Note that there must be a list opening tag preceding the use of this function in order to display correctly 
+ * Note that there must be a list opening tag preceding the use of this function in order to display correctly
  */
 {
 ?>
@@ -58,7 +58,7 @@ function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_
 	}
 
 	echo "<tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Major:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'><div id='{$proj_id}project_major'>";
-	
+
 	$first = true;
 	foreach (explode(', ', $proj_discipline) as $major) {
 		if ($first === true) {
@@ -68,7 +68,7 @@ function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_
 			echo ", ";
 		}
 
-		echo "<a href='/istopics/project/search?project_discipline={$major}'>{$major}</a>";
+		echo "<a href='/istopics/project/search?discipline={$major}'>{$major}</a>";
 	}
 
 	echo "</div></td></tr>";
@@ -84,7 +84,7 @@ function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_
 	if ($proj_keywords != NULL) {
 	       echo "<tr><th>Keywords:</th><td><div id='{$proj_id}keywords'><span id='{$proj_id}keywords_text'>";
 		   $proj_keywords_arr = explode(', ', $proj_keywords);
-		   
+
 		   $first = true;
 		   foreach ($proj_keywords_arr as $keyword) {
 			   if ($first === true) {
@@ -128,7 +128,7 @@ function display_project_tabular($proj_id, $proj_author, $author_id, $proj_title
  *
  * For display in a tabular environment
  *
- * Note that there must be a table opening tag preceding the use of this function in order to display correctly 
+ * Note that there must be a table opening tag preceding the use of this function in order to display correctly
  */
 {
 ?>
