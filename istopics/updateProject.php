@@ -26,6 +26,7 @@ $discipline = $row["discipline"];
 $proposal   = $row["proposal"];
 $keywords   = $row["keywords"];
 $comments   = $row["comments"];
+$project_t  = $row['project_type'];
 
 if (issignedin() != -1) {
 // user is signed in
@@ -57,6 +58,16 @@ if (issignedin() != -1) {
 	<form id="update_project" action="/istopics/updateProjectController.php" method="POST" class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<div class="form-group">
 			<input type="hidden" name="project_id" value="<?php echo $id ?>">
+			<label for="project_type">Project Type</label>
+			<label class="checkbox-inline">
+				<input type="radio" name="project_type" value="senior" <?php echo ($project_t == 'senior') ? 'checked' : '' ?>> Senior I.S.
+			</label>
+			<label class="checkbox-inline">
+				<input type="radio" name="project_type" value="junior" <?php echo ($project_t == 'junior') ? 'checked' : '' ?>> Junior I.S.
+			</label>
+			<label class="checkbox-inline">
+				<input type="radio" name="project_type" value="other" <?php echo ($project_t == 'other') ? 'checked' : '' ?>> Other Research Project
+			</label>
 			<div id="check_title">
 				<label for="title" class="control-label">Title:</label>
 				<input type="text" name="title" id="title" value="<?php echo $title ?>" class="form-control" required>
@@ -89,7 +100,7 @@ if (issignedin() != -1) {
 <?php
 }
 else {
-    // user is not signed in, set error 
+    // user is not signed in, set error
     $_SESSION["error"] = 1;
     $_SESSION["error_msg"] = "You must be signed in to perform this action.";
 

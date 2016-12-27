@@ -2,12 +2,13 @@
 /**
  * Update a project already in the istopics database.
  *
- * $_POST["project_id"] - the id of the project to update
- * $_POST["title"]      - the title of the project to update
- * $_POST["proposal"]   - the proposal of the project to update
- * $_POST["keywords"]   - the keywords of the project to update
- * $_POST["comments"]   - the comments of the project to update
- * $_POST["discipline"] - the major of the project to update
+ * $_POST["project_id"]   - the id of the project to update
+ * $_POST["title"]        - the title of the project to update
+ * $_POST["proposal"]     - the proposal of the project to update
+ * $_POST["keywords"]     - the keywords of the project to update
+ * $_POST["comments"]     - the comments of the project to update
+ * $_POST["discipline"]   - the major of the project to update
+ * $_POST["project_type"] - the type of the project to update
  */
 
 if (!isset($_SESSION)) {session_start();}
@@ -32,7 +33,7 @@ if (issignedin() != -1) {
         // the correct user is not signed in, set error message
      	$_SESSION["error"] = 1;
      	$_SESSION["error_msg"] = "You are not authorized to perform this action.";
-     
+
 	    $stmt->close();
      	$conn->close();
 
@@ -44,6 +45,7 @@ if (issignedin() != -1) {
     $proposal = filter_var($_POST["proposal"], FILTER_SANITIZE_STRING);
     $keywords = filter_var($_POST["keywords"], FILTER_SANITIZE_STRING);
     $comments = filter_var($_POST["comments"], FILTER_SANITIZE_STRING);
+    $proj_t   = filter_var(trim($_POST["project_type"]), FILTER_SANITIZE_SPECIAL_CHARS);
 
     $discipline = "";
     $discipline_array = $_POST["discipline"];
@@ -58,7 +60,7 @@ if (issignedin() != -1) {
     	}
     }
 
-    if (empty($title) || empty(discipline)) {
+    if (empty($title) || empty($discipline)) {
         $_SESSION["error"] = 1;
         $_SESSION["error_msg"] = "Could Not Update Project";
 
@@ -67,8 +69,7 @@ if (issignedin() != -1) {
     }
 
     $project = new Project();
-    $project->update($id, $title, $proposal, $keywords, $comments, $discipline, $conn);
-
+    $project->update($id, $title, $proposal, $keywords, $comments, $discipline, $proj_t, $conn);
     $conn->close();
 
     $_SESSION["message"] = 1;
@@ -81,7 +82,7 @@ else {
      // user is not signed in, set error message
      $_SESSION["error"] = 1;
      $_SESSION["error_msg"] = "You must be signed in to perform this action.";
-     
+
      header("Location: /istopics/project/all");
      exit();
 }

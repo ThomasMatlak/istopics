@@ -23,9 +23,9 @@ class Project {
 	 *
 	 * @return int
 	 */
-	function create($title, $proposal, $keywords, $comments, $discipline, $user_id, $conn) {
-		$stmt = $conn->prepare("INSERT INTO projects (title, discipline, proposal, keywords, comments, date_created, last_updated) VALUES (?, ?, ?, ?, ?, now(), now())");
-		$stmt->bind_param("sssss", $title, $discipline, $proposal, $keywords, $comments);
+	function create($title, $proposal, $keywords, $comments, $discipline, $project_type, $user_id, $conn) {
+		$stmt = $conn->prepare("INSERT INTO projects (title, discipline, proposal, keywords, comments, project_type, date_created, last_updated) VALUES (?, ?, ?, ?, ?, ?, now(), now())");
+		$stmt->bind_param("ssssss", $title, $discipline, $proposal, $keywords, $comments, $project_type);
 
 		$stmt->execute();
 
@@ -51,10 +51,10 @@ class Project {
 	 * @return array|bool
 	 */
 	function get($id, $conn) {
-		$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.comments, projects.keywords, projects.last_updated, users.id AS user_id, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE projects.id=?";
+		$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.comments, projects.keywords, projects.project_type, projects.last_updated, users.id AS user_id, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE projects.id=?";
     	$stmt = $conn->prepare($sql);
 		$stmt->bind_param("s", $id);
-		
+
 		$stmt->execute();
 		$result = $stmt->get_result();
 		$stmt->close();
@@ -80,9 +80,9 @@ class Project {
 	 *
 	 * @return bool
 	 */
-	function update($id, $title, $proposal, $keywords, $comments, $discipline, $conn) {
-		$stmt = $conn->prepare("UPDATE projects SET title=?, discipline=?, proposal=?, keywords=?, comments=?, last_updated=now() WHERE id=?");
-		$stmt->bind_param("ssssss", $title, $discipline, $proposal, $keywords, $comments, $id);
+	function update($id, $title, $proposal, $keywords, $comments, $discipline, $project_type, $conn) {
+		$stmt = $conn->prepare("UPDATE projects SET title=?, discipline=?, proposal=?, keywords=?, comments=?, project_type=?, last_updated=now() WHERE id=?");
+		$stmt->bind_param("sssssss", $title, $discipline, $proposal, $keywords, $comments, $project_type, $id);
 
 		$stmt->execute();
 		$stmt->close();

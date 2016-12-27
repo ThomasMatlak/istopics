@@ -34,7 +34,17 @@ if (issignedin() == 'student') {
 	<h3>Add a new project</h3>
 <form id="new_project" action="/istopics/newProjectController.php" method="POST" class="form-horizontal col-lg-12 col-md-12 col-sm-12 col-xs-12">
 	<div class="form-group">
-			<div id="check_title">
+		<label for="project_type">Project Type</label>
+		<label class="checkbox-inline">
+			<input type="radio" name="project_type" value="senior" checked> Senior I.S.
+		</label>
+		<label class="checkbox-inline">
+			<input type="radio" name="project_type" value="junior"> Junior I.S.
+		</label>
+		<label class="checkbox-inline">
+			<input type="radio" name="project_type" value="other"> Other Research Project
+		</label>
+		<div id="check_title">
 			<label for="title" class="control-label">Title:</label>
 			<input type="text" name="title" id="title" class="form-control" placeholder="Your project's working title" required>
 		</div>
