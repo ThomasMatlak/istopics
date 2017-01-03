@@ -2,28 +2,77 @@
  * Search all projects based on keywords or title content
  */
 
+// when text input changes
 $("form :input").on('input', function() {
+    search_all();
+});
+
+// when checkboxes change
+$("input").change(function() {
     search_all();
 });
 
 function search_all() {
     var searchTerms = $('#search').val().toLowerCase().split(",");
 
+    var senior_checked = $("#project_type0").is(":checked");
+    var junior_checked = $("#project_type1").is(":checked");
+    var other_checked = $("#project_type2").is(":checked");
+
+    if (!senior_checked && !junior_checked && !other_checked)
+    // if nothing is checked, treat it as if everything is checked
+    {
+        senior_checked = true;
+        junior_checked = true;
+        other_checked = true;
+    }
+
     // Hide all projects to start with
     p.projects.forEach( function(item, index, array) {
         $('.'+item.id).remove();
     });
 
-    if (!$('#search').val()) {
+    if (!$('#search').val() && senior_checked && junior_checked && other_checked) {
         // Input is empty; display all projects
         p.projects.forEach( function(item, index, array) {
-            $('#results').append(project(item.id, item.title, item.author_name, item.user_id, item.discipline, item.proposal, item.keywords, item.last_updated, item.fav_status));
+            $('#results').append(project(item.id, item.title, item.author_name, item.user_id, item.discipline, item.proposal, item.keywords, item.last_updated, item.fav_status, item.project_type));
         });
 
         $('#no_results_msg').text('');
         var num_projects = $('#num_projects').text($('#initial_num_results').val());
 
         if (num_projects === 1) {
+            $('#result_or_results').text('project');
+        }
+        else {
+            $('#result_or_results').text('projects');
+        }
+    }
+    else if (!$('#search').val() && (!senior_checked || !junior_checked || !other_checked)) {
+        num_projects = 0;
+
+        p.projects.forEach( function(item, index, array) {
+            if (senior_checked && item.project_type == "senior") {
+                ++num_projects;
+                $('#results').append(project(item.id, item.title, item.author_name, item.user_id, item.discipline, item.proposal, item.keywords, item.last_updated, item.fav_status, item.project_type));
+            }
+            else if (junior_checked && item.project_type == "junior") {
+                ++num_projects;
+                $('#results').append(project(item.id, item.title, item.author_name, item.user_id, item.discipline, item.proposal, item.keywords, item.last_updated, item.fav_status, item.project_type));
+            }
+            else if (other_checked && item.project_type == "other") {
+                ++num_projects;
+                $('#results').append(project(item.id, item.title, item.author_name, item.user_id, item.discipline, item.proposal, item.keywords, item.last_updated, item.fav_status, item.project_type));
+            }
+        });
+
+        $('#num_projects').text(num_projects);
+        $('#no_results_msg').text('');
+        if (num_projects === 0) {
+            $('#no_results_msg').text('No projects were found. Try different keywords');
+            $('#result_or_results').text('projects');
+        }
+        else if (num_projects === 1) {
             $('#result_or_results').text('project');
         }
         else {
@@ -72,6 +121,10 @@ function search_all() {
                     item.score += .1
                     // continue;
                 }
+
+                if ((!senior_checked && item.project_type == "senior") || (!junior_checked && item.project_type == "junior") || (!other_checked && item.project_type == "other")) {
+                    item.score = 0;
+                }
             }
 
             if (item.score > 0) {
@@ -89,7 +142,7 @@ function search_all() {
         all_projects.forEach(function(item, index, array) {
             if (item.score > 0) {
                 ++num_projects;
-                $('#results').append(project(item.id, item.title, item.author_name, item.user_id, item.discipline, item.proposal, item.keywords, item.last_updated, item.fav_status));
+                $('#results').append(project(item.id, item.title, item.author_name, item.user_id, item.discipline, item.proposal, item.keywords, item.last_updated, item.fav_status, item.project_type));
             }
         });
 

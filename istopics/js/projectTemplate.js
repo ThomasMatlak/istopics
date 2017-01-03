@@ -1,4 +1,4 @@
-function project(id, title, author, author_id, discipline, proposal, keywords, timestamp, fav_status) {
+function project(id, title, author, author_id, discipline, proposal, keywords, timestamp, fav_status, project_type) {
     var list_item = document.createElement("li");
     list_item.className = id;
 
@@ -52,6 +52,18 @@ function project(id, title, author, author_id, discipline, proposal, keywords, t
     var caption = document.createElement("caption");
     caption.innerHTML = "<span id='" + id + "author'><a href='/istopics/user?user_id=" + author_id + "'>" + author + "</a></span></caption>";
     table.appendChild(caption);
+
+    var caption1 = document.createElement("caption");
+    if (project_type == "senior") {
+        caption1.innerHTML = "Senior IS";
+    }
+    else if (project_type == "junior") {
+        caption1.innerHTML = "Junior IS";
+    }
+    else if (project_type == "other") {
+        caption1.innerHTML = "Other";
+    }
+    table.appendChild(caption1);
 
     var table_body = document.createElement("tbody");
 

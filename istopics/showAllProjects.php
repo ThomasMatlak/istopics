@@ -63,8 +63,24 @@ $result = $conn->query($sql);
 
 // Display Projects
 if ($result->num_rows > 0) {
-    echo "<form class='form-inline'><div class='form-group'><input type='text' name='search' id='search' placeholder='Search Projects' class='form-control'></div><span class='help-block'>Search by keywords, title, major, or author. Separate search terms with commas.</span></form>";
-
+?>
+<form class='form-inline'>
+    <div class='form-group'>
+        <input type='text' name='search' id='search' placeholder='Search Projects' class='form-control'>
+    </div>
+    <span class='help-block'>Search by keywords, title, major, or author. Separate search terms with commas.</span>
+    <label for="project_type">Project Type</label>
+    <label class="checkbox-inline">
+        <input type="checkbox" name="project_type" id="project_type0" value="senior"> Senior I.S.
+    </label>
+    <label class="checkbox-inline">
+        <input type="checkbox" name="project_type" id="project_type1" value="junior"> Junior I.S.
+    </label>
+    <label class="checkbox-inline">
+        <input type="checkbox" name="project_type" id="project_type2" value="other"> Other Research Projects
+    </label>
+</form>
+<?php
     if ($result->num_rows == 1) {
         echo "<p>Showing <span id='num_projects'>{$result->num_rows}</span> <span id='result_or_results'>project</span>.</p>";
     }
@@ -79,6 +95,7 @@ if ($result->num_rows > 0) {
     }
     elseif ($view == 'tabular') {
 ?>
+        <span class="help-block">Click columns headers to sort. To sort by multiple columns, hold <kbd>Shift</kbd>.</span>
         <table class='table table-bordered table-hover' id='results'>
         <thead>
         <tr>
