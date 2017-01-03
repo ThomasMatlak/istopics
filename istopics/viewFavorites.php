@@ -15,14 +15,14 @@ require_once 'checkSignIn.php';
 if (issignedin() == -1) {
     $_SESSION["error"] = 1;
     $_SESSION["error_msg"] = "You must be signed in to perform this action.";
-     
+
     header("Location: /istopics/project/all");
     exit();
 }
 
 $user_id = $_SESSION['sess_user_id'];
 
-$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.last_updated, projects.keywords FROM projects INNER JOIN user_project_favorites ON projects.id=user_project_favorites.projectid INNER JOIN users ON user_project_favorites.userid=users.id WHERE users.id=? ORDER BY title";
+$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.last_updated, projects.keywords, projects.project_type FROM projects INNER JOIN user_project_favorites ON projects.id=user_project_favorites.projectid INNER JOIN users ON user_project_favorites.userid=users.id WHERE users.id=? ORDER BY title";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param('s', $user_id);
 $stmt->execute();
@@ -51,6 +51,7 @@ if ($result->num_rows > 0) {
         $proj_proposal     = addslashes($row["proposal"]);
         $proj_keywords     = addslashes($row["keywords"]);
         $last_updated      = $row["last_updated"];
+        $project_type      = $row['project_type'];
 
         $author_info_sql = "SELECT users.id, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON users.id=user_project_connections.userid WHERE user_project_connections.projectid={$proj_id}";
 
@@ -76,7 +77,7 @@ if ($result->num_rows > 0) {
             $fav_status = false;
         }
 
-        display_project($proj_id, $author_name, $author_id, $proj_title, $proj_major, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $fav_status, $conn);
+        display_project($proj_id, $author_name, $author_id, $proj_title, $proj_major, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $fav_status, $project_type, $conn);
     }
 
     $max_proj_id = $conn->query("SELECT id FROM projects ORDER BY id DESC")->fetch_assoc()['id'];

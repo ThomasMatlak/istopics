@@ -49,7 +49,7 @@ else {
 
 		echo "</ul>";
 
-		$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.last_updated, projects.keywords FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE users.id=? ORDER BY title";
+		$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.last_updated, projects.keywords, projects.project_type FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE users.id=? ORDER BY title";
 		$stmt = $conn->prepare($sql);
 		$stmt->bind_param('s', $user_id);
 		$stmt->execute();
@@ -72,6 +72,7 @@ else {
 				$proj_proposal   = addslashes($row["proposal"]);
 				$proj_keywords   = addslashes($row["keywords"]);
 				$last_updated    = $row["last_updated"];
+				$project_type    = $row['project_type'];
 
 				if (issignedin() != -1) {
 					$userid = $_SESSION['sess_user_id'];
@@ -90,7 +91,7 @@ else {
 					$fav_status = false;
 				}
 
-				display_project($proj_id, "", "", $proj_title, $proj_major, $proj_proposal, $proj_keywords, "", $last_updated, false, false, $fav_status, $conn);
+				display_project($proj_id, "", "", $proj_title, $proj_major, $proj_proposal, $proj_keywords, "", $last_updated, false, false, $fav_status, $project_type, $conn);
 			}
 
 			$max_proj_id = $conn->query("SELECT id FROM projects ORDER BY id DESC")->fetch_assoc()['id'];

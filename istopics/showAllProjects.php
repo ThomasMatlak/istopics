@@ -15,7 +15,7 @@ if (isset($_GET['view']) && ($_GET['view'] == 'tabular' || $_GET['view'] == 't')
     $view = 'tabular';
 }
 
-$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.keywords, projects.last_updated, users.id AS user_id, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE users.year";
+$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.keywords, projects.last_updated, projects.project_type, users.id AS user_id, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE users.year";
 
 // it is assumed IS projects take place during a student's graduating year
 if (isset($_GET['year']) && is_numeric($_GET['year'])) {
@@ -85,6 +85,7 @@ if ($result->num_rows > 0) {
             <th>Project Title</th>
             <th>Author</th>
             <th>Discipline</th>
+            <th>Project Type</th>
             <th>Project Year</th>
         </tr>
         </thead>
@@ -108,6 +109,7 @@ if ($result->num_rows > 0) {
         $user_id         = $row["user_id"];
         $author_name     = addslashes($row['first_name']. " ". $row['last_name']);
         $last_updated    = $row['last_updated'];
+        $project_type    = $row['project_type'];
 
         if (issignedin() != -1) {
             $userid = $_SESSION['sess_user_id'];
@@ -127,10 +129,10 @@ if ($result->num_rows > 0) {
         }
 
         if ($view == 'list') {
-            display_project($proj_id, $author_name, $user_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $fav_status, $conn);
+            display_project($proj_id, $author_name, $user_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $fav_status, $project_type, $conn);
         }
         elseif ($view == 'tabular') {
-            display_project_tabular($proj_id, $author_name, $user_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $fav_status, $conn);
+            display_project_tabular($proj_id, $author_name, $user_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $fav_status, $project_type, $conn);
         }
 
         $keywords_list = explode(",", $proj_keywords);
@@ -138,7 +140,7 @@ if ($result->num_rows > 0) {
         ($first === false) ? $project_json .= ',' : $first = false;
 
         $project_json .= "{";
-        $project_json .= "\"id\":\"{$proj_id}\",\"title\":\"{$proj_title}\",\"discipline\":\"{$proj_discipline}\",\"proposal\":\"{$proj_proposal}\",\"keywords\":\"{$proj_keywords}\",\"user_id\":\"{$user_id}\",\"author_name\":\"{$author_name}\",\"last_updated\":\"{$last_updated}\",\"fav_status\":\"{$fav_status}\"";
+        $project_json .= "\"id\":\"{$proj_id}\",\"title\":\"{$proj_title}\",\"discipline\":\"{$proj_discipline}\",\"proposal\":\"{$proj_proposal}\",\"keywords\":\"{$proj_keywords}\",\"user_id\":\"{$user_id}\",\"author_name\":\"{$author_name}\",\"last_updated\":\"{$last_updated}\",\"fav_status\":\"{$fav_status}\",\"project_type\":\"{$project_type}\"";
         $project_json .= "}";
 
         foreach ($keywords_list as $word) {

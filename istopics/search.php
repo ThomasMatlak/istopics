@@ -75,7 +75,7 @@ if (isset($_GET['project_keywords'])) {
 <?php
 
 if ($search === true) {
-    $sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.keywords, projects.last_updated, users.id AS user_id, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE ";
+    $sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.keywords, projects.last_updated, projects.project_type, users.id AS user_id, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE ";
 
     if ($project_title) {
         $sql .= "projects.title LIKE '%{$project_title}%'";
@@ -144,6 +144,7 @@ if ($search === true) {
             $user_id         = $row["user_id"];
             $author_name     = $row['first_name']. " ". $row['last_name'];
             $last_updated    = $row['last_updated'];
+            $project_type    = $row['project_type'];
 
             if (issignedin() != -1) {
                 $userid = $_SESSION['sess_user_id'];
@@ -162,7 +163,7 @@ if ($search === true) {
                 $fav_status = false;
             }
 
-            display_project($proj_id, $author_name, $user_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $fav_status, $conn);
+            display_project($proj_id, $author_name, $user_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $fav_status, $project_type, $conn);
         }
         echo "</ul>";
     }

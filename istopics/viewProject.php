@@ -1,6 +1,6 @@
 <?php
 /**
- * Display the project 
+ * Display the project
  */
 
 $page_title = "View Project";
@@ -22,15 +22,16 @@ else {
     if ($result !== false) {
         $row = $result;
 
-		$author_name = addslashes($row["first_name"]. " ". $row["last_name"]);
-		$user_id     = $row["user_id"];
-		$proj_id     = $row["proj_id"];
-		$proj_title  = addslashes($row["title"]);
-		$major       = addslashes($row["discipline"]);
-		$proposal    = addslashes($row["proposal"]);
-		$comments    = addslashes($row["comments"]);
-		$keywords    = addslashes($row["keywords"]);
+		$author_name  = addslashes($row["first_name"]. " ". $row["last_name"]);
+		$user_id      = $row["user_id"];
+		$proj_id      = $row["proj_id"];
+		$proj_title   = addslashes($row["title"]);
+		$major        = addslashes($row["discipline"]);
+		$proposal     = addslashes($row["proposal"]);
+		$comments     = addslashes($row["comments"]);
+		$keywords     = addslashes($row["keywords"]);
 		$last_updated = $row["last_updated"];
+        $project_type = $row["project_type"];
 
 		echo "<ul class='list-unstyled'>";
 
@@ -51,7 +52,7 @@ else {
             $fav_status = false;
         }
 
-		display_project($proj_id, $author_name, $user_id, $proj_title, $major, $proposal, $keywords, $comments, $last_updated, true, true, $fav_status, $conn);
+		display_project($proj_id, $author_name, $user_id, $proj_title, $major, $proposal, $keywords, $comments, $last_updated, true, true, $fav_status, $project_type, $conn);
 
 		echo "</ul>";
 

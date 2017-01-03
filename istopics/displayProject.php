@@ -10,7 +10,7 @@
 require_once 'timeElapsed.php';
 require_once 'checkSignIn.php';
 
-function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, $proj_comments, $last_updated, $show_comments, $show_author, $favorited, $conn)
+function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, $proj_comments, $last_updated, $show_comments, $show_author, $favorited, $proj_type, $conn)
 /**
  * @param int    $proj_id         - the id of the project being displayed
  * @param string $proj_author     - the name of the author of the project
@@ -56,6 +56,8 @@ function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_
 	if ($show_author == true) {
 	    echo "<caption><span id='{$proj_id}author'><a href='/istopics/user/{$author_id}'>{$proj_author}</a></span></caption>";
 	}
+
+	echo "<caption>" .project_type_display($proj_type) ."</caption>";
 
 	echo "<tr><th class='col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1'>Major:</th><td class='col-xl-11 col-lg-11 col-md-11 col-sm-11 col-xs-11'><div id='{$proj_id}project_major'>";
 
@@ -112,7 +114,7 @@ function display_project($proj_id, $proj_author, $author_id, $proj_title, $proj_
 <?php
 }
 
-function display_project_tabular($proj_id, $proj_author, $author_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, $proj_comments, $last_updated, $show_comments, $show_author, $favorited, $conn)
+function display_project_tabular($proj_id, $proj_author, $author_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, $proj_comments, $last_updated, $show_comments, $show_author, $favorited, $proj_type, $conn)
 /**
  * @param int    $proj_id         - the id of the project being displayed
  * @param string $proj_author     - the name of the author of the project
@@ -150,7 +152,23 @@ function display_project_tabular($proj_id, $proj_author, $author_id, $proj_title
 		}
 		?>
 	</td>
+	<td><?php echo project_type_display($proj_type); ?></td>
 	<td><?php echo date("Y", strtotime($last_updated)); ?></td>
 </tr>
 <?php
+}
+
+function project_type_display($proj_type)
+/**
+ * @param string $proj_type
+ */
+{
+	switch ($proj_type) {
+		case "senior":
+			return "Senior IS";
+		case "junior":
+			return "Junior IS";
+		default:
+			return "Other";
+	}
 }
