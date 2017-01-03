@@ -17,11 +17,11 @@ $project_keywords = "";
 
 $search = false;
 
-if (isset($_GET['project_title'])) {
+if (isset($_GET['project_title']) && $_GET['project_title'] != '') {
     $project_title = mysqli_real_escape_string($conn, $_GET['project_title']);
     $search = true;
 }
-if (isset($_GET['discipline'])) {
+if (isset($_GET['discipline']) && $_GET['discipline'] != '') {
     $project_discipline = $_GET['discipline'];
 
     if (is_array($project_discipline)) {
@@ -31,17 +31,31 @@ if (isset($_GET['discipline'])) {
     }
     $search = true;
 }
-if (isset($_GET['author_first_name'])) {
+if (isset($_GET['author_first_name']) && $_GET['author_first_name'] != '') {
     $author_first_name = mysqli_real_escape_string($conn, $_GET['author_first_name']);
     $search = true;
 }
-if (isset($_GET['author_last_name'])) {
+if (isset($_GET['author_last_name']) && $_GET['author_last_name'] != '') {
     $author_last_name = mysqli_real_escape_string($conn, $_GET['author_last_name']);
     $search = true;
 }
-if (isset($_GET['project_keywords'])) {
+if (isset($_GET['project_keywords']) && $_GET['project_keywords'] != '') {
     $project_keywords = mysqli_real_escape_string($conn, $_GET['project_keywords']);
     $search = true;
+}
+
+if (isset($_GET['project_type']) && count($_GET['project_type']) > 0) {
+    $project_type = $_GET['project_type'];
+
+    if (is_array($project_type)) {
+        foreach ($project_type as $type) {
+            $type = mysqli_real_escape_string($conn, $type);
+        }
+    }
+    $search = true;
+}
+else {
+    $project_type = array();
 }
 
 ?>
@@ -67,6 +81,18 @@ if (isset($_GET['project_keywords'])) {
     <div class="form-group">
         <label for="project_keywords" class="control-label">Keywords</label>
         <input type="text" name="project_keywords" id="project_keywords" value="<?php echo $project_keywords; ?>" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="project_type">Project Type</label>
+        <label class="checkbox-inline">
+            <input type="checkbox" name="project_type[]" value="senior" <?php echo (array_search('senior', $project_type) === false) ? '' : 'checked' ?>> Senior I.S.
+        </label>
+        <label class="checkbox-inline">
+            <input type="checkbox" name="project_type[]" value="junior" <?php echo (array_search('junior', $project_type) === false) ? '' : 'checked' ?>> Junior I.S.
+        </label>
+        <label class="checkbox-inline">
+            <input type="checkbox" name="project_type[]" value="other" <?php echo (array_search('other', $project_type) === false) ? '' : 'checked' ?>> Other Research Projects
+        </label>
     </div>
     <div class="form-group">
         <button type="submit" class="btn btn-warning">Search</button>
@@ -96,7 +122,7 @@ if ($search === true) {
             $first_disc = true;
             foreach ($project_discipline as $disc) {
                 if ($first_disc !== true) {
-                    $sql .= " OR ";
+                    $sql .= ' OR ';
                 }
                 else {
                     $first_disc = false;
@@ -127,7 +153,26 @@ if ($search === true) {
         $sql .= "projects.keywords LIKE '%{$project_keywords}%'";
     }
 
-    // echo $sql;
+    if (count($project_type) > 0) {
+        if ($project_title || $project_discipline || $author_first_name || $author_last_name || $project_keywords) {
+            $sql .= ' AND ';
+        }
+        $sql .= '(';
+
+        $first_type = true;
+        foreach($project_type as $type) {
+            if ($first_type !== true) {
+                $sql .= ' OR ';
+            }
+            else {
+                $first_type = false;
+            }
+            $sql .= "projects.project_type LIKE '%{$type}%'";
+        }
+
+        $sql .= ')';
+    }
+
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
