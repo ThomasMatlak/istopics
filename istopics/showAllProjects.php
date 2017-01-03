@@ -30,13 +30,13 @@ else { // show everything
 
 // choose how the projects are sorted
 if (isset($_GET['type']) && $_GET['type'] == 'senior') { // only retrieve Senior IS projects
-    $sql .= "AND projects.project_type='senior'";
+    $sql .= " AND projects.project_type='senior'";
 }
 else if (isset($_GET['type']) && $_GET['type'] == 'junior') { // only retrive Junior IS projects
-    $sql .= "AND projects.project_type='junior'";
+    $sql .= " AND projects.project_type='junior'";
 }
 else if (isset($_GET['type']) && $_GET['type'] == 'other') { // only retrieve other projects
-    $sql .= "AND projects.project_type='other'";
+    $sql .= " AND projects.project_type='other'";
 }
 else {} // retrive all projects
 
@@ -108,7 +108,7 @@ if ($result->num_rows > 0) {
         $user_id         = $row["user_id"];
         $author_name     = addslashes($row['first_name']. " ". $row['last_name']);
         $last_updated    = $row['last_updated'];
-        
+
         if (issignedin() != -1) {
             $userid = $_SESSION['sess_user_id'];
             $sql1 = "SELECT userid, projectid FROM user_project_favorites WHERE projectid={$proj_id} AND userid={$userid}";

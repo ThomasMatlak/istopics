@@ -23,8 +23,11 @@ if (isset($_GET['project_title'])) {
 }
 if (isset($_GET['discipline'])) {
     $project_discipline = $_GET['discipline'];
-    foreach ($project_discipline as $disc) {
-        $disc = mysqli_real_escape_string($conn, $disc);
+
+    if (is_array($project_discipline)) {
+        foreach ($project_discipline as $disc) {
+            $disc = mysqli_real_escape_string($conn, $disc);
+        }
     }
     $search = true;
 }
@@ -83,7 +86,10 @@ if ($search === true) {
             $sql .= ' OR ';
         }
 
-        if (count($project_discipline) == 1) {
+        if (! is_array($project_discipline)) {
+            $sql .= "projects.discipline LIKE '%{$project_discipline}%'";
+        }
+        elseif (count($project_discipline) == 1) {
             $sql .= "projects.discipline LIKE '%{$project_discipline[0]}%'";
         }
         else {
@@ -155,7 +161,7 @@ if ($search === true) {
             else {
                 $fav_status = false;
             }
-        
+
             display_project($proj_id, $author_name, $user_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $fav_status, $conn);
         }
         echo "</ul>";

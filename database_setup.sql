@@ -12,7 +12,7 @@ CREATE TABLE users (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, first_name VARCH
 
 # projects
 DROP TABLE IF EXISTS projects;
-create table projects (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, title VARCHAR(500), proposal TEXT, keywords VARCHAR(1000), comments VARCHAR(1000), discipline VARCHAR(100), date_created DATETIME, last_updated TIMESTAMP);
+create table projects (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, title VARCHAR(500), proposal TEXT, keywords VARCHAR(1000), comments VARCHAR(1000), discipline VARCHAR(100), project_type ENUM('senior', 'junior', 'other'), date_created DATETIME, last_updated TIMESTAMP);
 
 # relational table for user ownership of projects
 DROP TABLE IF EXISTS user_project_connections;
@@ -26,7 +26,7 @@ CREATE TABLE user_project_favorites (userid INT, projectid INT);
 # header links
 DROP TABLE IF EXISTS header_links;
 CREATE TABLE header_links (link TEXT, visible_text TEXT, required_priveleges TEXT, link_order INT);
-INSERT INTO header_links (link, visible_text, required_priveleges, link_order) VALUES 
+INSERT INTO header_links (link, visible_text, required_priveleges, link_order) VALUES
 	('/project/all', 'View All Projects', 'none', 0),
 	('/project/new', 'Add a New Project', 'student', 1),
 	('/user', 'Hello ', 'signin', 2),

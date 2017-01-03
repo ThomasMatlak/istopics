@@ -12,7 +12,7 @@ function project(id, title, author, author_id, discipline, proposal, keywords, t
     t.innerText = title;
     t.id = id + 'project_title';
     t.className = "btn btn-link text-left col-xs-11 col-sm-11 col-md-11 col-ls-11";
-    t.href = "/istopics/project?project_id=" + id;
+    t.href = "/istopics/project/" + id;
 
     var f = document.createElement("form");
     f.action = "/istopics/favorite.php";
@@ -75,7 +75,7 @@ function project(id, title, author, author_id, discipline, proposal, keywords, t
         else {
             d += ", ";
         }
-        d += "<a href='/istopics/project/search?project_discipline=" + disciplines[i] + "'>" + disciplines[i] + "</a>";
+        d += "<a href='/istopics/project/search?discipline=" + disciplines[i] + "'>" + disciplines[i] + "</a>";
     }
 
     discipline_data.innerHTML = d;
