@@ -80,12 +80,15 @@ if ($result->num_rows > 0) {
     elseif ($view == 'tabular') {
 ?>
         <table class='table table-bordered table-hover' id='results'>
+        <thead>
         <tr>
             <th>Project Title</th>
             <th>Author</th>
             <th>Discipline</th>
             <th>Project Year</th>
         </tr>
+        </thead>
+        <tbody>
 <?php
     }
 
@@ -151,7 +154,7 @@ if ($result->num_rows > 0) {
         echo "</ul>";
     }
     elseif ($view == 'tabular') {
-        echo "</table>";
+        echo "</tbody></table>";
     }
 ?>
 <script>
@@ -159,6 +162,16 @@ if ($result->num_rows > 0) {
 </script>
 
 <script src='/istopics/js/searchAllProjects.js'></script>
+<?php
+if ($view == 'tabular') {
+?>
+<script src='/istopics/js/jquery.tablesorter.min.js'></script>
+<script>
+    $(document).ready(function(){$('#results').tablesorter();});
+</script>
+<?php
+}
+?>
 
 	<input type='hidden' value='<?php echo $result->num_rows; ?>' id='initial_num_results'>
 <?php
