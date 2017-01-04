@@ -64,6 +64,10 @@ $result = $conn->query($sql);
 // Display Projects
 if ($result->num_rows > 0) {
 ?>
+<ul class="nav nav-tabs">
+    <li <?php echo ($view == 'list') ? 'class="active"' : '' ?>><a <?php echo ($view == 'list') ? '' : 'href="./all"';?>>List</a></li>
+    <li <?php echo ($view == 'tabular') ? 'class="active"' : '' ?>><a <?php echo ($view == 'tabular') ? '' : 'href="./all?view=tabular"';?>>Tabular</a></li>
+</ul>
 <form class='form-inline'>
     <div class='form-group'>
         <input type='text' name='search' id='search' placeholder='Search Projects' class='form-control'>
