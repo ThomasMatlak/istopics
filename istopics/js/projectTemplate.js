@@ -9,7 +9,7 @@ function project(id, title, author, author_id, discipline, proposal, keywords, t
     panel_heading.className = "panel-heading container-fluid";
 
     var t = document.createElement("a");
-    t.innerText = title;
+    t.innerHTML = title;
     t.id = id + 'project_title';
     t.className = "btn btn-link text-left col-xs-11 col-sm-11 col-md-11 col-ls-11";
     t.href = "/istopics/project/" + id;
@@ -35,7 +35,7 @@ function project(id, title, author, author_id, discipline, proposal, keywords, t
     b.type = "submit";
     b.className = "btn btn-link";
     var s = document.createElement("span");
-    s.className = (fav_status == true) ? "glyphicon glyphicon-star" : "glyphicon glyphicon-star-empty"; // change depending on if the project is favorited or not
+    s.className = (fav_status == true) ? "glyphicon glyphicon-star" : "glyphicon glyphicon-star-empty";
     b.appendChild(s);
     f.appendChild(b);
 
@@ -71,7 +71,7 @@ function project(id, title, author, author_id, discipline, proposal, keywords, t
     var discipline_row = document.createElement("tr");
     var discipline_head = document.createElement("th");
     discipline_head.className = "col-xs-1 col-sm-1 col-md-1 col-lg-1";
-    discipline_head.innerText = "Major:";
+    discipline_head.innerHTML = "Major:";
     discipline_row.appendChild(discipline_head);
     var discipline_data = document.createElement("td");
     discipline_data.className = "col-xs-11 col-sm-11 col-md-11 col-lg-11";
@@ -98,10 +98,10 @@ function project(id, title, author, author_id, discipline, proposal, keywords, t
     // proposal
     var prop = document.createElement("tr");
     var prop_head = document.createElement("th");
-    prop_head.innerText = "Proposal:";
+    prop_head.innerHTML = "Proposal:";
     prop.appendChild(prop_head);
     var prop_data = document.createElement("td");
-    prop_data.innerText = proposal;
+    prop_data.innerHTML = proposal;
 
     prop.appendChild(prop_data);
     table_body.appendChild(prop);
@@ -109,7 +109,7 @@ function project(id, title, author, author_id, discipline, proposal, keywords, t
     // keywords
     var key = document.createElement("tr");
     var key_head = document.createElement("th");
-    key_head.innerText = "Keywords:";
+    key_head.innerHTML = "Keywords:";
     key.appendChild(key_head);
     var key_data = document.createElement("td");
 
@@ -128,7 +128,7 @@ function project(id, title, author, author_id, discipline, proposal, keywords, t
     }
 
     key_data.innerHTML = k;
-    // key_data.innerText = keywords;
+    // key_data.innerHTML = keywords;
 
     key.appendChild(key_data);
     table_body.appendChild(key);
@@ -137,7 +137,7 @@ function project(id, title, author, author_id, discipline, proposal, keywords, t
     panel_body.appendChild(table);
 
     var last_updated_msg = document.createElement("span");
-    last_updated_msg.innerText = time_elapsed(timestamp);
+    last_updated_msg.innerHTML = time_elapsed(timestamp);
 
     panel_body.appendChild(last_updated_msg);
     panel.appendChild(panel_body);
