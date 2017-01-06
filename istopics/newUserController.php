@@ -55,16 +55,21 @@ if (empty($stu_or_fac) || (empty($first_name) || empty($last_name) || empty($ema
 if (($stu_or_fac == "student")) {
     $year  = filter_var($_POST["year"], FILTER_SANITIZE_STRING);
 
-    $major = "";
-    $discipline_array = $_POST["discipline"];
-    $last_discipline  = end($discipline_array);
+    if ($_POST['other_discipline'] != '') {
+        $major = filter_var($_POST['other_discipline'], FILTER_SANITIZE_STRING);
+    }
+    else {
+        $major = "";
+        $discipline_array = $_POST["discipline"];
+        $last_discipline  = end($discipline_array);
 
-    foreach ($discipline_array as $selected_major) {
-        $selected_major = filter_var($selected_major, FILTER_SANITIZE_STRING);
-    	$major = $major. $selected_major;
-    	if ($selected_major != $last_discipline) {
-            $major = $major. ", ";
-    	}
+        foreach ($discipline_array as $selected_major) {
+            $selected_major = filter_var($selected_major, FILTER_SANITIZE_STRING);
+            $major = $major. $selected_major;
+            if ($selected_major != $last_discipline) {
+                $major = $major. ", ";
+            }
+        }
     }
 
     if (empty($year) || empty($major)) {

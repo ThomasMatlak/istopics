@@ -33,14 +33,35 @@ $('#last_name').on('input', function() {
 
 // Display the user's selection of major(s)
 $('#discipline').on('input', function() {
-    if ($('#discipline').val()) {
+    if ($('#discipline').val() && !$('#other_discipline').val()) {
         $('#stud_major').text($('#discipline').val());
 	    $('#discipline_check').attr("class", "has-success");
     }
-    else {
+    else if (!$('#other_discipline').val()) {
     	$('#stud_major').text('');
     	$('#discipline_check').attr("class", "has-error");
 	    $('#submit').attr("disabled", "true");
+    }
+    else {
+        $('#stud_major').text($('#other_discipline').val());
+    }
+});
+
+$('#other_discipline').on('input', function() {
+    if ($('#other_discipline').val()) {
+        $('#stud_major').text($('#other_discipline').val());
+	    $('#discipline_check').attr("class", "has-success");
+        $('#discipline').attr("disabled", "true");
+    }
+    else if (!$('#discipline').val()) {
+        $('#stud_major').text('');
+    	$('#discipline_check').attr("class", "has-error");
+	    $('#submit').attr("disabled", "true");
+        document.getElementById("discipline").disabled = false;
+    }
+    else {
+        $('#stud_major').text($('#discipline').val());
+        document.getElementById("discipline").disabled = false;
     }
 });
 
@@ -111,7 +132,7 @@ $('#confirm_password').on('input', function() {
 // Check that all fields are filled
 $("form :input").on('input', function() {
     if ($('#studentSelect').is(":checked")) {
-        if ($('#first_name').val() && $('#last_name').val() && $('#discipline').val() && $('#year').val() && $('#email').val() && $('#password').val() && $('#confirm_password').val() && ($('#password').val() == $('#confirm_password').val())) {
+        if ($('#first_name').val() && $('#last_name').val() && ($('#discipline').val() || $('#other_discipline').val()) && $('#year').val() && $('#email').val() && $('#password').val() && $('#confirm_password').val() && ($('#password').val() == $('#confirm_password').val())) {
 	        document.getElementById("submit").disabled = false;
         }
         else {

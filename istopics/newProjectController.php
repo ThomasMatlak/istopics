@@ -34,16 +34,21 @@ $keywords = filter_var(trim($_POST["keywords"]), FILTER_SANITIZE_SPECIAL_CHARS);
 $comments = filter_var(trim($_POST["comments"]), FILTER_SANITIZE_SPECIAL_CHARS);
 $proj_t   = filter_var(trim($_POST["project_type"]), FILTER_SANITIZE_SPECIAL_CHARS);
 
-$discipline = "";
-$discipline_array = $_POST["discipline"];
-$last_discipline  = end($discipline_array);
+if ($_POST['other_discipline'] != '') {
+    $discipline = filter_var($_POST['other_discipline'], FILTER_SANITIZE_STRING);
+}
+else {
+    $discipline = "";
+    $discipline_array = $_POST["discipline"];
+    $last_discipline  = end($discipline_array);
 
-foreach ($discipline_array as $selected_major) {
-    $selected_major = filter_var($selected_major, FILTER_SANITIZE_SPECIAL_CHARS);
-    $discipline = $discipline. $selected_major;
-    if ($selected_major != $last_discipline) {
-        $discipline = $discipline. ", ";
-    }
+    foreach ($discipline_array as $selected_major) {
+        $selected_major = filter_var($selected_major, FILTER_SANITIZE_SPECIAL_CHARS);
+        $discipline = $discipline. $selected_major;
+        if ($selected_major != $last_discipline) {
+            $discipline = $discipline. ", ";
+        }
+}
 }
 
 if (empty($title) || empty($discipline)) {

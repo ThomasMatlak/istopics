@@ -26,15 +26,20 @@ if (issignedin() != -1) {
     $year       = filter_var($_POST["year"], FILTER_SANITIZE_STRING);
     $email      = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
 
-    $discipline = "";
-    $discipline_array = $_POST["discipline"];
-    $last_discipline  = end($discipline_array);
+    if ($_POST['other_discipline'] != '') {
+        $discipline = filter_var($_POST['other_discipline'], FILTER_SANITIZE_STRING);
+    }
+    else {
+        $discipline = "";
+        $discipline_array = $_POST["discipline"];
+        $last_discipline  = end($discipline_array);
 
-    foreach ($discipline_array as $selected_major) {
-        $selected_major = filter_var($selected_major, FILTER_SANITIZE_STRING);
-    	$discipline = $discipline. $selected_major;
-    	if ($selected_major != $last_discipline) {
-            $discipline = $discipline. ", ";
+        foreach ($discipline_array as $selected_major) {
+            $selected_major = filter_var($selected_major, FILTER_SANITIZE_STRING);
+            $discipline = $discipline. $selected_major;
+            if ($selected_major != $last_discipline) {
+                $discipline = $discipline. ", ";
+            }
         }
     }
 
@@ -42,7 +47,7 @@ if (issignedin() != -1) {
         // Some input is not valid
     	$_SESSION["error"] = 1;
     	$_SESSION["error_msg"] = "Your input was invalid.";
-     
+
 	    header("Location: /istopics/user/{$user_id}");
     	exit();
     }
@@ -50,7 +55,7 @@ if (issignedin() != -1) {
         // Some input is not valid
     	$_SESSION["error"] = 1;
     	$_SESSION["error_msg"] = "Your input was invalid.";
-     
+
 	    header("Location: /istopics/user/{$user_id}");
     	exit();
     }
@@ -87,7 +92,7 @@ else {
      // user is not signed in, set error message
      $_SESSION["error"] = 1;
      $_SESSION["error_msg"] = "You must be signed in to perform this action.";
-     
+
      // Redirect to home page
      header("Location: /istopics/user/{$user_id}");
      exit();

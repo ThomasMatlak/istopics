@@ -32,14 +32,35 @@ $('#last_name').on('input', function() {
 
 // Display the user's selection of major(s)
 $('#discipline').on('input', function() {
-    if ($('#discipline').val()) {
+    if ($('#discipline').val() && !$('#other_discipline').val()) {
         $('#stud_major').text($('#discipline').val());
 	    $('#discipline_check').attr("class", "has-success");
     }
-    else {
+    else if (!$('#other_discipline').val()) {
     	$('#stud_major').text('');
     	$('#discipline_check').attr("class", "has-error");
 	    $('#submit').attr("disabled", "true");
+    }
+    else {
+        $('#stud_major').text($('#other_discipline').val());
+    }
+});
+
+$('#other_discipline').on('input', function() {
+    if ($('#other_discipline').val()) {
+        $('#stud_major').text($('#other_discipline').val());
+	    $('#discipline_check').attr("class", "has-success");
+        $('#discipline').attr("disabled", "true");
+    }
+    else if (!$('#discipline').val()) {
+        $('#stud_major').text('');
+    	$('#discipline_check').attr("class", "has-error");
+	    $('#submit').attr("disabled", "true");
+        document.getElementById("discipline").disabled = false;
+    }
+    else {
+        $('#stud_major').text($('#discipline').val());
+        document.getElementById("discipline").disabled = false;
     }
 });
 
@@ -76,7 +97,7 @@ $('#email').on('input', function() {
 // Check that all fields are filled
 $("form :input").on('input', function() {
     if ($('#first_name').val() && $('#last_name').val() && $('#email').val()) {
-        if ($('#user_role').val() == "student" && ($('#discipline').val() && $('#year').val())) {
+        if ($('#user_role').val() == "student" && (($('#discipline').val() || $('#other_discipline').val()) && $('#year').val())) {
             document.getElementById("submit").disabled = false;
         }
         else {
