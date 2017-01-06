@@ -8,15 +8,25 @@ $(document).ready(function () {
 
     var st_majors = $('#st_major').val().split(", ");
 
+    var major_in_list = false;
+
     for (i = 0; i < majors.length; i++) {
         for (j = 0; j < st_majors.length; j++) {
             if (st_majors[j] == majors[i].value) {
                 student_majors.push(majors[i].value);
                 $('#discipline_check').attr("class", "has-success");
+                major_in_list = true;
             }
         }
     }
 
-    $('#discipline').val(student_majors);
-    $('#stud_major').text($('#discipline').val());
+    if (major_in_list) {
+        $('#discipline').val(student_majors);
+        $('#stud_major').text($('#discipline').val());
+    }
+    else if (!major_in_list) {
+        $('#other_discipline').val($('#st_major').val());
+        $('#discipline_check').attr("class", "has-success");
+        $('#stud_major').text($('#other_discipline').val());
+    }
 });
