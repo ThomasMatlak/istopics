@@ -15,7 +15,30 @@ require_once 'checkSignIn.php';
 if (issignedin() == 'admin') {
 // user is signed in as an admin
 ?>
-<a href='/istopics/dbToCSV.php' class='btn btn-primary'>Download Projects as CSV</a>
+<h4>Download Projects as CSV</h4>
+<form action="/istopics/dbToCSV.php" method="post">
+    <div class="form-group">
+        <label for="discipline" class="control-label">Major/Discipline</label>
+        <?php include 'majors.html'; ?>
+    </div>
+    <div class="form-group">
+        <label for="project_keywords" class="control-label">Keywords</label>
+        <input type="text" name="project_keywords" id="project_keywords" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="project_type">Project Type</label>
+        <label class="checkbox-inline">
+            <input type="checkbox" name="project_type[]" value="senior"> Senior I.S.
+        </label>
+        <label class="checkbox-inline">
+            <input type="checkbox" name="project_type[]" value="junior"> Junior I.S.
+        </label>
+        <label class="checkbox-inline">
+            <input type="checkbox" name="project_type[]" value="other"> Other Research Projects
+        </label>
+    </div>
+	<button type="submit" class="btn btn-primary">Download Projects as CSV</button>
+</form>
 
 <hr>
 
@@ -90,7 +113,7 @@ else {
      // user is not signed in as an admin, set error message
      $_SESSION["error"] = 1;
      $_SESSION["error_msg"] = "You must be signed in to perform this action.";
-     
+
      header("Location: /istopics/project/all");
      exit();
 }
