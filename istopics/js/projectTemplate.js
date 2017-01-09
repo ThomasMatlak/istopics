@@ -96,15 +96,17 @@ function project(id, title, author, author_id, discipline, proposal, keywords, t
     table_body.appendChild(discipline_row);
 
     // proposal
-    var prop = document.createElement("tr");
-    var prop_head = document.createElement("th");
-    prop_head.innerHTML = "Proposal:";
-    prop.appendChild(prop_head);
-    var prop_data = document.createElement("td");
-    prop_data.innerHTML = proposal;
+    if (proposal != '') {
+        var prop = document.createElement("tr");
+        var prop_head = document.createElement("th");
+        prop_head.innerHTML = "Proposal:";
+        prop.appendChild(prop_head);
+        var prop_data = document.createElement("td");
+        prop_data.innerHTML = proposal;
 
-    prop.appendChild(prop_data);
-    table_body.appendChild(prop);
+        prop.appendChild(prop_data);
+        table_body.appendChild(prop);
+    }
 
     // keywords
     var key = document.createElement("tr");
