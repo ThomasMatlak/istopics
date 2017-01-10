@@ -10,7 +10,7 @@ if (issignedin() == 'admin') {
 
     $sql = "SELECT id, project_type, discipline, title, keywords, proposal, comments, date_created, last_updated FROM projects";
 
-    if ((isset($_POST['discipline']) && $_POST['discipline'] != '') || $_POST['other_discipline'] != '' || $_POST['project_keywords'] != '' || (isset($_POST['project_type']) && $_POST['project_type'] != '')) {
+    if ((isset($_POST['discipline']) && $_POST['discipline'] != '') || $_POST['other_discipline'] != '' || $_POST['year'] != '' || $_POST['project_keywords'] != '' || (isset($_POST['project_type']) && $_POST['project_type'] != '')) {
         $sql .= " WHERE ";
 
         if ($_POST['other_discipline'] != '') {
@@ -43,9 +43,19 @@ if (issignedin() == 'admin') {
             if (isset($_POST['discipline'])) {
                 $sql .= ' OR ';
             }
-            $sql .= "keywords LIKE '%{$_POST['project_keywords']}%'";
-        }
+            $keywords = explode(',', $_POST['project_keywords']);
 
+            $first_key = true;
+            foreach ($keywords as $k) {
+                if ($first_key !== true) {
+                    $sql .= ' OR ';
+                }
+                else {
+                    $first_key = false;
+                }
+                $sql .= "keywords LIKE '%{$k}%'";
+            }
+        }
         if (isset($_POST['project_type']) && count($_POST['project_type']) > 0) {
             if (isset($_POST['discipline']) || $_POST['other_discipline'] || $_POST['project_keywords']) {
                 $sql .= ' AND ';
@@ -64,6 +74,12 @@ if (issignedin() == 'admin') {
             }
 
             $sql .= ')';
+        }
+        if (isset($_POST['year'])) {
+            if (isset($_POST['discipline']) || $_POST['other_discipline'] || $_POST['project_keywords'] || isset($_POST['project_type'])) {
+                $sql .= ' AND ';
+            }
+            $sql .= "YEAR(date_created)={$_POST['year']}";
         }
     }
 

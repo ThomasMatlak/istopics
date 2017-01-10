@@ -14,6 +14,7 @@ $project_discipline = "";
 $author_first_name = "";
 $author_last_name = "";
 $project_keywords = "";
+$year = "";
 
 $search = false;
 
@@ -29,6 +30,10 @@ if (isset($_GET['discipline']) && $_GET['discipline'] != '') {
             $disc = mysqli_real_escape_string($conn, $disc);
         }
     }
+    $search = true;
+}
+if (isset($_GET['year']) && is_numeric(intval($_GET['year']))) {
+    $year = $_GET['year'];
     $search = true;
 }
 if (isset($_GET['author_first_name']) && $_GET['author_first_name'] != '') {
@@ -71,14 +76,12 @@ else {
         <?php include 'majors.html'; ?>
     </div>
     <div class="form-group">
+        <label for="year">Year</label>
+        <input type="number" name="year" id="year" class="form-control" value="<?php echo $year; ?>">
         <label for="author_first_name" class="control-label">Author's First Name</label>
         <input type="text" name="author_first_name" id="author_first_name" value="<?php echo $author_first_name; ?>" class="form-control">
-    </div>
-    <div class="form-group">
         <label for="author_last_name" class="control-label">Author's Last Name</label>
         <input type="text" name="author_last_name" id="author_last_name" value="<?php echo $author_last_name; ?>" class="form-control">
-    </div>
-    <div class="form-group">
         <label for="project_keywords" class="control-label">Keywords</label>
         <input type="text" name="project_keywords" id="project_keywords" value="<?php echo $project_keywords; ?>" class="form-control">
     </div>
@@ -108,7 +111,6 @@ if ($search === true) {
     }
     if ($project_discipline) {
         if ($project_title) {
-            // $sql .= ' AND ';
             $sql .= ' OR ';
         }
 
@@ -133,26 +135,22 @@ if ($search === true) {
     }
     if ($author_first_name) {
         if ($project_title || $project_discipline) {
-            // $sql .= ' AND ';
             $sql .= ' OR ';
         }
         $sql .= "users.first_name LIKE '%{$author_first_name}%'";
     }
     if ($author_last_name) {
         if ($project_title || $project_discipline || $author_first_name) {
-            // $sql .= ' AND ';
             $sql .= ' OR ';
         }
         $sql .= "users.last_name LIKE '%{$author_last_name}%'";
     }
     if ($project_keywords) {
         if ($project_title || $project_discipline || $author_first_name || $author_last_name) {
-            // $sql .= ' AND ';
             $sql .= ' OR ';
         }
         $sql .= "projects.keywords LIKE '%{$project_keywords}%'";
     }
-
     if (count($project_type) > 0) {
         if ($project_title || $project_discipline || $author_first_name || $author_last_name || $project_keywords) {
             $sql .= ' AND ';
@@ -171,6 +169,12 @@ if ($search === true) {
         }
 
         $sql .= ')';
+    }
+    if ($year) {
+        if ($project_title || $project_discipline || $author_first_name || $author_last_name || $project_keywords || count($project_type) > 0) {
+            $sql .= ' AND ';
+        }
+        $sql .= "YEAR(projects.date_created)={$year}";
     }
 
     $result = $conn->query($sql);

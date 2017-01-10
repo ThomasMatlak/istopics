@@ -17,11 +17,19 @@ if (issignedin() == 'admin') {
 ?>
 <h4>Download Projects as CSV</h4>
 <form action="/istopics/dbToCSV.php" method="post">
+	<label for="csv" class="radio-inline">
+		<input type="radio" name="data_format" value="csv" id="csv" checked> CSV
+	</label>
+	<label for="json" class="radio-inline">
+		<input type="radio" name="data_format" value="json" id="json"> JSON
+	</label>
     <div class="form-group">
         <label for="discipline" class="control-label">Major/Discipline</label>
         <?php include 'majors.html'; ?>
     </div>
-    <div class="form-group">
+	<div class="form-group">
+		<label for="year">Year</label>
+		<input type="number" name="year" id="year" class="form-control">
         <label for="project_keywords" class="control-label">Keywords</label>
         <input type="text" name="project_keywords" id="project_keywords" class="form-control">
     </div>

@@ -15,14 +15,11 @@ if (isset($_GET['view']) && ($_GET['view'] == 'tabular' || $_GET['view'] == 't')
     $view = 'tabular';
 }
 
-$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.keywords, projects.last_updated, projects.project_type, users.id AS user_id, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE users.year";
+$sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.keywords, projects.date_created, projects.last_updated, projects.project_type, users.id AS user_id, users.first_name, users.last_name FROM projects INNER JOIN user_project_connections ON projects.id=user_project_connections.projectid INNER JOIN users ON user_project_connections.userid=users.id WHERE YEAR(projects.date_created)";
 
 // it is assumed IS projects take place during a student's graduating year
 if (isset($_GET['year']) && is_numeric($_GET['year'])) {
-    $sql .= "=" .$_GET['year'];
-}
-elseif (isset($_GET['year']) && $_GET['year'] === '') {
-    $sql .= "=YEAR(CURDATE()) OR users.year=(YEAR(CURDATE()) + 1) ";
+    $sql .= "={$_GET['year']} OR users.year={$_GET['year']}";
 }
 else { // show everything
     $sql .= ">0";
@@ -38,7 +35,6 @@ else if (isset($_GET['type']) && $_GET['type'] == 'junior') { // only retrive Ju
 else if (isset($_GET['type']) && $_GET['type'] == 'other') { // only retrieve other projects
     $sql .= " AND projects.project_type='other'";
 }
-else {} // retrive all projects
 
 $sql .= " ORDER BY ";
 
@@ -49,8 +45,8 @@ else if (isset($_GET['order']) && ($_GET['order'] == 'time')) {
     $sql .= "projects.last_updated DESC";
 }
 else {
-     // default sorting of projects
-     $sql .= "projects.last_updated DESC";
+    // default sorting of projects
+    $sql .= "projects.last_updated DESC";
 }
 
 $result = $conn->query($sql);
@@ -58,8 +54,13 @@ $result = $conn->query($sql);
 ?>
     <script src='/istopics/js/ellipsify.js'></script>
     <script src='/istopics/js/expand_contract_pk.js'></script>
-    <script src='/istopics/js/projectTemplate.js'></script>
 <?php
+if ($view == 'list') {
+    echo '<script src="/istopics/js/projectTemplate.js"></script>';
+}
+else if ($view == 'tabular') {
+    echo '<script src="/istopics/js/projectTemplateTab.js"></script>';
+}
 
 // Display Projects
 if ($result->num_rows > 0) {
@@ -105,7 +106,7 @@ if ($result->num_rows > 0) {
         <tr>
             <th>Project Title</th>
             <th>Author</th>
-            <th>Discipline</th>
+            <th>Major</th>
             <th>Project Type</th>
             <th>Project Year</th>
         </tr>
@@ -129,6 +130,7 @@ if ($result->num_rows > 0) {
         $proj_keywords   = addslashes($row["keywords"]);
         $user_id         = $row["user_id"];
         $author_name     = addslashes($row['first_name']. " ". $row['last_name']);
+        $date_created    = $row['date_created'];
         $last_updated    = $row['last_updated'];
         $project_type    = $row['project_type'];
 
@@ -161,7 +163,7 @@ if ($result->num_rows > 0) {
         ($first === false) ? $project_json .= ',' : $first = false;
 
         $project_json .= "{";
-        $project_json .= "\"id\":\"{$proj_id}\",\"title\":\"{$proj_title}\",\"discipline\":\"{$proj_discipline}\",\"proposal\":\"{$proj_proposal}\",\"keywords\":\"{$proj_keywords}\",\"user_id\":\"{$user_id}\",\"author_name\":\"{$author_name}\",\"last_updated\":\"{$last_updated}\",\"fav_status\":\"{$fav_status}\",\"project_type\":\"{$project_type}\"";
+        $project_json .= "\"id\":\"{$proj_id}\",\"title\":\"{$proj_title}\",\"discipline\":\"{$proj_discipline}\",\"proposal\":\"{$proj_proposal}\",\"keywords\":\"{$proj_keywords}\",\"user_id\":\"{$user_id}\",\"author_name\":\"{$author_name}\",\"date_created\":\"{$date_created}\",\"last_updated\":\"{$last_updated}\",\"fav_status\":\"{$fav_status}\",\"project_type\":\"{$project_type}\"";
         $project_json .= "}";
 
         foreach ($keywords_list as $word) {
