@@ -87,7 +87,12 @@ if (issignedin() == 'admin') {
 
     $outputFile = fopen("php://output", "w");
 
-    fputcsv($outputFile, array('id', 'project_type', 'major', 'title', 'keywords', 'proposal', 'comments', 'date_created', 'last_updated'));
+    if ($_POST['data_format'] == 'csv') {
+        fputcsv($outputFile, array('id', 'project_type', 'major', 'title', 'keywords', 'proposal', 'comments', 'date_created', 'last_updated'));
+    }
+    else if ($_POST['data_format'] == 'json') {
+        $projects = array();
+    }
 
     // download the file
     $today = date("Y-m-d");
@@ -100,11 +105,36 @@ if (issignedin() == 'admin') {
 
     // output headers so that the file is downloaded rather than displayed
     header('Content-Type: application/csv; charset=utf-8');
-    header("Content-Disposition: attachment; filename=istopics_project_{$today}.csv");
+    if ($_POST['data_format'] == 'csv') {
+        header("Content-Disposition: attachment; filename=istopics_projects_{$today}.csv");
+    }
+    else if ($_POST['data_format'] == 'json') {
+        header("Content-Disposition: attachment; filename=istopics_projects_{$today}.json");
+    }
 
     // put results into the file
-    while ($row = $result->fetch_assoc()) {
-        fputcsv($outputFile, $row);
+    if ($_POST['data_format'] == 'csv') {
+        while ($row = $result->fetch_assoc()) {
+            fputcsv($outputFile, $row);
+        }
+    }
+    else if ($_POST['data_format'] == 'json') {
+        while ($row = $result->fetch_assoc()) {
+            $projects[] = array(
+                'id' => $row['id'],
+                'project_type' => $row['project_type'],
+                'major' => $row['discipline'],
+                'title' => $row['title'],
+                'keywords' => $row['keywords'],
+                'proposal' => $row['proposal'],
+                'comments' => $row['comments'],
+                'date_created' => $row['date_created'],
+                'last_updated' => $row['last_updated'],
+            );
+        }
+
+        $projects_file['projects'] = $projects;
+        fwrite($outputFile, json_encode($projects_file));
     }
 
     fclose($outputFile);
