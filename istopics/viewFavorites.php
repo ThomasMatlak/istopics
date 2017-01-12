@@ -20,6 +20,11 @@ if (issignedin() == -1) {
     exit();
 }
 
+$view = 'list';
+if (isset($_GET['view']) && ($_GET['view'] == 'tabular' || $_GET['view'] == 't')) {
+    $view = 'tabular';
+}
+
 $user_id = $_SESSION['sess_user_id'];
 
 $sql = "SELECT projects.id AS proj_id, projects.title, projects.discipline, projects.proposal, projects.last_updated, projects.keywords, projects.project_type FROM projects INNER JOIN user_project_favorites ON projects.id=user_project_favorites.projectid INNER JOIN users ON user_project_favorites.userid=users.id WHERE users.id=? ORDER BY title";
@@ -40,10 +45,30 @@ if ($result->num_rows > 0) {
 ?>
 <hr>
 <h4>Your Favorite Projects</h4>
-
-<ul class='list-unstyled'>
+<ul class="nav nav-tabs">
+    <li <?php echo ($view == 'list') ? 'class="active"' : '' ?>><a <?php echo ($view == 'list') ? '' : 'href="./favorites"';?>>List</a></li>
+    <li <?php echo ($view == 'tabular') ? 'class="active"' : '' ?>><a <?php echo ($view == 'tabular') ? '' : 'href="./favorites?view=t"';?>>Tabular</a></li>
+</ul>
 <?php
-
+    if ($view == 'list') {
+        echo "<ul class='list-unstyled' id='results'>";
+    }
+    elseif ($view == 'tabular') {
+?>
+    <!--<span class="help-block">Click columns headers to sort. To sort by multiple columns, hold <kbd>Shift</kbd>.</span>-->
+    <table class='table table-bordered table-hover' id='results'>
+    <thead>
+    <tr>
+        <th>Project Title</th>
+        <th>Author</th>
+        <th>Major</th>
+        <th>Project Type</th>
+        <th>Project Year</th>
+    </tr>
+    </thead>
+    <tbody>
+<?php
+    }
     while($row = $result->fetch_assoc()) {
         $proj_id           = $row["proj_id"];
         $proj_title        = addslashes($row["title"]);
@@ -77,15 +102,24 @@ if ($result->num_rows > 0) {
             $fav_status = false;
         }
 
-        display_project($proj_id, $author_name, $author_id, $proj_title, $proj_major, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $fav_status, $project_type, $conn);
+        if ($view == 'list') {
+            display_project($proj_id, $author_name, $author_id, $proj_title, $proj_major, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $fav_status, $project_type, $conn);
+        }
+        elseif ($view == 'tabular') {
+            display_project_tabular($proj_id, $author_name, $author_id, $proj_title, $proj_major, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $fav_status, $project_type, $conn);
+        }
     }
 
     $max_proj_id = $conn->query("SELECT id FROM projects ORDER BY id DESC")->fetch_assoc()['id'];
 
-?>
-    </ul>
-<input type='hidden' value='{$max_proj_id}' id='max_proj_id'>
-<?php
+    if ($view == 'list') {
+        echo "</ul>";
+    }
+    elseif ($view == 'tabular') {
+        echo "</tbody></table>";
+    }
+
+    echo "<input type='hidden' value='{$max_proj_id}' id='max_proj_id'>";
 }
 else {
     echo "<p>You do not have any favorited projects.</p>";
