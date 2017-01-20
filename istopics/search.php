@@ -32,7 +32,7 @@ if (isset($_GET['discipline']) && $_GET['discipline'] != '') {
     }
     $search = true;
 }
-if (isset($_GET['year']) && is_numeric(intval($_GET['year']))) {
+if (isset($_GET['year']) && $_GET['year'] != '' && is_numeric(intval($_GET['year']))) {
     $year = $_GET['year'];
     $search = true;
 }
