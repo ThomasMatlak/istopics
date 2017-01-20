@@ -18,6 +18,11 @@ $year = "";
 
 $search = false;
 
+$view = 'list';
+if (isset($_GET['view_mode']) && $_GET['view_mode'] == 'tabular') {
+    $view = 'tabular';
+}
+
 if (isset($_GET['project_title']) && $_GET['project_title'] != '') {
     $project_title = mysqli_real_escape_string($conn, $_GET['project_title']);
     $search = true;
@@ -95,6 +100,15 @@ else {
         </label>
         <label class="checkbox-inline">
             <input type="checkbox" name="project_type[]" value="other" <?php echo (array_search('other', $project_type) === false) ? '' : 'checked' ?>> Other Research Projects
+        </label>
+    </div>
+    <div class="form-group">
+        <label for="view_mode">Display Mode</label>
+        <label class="checkbox-inline">
+            <input type="radio" name="view_mode" value="list" <?php echo ($view == 'list') ? 'checked' : '' ?>> List
+        </label>
+        <label class="checkbox-inline">
+            <input type="radio" name="view_mode" value="tabular" <?php echo ($view == 'tabular') ? 'checked' : '' ?>> Table
         </label>
     </div>
     <div class="form-group">
@@ -182,7 +196,25 @@ if ($search === true) {
     if ($result->num_rows > 0) {
         echo "<p>Showing <span id='num_projects'>{$result->num_rows}</span> <span id='result_or_results'>" .(($result->num_rows == 1) ? 'project' : 'projects') ."</span>.</p>";
 
-        echo "<ul class='list-unstyled' id='results'>";
+        if ($view == 'list') {
+            echo "<ul class='list-unstyled' id='results'>";
+        }
+        elseif ($view == 'tabular') {
+    ?>
+            <span class="help-block">Click columns headers to sort. To sort by multiple columns, hold <kbd>Shift</kbd>.</span>
+            <table class='table table-bordered table-hover' id='results'>
+            <thead>
+            <tr>
+                <th>Project Title</th>
+                <th>Author</th>
+                <th>Major</th>
+                <th>Project Type</th>
+                <th>Project Year</th>
+            </tr>
+            </thead>
+            <tbody>
+<?php
+        }
 
         while($row = $result->fetch_assoc()) {
             $proj_id         = $row["proj_id"];
@@ -212,9 +244,19 @@ if ($search === true) {
                 $fav_status = false;
             }
 
-            display_project($proj_id, $author_name, $user_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $fav_status, $project_type, $conn);
+            if ($view == 'list') {
+                display_project($proj_id, $author_name, $user_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $fav_status, $project_type, $conn);
+            }
+            elseif ($view == 'tabular') {
+                display_project_tabular($proj_id, $author_name, $user_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $fav_status, $project_type, $conn);
+            }
         }
-        echo "</ul>";
+        if ($view == 'list') {
+            echo "</ul>";
+        }
+        elseif ($view == 'tabular') {
+            echo "</tbody></table>";
+        }
     }
     else {
         echo "<p>Did not find any projects. Try different search terms.</p>";
