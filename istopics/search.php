@@ -9,6 +9,11 @@ include("header.php");
 require_once 'db_credentials.php';
 require_once 'displayProject.php';
 
+$view = 'list';
+if (isset($_GET['view']) && ($_GET['view'] == 'tabular' || $_GET['view'] == 't')) {
+    $view = 'tabular';
+}
+
 $project_title = "";
 $project_discipline = "";
 $author_first_name = "";
@@ -67,6 +72,11 @@ else {
 <h1>Advanced Search</h1>
 
 <form action="/istopics/project/search" method="GET" class="form-horizontal">
+<?php
+if ($view == 'tabular') {
+    echo "<input type='hidden' name='view' value='t'>";
+}
+?>
     <div class="form-group">
         <label for="project_title" class="control-label">Project Title</label>
         <input type="text" name="project_title" id="project_title" value="<?php echo $project_title; ?>" class="form-control">
@@ -182,6 +192,25 @@ if ($search === true) {
     if ($result->num_rows > 0) {
         echo "<p>Showing <span id='num_projects'>{$result->num_rows}</span> <span id='result_or_results'>" .(($result->num_rows == 1) ? 'project' : 'projects') ."</span>.</p>";
 
+        if ($view == 'list') {
+            echo "<ul class='list-unstyled' id='results'>";
+        }
+        elseif ($view == 'tabular') {
+?>
+<!--<span class="help-block">Click columns headers to sort. To sort by multiple columns, hold <kbd>Shift</kbd>.</span>-->
+<table class='table table-bordered table-hover' id='results'>
+<thead>
+<tr>
+    <th>Project Title</th>
+    <th>Author</th>
+    <th>Major</th>
+    <th>Project Type</th>
+    <th>Project Year</th>
+</tr>
+</thead>
+<tbody>
+<?php
+        }
         echo "<ul class='list-unstyled' id='results'>";
 
         while($row = $result->fetch_assoc()) {
@@ -212,9 +241,19 @@ if ($search === true) {
                 $fav_status = false;
             }
 
-            display_project($proj_id, $author_name, $user_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $fav_status, $project_type, $conn);
+            if ($view == 'list') {
+                display_project($proj_id, $author_name, $user_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $fav_status, $project_type, $conn);
+            }
+            elseif ($view == 'tabular') {
+                display_project_tabular($proj_id, $author_name, $user_id, $proj_title, $proj_discipline, $proj_proposal, $proj_keywords, "", $last_updated, false, true, $fav_status, $project_type, $conn);
+            }
         }
-        echo "</ul>";
+        if ($view == 'list') {
+            echo "</ul>";
+        }
+        elseif ($view == 'tabular') {
+            echo "</tbody></table>";
+        }
     }
     else {
         echo "<p>Did not find any projects. Try different search terms.</p>";
