@@ -211,7 +211,7 @@ if ($search === true) {
         }
         elseif ($view == 'tabular') {
     ?>
-            <span class="help-block">Click columns headers to sort. To sort by multiple columns, hold <kbd>Shift</kbd>.</span>
+            <!--<span class="help-block">Click columns headers to sort. To sort by multiple columns, hold <kbd>Shift</kbd>.</span>-->
             <table class='table table-bordered table-hover' id='results'>
             <thead>
             <tr>

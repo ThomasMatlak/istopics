@@ -100,7 +100,7 @@ if ($result->num_rows > 0) {
     }
     elseif ($view == 'tabular') {
 ?>
-        <span class="help-block">Click columns headers to sort. To sort by multiple columns, hold <kbd>Shift</kbd>.</span>
+        <!--<span class="help-block">Click columns headers to sort. To sort by multiple columns, hold <kbd>Shift</kbd>.</span>-->
         <table class='table table-bordered table-hover' id='results'>
         <thead>
         <tr>
@@ -190,10 +190,10 @@ if ($result->num_rows > 0) {
 <?php
 if ($view == 'tabular') {
 ?>
-<script src='/istopics/js/jquery.tablesorter.min.js'></script>
+<!--<script src='/istopics/js/jquery.tablesorter.min.js'></script>
 <script>
     $(document).ready(function(){$('#results').tablesorter();});
-</script>
+</script>-->
 <?php
 }
 ?>
