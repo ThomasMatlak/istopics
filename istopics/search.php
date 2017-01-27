@@ -23,6 +23,11 @@ $year = "";
 
 $search = false;
 
+$view = 'list';
+if (isset($_GET['view_mode']) && $_GET['view_mode'] == 'tabular') {
+    $view = 'tabular';
+}
+
 if (isset($_GET['project_title']) && $_GET['project_title'] != '') {
     $project_title = mysqli_real_escape_string($conn, $_GET['project_title']);
     $search = true;
@@ -37,7 +42,7 @@ if (isset($_GET['discipline']) && $_GET['discipline'] != '') {
     }
     $search = true;
 }
-if (isset($_GET['year']) && is_numeric(intval($_GET['year']))) {
+if (isset($_GET['year']) && $_GET['year'] != '' && is_numeric(intval($_GET['year']))) {
     $year = $_GET['year'];
     $search = true;
 }
@@ -105,6 +110,15 @@ if ($view == 'tabular') {
         </label>
         <label class="checkbox-inline">
             <input type="checkbox" name="project_type[]" value="other" <?php echo (array_search('other', $project_type) === false) ? '' : 'checked' ?>> Other Research Projects
+        </label>
+    </div>
+    <div class="form-group">
+        <label for="view_mode">Display Mode</label>
+        <label class="checkbox-inline">
+            <input type="radio" name="view_mode" value="list" <?php echo ($view == 'list') ? 'checked' : '' ?>> List
+        </label>
+        <label class="checkbox-inline">
+            <input type="radio" name="view_mode" value="tabular" <?php echo ($view == 'tabular') ? 'checked' : '' ?>> Table
         </label>
     </div>
     <div class="form-group">
@@ -196,22 +210,21 @@ if ($search === true) {
             echo "<ul class='list-unstyled' id='results'>";
         }
         elseif ($view == 'tabular') {
-?>
-<!--<span class="help-block">Click columns headers to sort. To sort by multiple columns, hold <kbd>Shift</kbd>.</span>-->
-<table class='table table-bordered table-hover' id='results'>
-<thead>
-<tr>
-    <th>Project Title</th>
-    <th>Author</th>
-    <th>Major</th>
-    <th>Project Type</th>
-    <th>Project Year</th>
-</tr>
-</thead>
-<tbody>
+    ?>
+            <span class="help-block">Click columns headers to sort. To sort by multiple columns, hold <kbd>Shift</kbd>.</span>
+            <table class='table table-bordered table-hover' id='results'>
+            <thead>
+            <tr>
+                <th>Project Title</th>
+                <th>Author</th>
+                <th>Major</th>
+                <th>Project Type</th>
+                <th>Project Year</th>
+            </tr>
+            </thead>
+            <tbody>
 <?php
         }
-        echo "<ul class='list-unstyled' id='results'>";
 
         while($row = $result->fetch_assoc()) {
             $proj_id         = $row["proj_id"];
