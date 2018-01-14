@@ -1,3 +1,7 @@
+/**
+ * A template to use for displaying projects when filtering them
+ */
+
 function project(id, title, author, author_id, discipline, proposal, keywords, timestamp, fav_status, project_type) {
     var list_item = document.createElement("li");
     list_item.className = id;

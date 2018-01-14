@@ -2,6 +2,8 @@
 
 /**
  * @author Thomas Matlak <tmatlak18@wooster.edu>
+ * 
+ * A class to streamline database access and remove the need to write custom SQL statements when manipulating users
  */
 class UserProfile {
 	/**

@@ -1,3 +1,7 @@
+/**
+ * A template to use for displaying users when filtering them
+ */
+
 function user(id, first_name,  last_name, role, major, year, email) {
     var list_item = document.createElement("li");
     list_item.className = id + " well";

@@ -1,5 +1,5 @@
 /**
- * 
+ * Filter and sort projects based on the input box
  */
 
 $("form :input").on('input', function() {

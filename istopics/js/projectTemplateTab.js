@@ -1,3 +1,7 @@
+/**
+ * A template to use for displaying projects in the tabular view when filtering them
+ */
+
 function project(id, title, author, author_id, discipline, proposal, keywords, timestamp, fav_status, project_type) {
     var table_item = document.createElement("tr");
     table_item.className = id;
