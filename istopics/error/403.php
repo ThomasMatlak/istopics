@@ -14,5 +14,3 @@ echo <<<EOT
 EOT;
 
 include '../footer.php';
-
-?>

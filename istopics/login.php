@@ -40,6 +40,5 @@ include("header.php");
     </div>
     <!--<a href='/istopics/signin/forgotpassword' class='btn btn-link'>Forgot Password?</a>-->
 </form>
-
 <?php 
 include("footer.php");
