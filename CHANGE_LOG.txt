@@ -1,6 +1,42 @@
 CHANGE LOG
 ==========
-2016-11-2
+2017-01-27
+-disabled table sorting because display was duplicating projects
+-added licensing information to the footer
+-added an about page
+
+2017-01-10
+-added ability to export projects to JSON or CSV
+
+2017-01-09
+-improved CSV exporter
+
+2017-01-07
+-added ability to set a custom major
+
+2017-01-03
+-can view project type and search/filter by project type
+
+2017-01-02
+-added table sorting
+
+2016-12-27
+-added multiple types of projects: Senior IS, Junior IS, and Other
+
+2016-12-23
+-added a simple table view of projects
+
+2016-12-19
+-preserve the favorite buttons when filtering projects
+-added list of majors to advanced search
+
+2016-12-01
+-changed colors to represent Wooster
+
+2016-11-03
+-various bug fixes
+
+2016-11-02
 -can click on keywords and majors to show only projects with those keywords and majors
 
 2016-10-26
