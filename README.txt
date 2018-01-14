@@ -8,14 +8,18 @@ The web server should have support for MySQL and a php interpreter with the MySQ
 To allow for the .htaccess file to work, the server must be configured to allow this
     This can be accomplished on a Linux Apache server by editing /etc/apache2/sites-enabled/000-default.conf (or a very similar name) to include the following code:
 
-        <Directory /var/www/html>
-	    AllowOverride All
-	</Directory>
+    <Directory /var/www/html>
+        AllowOverride All
+    </Directory>
 
     Replace /var/www/html with the server's web root
 
     Then, the command "a2enmod rewrite" must be run to enable mod_rewrite
     Finally, restart the server: "service apache2 restart"
+
+    If you want to use a virtual host, see your web server's documentation.
+
+    Web root url should be localhost/istopics, or some such.
 
 Installation
 ------------
@@ -26,6 +30,8 @@ Installation
     update username and password in /istopics/db_credentials.php and in database_setup.sql
 -to change a users's role from 'student' to 'admin', from MySQL run the command:
     UPDATE users SET role='admin' WHERE email='EMAIL OF THE USER TO BE UPDATATED';
+
+To use Google Analytics, replace the x's on line 8 of istopics/analyticstranking.php with your own code
 
 Auto Populate the Dabatase (testing)
 ------------------------------------
@@ -49,84 +55,22 @@ Auto Populate the Dabatase (testing)
    -"SOURCE db_filler/filler_user_project_connections.sql;"
    -there will be some errors in the SQL, but that is okay. Enough INSERTs should succeed to give enough data to test.
 
-File Manifest
--------------
-This project has the following file structure:
+Directory Layout
+----------------
+This project has the following directory structure:
 
-istopics/
-|--README.txt
-|--AUTHORS.txt
-|--CHANGE_LOG.txt
-|--database_setup.sql
-|--db_filler/
-    |--create_filler_projects.py
-    |--create_filler_user_project_connections.py
-    |--ISkeywords.csv
-|--istopics/
-    |--css/
-        |--istopics.css
-	|--jquery.ui.min.css
-    |--images/
-    |--js/
-	|--autocompleteSearch.js
-	|--ellipsify.js
-	|--expand_contract_pk.js
-	|--generateUserEmail.js
-	|--jquery-ui.min.js
-	|--newProjectValidation.js
-	|--newUsrValidation.js
-	|--resetDatabaseWarning.js
-	|--searchAllProjects.js
-	|--setMajor.js
-	|--updateProfileValidation.js
-	|--updateProjectValidation.js
-    |--adminInterface.php
-    |--analyticstracking.php
-    |--checkSignIn.php
-    |--class.phpmailer.php
-    |--class.smtp.php
-    |--db_credentials.php
-    |--dbToCSV.php
-    |--deleteProjectController.php
-    |--deleteUserController.php
-    |--displayProfile.php
-    |--displayProject.php
-    |--emailPasswordReset.php
-    |--favicon.ico
-    |--favorite.php
-    |--footer.php
-    |--forgotPassword.php
-    |--header.php
-    |--index.php
-    |--login.php
-    |--loginController.php
-    |--logout.php
-    |--majors.html
-    |--newProject.php
-    |--newProjectController.php
-    |--newUser.php
-    |--newUserController.php
-    |--promoteUser.php
-    |--resetDatabase.php
-    |--search.php
-    |--showAllProjects.php
-    |--timeElapsed.php
-    |--updateProfile.php
-    |--updateProfileController.php
-    |--updateProject.php
-    |--updateProjectController.php
-    |--viewProfile.php
-    |--viewProject.php
-    |--wordmark.png
-|--majors/
-    |--convert_majors_to_html.py
-    |--majors.html
-    |--majors.txt
+istopics/ Contains meta information about the project and subdirectories containing parts of the project
+|--db_filler/ Contains code to generate filler projects during development
+|--istopics/ Contains PHP files
+    |--css/ Contains custom CSS
+    |--error/ Contains PHP pages for custom server error messages
+    |--js/ Contains custom JavaScript code
+|--majors/ Contains code to generate an HTML list of majors offered at The College of Wooster
 
 Authors
 -------
-Read AUTHORS.txt
+See AUTHORS.txt
 
 Change Log
 ----------
-Read CHANGE_LOG.txt
+See CHANGE_LOG.txt
